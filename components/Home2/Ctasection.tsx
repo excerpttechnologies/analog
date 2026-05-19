@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -9,104 +9,132 @@ import {
   Zap,
   Shield,
   TrendingUp,
+  CheckCircle,
+  Star,
+  Briefcase,
+  Clock,
 } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Register ScrollTrigger
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
 export function CTASection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const floatingIconsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const leftCardRef = useRef<HTMLDivElement>(null);
+  const rightCardRef = useRef<HTMLDivElement>(null);
+  const centerContentRef = useRef<HTMLDivElement>(null);
+  const floatingElementsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
   useEffect(() => {
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Main content animation
+      // Animate left card
       gsap.fromTo(
-        contentRef.current,
+        leftCardRef.current,
         {
+          x: -100,
           opacity: 0,
-          y: 50,
-          scale: 0.9,
-          filter: "blur(10px)",
+          rotationY: -30,
         },
         {
+          x: 0,
           opacity: 1,
-          y: 0,
-          scale: 1,
-          filter: "blur(0px)",
-          duration: 1.2,
-          ease: "back.out(0.4)",
+          rotationY: 0,
+          duration: 1,
+          ease: "back.out(0.6)",
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top 80%",
+            start: "top 70%",
             toggleActions: "play none none reverse",
           },
         },
       );
 
-      // Button hover animation (GSAP powered)
-      if (buttonRef.current) {
-        buttonRef.current.addEventListener("mouseenter", () => {
-          gsap.to(buttonRef.current, {
-            scale: 1.05,
-            boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
-            duration: 0.3,
-            ease: "power2.out",
-          });
-          gsap.to(buttonRef.current.querySelector(".button-icon"), {
-            x: 5,
-            duration: 0.3,
-            ease: "power2.out",
-          });
-        });
+      // Animate right card
+      gsap.fromTo(
+        rightCardRef.current,
+        {
+          x: 100,
+          opacity: 0,
+          rotationY: 30,
+        },
+        {
+          x: 0,
+          opacity: 1,
+          rotationY: 0,
+          duration: 1,
+          ease: "back.out(0.6)",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 70%",
+            toggleActions: "play none none reverse",
+          },
+        },
+      );
 
-        buttonRef.current.addEventListener("mouseleave", () => {
-          gsap.to(buttonRef.current, {
-            scale: 1,
-            boxShadow: "0 10px 20px rgba(0,0,0,0.1)",
-            duration: 0.3,
-            ease: "power2.out",
-          });
-          gsap.to(buttonRef.current.querySelector(".button-icon"), {
-            x: 0,
-            duration: 0.3,
-            ease: "power2.out",
-          });
-        });
-      }
+      // Animate center content
+      gsap.fromTo(
+        centerContentRef.current,
+        {
+          scale: 0.8,
+          opacity: 0,
+          y: 50,
+        },
+        {
+          scale: 1,
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          delay: 0.3,
+          ease: "elastic.out(1, 0.5)",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 70%",
+            toggleActions: "play none none reverse",
+          },
+        },
+      );
 
-      // Floating icons animation
-      floatingIconsRef.current.forEach((icon, index) => {
-        if (!icon) return;
+      // Floating elements animation
+      floatingElementsRef.current.forEach((element, index) => {
+        if (!element) return;
 
-        gsap.to(icon, {
-          y: -20,
-          x: index % 2 === 0 ? 15 : -15,
-          rotation: 360,
-          duration: 3 + index,
+        gsap.to(element, {
+          y: "random(-30, 30)",
+          x: "random(-30, 30)",
+          rotation: "random(-15, 15)",
+          duration: "random(3, 6)",
           repeat: -1,
           yoyo: true,
           ease: "sine.inOut",
-          delay: index * 0.5,
+          delay: index * 0.3,
         });
       });
 
-      // Background pulse animation
-      gsap.to(".bg-pulse", {
-        scale: 1.1,
-        opacity: 0.5,
-        duration: 4,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
+      // Parallax background effect
+      gsap.to(".bg-gradient-layer-1", {
+        y: 100,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1,
+        },
+      });
+
+      gsap.to(".bg-gradient-layer-2", {
+        y: -80,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1,
+        },
       });
     }, sectionRef);
 
@@ -116,199 +144,261 @@ export function CTASection() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-20 md:py-28 lg:py-32 overflow-hidden"
+      className="relative py-24 md:py-32 lg:py-40 overflow-hidden bg-gradient-to-br from-indigo-950 via-purple-900 to-indigo-950"
     >
-      {/* Animated Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500">
-        {/* Animated pulse effect */}
-        <div className="bg-pulse absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-400 opacity-0" />
+      {/* Animated Background Layers */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="bg-gradient-layer-1 absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full blur-3xl" />
+        <div className="bg-gradient-layer-2 absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full blur-3xl" />
 
-        {/* Animated particles */}
-        <div className="absolute inset-0 overflow-hidden">
-          {[...Array(30)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-1 h-1 bg-white/30 rounded-full"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                animation: `float-particle ${3 + Math.random() * 5}s infinite ease-in-out`,
-                animationDelay: `${Math.random() * 5}s`,
-              }}
-            />
-          ))}
-        </div>
-
-        {/* Grid pattern overlay */}
-        <div
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 1px)`,
-            backgroundSize: "40px 40px",
-          }}
-        />
-      </div>
-
-      {/* Floating Icons */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {[
-          { icon: Sparkles, top: "10%", left: "10%", size: 40 },
-          { icon: Rocket, top: "20%", right: "15%", size: 35 },
-          { icon: Zap, bottom: "25%", left: "15%", size: 45 },
-          { icon: Shield, bottom: "15%", right: "10%", size: 38 },
-          { icon: TrendingUp, top: "70%", left: "20%", size: 30 },
-          { icon: Sparkles, top: "80%", right: "20%", size: 32 },
-        ].map((item, idx) => {
-          const IconComponent = item.icon;
-          return (
-            <div
-              key={idx}
-              ref={(el) => {
-                floatingIconsRef.current[idx] = el;
-              }}
-              className="absolute text-white/10"
-              style={{
-                top: item.top,
-                left: item.left,
-                right: item.right,
-                bottom: item.bottom,
-              }}
-            >
-              <IconComponent size={item.size} />
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Main Content */}
-      <div
-        ref={contentRef}
-        className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl text-center relative z-10"
-      >
-        {/* Pre-title badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 shadow-lg mb-6 animate-pulse">
-          <Sparkles className="w-4 h-4 text-yellow-300" />
-          <span className="text-sm font-semibold text-white tracking-wide">
-            Limited Time Offer
-          </span>
-        </div>
-
-        {/* Main Title */}
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-          Ready to Transform{" "}
-          <span className="relative inline-block">
-            Your Projects?
-            <svg
-              className="absolute -bottom-2 left-0 w-full"
-              height="8"
-              viewBox="0 0 300 8"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+        {/* Animated Grid Pattern */}
+        <svg className="absolute inset-0 w-full h-full opacity-[0.03]">
+          <defs>
+            <pattern
+              id="grid"
+              width="60"
+              height="60"
+              patternUnits="userSpaceOnUse"
             >
               <path
-                d="M1 5.5C100 8.5 200 8.5 299 5.5"
-                stroke="url(#gradient)"
-                strokeWidth="3"
-                strokeLinecap="round"
+                d="M 60 0 L 0 0 0 60"
                 fill="none"
+                stroke="white"
+                strokeWidth="0.5"
               />
-              <defs>
-                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#fff" stopOpacity="0.5" />
-                  <stop offset="50%" stopColor="#fff" stopOpacity="1" />
-                  <stop offset="100%" stopColor="#fff" stopOpacity="0.5" />
-                </linearGradient>
-              </defs>
-            </svg>
-          </span>
-        </h2>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
 
-        {/* Description */}
-        <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed">
-          Join hundreds of enterprises leveraging SmartScope technology to
-          accelerate innovation, reduce costs, and stay ahead of the
-          competition.
-        </p>
+        {/* Floating Particles */}
+        {[...Array(50)].map((_, i) => (
+          <div
+            key={i}
+            ref={(el) => {
+              floatingElementsRef.current[i] = el;
+            }}
+            className="absolute w-1 h-1 bg-white/20 rounded-full"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+            }}
+          />
+        ))}
+      </div>
 
-        {/* Statistics */}
-        <div className="flex flex-wrap justify-center gap-6 md:gap-10 mb-10">
-          <div className="text-center">
-            <p className="text-2xl md:text-3xl font-bold text-white">500+</p>
-            <p className="text-sm text-white/80">Enterprise Clients</p>
+      {/* Three Column Layout */}
+      <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl relative z-10">
+        <div className="grid lg:grid-cols-3 gap-6 md:gap-8 items-center">
+          {/* Left Card - Feature Highlight */}
+          <div
+            ref={leftCardRef}
+            className={`relative backdrop-blur-xl bg-white/10 rounded-2xl p-6 border transition-all duration-500 cursor-pointer
+              ${hoveredCard === "left" ? "border-cyan-400 bg-white/15 scale-105" : "border-white/20"}`}
+            onMouseEnter={() => setHoveredCard("left")}
+            onMouseLeave={() => setHoveredCard(null)}
+          >
+            <div className="absolute top-4 right-4">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-center">
+                <Star className="w-5 h-5 text-white" />
+              </div>
+            </div>
+
+            <div className="mb-4">
+              <div className="text-4xl font-bold text-white mb-1">500+</div>
+              <div className="text-sm text-cyan-300 font-semibold">
+                ENTERPRISE
+              </div>
+            </div>
+
+            <h3 className="text-xl font-bold text-white mb-2">
+              Trusted Worldwide
+            </h3>
+            <p className="text-white/70 text-sm leading-relaxed">
+              Industry leaders across tech, finance, and healthcare rely on
+              SmartScope for mission-critical solutions.
+            </p>
+
+            <div className="mt-4 flex items-center gap-2 text-cyan-300 text-sm">
+              <CheckCircle className="w-4 h-4" />
+              <span>97% renewal rate</span>
+            </div>
           </div>
-          <div className="w-px h-12 bg-white/30 hidden md:block" />
-          <div className="text-center">
-            <p className="text-2xl md:text-3xl font-bold text-white">99.9%</p>
-            <p className="text-sm text-white/80">Satisfaction Rate</p>
+
+          {/* Center Content - Main CTA */}
+          <div ref={centerContentRef} className="text-center relative">
+            {/* Glow Effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-pink-500/20 blur-2xl rounded-full" />
+
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-cyan-500/20 to-purple-500/20 backdrop-blur-sm border border-white/20 mb-6">
+              <Sparkles className="w-4 h-4 text-yellow-300 animate-pulse" />
+              <span className="text-sm font-semibold text-white tracking-wide">
+                ⚡ Limited Slots Available
+              </span>
+            </div>
+
+            {/* Main Title */}
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+              Ready to{" "}
+              <span className="relative inline-block">
+                Accelerate?
+                <svg
+                  className="absolute -bottom-2 left-0 w-full"
+                  height="10"
+                  viewBox="0 0 300 10"
+                  fill="none"
+                >
+                  <path
+                    d="M1 5C100 9 200 9 299 5"
+                    stroke="url(#lineGradient)"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    fill="none"
+                  />
+                  <defs>
+                    <linearGradient
+                      id="lineGradient"
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="0%"
+                    >
+                      <stop offset="0%" stopColor="#06b6d4" />
+                      <stop offset="50%" stopColor="#a855f7" />
+                      <stop offset="100%" stopColor="#ec4899" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </span>
+            </h2>
+
+            {/* Description */}
+            <p className="text-base md:text-lg text-white/80 mb-8 max-w-md mx-auto leading-relaxed">
+              Join forward-thinking companies using SmartScope to drive
+              innovation and achieve breakthrough results.
+            </p>
+
+            {/* Main CTA Button */}
+            <div className="relative inline-block group">
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full blur-lg opacity-75 group-hover:opacity-100 transition duration-300" />
+              <button className="relative px-8 py-4 rounded-full bg-white text-purple-900 font-bold text-lg shadow-2xl flex items-center gap-3 group-hover:scale-105 transition-all duration-300">
+                <span>Get Started Free</span>
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </div>
+
+            {/* Trust Badge */}
+            <div className="mt-6 flex items-center justify-center gap-4 text-xs text-white/60">
+              <div className="flex items-center gap-1">
+                <Shield className="w-3 h-3" />
+                <span>No credit card required</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <Clock className="w-3 h-3" />
+                <span>14-day trial</span>
+              </div>
+            </div>
           </div>
-          <div className="w-px h-12 bg-white/30 hidden md:block" />
-          <div className="text-center">
-            <p className="text-2xl md:text-3xl font-bold text-white">24/7</p>
-            <p className="text-sm text-white/80">Support Available</p>
+
+          {/* Right Card - Feature Highlight */}
+          <div
+            ref={rightCardRef}
+            className={`relative backdrop-blur-xl bg-white/10 rounded-2xl p-6 border transition-all duration-500 cursor-pointer
+              ${hoveredCard === "right" ? "border-purple-400 bg-white/15 scale-105" : "border-white/20"}`}
+            onMouseEnter={() => setHoveredCard("right")}
+            onMouseLeave={() => setHoveredCard(null)}
+          >
+            <div className="absolute top-4 right-4">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
+                <Rocket className="w-5 h-5 text-white" />
+              </div>
+            </div>
+
+            <div className="mb-4">
+              <div className="text-4xl font-bold text-white mb-1">2x</div>
+              <div className="text-sm text-purple-300 font-semibold">
+                FASTER DEPLOYMENT
+              </div>
+            </div>
+
+            <h3 className="text-xl font-bold text-white mb-2">
+              Rapid Integration
+            </h3>
+            <p className="text-white/70 text-sm leading-relaxed">
+              Get up and running in days, not months. Our APIs and SDKs make
+              integration seamless and efficient.
+            </p>
+
+            <div className="mt-4 flex items-center gap-2 text-purple-300 text-sm">
+              <Zap className="w-4 h-4" />
+              <span>Deploy in 48 hours</span>
+            </div>
           </div>
         </div>
 
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button
-            ref={buttonRef}
-            className="group relative px-8 py-4 rounded-xl bg-white text-blue-600 font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden"
-          >
-            <span className="relative z-10 flex items-center gap-2">
-              Start Your Journey
-              <ArrowRight className="button-icon w-5 h-5 transition-transform duration-300" />
-            </span>
-
-            {/* Animated background on hover */}
-            <div className="absolute inset-0 bg-gradient-to-r from-slate-100 to-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-          </button>
-
-          <Link
-            href="/contact"
-            className="px-8 py-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/30 text-white font-semibold text-lg hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-2 group"
-          >
-            Contact Sales
-            <Rocket className="w-5 h-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-          </Link>
-        </div>
-
-        {/* Trust Badges */}
-        <div className="mt-12 flex flex-wrap justify-center gap-6 text-xs text-white/70">
-          <div className="flex items-center gap-2">
-            <Shield className="w-4 h-4" />
-            <span>ISO 27001 Certified</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Sparkles className="w-4 h-4" />
-            <span>GDPR Compliant</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <TrendingUp className="w-4 h-4" />
-            <span>99.99% Uptime SLA</span>
+        {/* Bottom Benefits Row */}
+        <div className="mt-12 pt-8 border-t border-white/10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              { icon: Shield, text: "Enterprise Security", color: "cyan" },
+              { icon: TrendingUp, text: "99.99% Uptime SLA", color: "blue" },
+              { icon: Briefcase, text: "Dedicated Support", color: "purple" },
+              { icon: CheckCircle, text: "ISO 27001 Certified", color: "pink" },
+            ].map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={idx}
+                  className="flex items-center justify-center gap-2 text-white/60 text-xs md:text-sm"
+                >
+                  <Icon className={`w-4 h-4 text-${item.color}-400`} />
+                  <span>{item.text}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
 
-      {/* CSS Animations */}
+      {/* Decorative Corner Elements */}
+      <div className="absolute top-0 left-0 w-32 h-32 border-l-4 border-t-4 border-cyan-500/30 rounded-tl-3xl" />
+      <div className="absolute bottom-0 right-0 w-32 h-32 border-r-4 border-b-4 border-purple-500/30 rounded-br-3xl" />
+
+      {/* Inline Animation Styles */}
       <style jsx>{`
-        @keyframes float-particle {
+        @keyframes float {
           0%,
           100% {
-            transform: translateY(0px) translateX(0px);
-            opacity: 0;
+            transform: translateY(0px) rotate(0deg);
           }
           25% {
-            transform: translateY(-30px) translateX(15px);
+            transform: translateY(-20px) rotate(5deg);
+          }
+          75% {
+            transform: translateY(10px) rotate(-5deg);
+          }
+        }
+
+        @keyframes pulse-glow {
+          0%,
+          100% {
             opacity: 0.5;
           }
           50% {
-            transform: translateY(0px) translateX(30px);
-            opacity: 0.8;
+            opacity: 1;
           }
-          75% {
-            transform: translateY(30px) translateX(15px);
-            opacity: 0.5;
-          }
+        }
+
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+      `}</style>
+
+      {/* Add dynamic hover effect styles */}
+      <style jsx>{`
+        .group:hover .button-icon {
+          transform: translateX(4px);
         }
       `}</style>
     </section>

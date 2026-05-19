@@ -1,10 +1,10 @@
 "use client";
 
-import ContactForm from "@/components/Home3/Contactform";
-import HeroSection from "@/components/Home3/Hero";
-import Newsletter from "@/components/Home3/Newsletter";
-import ProductsSection from "@/components/Home3/ProductShowcase";
-import TechnologySection from "@/components/Home3/Technologysection";
+import ContactForm from "@/components/Home4/Contactform";
+import HeroSection from "@/components/Home4/Hero";
+import Newsletter from "@/components/Home4/Newsletter";
+import ProductsSection from "@/components/Home4/ProductShowcase";
+import TechnologySection from "@/components/Home4/Technologysection";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import React, { useState } from "react";

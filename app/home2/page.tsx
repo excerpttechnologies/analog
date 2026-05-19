@@ -1,13 +1,12 @@
 import { Metadata } from "next";
-
+import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { Hero } from "@/components/Home2/Hero";
-import { ProductShowcase } from "@/components/Home2/ProductShowcase";
-import { Features } from "@/components/Home2/Features";
+import { Hero } from "@/components/Home3/Hero";
+import { ProductShowcase } from "@/components/Home3/ProductShowcase";
+import { Features } from "@/components/Home3/Features";
 
-import { CTASection } from "@/components/Home2/Ctasection";
-import { AboutSection } from "@/components/Home2/About";
-import { Navbar } from "@/components/Home2/Navbar";
+import { CTASection } from "@/components/Home3/Ctasection";
+import { AboutSection } from "@/components/Home3/About";
 
 export const metadata: Metadata = {
   title: "SmartScope - Premium Semiconductor Solutions",

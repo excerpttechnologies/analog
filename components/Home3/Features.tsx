@@ -1,354 +1,396 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
-import { Zap, Cpu, TrendingUp, Shield, Sparkles, Rocket, Globe, Award } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useEffect, useRef, useState } from "react";
+import {
+  Zap,
+  Cpu,
+  Shield,
+  Globe,
+  Battery,
+  Cloud,
+  Sparkles,
+  ArrowRight,
+  TrendingUp,
+  Award,
+  Users,
+  CheckCircle2,
+  Infinity,
+  Gauge,
+  Radio,
+  Lock,
+} from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Register ScrollTrigger
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
 const features = [
   {
     icon: Zap,
-    title: 'High Performance',
-    description: 'Industry-leading speed and efficiency for demanding applications with up to 5x performance boost',
-    gradient: 'from-yellow-500 to-orange-500',
-    bgGradient: 'from-yellow-50 to-orange-50',
-    stats: '5x Faster',
-    metric: '2.5 GHz',
+    title: "Lightning Speed",
+    description: "5x faster processing with 3nm architecture",
+    gradient: "from-blue-50 to-indigo-50",
+    iconBg: "bg-blue-100",
+    iconColor: "text-blue-600",
+    color: "blue",
+    metric: "2.5 GHz",
+    badge: "NEW",
   },
   {
     icon: Cpu,
-    title: 'Advanced Architecture',
-    description: 'State-of-the-art semiconductor design and fabrication using 3nm process technology',
-    gradient: 'from-blue-500 to-cyan-500',
-    bgGradient: 'from-blue-50 to-cyan-50',
-    stats: '3nm Process',
-    metric: '100B Transistors',
-  },
-  {
-    icon: TrendingUp,
-    title: 'Scalable Solutions',
-    description: 'From embedded systems to enterprise-grade deployments with seamless integration',
-    gradient: 'from-emerald-500 to-teal-500',
-    bgGradient: 'from-emerald-50 to-teal-50',
-    stats: '100% Scalable',
-    metric: 'Edge to Cloud',
+    title: "Neural Compute",
+    description: "AI-optimized cores for machine learning",
+    gradient: "from-purple-50 to-pink-50",
+    iconBg: "bg-purple-100",
+    iconColor: "text-purple-600",
+    color: "purple",
+    metric: "100B Transistors",
+    badge: "AI",
   },
   {
     icon: Shield,
-    title: 'Enterprise Reliability',
-    description: '99.999% uptime SLA with enterprise-grade security and 24/7 global support',
-    gradient: 'from-purple-500 to-pink-500',
-    bgGradient: 'from-purple-50 to-pink-50',
-    stats: '99.999% Uptime',
-    metric: '24/7 Support',
+    title: "Quantum Security",
+    description: "Hardware-level encryption with zero-trust architecture",
+    gradient: "from-emerald-50 to-teal-50",
+    iconBg: "bg-emerald-100",
+    iconColor: "text-emerald-600",
+    color: "emerald",
+    metric: "ISO 27001",
+    badge: "SECURE",
+  },
+  {
+    icon: Globe,
+    title: "Global Mesh",
+    description: "50+ edge locations with <10ms latency",
+    gradient: "from-cyan-50 to-blue-50",
+    iconBg: "bg-cyan-100",
+    iconColor: "text-cyan-600",
+    color: "cyan",
+    metric: "Global",
+    badge: "24/7",
+  },
+  {
+    icon: Battery,
+    title: "Eco Power",
+    description: "40% less energy, 100% renewable compatible",
+    gradient: "from-lime-50 to-emerald-50",
+    iconBg: "bg-lime-100",
+    iconColor: "text-lime-600",
+    color: "lime",
+    metric: "Green",
+    badge: "ECO",
+  },
+  {
+    icon: Cloud,
+    title: "Hybrid Cloud",
+    description: "Seamless edge-to-cloud deployment",
+    gradient: "from-violet-50 to-indigo-50",
+    iconBg: "bg-violet-100",
+    iconColor: "text-violet-600",
+    color: "violet",
+    metric: "Any Scale",
+    badge: "FLEX",
   },
 ];
 
-// Fixed particle positions - deterministic values to avoid hydration mismatch
-const particlePositions = [
-  { top: '15%', left: '10%', delay: 0, duration: 5 },
-  { top: '25%', left: '85%', delay: 1, duration: 7 },
-  { top: '45%', left: '20%', delay: 2, duration: 6 },
-  { top: '60%', left: '75%', delay: 0.5, duration: 8 },
-  { top: '75%', left: '15%', delay: 1.5, duration: 5.5 },
-  { top: '85%', left: '90%', delay: 2.5, duration: 7.5 },
-  { top: '10%', left: '45%', delay: 0.8, duration: 6.5 },
-  { top: '35%', left: '60%', delay: 1.2, duration: 5.8 },
-  { top: '55%', left: '40%', delay: 1.8, duration: 7.2 },
-  { top: '70%', left: '30%', delay: 2.2, duration: 6.3 },
-  { top: '20%', left: '70%', delay: 0.3, duration: 8.5 },
-  { top: '40%', left: '50%', delay: 1.7, duration: 5.2 },
-  { top: '65%', left: '55%', delay: 0.9, duration: 7.8 },
-  { top: '80%', left: '25%', delay: 2.1, duration: 6.7 },
-  { top: '5%', left: '95%', delay: 1.4, duration: 5.9 },
-  { top: '95%', left: '5%', delay: 2.8, duration: 7.4 },
-  { top: '50%', left: '80%', delay: 0.6, duration: 6.1 },
-  { top: '30%', left: '35%', delay: 1.9, duration: 8.2 },
-  { top: '50%', left: '65%', delay: 0.4, duration: 5.4 },
-  { top: '70%', left: '10%', delay: 2.3, duration: 7.1 },
+const stats = [
+  { value: "500+", label: "Enterprise Clients", change: "+28%", icon: Users },
+  { value: "50+", label: "Global Patents", change: "+12", icon: Award },
+  {
+    value: "99.999%",
+    label: "Uptime SLA",
+    change: "5-9's",
+    icon: CheckCircle2,
+  },
+  { value: "40%", label: "Energy Saved", change: "-40%", icon: Battery },
+];
+
+const testimonials = [
+  {
+    text: "The performance gains were immediate. SmartScope's technology is a game-changer.",
+    author: "Michael Chen",
+    role: "CTO, TechVision",
+  },
+  {
+    text: "Best-in-class support and reliability. Our infrastructure has never been more stable.",
+    author: "Sarah Johnson",
+    role: "VP Engineering, DataCore",
+  },
 ];
 
 export function Features() {
   const sectionRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-  const [mounted, setMounted] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [visibleStats, setVisibleStats] = useState(false);
 
-  // Handle mounting to avoid hydration issues
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Smooth scroll animations
-  useEffect(() => {
-    if (!sectionRef.current || !mounted) return;
+    if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Title animation
-      gsap.fromTo(titleRef.current,
-        { 
-          opacity: 0, 
-          y: 50,
-          filter: 'blur(10px)',
-          scale: 0.9
-        },
-        {
-          opacity: 1,
-          y: 0,
-          filter: 'blur(0px)',
-          scale: 1,
-          duration: 1.2,
-          ease: 'back.out(0.4)',
-          scrollTrigger: {
-            trigger: titleRef.current,
-            start: 'top 85%',
-            toggleActions: 'play none none reverse',
-          },
-        }
-      );
-
-      // Cards staggered animation
-      cardsRef.current.forEach((card, index) => {
-        if (!card) return;
-        
-        gsap.fromTo(card,
-          { 
-            opacity: 0, 
-            y: 100,
-            rotationX: 15,
-            scale: 0.9,
-          },
+      // Animate feature cards with staggered scale
+      const cards = document.querySelectorAll(".feature-card-new");
+      cards.forEach((card, i) => {
+        gsap.fromTo(
+          card,
+          { opacity: 0, y: 40, scale: 0.95 },
           {
             opacity: 1,
             y: 0,
-            rotationX: 0,
             scale: 1,
-            duration: 0.8,
-            delay: index * 0.15,
-            ease: 'back.out(0.4)',
+            duration: 0.6,
+            delay: i * 0.08,
+            ease: "power3.out",
             scrollTrigger: {
               trigger: card,
-              start: 'top 90%',
-              toggleActions: 'play none none reverse',
+              start: "top 90%",
+              toggleActions: "play none none reverse",
             },
-          }
+          },
         );
+      });
+
+      // Animate stats
+      gsap.fromTo(
+        ".stat-card",
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: ".stats-wrapper",
+            start: "top 85%",
+            onEnter: () => setVisibleStats(true),
+          },
+        },
+      );
+
+      // Animate testimonials
+      gsap.fromTo(
+        ".testimonial-card",
+        { opacity: 0, x: -30 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.6,
+          stagger: 0.15,
+          scrollTrigger: {
+            trigger: ".testimonials-wrapper",
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+          },
+        },
+      );
+
+      // Floating decoration animation
+      gsap.to(".float-decoration", {
+        y: -15,
+        duration: 3,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        stagger: 0.2,
       });
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [mounted]);
-
-  // Hover animations (without glow/light effect)
-  const handleCardHover = (index: number, isEnter: boolean) => {
-    setHoveredCard(isEnter ? index : null);
-    
-    const card = cardsRef.current[index];
-    if (!card) return;
-
-    if (isEnter) {
-      gsap.to(card.querySelector('.icon-wrapper'), {
-        scale: 1.05,
-        rotate: 0,
-        duration: 0.4,
-        ease: 'back.out(0.3)',
-      });
-      gsap.to(card.querySelector('.stats-badge'), {
-        y: 0,
-        opacity: 1,
-        duration: 0.3,
-        ease: 'back.out(0.3)',
-      });
-      gsap.to(card, {
-        y: -5,
-        duration: 0.3,
-        ease: 'power2.out',
-      });
-    } else {
-      gsap.to(card.querySelector('.icon-wrapper'), {
-        scale: 1,
-        rotate: 0,
-        duration: 0.3,
-        ease: 'back.out(0.3)',
-      });
-      gsap.to(card.querySelector('.stats-badge'), {
-        y: 10,
-        opacity: 0,
-        duration: 0.2,
-        ease: 'power2.out',
-      });
-      gsap.to(card, {
-        y: 0,
-        duration: 0.3,
-        ease: 'power2.out',
-      });
-    }
-  };
+  }, []);
 
   return (
     <section
       ref={sectionRef}
-      className="relative py-24 md:py-32 overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"
+      className="relative py-24 md:py-32 overflow-hidden bg-white"
     >
-      {/* Animated Background */}
+      {/* Minimal Background */}
       <div className="absolute inset-0 -z-10">
-        {/* Gradient Orbs */}
-        <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-3xl" />
-        
-        {/* Grid Pattern */}
-        <div 
-          className="absolute inset-0 opacity-[0.05]"
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-b from-blue-50/50 to-transparent rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-t from-purple-50/50 to-transparent rounded-full blur-3xl" />
+
+        {/* Thin Grid Lines */}
+        <div
+          className="absolute inset-0 opacity-[0.02]"
           style={{
-            backgroundImage: `linear-gradient(rgb(56, 189, 248) 1px, transparent 1px), linear-gradient(90deg, rgb(56, 189, 248) 1px, transparent 1px)`,
-            backgroundSize: '60px 60px',
+            backgroundImage: `linear-gradient(#94a3b8 1px, transparent 1px), linear-gradient(90deg, #94a3b8 1px, transparent 1px)`,
+            backgroundSize: "40px 40px",
           }}
         />
-        
-        {/* Floating Particles - No random values, using fixed positions */}
-        {mounted && (
-          <div className="absolute inset-0 overflow-hidden">
-            {particlePositions.map((pos, i) => (
-              <div
-                key={i}
-                className="absolute w-1 h-1 bg-cyan-400 rounded-full opacity-60"
-                style={{
-                  top: pos.top,
-                  left: pos.left,
-                  animation: `float ${pos.duration}s infinite ease-in-out`,
-                  animationDelay: `${pos.delay}s`,
-                }}
-              />
-            ))}
-          </div>
-        )}
       </div>
 
-      <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl relative z-10">
-        {/* Header Section */}
-        <div className="text-center mb-16 md:mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 shadow-sm mb-6">
-            <Sparkles className="w-4 h-4 text-cyan-400" />
-            <span className="text-sm font-semibold text-transparent bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text">
-              Core Capabilities
+      <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-6xl">
+        {/* Header - Minimal & Clean */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 mb-4">
+            <Sparkles className="w-3 h-3 text-slate-600" />
+            <span className="text-xs font-medium text-slate-600 uppercase tracking-wide">
+              Capabilities
             </span>
           </div>
-          
-          <h2
-            ref={titleRef}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
-          >
-            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-              Why Choose SmartScope
+
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">
+            Engineered for
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-slate-700 to-slate-500">
+              Peak Performance
             </span>
           </h2>
-          
-          <p className="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-            Experience the future of semiconductor technology with our cutting-edge solutions
-            designed for performance, scalability, and reliability.
+
+          <p className="text-slate-500 max-w-2xl mx-auto">
+            Discover the technology powering the next generation of
+            semiconductor solutions.
           </p>
         </div>
 
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-          {features.map((feature, index) => {
+        {/* Masonry Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-20">
+          {features.map((feature, idx) => {
             const Icon = feature.icon;
-            const isHovered = hoveredCard === index;
-            
+            const isHovered = hoveredIndex === idx;
+
             return (
               <div
-                key={index}
-                ref={(el) => { cardsRef.current[index] = el; }}
-                className="group relative"
-                onMouseEnter={() => handleCardHover(index, true)}
-                onMouseLeave={() => handleCardHover(index, false)}
+                key={idx}
+                className="feature-card-new group cursor-pointer"
+                onMouseEnter={() => setHoveredIndex(idx)}
+                onMouseLeave={() => setHoveredIndex(null)}
               >
-                {/* Main Card - No glow effect */}
-                <div className="relative h-full bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300 overflow-hidden">
-                  {/* Background Gradient on Hover - Subtle, no light effect */}
-                  <div 
-                    className={`absolute inset-0 bg-gradient-to-br ${feature.bgGradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}
-                  />
-                  
-                  {/* Icon Section */}
-                  <div className="relative mb-6">
-                    <div className="icon-wrapper w-16 h-16 rounded-xl bg-gradient-to-br from-white/10 to-white/5 flex items-center justify-center border border-white/20 group-hover:border-white/40 transition-all duration-300">
-                      <Icon className={`w-8 h-8 transition-all duration-300 ${isHovered ? 'scale-105' : ''}`} style={{ 
-                        color: isHovered ? '#22d3ee' : '#94a3b8',
-                      }} />
+                <div
+                  className={`relative bg-white rounded-xl p-6 transition-all duration-400 border ${
+                    isHovered
+                      ? `border-${feature.color}-200 shadow-lg -translate-y-1`
+                      : "border-slate-100 shadow-sm"
+                  }`}
+                >
+                  {/* Top Row */}
+                  <div className="flex items-start justify-between mb-4">
+                    <div
+                      className={`w-12 h-12 rounded-xl ${feature.iconBg} flex items-center justify-center transition-all duration-300 ${isHovered ? "scale-110" : ""}`}
+                    >
+                      <Icon className={`w-6 h-6 ${feature.iconColor}`} />
                     </div>
-                    
-                    {/* Stats Badge */}
-                    <div className="stats-badge absolute -top-2 -right-2 px-2 py-1 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 opacity-0 transform translate-y-2 transition-all duration-300">
-                      <span className="text-xs font-bold text-white">{feature.stats}</span>
-                    </div>
+                    {feature.badge && (
+                      <span
+                        className={`text-[10px] font-bold px-2 py-0.5 rounded-full bg-${feature.color}-100 text-${feature.color}-600 uppercase tracking-wider`}
+                      >
+                        {feature.badge}
+                      </span>
+                    )}
                   </div>
-                  
+
                   {/* Content */}
-                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-blue-400 group-hover:bg-clip-text transition-all duration-300">
+                  <h3 className="text-lg font-semibold text-slate-800 mb-1">
                     {feature.title}
                   </h3>
-                  
-                  <p className="text-slate-300 text-sm leading-relaxed mb-4">
+                  <p className="text-slate-500 text-sm mb-3">
                     {feature.description}
                   </p>
-                  
-                  {/* Metric Display */}
-                  <div className="flex items-center justify-between pt-3 border-t border-white/10">
-                    <span className="text-xs text-slate-400">Peak Performance</span>
-                    <span className="text-sm font-semibold text-cyan-400">{feature.metric}</span>
+
+                  {/* Metric */}
+                  <div className="flex items-center justify-between pt-3 border-t border-slate-50">
+                    <span className="text-xs text-slate-400">Performance</span>
+                    <span
+                      className={`text-sm font-mono font-semibold text-${feature.color}-600`}
+                    >
+                      {feature.metric}
+                    </span>
                   </div>
-                  
-                  {/* Underline Animation - Subtle */}
-                  <div className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r ${feature.gradient} transition-all duration-300 ${isHovered ? 'w-full' : 'w-0'}`} />
+
+                  {/* Hover Arrow */}
+                  <div
+                    className={`absolute bottom-4 right-4 transition-all duration-300 ${isHovered ? "opacity-100 translate-x-0" : "opacity-0 translate-x-2"}`}
+                  >
+                    <ArrowRight
+                      className={`w-4 h-4 text-${feature.color}-500`}
+                    />
+                  </div>
                 </div>
               </div>
             );
           })}
         </div>
 
-        {/* Trust Indicators */}
-        <div className="mt-16 pt-8 border-t border-white/10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              { icon: Globe, label: 'Global Presence', value: '50+ Countries' },
-              { icon: Award, label: 'Industry Awards', value: '25+ Awards' },
-              { icon: Rocket, label: 'Happy Clients', value: '500+ Clients' },
-              { icon: Shield, label: 'Security Certified', value: 'ISO 27001' },
-            ].map((item, idx) => {
-              const ItemIcon = item.icon;
-              return (
-                <div key={idx} className="text-center group">
-                  <div className="flex justify-center mb-2">
-                    <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-all duration-300">
-                      <ItemIcon className="w-5 h-5 text-cyan-400" />
-                    </div>
+        {/* Stats Row */}
+        <div className="stats-wrapper grid grid-cols-2 md:grid-cols-4 gap-4 mb-20">
+          {stats.map((stat, idx) => {
+            const Icon = stat.icon;
+            return (
+              <div
+                key={idx}
+                className="stat-card text-center p-5 rounded-xl bg-slate-50/50 border border-slate-100 hover:bg-white hover:shadow-md transition-all duration-300"
+              >
+                <div className="flex justify-center mb-2">
+                  <div className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center">
+                    <Icon className="w-5 h-5 text-slate-600" />
                   </div>
-                  <p className="text-xs text-slate-400 mb-1">{item.label}</p>
-                  <p className="text-sm font-semibold text-white">{item.value}</p>
                 </div>
-              );
-            })}
+                <p className="text-2xl font-bold text-slate-800">
+                  {visibleStats ? stat.value : "0"}
+                </p>
+                <p className="text-xs text-slate-500 mt-0.5">{stat.label}</p>
+                <span className="inline-block mt-1 text-[10px] font-medium text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded">
+                  {stat.change}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Testimonials Row */}
+        <div className="testimonials-wrapper grid md:grid-cols-2 gap-6 mb-16">
+          {testimonials.map((testimonial, idx) => (
+            <div
+              key={idx}
+              className="testimonial-card p-6 rounded-xl bg-slate-50/50 border border-slate-100"
+            >
+              <div className="flex gap-1 mb-3">
+                {[...Array(5)].map((_, i) => (
+                  <svg
+                    key={i}
+                    className="w-4 h-4 text-amber-400 fill-amber-400"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="text-slate-600 text-sm italic mb-4">
+                "{testimonial.text}"
+              </p>
+              <div>
+                <p className="text-sm font-semibold text-slate-800">
+                  {testimonial.author}
+                </p>
+                <p className="text-xs text-slate-400">{testimonial.role}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Simple CTA */}
+        <div className="text-center">
+          <div className="inline-flex items-center gap-3">
+            <button className="px-6 py-2.5 bg-slate-900 text-white text-sm font-medium rounded-full hover:bg-slate-800 transition-all duration-300 hover:scale-105 shadow-sm">
+              Explore Technology
+            </button>
+            <button className="px-6 py-2.5 border border-slate-200 text-slate-600 text-sm font-medium rounded-full hover:border-slate-300 hover:bg-slate-50 transition-all duration-300 flex items-center gap-1 group">
+              Contact Sales
+              <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+            </button>
           </div>
         </div>
-      </div>
 
-      {/* CSS Animations */}
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) translateX(0px); }
-          25% { transform: translateY(-20px) translateX(10px); }
-          50% { transform: translateY(0px) translateX(20px); }
-          75% { transform: translateY(20px) translateX(10px); }
-        }
-      `}</style>
+        {/* Floating Decorations */}
+        <div className="absolute top-20 right-20 float-decoration opacity-30 pointer-events-none hidden lg:block">
+          <div className="w-2 h-2 rounded-full bg-blue-400" />
+        </div>
+        <div className="absolute bottom-40 left-10 float-decoration opacity-30 pointer-events-none hidden lg:block">
+          <div className="w-1.5 h-1.5 rounded-full bg-purple-400" />
+        </div>
+        <div className="absolute top-1/2 right-10 float-decoration opacity-20 pointer-events-none hidden lg:block">
+          <div className="w-1 h-1 rounded-full bg-emerald-400" />
+        </div>
+      </div>
     </section>
   );
 }

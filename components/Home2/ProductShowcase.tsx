@@ -1,349 +1,202 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import {
-  ArrowRight,
-  Cpu,
-  Zap,
-  Gauge,
-  Microchip,
-  Bot,
-  Target,
-  Sparkles,
-  Eye,
-} from "lucide-react";
-import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { ArrowRight, Cpu, Zap, Gauge, Microchip, Bot, Target, Sparkles } from 'lucide-react';
+import { Card } from '@/components/ui/card';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-if (typeof window !== "undefined") {
+// Register ScrollTrigger
+if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
 const products = [
   {
     id: 1,
-    name: "SERDES IP",
-    category: "Silicon IP",
-    description:
-      "High-speed SerDes for data communication interfaces up to 112G PAM4",
-    longDescription:
-      "Industry-leading serialization/deserialization technology enabling next-gen data centers and high-performance computing with ultra-low power consumption.",
+    name: 'SERDES IP',
+    category: 'Silicon IP',
+    description: 'High-speed SerDes for data communication interfaces up to 112G PAM4',
     icon: Cpu,
-    image:
-      "https://media.finebi.com/strapi/DALL_E_2024_11_05_15_45_59_A_futuristic_and_technical_infographic_showcasing_the_three_stages_of_data_conversion_extraction_transformation_and_loading_The_diagram_should_vis_f6d1a8a16b.webp",
-    gradient: "from-blue-500 to-cyan-500",
-    gradientLight: "from-blue-50 to-cyan-50",
-    specs: ["112G PAM4", "<1e-12 BER", "0.5pJ/bit"],
-    color: "blue",
+    image: 'https://media.finebi.com/strapi/DALL_E_2024_11_05_15_45_59_A_futuristic_and_technical_infographic_showcasing_the_three_stages_of_data_conversion_extraction_transformation_and_loading_The_diagram_should_vis_f6d1a8a16b.webp',
+    gradient: 'from-blue-500 to-cyan-500',
+    specs: ['112G PAM4', '<1e-12 BER', '0.5pJ/bit'],
   },
   {
     id: 2,
-    name: "PLL Systems",
-    category: "Silicon IP",
-    description:
-      "Ultra-low jitter phase-locked loops for clock generation and synchronization",
-    longDescription:
-      "Precision clocking solutions with industry-best jitter performance, ideal for high-speed data converters and RF applications.",
+    name: 'PLL Systems',
+    category: 'Silicon IP',
+    description: 'Ultra-low jitter phase-locked loops for clock generation and synchronization',
     icon: Gauge,
-    image:
-      "https://www.3alphadataentry.com/wp-content/uploads/2018/08/data-conversion-services-1.jpg",
-    gradient: "from-purple-500 to-pink-500",
-    gradientLight: "from-purple-50 to-pink-50",
-    specs: ["50fs RMS jitter", "10MHz-40GHz", "Integrated VCO"],
-    color: "purple",
+    image: 'https://www.3alphadataentry.com/wp-content/uploads/2018/08/data-conversion-services-1.jpg',
+    gradient: 'from-purple-500 to-pink-500',
+    specs: ['50fs RMS jitter', '10MHz-40GHz', 'Integrated VCO'],
   },
   {
     id: 3,
-    name: "Analog IP",
-    category: "Silicon IP",
-    description:
-      "Precision analog circuits for sensor and signal processing applications",
-    longDescription:
-      "High-performance analog building blocks including ADCs, DACs, amplifiers, and voltage references for precision measurement systems.",
+    name: 'Analog IP',
+    category: 'Silicon IP',
+    description: 'Precision analog circuits for sensor and signal processing applications',
     icon: Microchip,
-    image:
-      "https://media.finebi.com/strapi/DALL_E_2024_11_05_15_29_44_A_futuristic_and_technological_image_illustrating_data_being_transformed_from_one_format_to_another_The_image_should_show_digital_representations_of_4d381fc87f.webp",
-    gradient: "from-emerald-500 to-teal-500",
-    gradientLight: "from-emerald-50 to-teal-50",
-    specs: ["16-bit resolution", "1uV offset", "0.01% INL"],
-    color: "emerald",
+    image: 'https://media.finebi.com/strapi/DALL_E_2024_11_05_15_29_44_A_futuristic_and_technological_image_illustrating_data_being_transformed_from_one_format_to_another_The_image_should_show_digital_representations_of_4d381fc87f.webp',
+    gradient: 'from-emerald-500 to-teal-500',
+    specs: ['16-bit resolution', '1uV offset', '0.01% INL'],
   },
   {
     id: 4,
-    name: "Digital IP",
-    category: "Silicon IP",
-    description:
-      "Advanced digital signal processing and computation cores for edge AI",
-    longDescription:
-      "Energy-efficient DSP cores and AI accelerators optimized for on-device intelligence and real-time signal processing.",
+    name: 'Digital IP',
+    category: 'Silicon IP',
+    description: 'Advanced digital signal processing and computation cores for edge AI',
     icon: Zap,
-    image:
-      "https://www.tarento.com/static/2c1015cb6e6c26a30affbd668d278ee6/afa5c/4_001cd4df1f.png",
-    gradient: "from-orange-500 to-red-500",
-    gradientLight: "from-orange-50 to-red-50",
-    specs: ["5 TOPS/W", "RISC-V cores", "Hardware accelerators"],
-    color: "orange",
+    image: 'https://www.tarento.com/static/2c1015cb6e6c26a30affbd668d278ee6/afa5c/4_001cd4df1f.png',
+    gradient: 'from-orange-500 to-red-500',
+    specs: ['5 TOPS/W', 'RISC-V cores', 'Hardware accelerators'],
   },
   {
     id: 5,
-    name: "AI Converters",
-    category: "Technology",
-    description:
-      "ML-enhanced ADC/DAC for intelligent signal acquisition and processing",
-    longDescription:
-      "Revolutionary data converters that use machine learning to adapt and optimize performance in real-time.",
+    name: 'AI Converters',
+    category: 'Technology',
+    description: 'ML-enhanced ADC/DAC for intelligent signal acquisition and processing',
     icon: Bot,
-    image:
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop",
-    gradient: "from-indigo-500 to-purple-500",
-    gradientLight: "from-indigo-50 to-purple-50",
-    specs: [
-      "AI-assisted calibration",
-      "40% power saving",
-      "Real-time adaptation",
-    ],
-    color: "indigo",
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop',
+    gradient: 'from-indigo-500 to-purple-500',
+    specs: ['AI-assisted calibration', '40% power saving', 'Real-time adaptation'],
   },
   {
     id: 6,
-    name: "Precision Analog",
-    category: "Technology",
-    description:
-      "Ultra-low noise analog front-ends for precision measurement systems",
-    longDescription:
-      "Highest precision analog front-ends for medical imaging, scientific instrumentation, and industrial automation.",
+    name: 'Precision Analog',
+    category: 'Technology',
+    description: 'Ultra-low noise analog front-ends for precision measurement systems',
     icon: Target,
-    image:
-      "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=800&h=600&fit=crop",
-    gradient: "from-rose-500 to-orange-500",
-    gradientLight: "from-rose-50 to-orange-50",
-    specs: ["0.5nV/√Hz noise", "140dB CMRR", "±0.5ppm/°C drift"],
-    color: "rose",
+    image: 'https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=800&h=600&fit=crop',
+    gradient: 'from-rose-500 to-orange-500',
+    specs: ['0.5nV/√Hz noise', '140dB CMRR', '±0.5ppm/°C drift'],
   },
 ];
-
-// Tilt Card Component with hover effects
-function TiltProductCard({
-  product,
-  index,
-}: {
-  product: (typeof products)[0];
-  index: number;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const rotateX = useTransform(y, [-0.5, 0.5], [8, -8]);
-  const rotateY = useTransform(x, [-0.5, 0.5], [-8, 8]);
-  const springX = useSpring(rotateX, { stiffness: 200, damping: 30 });
-  const springY = useSpring(rotateY, { stiffness: 200, damping: 30 });
-
-  const IconComponent = product.icon;
-
-  const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = ref.current?.getBoundingClientRect();
-    if (!rect) return;
-    x.set((e.clientX - rect.left) / rect.width - 0.5);
-    y.set((e.clientY - rect.top) / rect.height - 0.5);
-  };
-
-  const onLeave = () => {
-    x.set(0);
-    y.set(0);
-    setIsHovered(false);
-  };
-
-  const onEnter = () => {
-    setIsHovered(true);
-  };
-
-  return (
-    <motion.div
-      ref={ref}
-      className="relative group flex-shrink-0 w-80 md:w-96 overflow-visible"
-      style={{
-        rotateX: springX,
-        rotateY: springY,
-        transformStyle: "preserve-3d",
-        perspective: 1000,
-      }}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
-      onMouseEnter={onEnter}
-      whileHover={{ scale: 1.02, zIndex: 50 }}
-      transition={{ duration: 0.3 }}
-    >
-      <div className="relative bg-white rounded-2xl shadow-lg overflow-hidden border border-slate-200 h-[480px] flex flex-col">
-        {/* Image Section */}
-        <div className="relative h-48 overflow-hidden">
-          <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-110">
-            <Image
-              src={product.image}
-              alt={product.name}
-              fill
-              className="object-cover"
-            />
-          </div>
-
-          {/* Gradient Overlay on Hover */}
-          <div
-            className={`absolute inset-0 bg-gradient-to-r ${product.gradient} opacity-0 transition-opacity duration-500 mix-blend-multiply ${isHovered ? "opacity-60" : ""}`}
-          />
-
-          {/* Category Badge */}
-          <div className="absolute top-4 left-4 z-10">
-            <div className="px-3 py-1.5 rounded-full bg-white/95 backdrop-blur-sm border border-slate-200 shadow-sm">
-              <span className="text-xs font-bold text-slate-700">
-                {product.category}
-              </span>
-            </div>
-          </div>
-
-          {/* Icon Overlay */}
-          <div
-            className={`absolute bottom-4 right-4 z-10 transition-all duration-500 ${isHovered ? "scale-110" : "scale-100"}`}
-          >
-            <div
-              className={`w-10 h-10 rounded-xl bg-white shadow-md flex items-center justify-center border border-slate-200`}
-            >
-              <IconComponent
-                className={`w-5 h-5 transition-colors duration-500 ${isHovered ? `text-${product.color}-500` : "text-slate-600"}`}
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Content Section - Hidden by default, shows on hover */}
-        <div
-          className={`absolute inset-0 bg-white/95 backdrop-blur-md rounded-2xl flex flex-col justify-center p-6 transition-all duration-500 z-20 ${
-            isHovered ? "opacity-100 visible" : "opacity-0 invisible"
-          }`}
-        >
-          <div className="text-center mb-4">
-            <div
-              className={`inline-flex w-12 h-12 rounded-xl bg-gradient-to-r ${product.gradient} items-center justify-center mb-3`}
-            >
-              <IconComponent className="w-6 h-6 text-white" />
-            </div>
-            <h3 className="text-xl font-bold text-slate-900 mb-2">
-              {product.name}
-            </h3>
-            <p className="text-slate-600 text-sm leading-relaxed">
-              {product.longDescription}
-            </p>
-          </div>
-
-          {/* Specs Tags */}
-          <div className="flex flex-wrap gap-2 justify-center mb-6">
-            {product.specs.map((spec, idx) => (
-              <span
-                key={idx}
-                className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-slate-100 text-xs font-medium text-slate-600"
-              >
-                <Cpu className="w-3 h-3" />
-                {spec}
-              </span>
-            ))}
-          </div>
-
-          {/* Learn More Link */}
-          <Link
-            href={`/products/${product.id}`}
-            className={`inline-flex items-center justify-center gap-2 font-semibold transition-all duration-300 group/link bg-gradient-to-r ${product.gradient} text-white px-4 py-2 rounded-xl hover:shadow-lg`}
-          >
-            Learn More
-            <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />
-          </Link>
-        </div>
-
-        {/* Bottom Content - Visible when not hovered */}
-        <div
-          className={`p-5 flex-1 flex flex-col transition-opacity duration-300 ${isHovered ? "opacity-0" : "opacity-100"}`}
-        >
-          <h3 className="text-lg font-bold text-slate-900 mb-2">
-            {product.name}
-          </h3>
-          <p className="text-slate-500 text-sm leading-relaxed mb-3 flex-1">
-            {product.description}
-          </p>
-
-          {/* Minimal Specs */}
-          <div className="flex flex-wrap gap-1.5">
-            {product.specs.slice(0, 2).map((spec, idx) => (
-              <span
-                key={idx}
-                className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-50 text-xs font-medium text-slate-500"
-              >
-                <span className="w-1 h-1 rounded-full bg-slate-400" />
-                {spec}
-              </span>
-            ))}
-          </div>
-
-          {/* Hover Hint */}
-          <div className="mt-3 flex items-center gap-1 text-xs text-slate-400">
-            <Eye className="w-3 h-3" />
-            <span>Hover to explore</span>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
 
 export function ProductShowcase() {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
-  const marqueeRef1 = useRef<HTMLDivElement>(null);
-  const marqueeRef2 = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
+  // Smooth scroll animations
   useEffect(() => {
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
       // Title animation
-      gsap.fromTo(
-        titleRef.current,
-        { opacity: 0, y: 50, filter: "blur(10px)" },
+      gsap.fromTo(titleRef.current,
+        { opacity: 0, y: 50, filter: 'blur(10px)' },
         {
           opacity: 1,
           y: 0,
-          filter: "blur(0px)",
+          filter: 'blur(0px)',
           duration: 1,
-          ease: "power3.out",
+          ease: 'power3.out',
           scrollTrigger: {
             trigger: titleRef.current,
-            start: "top 85%",
-            toggleActions: "play none none reverse",
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
           },
-        },
+        }
       );
+
+      // Cards staggered animation
+      cardsRef.current.forEach((card, index) => {
+        if (!card) return;
+        
+        gsap.fromTo(card,
+          { 
+            opacity: 0, 
+            y: 100,
+            rotationX: 15,
+            scale: 0.9,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            rotationX: 0,
+            scale: 1,
+            duration: 0.8,
+            delay: index * 0.1,
+            ease: 'back.out(0.3)',
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 90%',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        );
+      });
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
+  // Hover animation for cards
+  const handleCardHover = (index: number, isEnter: boolean) => {
+    setHoveredCard(isEnter ? index : null);
+    
+    const card = cardsRef.current[index];
+    if (!card) return;
+
+    if (isEnter) {
+      gsap.to(card.querySelector('.card-gradient'), {
+        opacity: 1,
+        duration: 0.3,
+        ease: 'power2.out',
+      });
+      gsap.to(card.querySelector('.card-image'), {
+        scale: 1.1,
+        duration: 0.5,
+        ease: 'power2.out',
+      });
+      gsap.to(card.querySelector('.card-content'), {
+        y: -8,
+        duration: 0.3,
+        ease: 'power2.out',
+      });
+    } else {
+      gsap.to(card.querySelector('.card-gradient'), {
+        opacity: 0,
+        duration: 0.3,
+        ease: 'power2.out',
+      });
+      gsap.to(card.querySelector('.card-image'), {
+        scale: 1,
+        duration: 0.5,
+        ease: 'power2.out',
+      });
+      gsap.to(card.querySelector('.card-content'), {
+        y: 0,
+        duration: 0.3,
+        ease: 'power2.out',
+      });
+    }
+  };
+
   return (
     <section
       ref={sectionRef}
-      className="relative py-24 md:py-32 overflow-hidden bg-white"
+      className="relative py-24 md:py-32 overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50"
     >
-      {/* White Theme Background */}
+      {/* Background decorations */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-100/30 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-100/20 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-cyan-100/10 rounded-full blur-3xl" />
-
-        {/* Subtle Grid Pattern */}
-        <div
-          className="absolute inset-0 opacity-[0.02]"
+        <div className="absolute top-0 left-0 w-full h-full">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-blue-200/20 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-200/20 rounded-full blur-3xl animate-pulse delay-1000" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-cyan-200/10 rounded-full blur-3xl" />
+        </div>
+        
+        {/* Grid pattern */}
+        <div 
+          className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, rgb(14, 165, 233) 1px, transparent 1px)`,
-            backgroundSize: "40px 40px",
+            backgroundImage: `linear-gradient(rgb(14, 165, 233) 1px, transparent 1px), linear-gradient(90deg, rgb(14, 165, 233) 1px, transparent 1px)`,
+            backgroundSize: '50px 50px',
           }}
         />
       </div>
@@ -357,122 +210,125 @@ export function ProductShowcase() {
               Our Portfolio
             </span>
           </div>
-
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 bg-clip-text text-transparent">
-              Product Categories
-            </span>
+          
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 bg-clip-text text-transparent">
+            Product Categories
           </h2>
-
+          
           <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-            Comprehensive semiconductor solutions spanning silicon IP, advanced
-            analog systems, and AI-enhanced technologies for next-generation
-            applications.
+            Comprehensive semiconductor solutions spanning silicon IP, advanced analog systems, 
+            and AI-enhanced technologies for next-generation applications.
           </p>
         </div>
-      </div>
 
-      {/* Marquee Row 1 - Left to Right */}
-      <div className="relative mb-8 overflow-hidden">
-        <div
-          ref={marqueeRef1}
-          className="flex gap-6 animate-marquee"
-          style={{ animationDuration: "40s", width: "max-content" }}
-        >
-          {[...products, ...products].map((product, idx) => (
-            <TiltProductCard
-              key={`row1-${idx}`}
-              product={product}
-              index={idx}
-            />
-          ))}
+        {/* Products Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {products.map((product, index) => {
+            const IconComponent = product.icon;
+            const isHovered = hoveredCard === index;
+            
+            return (
+              <div
+                key={product.id}
+                ref={(el) => { cardsRef.current[index] = el; }}
+                className="group relative"
+                onMouseEnter={() => handleCardHover(index, true)}
+                onMouseLeave={() => handleCardHover(index, false)}
+              >
+                <Card className="relative overflow-hidden bg-white/80 backdrop-blur-sm border-slate-200 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/10 h-full flex flex-col">
+                  {/* Image Section */}
+                  <div className="relative h-48 overflow-hidden">
+                    <div className="card-image absolute inset-0 transition-transform duration-500">
+                      <Image
+                        src={product.image}
+                        alt={product.name}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    
+                    {/* Gradient Overlay */}
+                    <div className={`card-gradient absolute inset-0 bg-gradient-to-r ${product.gradient} opacity-0 transition-opacity duration-500 mix-blend-multiply`} />
+                    
+                    {/* Category Badge */}
+                    <div className="absolute top-4 left-4 z-10">
+                      <div className="px-3 py-1.5 rounded-full bg-white/95 backdrop-blur-sm border border-white/20 shadow-lg">
+                        <span className="text-xs font-bold text-slate-700">{product.category}</span>
+                      </div>
+                    </div>
+                    
+                    {/* Icon Overlay */}
+                    <div className={`absolute bottom-4 right-4 z-10 transition-all duration-500 ${isHovered ? 'scale-110' : 'scale-100'}`}>
+                      <div className="w-12 h-12 rounded-xl bg-white/95 backdrop-blur-sm flex items-center justify-center shadow-lg border border-white/20">
+                        <IconComponent className={`w-6 h-6 transition-colors duration-500 ${isHovered ? `text-${product.gradient.split(' ')[1]}` : 'text-slate-600'}`} />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Content Section */}
+                  <div className="card-content p-6 flex-1 transition-transform duration-300">
+                    <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:bg-gradient-to-r group-hover:from-slate-900 group-hover:to-slate-700 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
+                      {product.name}
+                    </h3>
+                    
+                    <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                      {product.description}
+                    </p>
+                    
+                    {/* Specs Tags */}
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {product.specs.map((spec, idx) => (
+                        <span
+                          key={idx}
+                          className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-slate-100 text-xs font-medium text-slate-600"
+                        >
+                          <Cpu className="w-3 h-3" />
+                          {spec}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    {/* Learn More Link */}
+                    <Link
+                      href={`/products/${product.id}`}
+                      className={`inline-flex items-center gap-2 font-semibold transition-all duration-300 group/link ${
+                        isHovered ? `bg-gradient-to-r ${product.gradient} bg-clip-text text-transparent gap-3` : 'text-slate-700'
+                      }`}
+                    >
+                      Learn More
+                      <ArrowRight className={`w-4 h-4 transition-all duration-300 ${isHovered ? 'translate-x-1' : ''}`} />
+                    </Link>
+                  </div>
+                  
+                  {/* Animated Border */}
+                  <div className={`absolute inset-0 rounded-xl pointer-events-none transition-opacity duration-500 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
+                    <div className={`absolute inset-0 rounded-xl bg-gradient-to-r ${product.gradient} opacity-20 blur-xl`} />
+                  </div>
+                </Card>
+              </div>
+            );
+          })}
         </div>
 
-        {/* Edge Fades */}
-        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
-      </div>
-
-      {/* Marquee Row 2 - Right to Left */}
-      <div className="relative overflow-hidden">
-        <div
-          ref={marqueeRef2}
-          className="flex gap-6 animate-marquee-reverse"
-          style={{ animationDuration: "35s", width: "max-content" }}
-        >
-          {[...products.slice().reverse(), ...products.slice().reverse()].map(
-            (product, idx) => (
-              <TiltProductCard
-                key={`row2-${idx}`}
-                product={product}
-                index={idx}
-              />
-            ),
-          )}
-        </div>
-
-        {/* Edge Fades */}
-        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
-      </div>
-
-      {/* Footer Section */}
-      <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl mt-16">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 border-t border-slate-200">
-          <p className="text-sm text-slate-500">
-            Explore our complete portfolio of semiconductor solutions
-          </p>
-
-          <Link
-            href="/products"
-            className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-slate-800 to-slate-700 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 group"
-          >
-            View All Products
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </Link>
-        </div>
-
-        {/* Counter */}
-        <div className="text-center mt-6">
-          <span className="font-mono text-xs text-slate-400 tracking-widest">
-            {products.length} / {products.length} SOLUTIONS
-          </span>
+        {/* View All Button */}
+        <div className="mt-16 text-center">
+          <div className="inline-block group">
+            <Link
+              href="/products"
+              className="relative inline-flex items-center gap-3 px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-blue-600 to-cyan-500 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 overflow-hidden group"
+            >
+              <span className="relative z-10">View All Products</span>
+              <ArrowRight className="relative z-10 w-5 h-5 transition-transform group-hover:translate-x-1" />
+              
+              {/* Animated Background */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-cyan-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </Link>
+            
+            {/* Subtle Glow */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-500 blur-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 -z-10" />
+          </div>
         </div>
       </div>
-
-      {/* CSS Animations */}
-      <style jsx>{`
-        @keyframes marquee {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-
-        @keyframes marquee-reverse {
-          0% {
-            transform: translateX(-50%);
-          }
-          100% {
-            transform: translateX(0);
-          }
-        }
-
-        .animate-marquee {
-          animation: marquee 40s linear infinite;
-        }
-
-        .animate-marquee-reverse {
-          animation: marquee-reverse 35s linear infinite;
-        }
-
-        .animate-marquee:hover,
-        .animate-marquee-reverse:hover {
-          animation-play-state: paused;
-        }
-      `}</style>
     </section>
   );
 }

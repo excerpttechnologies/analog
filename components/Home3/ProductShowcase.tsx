@@ -1,102 +1,322 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowRight,
-  Sparkles,
-  CheckCircle,
   Cpu,
-  Shield,
-  Globe,
   Zap,
+  Gauge,
+  Microchip,
+  Bot,
   Target,
-  Award,
-  Rocket,
-  Star,
-  TrendingUp,
-  Clock,
+  Sparkles,
+  Eye,
 } from "lucide-react";
+import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
-
-interface Product {
-  id: string;
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-  features: string[];
-  ctaText?: string;
-  gradient?: string;
-  tag?: string;
-  popularity?: number;
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
 }
 
-interface ProductsSectionProps {
-  title: string;
-  subtitle: string;
-  products: Product[];
-  onProductClick?: (productId: string) => void;
+const products = [
+  {
+    id: 1,
+    name: "SERDES IP",
+    category: "Silicon IP",
+    description:
+      "High-speed SerDes for data communication interfaces up to 112G PAM4",
+    longDescription:
+      "Industry-leading serialization/deserialization technology enabling next-gen data centers and high-performance computing with ultra-low power consumption.",
+    icon: Cpu,
+    image:
+      "https://media.finebi.com/strapi/DALL_E_2024_11_05_15_45_59_A_futuristic_and_technical_infographic_showcasing_the_three_stages_of_data_conversion_extraction_transformation_and_loading_The_diagram_should_vis_f6d1a8a16b.webp",
+    gradient: "from-blue-500 to-cyan-500",
+    gradientLight: "from-blue-50 to-cyan-50",
+    specs: ["112G PAM4", "<1e-12 BER", "0.5pJ/bit"],
+    color: "blue",
+  },
+  {
+    id: 2,
+    name: "PLL Systems",
+    category: "Silicon IP",
+    description:
+      "Ultra-low jitter phase-locked loops for clock generation and synchronization",
+    longDescription:
+      "Precision clocking solutions with industry-best jitter performance, ideal for high-speed data converters and RF applications.",
+    icon: Gauge,
+    image:
+      "https://www.3alphadataentry.com/wp-content/uploads/2018/08/data-conversion-services-1.jpg",
+    gradient: "from-purple-500 to-pink-500",
+    gradientLight: "from-purple-50 to-pink-50",
+    specs: ["50fs RMS jitter", "10MHz-40GHz", "Integrated VCO"],
+    color: "purple",
+  },
+  {
+    id: 3,
+    name: "Analog IP",
+    category: "Silicon IP",
+    description:
+      "Precision analog circuits for sensor and signal processing applications",
+    longDescription:
+      "High-performance analog building blocks including ADCs, DACs, amplifiers, and voltage references for precision measurement systems.",
+    icon: Microchip,
+    image:
+      "https://media.finebi.com/strapi/DALL_E_2024_11_05_15_29_44_A_futuristic_and_technological_image_illustrating_data_being_transformed_from_one_format_to_another_The_image_should_show_digital_representations_of_4d381fc87f.webp",
+    gradient: "from-emerald-500 to-teal-500",
+    gradientLight: "from-emerald-50 to-teal-50",
+    specs: ["16-bit resolution", "1uV offset", "0.01% INL"],
+    color: "emerald",
+  },
+  {
+    id: 4,
+    name: "Digital IP",
+    category: "Silicon IP",
+    description:
+      "Advanced digital signal processing and computation cores for edge AI",
+    longDescription:
+      "Energy-efficient DSP cores and AI accelerators optimized for on-device intelligence and real-time signal processing.",
+    icon: Zap,
+    image:
+      "https://www.tarento.com/static/2c1015cb6e6c26a30affbd668d278ee6/afa5c/4_001cd4df1f.png",
+    gradient: "from-orange-500 to-red-500",
+    gradientLight: "from-orange-50 to-red-50",
+    specs: ["5 TOPS/W", "RISC-V cores", "Hardware accelerators"],
+    color: "orange",
+  },
+  {
+    id: 5,
+    name: "AI Converters",
+    category: "Technology",
+    description:
+      "ML-enhanced ADC/DAC for intelligent signal acquisition and processing",
+    longDescription:
+      "Revolutionary data converters that use machine learning to adapt and optimize performance in real-time.",
+    icon: Bot,
+    image:
+      "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop",
+    gradient: "from-indigo-500 to-purple-500",
+    gradientLight: "from-indigo-50 to-purple-50",
+    specs: [
+      "AI-assisted calibration",
+      "40% power saving",
+      "Real-time adaptation",
+    ],
+    color: "indigo",
+  },
+  {
+    id: 6,
+    name: "Precision Analog",
+    category: "Technology",
+    description:
+      "Ultra-low noise analog front-ends for precision measurement systems",
+    longDescription:
+      "Highest precision analog front-ends for medical imaging, scientific instrumentation, and industrial automation.",
+    icon: Target,
+    image:
+      "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=800&h=600&fit=crop",
+    gradient: "from-rose-500 to-orange-500",
+    gradientLight: "from-rose-50 to-orange-50",
+    specs: ["0.5nV/√Hz noise", "140dB CMRR", "±0.5ppm/°C drift"],
+    color: "rose",
+  },
+];
+
+// Tilt Card Component with hover effects
+function TiltProductCard({
+  product,
+  index,
+}: {
+  product: (typeof products)[0];
+  index: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const rotateX = useTransform(y, [-0.5, 0.5], [8, -8]);
+  const rotateY = useTransform(x, [-0.5, 0.5], [-8, 8]);
+  const springX = useSpring(rotateX, { stiffness: 200, damping: 30 });
+  const springY = useSpring(rotateY, { stiffness: 200, damping: 30 });
+
+  const IconComponent = product.icon;
+
+  const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = ref.current?.getBoundingClientRect();
+    if (!rect) return;
+    x.set((e.clientX - rect.left) / rect.width - 0.5);
+    y.set((e.clientY - rect.top) / rect.height - 0.5);
+  };
+
+  const onLeave = () => {
+    x.set(0);
+    y.set(0);
+    setIsHovered(false);
+  };
+
+  const onEnter = () => {
+    setIsHovered(true);
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      className="relative group flex-shrink-0 w-80 md:w-96 overflow-visible"
+      style={{
+        rotateX: springX,
+        rotateY: springY,
+        transformStyle: "preserve-3d",
+        perspective: 1000,
+      }}
+      onMouseMove={onMove}
+      onMouseLeave={onLeave}
+      onMouseEnter={onEnter}
+      whileHover={{ scale: 1.02, zIndex: 50 }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="relative bg-white rounded-2xl shadow-lg overflow-hidden border border-slate-200 h-[480px] flex flex-col">
+        {/* Image Section */}
+        <div className="relative h-48 overflow-hidden">
+          <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-110">
+            <Image
+              src={product.image}
+              alt={product.name}
+              fill
+              className="object-cover"
+            />
+          </div>
+
+          {/* Gradient Overlay on Hover */}
+          <div
+            className={`absolute inset-0 bg-gradient-to-r ${product.gradient} opacity-0 transition-opacity duration-500 mix-blend-multiply ${isHovered ? "opacity-60" : ""}`}
+          />
+
+          {/* Category Badge */}
+          <div className="absolute top-4 left-4 z-10">
+            <div className="px-3 py-1.5 rounded-full bg-white/95 backdrop-blur-sm border border-slate-200 shadow-sm">
+              <span className="text-xs font-bold text-slate-700">
+                {product.category}
+              </span>
+            </div>
+          </div>
+
+          {/* Icon Overlay */}
+          <div
+            className={`absolute bottom-4 right-4 z-10 transition-all duration-500 ${isHovered ? "scale-110" : "scale-100"}`}
+          >
+            <div
+              className={`w-10 h-10 rounded-xl bg-white shadow-md flex items-center justify-center border border-slate-200`}
+            >
+              <IconComponent
+                className={`w-5 h-5 transition-colors duration-500 ${isHovered ? `text-${product.color}-500` : "text-slate-600"}`}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Content Section - Hidden by default, shows on hover */}
+        <div
+          className={`absolute inset-0 bg-white/95 backdrop-blur-md rounded-2xl flex flex-col justify-center p-6 transition-all duration-500 z-20 ${
+            isHovered ? "opacity-100 visible" : "opacity-0 invisible"
+          }`}
+        >
+          <div className="text-center mb-4">
+            <div
+              className={`inline-flex w-12 h-12 rounded-xl bg-gradient-to-r ${product.gradient} items-center justify-center mb-3`}
+            >
+              <IconComponent className="w-6 h-6 text-white" />
+            </div>
+            <h3 className="text-xl font-bold text-slate-900 mb-2">
+              {product.name}
+            </h3>
+            <p className="text-slate-600 text-sm leading-relaxed">
+              {product.longDescription}
+            </p>
+          </div>
+
+          {/* Specs Tags */}
+          <div className="flex flex-wrap gap-2 justify-center mb-6">
+            {product.specs.map((spec, idx) => (
+              <span
+                key={idx}
+                className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-slate-100 text-xs font-medium text-slate-600"
+              >
+                <Cpu className="w-3 h-3" />
+                {spec}
+              </span>
+            ))}
+          </div>
+
+          {/* Learn More Link */}
+          <Link
+            href={`/products/${product.id}`}
+            className={`inline-flex items-center justify-center gap-2 font-semibold transition-all duration-300 group/link bg-gradient-to-r ${product.gradient} text-white px-4 py-2 rounded-xl hover:shadow-lg`}
+          >
+            Learn More
+            <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />
+          </Link>
+        </div>
+
+        {/* Bottom Content - Visible when not hovered */}
+        <div
+          className={`p-5 flex-1 flex flex-col transition-opacity duration-300 ${isHovered ? "opacity-0" : "opacity-100"}`}
+        >
+          <h3 className="text-lg font-bold text-slate-900 mb-2">
+            {product.name}
+          </h3>
+          <p className="text-slate-500 text-sm leading-relaxed mb-3 flex-1">
+            {product.description}
+          </p>
+
+          {/* Minimal Specs */}
+          <div className="flex flex-wrap gap-1.5">
+            {product.specs.slice(0, 2).map((spec, idx) => (
+              <span
+                key={idx}
+                className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-50 text-xs font-medium text-slate-500"
+              >
+                <span className="w-1 h-1 rounded-full bg-slate-400" />
+                {spec}
+              </span>
+            ))}
+          </div>
+
+          {/* Hover Hint */}
+          <div className="mt-3 flex items-center gap-1 text-xs text-slate-400">
+            <Eye className="w-3 h-3" />
+            <span>Hover to explore</span>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
 }
 
-export const ProductsSection: React.FC<ProductsSectionProps> = ({
-  title,
-  subtitle,
-  products,
-  onProductClick,
-}) => {
+export function ProductShowcase() {
   const sectionRef = useRef<HTMLElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
-  const [activeFilter, setActiveFilter] = useState<string>("all");
-  const [selectedProduct, setSelectedProduct] = useState<string | null>(null);
-
-  const categories = [
-    "all",
-    ...new Set(products.map((p) => p.tag || "featured")),
-  ];
-
-  const filteredProducts =
-    activeFilter === "all"
-      ? products
-      : products.filter((p) => (p.tag || "featured") === activeFilter);
+  const titleRef = useRef<HTMLDivElement>(null);
+  const marqueeRef1 = useRef<HTMLDivElement>(null);
+  const marqueeRef2 = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Animate header
+      // Title animation
       gsap.fromTo(
-        headerRef.current?.querySelectorAll(".animate-header"),
-        { opacity: 0, y: 50, filter: "blur(8px)" },
+        titleRef.current,
+        { opacity: 0, y: 50, filter: "blur(10px)" },
         {
           opacity: 1,
           y: 0,
           filter: "blur(0px)",
-          duration: 0.8,
-          stagger: 0.15,
+          duration: 1,
           ease: "power3.out",
           scrollTrigger: {
-            trigger: headerRef.current,
-            start: "top 85%",
-            toggleActions: "play none none reverse",
-          },
-        },
-      );
-
-      // Animate filter buttons
-      gsap.fromTo(
-        ".filter-btn",
-        { opacity: 0, y: 30, scale: 0.9 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.5,
-          stagger: 0.08,
-          ease: "back.out(0.4)",
-          scrollTrigger: {
-            trigger: ".filter-bar",
+            trigger: titleRef.current,
             start: "top 85%",
             toggleActions: "play none none reverse",
           },
@@ -107,357 +327,152 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
     return () => ctx.revert();
   }, []);
 
-  // Animate products when filter changes
-  useEffect(() => {
-    const cards = document.querySelectorAll(".product-card");
-    gsap.fromTo(
-      cards,
-      { opacity: 0, y: 40, scale: 0.95 },
-      {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.5,
-        stagger: 0.08,
-        ease: "power3.out",
-      },
-    );
-  }, [activeFilter]);
-
-  const getGradient = (index: number) => {
-    const gradients = [
-      "from-indigo-500 to-blue-500",
-      "from-purple-500 to-pink-500",
-      "from-emerald-500 to-teal-500",
-      "from-amber-500 to-orange-500",
-      "from-rose-500 to-red-500",
-      "from-cyan-500 to-blue-500",
-    ];
-    return gradients[index % gradients.length];
-  };
-
   return (
     <section
       ref={sectionRef}
-      className="relative py-20 md:py-28 lg:py-32 overflow-hidden bg-gradient-to-br from-slate-50 via-white to-slate-100"
+      className="relative py-24 md:py-32 overflow-hidden bg-white"
     >
-      {/* Animated Background Elements */}
+      {/* White Theme Background */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute top-20 right-10 w-96 h-96 bg-indigo-100/40 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 left-10 w-80 h-80 bg-purple-100/30 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-100/20 rounded-full blur-3xl" />
+        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-100/30 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-100/20 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-cyan-100/10 rounded-full blur-3xl" />
 
-        {/* Diagonal Lines Pattern */}
-        <svg
-          className="absolute inset-0 w-full h-full opacity-[0.02]"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <pattern
-              id="diagonal"
-              x="0"
-              y="0"
-              width="60"
-              height="60"
-              patternUnits="userSpaceOnUse"
-              patternTransform="rotate(45)"
-            >
-              <line
-                x1="0"
-                y1="0"
-                x2="0"
-                y2="60"
-                stroke="#1e293b"
-                strokeWidth="1"
-              />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#diagonal)" />
-        </svg>
+        {/* Subtle Grid Pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, rgb(14, 165, 233) 1px, transparent 1px)`,
+            backgroundSize: "40px 40px",
+          }}
+        />
       </div>
 
-      <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl relative z-10">
-        {/* Section Header */}
-        <div ref={headerRef} className="text-center mb-12">
-          <div className="animate-header inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-indigo-50 to-blue-50 border border-indigo-200/50 shadow-sm mb-6">
-            <Sparkles className="w-4 h-4 text-indigo-600" />
-            <span className="text-sm font-semibold bg-gradient-to-r from-indigo-700 to-blue-700 bg-clip-text text-transparent">
-              Innovative Solutions
+      <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
+        {/* Header Section */}
+        <div ref={titleRef} className="text-center mb-16 md:mb-20">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200/50 shadow-sm mb-6">
+            <Sparkles className="w-4 h-4 text-blue-600" />
+            <span className="text-sm font-semibold bg-gradient-to-r from-blue-700 to-cyan-700 bg-clip-text text-transparent">
+              Our Portfolio
             </span>
           </div>
 
-          <h2 className="animate-header text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             <span className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 bg-clip-text text-transparent">
-              {title}
+              Product Categories
             </span>
           </h2>
 
-          <p className="animate-header text-lg md:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-            {subtitle}
+          <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+            Comprehensive semiconductor solutions spanning silicon IP, advanced
+            analog systems, and AI-enhanced technologies for next-generation
+            applications.
           </p>
         </div>
+      </div>
 
-        {/* Filter Bar */}
-        <div className="filter-bar flex flex-wrap justify-center gap-3 mb-12">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setActiveFilter(category)}
-              className={`filter-btn px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                activeFilter === category
-                  ? "bg-gradient-to-r from-indigo-600 to-blue-600 text-white shadow-lg shadow-indigo-200"
-                  : "bg-white text-slate-600 hover:bg-slate-100 border border-slate-200"
-              }`}
-            >
-              {category.charAt(0).toUpperCase() + category.slice(1)}
-            </button>
+      {/* Marquee Row 1 - Left to Right */}
+      <div className="relative mb-8 overflow-hidden">
+        <div
+          ref={marqueeRef1}
+          className="flex gap-6 animate-marquee"
+          style={{ animationDuration: "40s", width: "max-content" }}
+        >
+          {[...products, ...products].map((product, idx) => (
+            <TiltProductCard
+              key={`row1-${idx}`}
+              product={product}
+              index={idx}
+            />
           ))}
         </div>
 
-        {/* Products Grid - Bento Grid Style */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProducts.map((product, index) => {
-            const gradient = product.gradient || getGradient(index);
-            const isSelected = selectedProduct === product.id;
-
-            return (
-              <div
-                key={product.id}
-                className="product-card group relative cursor-pointer"
-                onClick={() => {
-                  setSelectedProduct(isSelected ? null : product.id);
-                  onProductClick?.(product.id);
-                }}
-              >
-                {/* Main Card */}
-                <div
-                  className={`relative bg-white rounded-2xl transition-all duration-500 overflow-hidden ${
-                    isSelected
-                      ? "ring-2 ring-indigo-400 shadow-2xl"
-                      : "shadow-md hover:shadow-xl"
-                  }`}
-                >
-                  {/* Featured Tag */}
-                  {product.tag && (
-                    <div className="absolute top-4 left-4 z-20">
-                      <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-amber-100 text-amber-700 text-[10px] font-bold uppercase tracking-wider">
-                        <Star className="w-3 h-3" />
-                        {product.tag}
-                      </span>
-                    </div>
-                  )}
-
-                  {/* Popularity Badge */}
-                  {product.popularity && (
-                    <div className="absolute top-4 right-4 z-20">
-                      <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-emerald-100 text-emerald-700 text-[10px] font-semibold">
-                        <TrendingUp className="w-3 h-3" />
-                        {product.popularity}+
-                      </span>
-                    </div>
-                  )}
-
-                  {/* Card Content */}
-                  <div className="p-6">
-                    {/* Icon with Animated Gradient */}
-                    <div className="relative mb-5">
-                      <div
-                        className={`w-14 h-14 rounded-xl bg-gradient-to-r ${gradient} flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300`}
-                      >
-                        <div className="text-white text-2xl">
-                          {product.icon}
-                        </div>
-                      </div>
-                      <div
-                        className={`absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-gradient-to-r ${gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse`}
-                      />
-                    </div>
-
-                    {/* Title */}
-                    <h3
-                      className={`text-xl font-bold mb-2 transition-colors duration-300 group-hover:bg-gradient-to-r group-hover:${gradient} group-hover:bg-clip-text group-hover:text-transparent`}
-                    >
-                      {product.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="text-slate-500 text-sm leading-relaxed mb-3 line-clamp-2">
-                      {product.description}
-                    </p>
-
-                    {/* Expandable Features */}
-                    <div
-                      className={`overflow-hidden transition-all duration-500 ${
-                        isSelected
-                          ? "max-h-96 opacity-100"
-                          : "max-h-0 opacity-0"
-                      }`}
-                    >
-                      <div className="pt-3 border-t border-slate-100 space-y-2">
-                        {product.features.map((feature, idx) => (
-                          <div
-                            key={idx}
-                            className="flex items-start gap-2 text-sm"
-                          >
-                            <CheckCircle className="w-4 h-4 flex-shrink-0 mt-0.5 text-emerald-500" />
-                            <span className="text-slate-600">{feature}</span>
-                          </div>
-                        ))}
-                      </div>
-
-                      {/* CTA Button */}
-                      {product.ctaText && (
-                        <button
-                          className={`w-full mt-4 py-2.5 bg-gradient-to-r ${gradient} text-white font-semibold rounded-xl transition-all duration-300 hover:shadow-lg hover:scale-[1.02] flex items-center justify-center gap-2 group/btn`}
-                          type="button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            onProductClick?.(product.id);
-                          }}
-                        >
-                          <span>{product.ctaText}</span>
-                          <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-                        </button>
-                      )}
-                    </div>
-
-                    {/* Expand Hint */}
-                    {!isSelected && (
-                      <div className="mt-3 flex items-center justify-center gap-1 text-xs text-slate-400">
-                        <Clock className="w-3 h-3" />
-                        <span>Click to explore</span>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Decorative Bottom Bar */}
-                  <div
-                    className={`h-1 bg-gradient-to-r ${gradient} transition-all duration-500 ${isSelected ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}
-                  />
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* View All Link */}
-        <div className="text-center mt-12">
-          <button className="inline-flex items-center gap-2 text-indigo-600 font-semibold hover:gap-3 transition-all duration-300 group">
-            <span>View all solutions</span>
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </button>
-        </div>
+        {/* Edge Fades */}
+        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
       </div>
 
-      {/* Floating Stats Bar */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 bg-white/80 backdrop-blur-md rounded-full px-6 py-3 shadow-lg border border-slate-200 hidden lg:flex items-center gap-6">
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span className="text-xs text-slate-600">
-            500+ Active Deployments
+      {/* Marquee Row 2 - Right to Left */}
+      <div className="relative overflow-hidden">
+        <div
+          ref={marqueeRef2}
+          className="flex gap-6 animate-marquee-reverse"
+          style={{ animationDuration: "35s", width: "max-content" }}
+        >
+          {[...products.slice().reverse(), ...products.slice().reverse()].map(
+            (product, idx) => (
+              <TiltProductCard
+                key={`row2-${idx}`}
+                product={product}
+                index={idx}
+              />
+            ),
+          )}
+        </div>
+
+        {/* Edge Fades */}
+        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+      </div>
+
+      {/* Footer Section */}
+      <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl mt-16">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 border-t border-slate-200">
+          <p className="text-sm text-slate-500">
+            Explore our complete portfolio of semiconductor solutions
+          </p>
+
+          <Link
+            href="/products"
+            className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-slate-800 to-slate-700 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 group"
+          >
+            View All Products
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </div>
+
+        {/* Counter */}
+        <div className="text-center mt-6">
+          <span className="font-mono text-xs text-slate-400 tracking-widest">
+            {products.length} / {products.length} SOLUTIONS
           </span>
         </div>
-        <div className="w-px h-4 bg-slate-300" />
-        <div className="flex items-center gap-2">
-          <Award className="w-3 h-3 text-amber-500" />
-          <span className="text-xs text-slate-600">ISO 27001 Certified</span>
-        </div>
-        <div className="w-px h-4 bg-slate-300" />
-        <div className="flex items-center gap-2">
-          <Globe className="w-3 h-3 text-blue-500" />
-          <span className="text-xs text-slate-600">Global Coverage</span>
-        </div>
       </div>
+
+      {/* CSS Animations */}
+      <style jsx>{`
+        @keyframes marquee {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+
+        @keyframes marquee-reverse {
+          0% {
+            transform: translateX(-50%);
+          }
+          100% {
+            transform: translateX(0);
+          }
+        }
+
+        .animate-marquee {
+          animation: marquee 40s linear infinite;
+        }
+
+        .animate-marquee-reverse {
+          animation: marquee-reverse 35s linear infinite;
+        }
+
+        .animate-marquee:hover,
+        .animate-marquee-reverse:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
     </section>
   );
-};
-
-// Example usage with default products
-export const defaultProducts: Product[] = [
-  {
-    id: "1",
-    title: "SERDES IP",
-    description:
-      "High-speed SerDes for data communication interfaces up to 112G PAM4",
-    icon: <Cpu />,
-    features: ["112G PAM4", "<1e-12 BER", "0.5pJ/bit", "Low Power Consumption"],
-    ctaText: "Learn More",
-    tag: "Popular",
-    popularity: 128,
-  },
-  {
-    id: "2",
-    title: "PLL Systems",
-    description: "Ultra-low jitter phase-locked loops for clock generation",
-    icon: <Zap />,
-    features: [
-      "50fs RMS jitter",
-      "10MHz-40GHz",
-      "Integrated VCO",
-      "Wide Range",
-    ],
-    ctaText: "Explore",
-    tag: "New",
-    popularity: 89,
-  },
-  {
-    id: "3",
-    title: "Analog IP",
-    description: "Precision analog circuits for sensor and signal processing",
-    icon: <Target />,
-    features: [
-      "16-bit resolution",
-      "1uV offset",
-      "0.01% INL",
-      "High Precision",
-    ],
-    ctaText: "View Details",
-    popularity: 56,
-  },
-  {
-    id: "4",
-    title: "Digital IP",
-    description: "Advanced digital signal processing cores for edge AI",
-    icon: <Rocket />,
-    features: [
-      "5 TOPS/W",
-      "RISC-V cores",
-      "Hardware accelerators",
-      "AI Optimized",
-    ],
-    ctaText: "Discover",
-    tag: "Featured",
-    popularity: 234,
-  },
-  {
-    id: "5",
-    title: "Security Solutions",
-    description: "Hardware-grade security for mission-critical applications",
-    icon: <Shield />,
-    features: [
-      "Hardware Encryption",
-      "Secure Boot",
-      "Trusted Execution",
-      "Quantum Ready",
-    ],
-    ctaText: "Learn More",
-    popularity: 67,
-  },
-  {
-    id: "6",
-    title: "Global Services",
-    description: "24/7 enterprise support and deployment worldwide",
-    icon: <Globe />,
-    features: [
-      "Global Coverage",
-      "24/7 Support",
-      "Rapid Deployment",
-      "Expert Consulting",
-    ],
-    ctaText: "Get Started",
-    tag: "New",
-    popularity: 45,
-  },
-];
-
-export default ProductsSection;
+}

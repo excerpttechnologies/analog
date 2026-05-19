@@ -4,8 +4,12 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
-import Lenis from "lenis";
+import {
+  motion,
+  AnimatePresence,
+  useMotionValue,
+  useSpring,
+} from "framer-motion";
 import {
   Menu,
   X,
@@ -25,135 +29,144 @@ import {
   Battery,
   Clock,
   Building,
-  ChevronRight,
-  Sparkles,
   ArrowUpRight,
+  Sparkles,
+  MoveRight,
+  ChevronRight,
 } from "lucide-react";
 import gsap from "gsap";
 
-/* ─────────────────────────────
+/* ───────────────────────────
    TYPES
-───────────────────────────── */
+─────────────────────────── */
 interface SubNavItem {
   label: string;
   href: string;
   description?: string;
   icon?: any;
   tag?: string;
-  stat?: string;
+  color?: string;
+  bgColor?: string;
 }
 interface NavItem {
   label: string;
   href?: string;
   icon?: any;
   subitems?: SubNavItem[];
-  accent?: string;
 }
 
-/* ─────────────────────────────
+/* ───────────────────────────
    DATA
-───────────────────────────── */
+─────────────────────────── */
 const navigationData: NavItem[] = [
   { label: "Home", href: "/", icon: Home },
   {
     label: "Product",
     icon: Package,
-    accent: "#f97316",
     subitems: [
       {
         label: "RF Beamformers",
         href: "/products/rf-beamformers",
         description: "Advanced phased array solutions",
         icon: Radio,
-        tag: "NEW",
-        stat: "5G/6G Ready",
+        tag: "New",
+        color: "#2563eb",
+        bgColor: "#eff6ff",
       },
       {
         label: "RF Front End Modules",
         href: "/products/rf-front-end",
         description: "Integrated RF solutions",
         icon: Zap,
-        stat: "< 2dB NF",
+        color: "#d97706",
+        bgColor: "#fffbeb",
       },
       {
         label: "Power & Clock Mgmt",
         href: "/products/power-management",
         description: "Efficient power solutions",
         icon: Battery,
-        stat: "98% Eff.",
+        color: "#16a34a",
+        bgColor: "#f0fdf4",
       },
       {
         label: "Microcontrollers",
         href: "/products/microcontrollers",
         description: "High-performance MCUs",
         icon: Cpu,
-        tag: "PRO",
-        stat: "1GHz+",
+        tag: "Pro",
+        color: "#7c3aed",
+        bgColor: "#f5f3ff",
       },
     ],
   },
   {
     label: "Silicon IP",
     icon: Microchip,
-    accent: "#22d3ee",
     subitems: [
       {
         label: "Multi-Protocol SERDES",
         href: "/silicon-ip/serdes",
         description: "112G PAM4 SerDes",
         icon: Zap,
-        tag: "HOT",
-        stat: "112Gbps",
+        tag: "Hot",
+        color: "#dc2626",
+        bgColor: "#fef2f2",
       },
       {
         label: "Phase Locked Loop",
         href: "/silicon-ip/pll",
         description: "Ultra-low jitter PLL",
         icon: Clock,
-        stat: "< 50fs RMS",
+        color: "#0891b2",
+        bgColor: "#ecfeff",
       },
       {
         label: "Analog IPs",
         href: "/silicon-ip/analog",
         description: "Precision analog circuits",
         icon: Shield,
-        stat: "16-bit ADC",
+        color: "#059669",
+        bgColor: "#ecfdf5",
       },
       {
         label: "Digital IPs",
         href: "/silicon-ip/digital",
         description: "DSP and compute cores",
         icon: Cpu,
-        stat: "TSMC N3E",
+        color: "#9333ea",
+        bgColor: "#faf5ff",
       },
     ],
   },
   {
     label: "Company",
     icon: Building,
-    accent: "#a78bfa",
     subitems: [
       {
         label: "About Us",
         href: "/about",
         description: "Our story and mission",
         icon: Info,
-        stat: "Est. 2018",
+        color: "#0284c7",
+        bgColor: "#f0f9ff",
       },
       {
         label: "Leadership",
         href: "/leadership",
         description: "Meet our team",
         icon: Crown,
-        stat: "12 Leaders",
+        color: "#b45309",
+        bgColor: "#fffbeb",
       },
       {
         label: "Career",
         href: "/careers",
         description: "Join our team",
         icon: Briefcase,
-        tag: "HIRING",
-        stat: "24 Roles",
+        tag: "Hiring",
+        color: "#15803d",
+        bgColor: "#f0fdf4",
       },
     ],
   },
@@ -161,10 +174,34 @@ const navigationData: NavItem[] = [
   { label: "Contact Us", href: "/contact", icon: Mail },
 ];
 
-/* ─────────────────────────────
-   SPLIT-PANEL MEGA MENU
-───────────────────────────── */
-function SplitMegaMenu({
+/* ───────────────────────────
+   SPOTLIGHT HOOK
+─────────────────────────── */
+function useSpotlight(ref: React.RefObject<HTMLElement>) {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const sx = useSpring(x, { stiffness: 200, damping: 30 });
+  const sy = useSpring(y, { stiffness: 200, damping: 30 });
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const move = (e: MouseEvent) => {
+      const rect = el.getBoundingClientRect();
+      x.set(e.clientX - rect.left);
+      y.set(e.clientY - rect.top);
+    };
+    el.addEventListener("mousemove", move);
+    return () => el.removeEventListener("mousemove", move);
+  }, [ref, x, y]);
+
+  return { sx, sy };
+}
+
+/* ───────────────────────────
+   BENTO DROPDOWN (FIXED)
+─────────────────────────── */
+function BentoDropdown({
   item,
   isActive,
 }: {
@@ -172,29 +209,29 @@ function SplitMegaMenu({
   isActive: boolean;
 }) {
   const [open, setOpen] = useState(false);
-  const [activeIdx, setActiveIdx] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
   const timer = useRef<NodeJS.Timeout | null>(null);
-  const accent = item.accent ?? "#f97316";
 
   const enter = () => {
     if (timer.current) clearTimeout(timer.current);
     setOpen(true);
   };
   const leave = () => {
-    timer.current = setTimeout(() => setOpen(false), 160);
+    timer.current = setTimeout(() => setOpen(false), 150);
   };
 
   useEffect(() => {
     const fn = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node))
+      if (ref.current && !ref.current.contains(e.target as Node)) {
         setOpen(false);
+      }
     };
     document.addEventListener("mousedown", fn);
     return () => document.removeEventListener("mousedown", fn);
   }, []);
 
-  const activeSub = item.subitems?.[activeIdx];
+  const subs = item.subitems ?? [];
+  const isFour = subs.length === 4;
 
   return (
     <div
@@ -204,322 +241,154 @@ function SplitMegaMenu({
       className="relative"
     >
       <button
-        onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="group relative flex items-center gap-2 px-4 py-2 text-[12px] font-mono font-semibold tracking-[0.08em] uppercase transition-all duration-200"
-        style={{ color: open || isActive ? accent : "rgba(255,255,255,0.65)" }}
+        className={`group relative flex items-center gap-1.5 px-4 py-2.5 rounded-full text-[13.5px] font-semibold transition-all duration-200 ${
+          isActive
+            ? "text-gray-900 bg-gray-900/8"
+            : "text-gray-500 hover:text-gray-900"
+        }`}
+        style={{ letterSpacing: "-0.01em" }}
       >
-        {/* left bracket */}
-        <span
-          className="text-[14px] font-light transition-all duration-200 opacity-0 group-hover:opacity-100"
-          style={{ color: accent }}
-        >
-          [
-        </span>
-        {item.label}
-        {/* right bracket */}
-        <span
-          className="text-[14px] font-light transition-all duration-200 opacity-0 group-hover:opacity-100"
-          style={{ color: accent }}
-        >
-          ]
-        </span>
-
-        {/* active dot */}
         {isActive && (
-          <span
-            className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full"
-            style={{ background: accent }}
+          <motion.span
+            layoutId="nav-bg"
+            className="absolute inset-0 rounded-full bg-gray-900/6"
+            transition={{ type: "spring", stiffness: 400, damping: 35 }}
           />
         )}
+        <span className="relative z-10 whitespace-nowrap">{item.label}</span>
+        <motion.svg
+          animate={{ rotate: open ? 180 : 0 }}
+          transition={{ duration: 0.25 }}
+          className="relative z-10 w-3.5 h-3.5"
+          viewBox="0 0 12 12"
+          fill="none"
+        >
+          <path
+            d="M2 4L6 8L10 4"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </motion.svg>
       </button>
 
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: 12, scaleY: 0.94 }}
-            animate={{ opacity: 1, y: 0, scaleY: 1 }}
-            exit={{ opacity: 0, y: 8, scaleY: 0.96 }}
+            initial={{ opacity: 0, y: 10, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 6, scale: 0.98 }}
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            style={{
-              transformOrigin: "top center",
-              filter: "drop-shadow(0 40px 80px rgba(0,0,0,0.7))",
-            }}
-            className="absolute top-full left-1/2 -translate-x-1/2 mt-5 z-50 w-[680px]"
+            className="absolute top-full left-1/2 -translate-x-1/2 mt-4 z-50"
           >
-            {/* connector line */}
-            <div className="flex justify-center">
+            {/* tip arrow */}
+            <div className="flex justify-center mb-[-1px] relative z-10">
               <div
-                className="w-px h-4"
+                className="w-2.5 h-2.5 rotate-45 bg-white border-t border-l border-gray-200"
                 style={{
-                  background: `linear-gradient(to bottom, transparent, ${accent}60)`,
+                  borderBottom: "none",
+                  borderRight: "none",
                 }}
               />
             </div>
 
             <div
-              className="relative overflow-hidden"
+              className="rounded-2xl overflow-hidden bg-white border border-gray-200 shadow-2xl"
               style={{
-                background: "#0c0f14",
-                border: `1px solid ${accent}25`,
-                borderRadius: "4px",
+                minWidth: isFour ? 480 : 400,
               }}
             >
-              {/* scan-line top */}
+              {/* bento grid */}
               <div
-                className="absolute top-0 left-0 right-0 h-px"
-                style={{
-                  background: `linear-gradient(to right, transparent, ${accent}80, transparent)`,
-                }}
-              />
-
-              {/* corner brackets decoration */}
-              <div
-                className="absolute top-2 left-2 w-3 h-3"
-                style={{
-                  borderTop: `1px solid ${accent}60`,
-                  borderLeft: `1px solid ${accent}60`,
-                }}
-              />
-              <div
-                className="absolute top-2 right-2 w-3 h-3"
-                style={{
-                  borderTop: `1px solid ${accent}60`,
-                  borderRight: `1px solid ${accent}60`,
-                }}
-              />
-              <div
-                className="absolute bottom-2 left-2 w-3 h-3"
-                style={{
-                  borderBottom: `1px solid ${accent}60`,
-                  borderLeft: `1px solid ${accent}60`,
-                }}
-              />
-              <div
-                className="absolute bottom-2 right-2 w-3 h-3"
-                style={{
-                  borderBottom: `1px solid ${accent}60`,
-                  borderRight: `1px solid ${accent}60`,
-                }}
-              />
-
-              {/* header bar */}
-              <div
-                className="flex items-center justify-between px-5 py-3 border-b"
-                style={{
-                  borderColor: `${accent}18`,
-                  background: `${accent}06`,
-                }}
+                className={`p-3 grid gap-2 ${isFour ? "grid-cols-2" : "grid-cols-2"}`}
               >
-                <div className="flex items-center gap-3">
-                  <div
-                    className="w-5 h-5 rounded-sm flex items-center justify-center"
-                    style={{ background: accent }}
-                  >
-                    <item.icon className="w-3 h-3 text-black" />
-                  </div>
-                  <span
-                    className="font-mono text-[10px] tracking-[0.2em] uppercase"
-                    style={{ color: `${accent}99` }}
-                  >
-                    {item.label} — {item.subitems?.length} modules
-                  </span>
-                </div>
-                <span className="font-mono text-[9px] tracking-wider text-white/15">
-                  SYS:OK
-                </span>
-              </div>
-
-              {/* body: left list + right detail */}
-              <div className="flex">
-                {/* LEFT — item list */}
-                <div
-                  className="w-[55%] p-3 space-y-0.5 border-r"
-                  style={{ borderColor: `${accent}12` }}
-                >
-                  {item.subitems?.map((sub, idx) => (
+                {subs.map((sub, idx) => {
+                  return (
                     <Link
                       key={idx}
                       href={sub.href}
                       onClick={() => setOpen(false)}
-                      onMouseEnter={() => setActiveIdx(idx)}
-                      className="group/row flex items-center gap-3 px-3 py-3 rounded-sm transition-all duration-150 relative overflow-hidden"
+                      className={`group/tile relative flex flex-col justify-between rounded-xl p-4 transition-all duration-200 overflow-hidden`}
                       style={{
-                        background:
-                          activeIdx === idx ? `${accent}10` : "transparent",
-                        borderLeft:
-                          activeIdx === idx
-                            ? `2px solid ${accent}`
-                            : "2px solid transparent",
+                        background: sub.bgColor ?? "#f8fafc",
+                        border: "1px solid rgba(0,0,0,0.06)",
+                        minHeight: 108,
                       }}
                     >
-                      {/* row number */}
-                      <span className="font-mono text-[9px] text-white/15 w-4 shrink-0">
-                        {String(idx + 1).padStart(2, "0")}
-                      </span>
-
+                      {/* hover overlay */}
                       <div
-                        className="w-8 h-8 rounded-sm flex items-center justify-center shrink-0 transition-all duration-150"
+                        className="absolute inset-0 opacity-0 group-hover/tile:opacity-100 transition-opacity duration-200"
+                        style={{ background: `${sub.color}08` }}
+                      />
+                      {/* border highlight */}
+                      <div
+                        className="absolute inset-0 rounded-xl opacity-0 group-hover/tile:opacity-100 transition-opacity duration-200"
                         style={{
-                          background:
-                            activeIdx === idx
-                              ? `${accent}20`
-                              : "rgba(255,255,255,0.04)",
-                          border: `1px solid ${activeIdx === idx ? `${accent}40` : "rgba(255,255,255,0.06)"}`,
-                        }}
-                      >
-                        <sub.icon
-                          className="w-3.5 h-3.5 transition-colors"
-                          style={{
-                            color:
-                              activeIdx === idx
-                                ? accent
-                                : "rgba(255,255,255,0.35)",
-                          }}
-                        />
-                      </div>
-
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2">
-                          <span
-                            className="text-[12.5px] font-semibold tracking-tight transition-colors"
-                            style={{
-                              color:
-                                activeIdx === idx
-                                  ? "#fff"
-                                  : "rgba(255,255,255,0.65)",
-                            }}
-                          >
-                            {sub.label}
-                          </span>
-                          {sub.tag && (
-                            <span
-                              className="font-mono text-[8px] font-bold tracking-[0.15em] px-1.5 py-0.5 rounded-sm"
-                              style={{
-                                background: `${accent}22`,
-                                color: accent,
-                              }}
-                            >
-                              {sub.tag}
-                            </span>
-                          )}
-                        </div>
-                      </div>
-
-                      <ChevronRight
-                        className="w-3 h-3 shrink-0 transition-all duration-150"
-                        style={{
-                          color: activeIdx === idx ? accent : "transparent",
-                          transform:
-                            activeIdx === idx
-                              ? "translateX(0)"
-                              : "translateX(-4px)",
+                          boxShadow: `inset 0 0 0 1.5px ${sub.color}30`,
                         }}
                       />
-                    </Link>
-                  ))}
-                </div>
 
-                {/* RIGHT — detail panel */}
-                <div className="w-[45%] p-5 flex flex-col justify-between">
-                  <AnimatePresence mode="wait">
-                    {activeSub && (
-                      <motion.div
-                        key={activeIdx}
-                        initial={{ opacity: 0, x: 8 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -8 }}
-                        transition={{ duration: 0.15 }}
-                        className="flex flex-col gap-4"
-                      >
-                        {/* icon large */}
+                      <div className="relative z-10 flex items-start justify-between mb-3">
                         <div
-                          className="w-12 h-12 rounded-sm flex items-center justify-center"
+                          className="w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200 group-hover/tile:scale-110"
                           style={{
-                            background: `${accent}15`,
-                            border: `1px solid ${accent}30`,
+                            background: sub.color
+                              ? `${sub.color}15`
+                              : "#f1f5f9",
                           }}
                         >
-                          <activeSub.icon
-                            className="w-6 h-6"
-                            style={{ color: accent }}
+                          <sub.icon
+                            className="w-4.5 h-4.5"
+                            style={{ color: sub.color ?? "#64748b" }}
                           />
                         </div>
-
-                        {/* label */}
-                        <div>
-                          <div className="flex items-center gap-2 mb-1.5">
-                            <h3 className="text-[15px] font-bold text-white tracking-tight">
-                              {activeSub.label}
-                            </h3>
-                            {activeSub.tag && (
-                              <span
-                                className="font-mono text-[8px] font-bold tracking-[0.15em] px-1.5 py-0.5 rounded-sm"
-                                style={{
-                                  background: `${accent}22`,
-                                  color: accent,
-                                }}
-                              >
-                                {activeSub.tag}
-                              </span>
-                            )}
-                          </div>
-                          <p className="text-[12px] leading-relaxed text-white/40">
-                            {activeSub.description}
-                          </p>
-                        </div>
-
-                        {/* stat chip */}
-                        {activeSub.stat && (
-                          <div
-                            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-sm w-fit"
+                        {sub.tag && (
+                          <span
+                            className="text-[9px] font-bold tracking-wider px-2 py-1 rounded-full"
                             style={{
-                              background: "rgba(255,255,255,0.04)",
-                              border: "1px solid rgba(255,255,255,0.08)",
+                              background: `${sub.color}18`,
+                              color: sub.color,
                             }}
                           >
-                            <span className="font-mono text-[9px] tracking-[0.12em] text-white/30 uppercase">
-                              Spec
-                            </span>
-                            <span
-                              className="font-mono text-[11px] font-bold"
-                              style={{ color: accent }}
-                            >
-                              {activeSub.stat}
-                            </span>
-                          </div>
-                        )}
-
-                        {/* CTA */}
-                        <Link
-                          href={activeSub.href}
-                          onClick={() => setOpen(false)}
-                          className="group/cta flex items-center gap-2 mt-auto"
-                        >
-                          <span
-                            className="font-mono text-[10px] tracking-[0.12em] uppercase transition-colors"
-                            style={{ color: `${accent}80` }}
-                          >
-                            Learn more
+                            {sub.tag}
                           </span>
+                        )}
+                      </div>
+
+                      <div className="relative z-10">
+                        <div className="flex items-center gap-1.5 mb-1">
+                          <p
+                            className="text-[13px] font-semibold text-gray-800 group-hover/tile:text-gray-900 leading-tight"
+                            style={{ letterSpacing: "-0.01em" }}
+                          >
+                            {sub.label}
+                          </p>
                           <ArrowUpRight
-                            className="w-3 h-3 transition-transform group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5"
-                            style={{ color: `${accent}80` }}
+                            className="w-3 h-3 opacity-0 group-hover/tile:opacity-100 transition-all duration-200 -translate-x-1 group-hover/tile:translate-x-0"
+                            style={{ color: sub.color }}
                           />
-                        </Link>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
+                        </div>
+                        <p className="text-[11px] text-gray-400 leading-snug">
+                          {sub.description}
+                        </p>
+                      </div>
+                    </Link>
+                  );
+                })}
               </div>
 
-              {/* scan-line bottom */}
-              <div
-                className="absolute bottom-0 left-0 right-0 h-px"
-                style={{
-                  background: `linear-gradient(to right, transparent, ${accent}30, transparent)`,
-                }}
-              />
+              {/* footer */}
+              <div className="px-5 py-3 border-t border-gray-100 flex items-center justify-between">
+                <p className="text-[11px] text-gray-400">
+                  Explore {item.label}
+                </p>
+                <button className="group/all flex items-center gap-1.5 text-[11px] font-semibold text-gray-600 hover:text-gray-900 transition-colors">
+                  View all
+                  <MoveRight className="w-3 h-3 group-hover/all:translate-x-0.5 transition-transform" />
+                </button>
+              </div>
             </div>
           </motion.div>
         )}
@@ -528,10 +397,10 @@ function SplitMegaMenu({
   );
 }
 
-/* ─────────────────────────────
-   MOBILE DRAWER  (dark panel from left)
-───────────────────────────── */
-function MobileDrawer({
+/* ───────────────────────────
+   BOTTOM SHEET - MOBILE (FIXED)
+─────────────────────────── */
+function BottomSheet({
   open,
   onClose,
   isActive,
@@ -543,6 +412,12 @@ function MobileDrawer({
   isParentActive: (i: NavItem) => boolean;
 }) {
   const [expanded, setExpanded] = useState<number | null>(null);
+  const sheetRef = useRef<HTMLDivElement>(null);
+  const y = useMotionValue(0);
+
+  const onDragEnd = () => {
+    if (y.get() > 120) onClose();
+  };
 
   return (
     <AnimatePresence>
@@ -555,174 +430,143 @@ function MobileDrawer({
             onClick={onClose}
             className="fixed inset-0 z-40 md:hidden"
             style={{
-              background: "rgba(0,0,0,0.75)",
-              backdropFilter: "blur(4px)",
+              background: "rgba(0,0,0,0.35)",
+              backdropFilter: "blur(6px)",
             }}
           />
 
           <motion.div
-            initial={{ x: "-100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "-100%" }}
-            transition={{ type: "spring", damping: 30, stiffness: 250 }}
-            className="fixed left-0 top-0 bottom-0 z-50 md:hidden flex flex-col w-[310px]"
+            ref={sheetRef}
+            style={{ y }}
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "100%" }}
+            transition={{ type: "spring", damping: 32, stiffness: 240 }}
+            drag="y"
+            dragConstraints={{ top: 0, bottom: 400 }}
+            dragElastic={{ top: 0, bottom: 0.3 }}
+            onDragEnd={onDragEnd}
+            className="fixed bottom-0 left-0 right-0 z-50 md:hidden flex flex-col bg-white rounded-3xl shadow-2xl"
             style={{
-              background: "#080b10",
-              borderRight: "1px solid rgba(255,255,255,0.07)",
-              fontFamily: "'JetBrains Mono', monospace",
+              maxHeight: "85vh",
             }}
           >
-            {/* top scan line */}
-            <div
-              className="absolute top-0 left-0 right-0 h-px"
-              style={{
-                background:
-                  "linear-gradient(to right, #f9731640, #22d3ee40, transparent)",
-              }}
-            />
+            {/* drag pill */}
+            <div className="flex justify-center pt-3 pb-1">
+              <div className="w-10 h-1 rounded-full bg-gray-200" />
+            </div>
 
             {/* header */}
-            <div className="flex items-center justify-between px-5 py-5 border-b border-white/[0.06]">
-              <div className="flex items-center gap-3">
-                <div className="w-7 h-7 rounded-sm bg-[#f97316] flex items-center justify-center">
-                  <Sparkles className="w-3.5 h-3.5 text-black" />
+            <div className="flex items-center justify-between px-5 py-3 border-b border-gray-100">
+              <div className="flex items-center gap-2.5">
+                <div className="w-7 h-7 rounded-xl bg-gray-900 flex items-center justify-center">
+                  <Sparkles className="w-3.5 h-3.5 text-white" />
                 </div>
-                <div>
-                  <p className="text-[13px] font-bold text-white tracking-tight">
-                    ANALOG
-                  </p>
-                  <p className="text-[8px] font-mono tracking-[0.2em] text-white/30 uppercase">
-                    Navigation
-                  </p>
-                </div>
+                <span className="text-[15px] font-bold text-gray-900">
+                  Menu
+                </span>
               </div>
               <button
                 onClick={onClose}
-                className="w-7 h-7 rounded-sm border border-white/10 flex items-center justify-center hover:border-white/20 transition-all"
+                className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
               >
-                <X className="w-3.5 h-3.5 text-white/50" />
+                <X className="w-4 h-4 text-gray-600" />
               </button>
             </div>
 
-            {/* status bar */}
-            <div className="px-5 py-2 border-b border-white/[0.04] flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="font-mono text-[9px] tracking-[0.15em] text-white/20 uppercase">
-                System operational
-              </span>
-            </div>
-
-            {/* nav */}
-            <div className="flex-1 overflow-y-auto py-3">
+            {/* items */}
+            <div className="flex-1 overflow-y-auto px-4 py-3 space-y-1.5">
               {navigationData.map((item, index) => {
                 const active = item.href
                   ? isActive(item.href)
                   : isParentActive(item);
                 const isExp = expanded === index;
-                const accent = item.accent ?? "#f97316";
 
                 if (item.subitems) {
                   return (
-                    <div key={index}>
+                    <div
+                      key={index}
+                      className="rounded-2xl overflow-hidden border border-gray-100"
+                      style={{
+                        background: isExp ? "#fafafa" : "#fff",
+                      }}
+                    >
                       <button
                         onClick={() => setExpanded(isExp ? null : index)}
-                        className="w-full flex items-center justify-between px-5 py-3.5 group transition-all duration-150 hover:bg-white/[0.03]"
+                        className="w-full flex items-center justify-between px-4 py-3.5"
                       >
                         <div className="flex items-center gap-3">
-                          <span className="font-mono text-[9px] text-white/15">
-                            {String(index + 1).padStart(2, "0")}
-                          </span>
                           <div
-                            className="w-7 h-7 rounded-sm flex items-center justify-center transition-all"
-                            style={{
-                              background:
-                                isExp || active
-                                  ? `${accent}18`
-                                  : "rgba(255,255,255,0.04)",
-                              border: `1px solid ${isExp || active ? `${accent}35` : "rgba(255,255,255,0.06)"}`,
-                            }}
+                            className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all ${
+                              active || isExp ? "bg-gray-900" : "bg-gray-100"
+                            }`}
                           >
                             <item.icon
-                              className="w-3.5 h-3.5 transition-colors"
-                              style={{
-                                color:
-                                  isExp || active
-                                    ? accent
-                                    : "rgba(255,255,255,0.35)",
-                              }}
+                              className={`w-4 h-4 ${
+                                active || isExp ? "text-white" : "text-gray-500"
+                              }`}
                             />
                           </div>
-                          <span
-                            className="font-mono text-[11px] tracking-[0.08em] uppercase font-semibold"
-                            style={{
-                              color:
-                                active || isExp
-                                  ? "#fff"
-                                  : "rgba(255,255,255,0.5)",
-                            }}
-                          >
+                          <span className="text-[14px] font-semibold text-gray-800">
                             {item.label}
                           </span>
+                          {active && (
+                            <div className="w-1.5 h-1.5 rounded-full bg-gray-900" />
+                          )}
                         </div>
                         <motion.div
                           animate={{ rotate: isExp ? 90 : 0 }}
-                          transition={{ duration: 0.2 }}
+                          transition={{ duration: 0.22 }}
                         >
-                          <ChevronRight className="w-3.5 h-3.5 text-white/20" />
+                          <ChevronRight className="w-4 h-4 text-gray-300" />
                         </motion.div>
                       </button>
 
                       <AnimatePresence>
                         {isExp && (
                           <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.25 }}
+                            initial={{ height: 0 }}
+                            animate={{ height: "auto" }}
+                            exit={{ height: 0 }}
+                            transition={{ duration: 0.26 }}
                             className="overflow-hidden"
                           >
-                            <div
-                              className="mx-5 mb-2 rounded-sm overflow-hidden"
-                              style={{
-                                background: "rgba(255,255,255,0.02)",
-                                border: `1px solid ${accent}15`,
-                              }}
-                            >
+                            <div className="px-4 pb-3 pt-1 grid grid-cols-2 gap-2">
                               {item.subitems.map((sub, idx) => (
                                 <Link
                                   key={idx}
                                   href={sub.href}
                                   onClick={onClose}
-                                  className="group flex items-center gap-3 px-4 py-3 border-b last:border-0 transition-all hover:bg-white/[0.04]"
+                                  className="group flex flex-col gap-2 p-3 rounded-xl transition-all border border-gray-100"
                                   style={{
-                                    borderColor: "rgba(255,255,255,0.04)",
+                                    background: sub.bgColor ?? "#f8fafc",
                                   }}
                                 >
-                                  <sub.icon className="w-3.5 h-3.5 shrink-0 text-white/25 group-hover:text-white/60 transition-colors" />
-                                  <div className="flex-1 min-w-0">
-                                    <div className="flex items-center gap-1.5">
-                                      <span className="text-[12px] font-medium text-white/55 group-hover:text-white/90 transition-colors">
-                                        {sub.label}
-                                      </span>
-                                      {sub.tag && (
-                                        <span
-                                          className="font-mono text-[8px] px-1 py-0.5 rounded-sm"
-                                          style={{
-                                            background: `${accent}20`,
-                                            color: accent,
-                                          }}
-                                        >
-                                          {sub.tag}
-                                        </span>
-                                      )}
+                                  <div className="flex items-center justify-between">
+                                    <div
+                                      className="w-7 h-7 rounded-lg flex items-center justify-center"
+                                      style={{ background: `${sub.color}15` }}
+                                    >
+                                      <sub.icon
+                                        className="w-3.5 h-3.5"
+                                        style={{ color: sub.color }}
+                                      />
                                     </div>
-                                    {sub.stat && (
-                                      <span className="font-mono text-[9px] text-white/20">
-                                        {sub.stat}
+                                    {sub.tag && (
+                                      <span
+                                        className="text-[8px] font-bold px-1.5 py-0.5 rounded-full"
+                                        style={{
+                                          background: `${sub.color}18`,
+                                          color: sub.color,
+                                        }}
+                                      >
+                                        {sub.tag}
                                       </span>
                                     )}
                                   </div>
-                                  <ArrowUpRight className="w-3 h-3 text-white/15 group-hover:text-white/40 transition-colors" />
+                                  <p className="text-[11px] font-semibold text-gray-700 leading-tight">
+                                    {sub.label}
+                                  </p>
                                 </Link>
                               ))}
                             </div>
@@ -738,57 +582,44 @@ function MobileDrawer({
                     key={index}
                     href={item.href!}
                     onClick={onClose}
-                    className="flex items-center gap-3 px-5 py-3.5 transition-all hover:bg-white/[0.03] group"
-                    style={{
-                      borderLeft: active
-                        ? "2px solid #f97316"
-                        : "2px solid transparent",
-                    }}
+                    className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl transition-all border border-gray-100 ${
+                      active
+                        ? "bg-gray-900 text-white"
+                        : "bg-white text-gray-700 hover:bg-gray-50"
+                    }`}
                   >
-                    <span className="font-mono text-[9px] text-white/15">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
                     <div
-                      className="w-7 h-7 rounded-sm flex items-center justify-center"
-                      style={{
-                        background: active
-                          ? "rgba(249,115,22,0.15)"
-                          : "rgba(255,255,255,0.04)",
-                        border: `1px solid ${active ? "rgba(249,115,22,0.3)" : "rgba(255,255,255,0.06)"}`,
-                      }}
+                      className={`w-9 h-9 rounded-xl flex items-center justify-center ${
+                        active ? "bg-white/15" : "bg-gray-100"
+                      }`}
                     >
                       <item.icon
-                        className="w-3.5 h-3.5"
-                        style={{
-                          color: active ? "#f97316" : "rgba(255,255,255,0.35)",
-                        }}
+                        className={`w-4 h-4 ${
+                          active ? "text-white" : "text-gray-500"
+                        }`}
                       />
                     </div>
-                    <span
-                      className="font-mono text-[11px] tracking-[0.08em] uppercase font-semibold"
-                      style={{
-                        color: active ? "#fff" : "rgba(255,255,255,0.5)",
-                      }}
-                    >
+                    <span className="text-[14px] font-semibold">
                       {item.label}
                     </span>
+                    {active && (
+                      <MoveRight className="w-3.5 h-3.5 ml-auto text-white/60" />
+                    )}
                   </Link>
                 );
               })}
             </div>
 
-            {/* footer */}
-            <div className="p-5 border-t border-white/[0.06]">
+            {/* CTA */}
+            <div className="px-5 pb-8 pt-3 border-t border-gray-100">
               <Link href="/admin" onClick={onClose}>
-                <button
-                  className="w-full flex items-center justify-center gap-2.5 py-3 rounded-sm font-mono text-[11px] tracking-[0.1em] uppercase font-bold text-black transition-all hover:brightness-110"
-                  style={{
-                    background: "linear-gradient(135deg, #f97316, #fb923c)",
-                  }}
+                <motion.button
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full flex items-center justify-center gap-2.5 py-3.5 rounded-2xl bg-gray-900 text-white text-[14px] font-bold transition-all hover:bg-gray-800"
                 >
-                  <LogIn className="w-3.5 h-3.5" />
-                  Login
-                </button>
+                  <LogIn className="w-4 h-4" />
+                  Login to Dashboard
+                </motion.button>
               </Link>
             </div>
           </motion.div>
@@ -798,97 +629,73 @@ function MobileDrawer({
   );
 }
 
-/* ─────────────────────────────
-   TICKER
-───────────────────────────── */
-function Ticker() {
-  const items = [
-    "112G SERDES",
-    "5G BEAMFORMER",
-    "N3E PDK",
-    "LOW-JITTER PLL",
-    "ANALOG IP",
-  ];
-  return (
-    <div
-      className="hidden lg:flex items-center gap-3 px-3 py-1.5 rounded-sm border overflow-hidden"
-      style={{
-        background: "rgba(255,255,255,0.03)",
-        borderColor: "rgba(255,255,255,0.07)",
-        maxWidth: 200,
-      }}
-    >
-      <span className="font-mono text-[8px] tracking-[0.2em] text-emerald-400 shrink-0">
-        LIVE
-      </span>
-      <div className="overflow-hidden flex-1">
-        <motion.div
-          animate={{ x: ["0%", "-100%"] }}
-          transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
-          className="flex gap-8 whitespace-nowrap"
-        >
-          {[...items, ...items].map((t, i) => (
-            <span
-              key={i}
-              className="font-mono text-[9px] tracking-[0.1em] text-white/30"
-            >
-              {t}
-            </span>
-          ))}
-        </motion.div>
-      </div>
-    </div>
-  );
-}
-
-/* ─────────────────────────────
-   MAIN NAVBAR
-───────────────────────────── */
+/* ───────────────────────────
+   MAIN NAVBAR (FIXED)
+─────────────────────────── */
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [logoError, setLogoError] = useState(false);
   const pathname = usePathname();
   const navRef = useRef<HTMLElement>(null);
+  const barRef = useRef<HTMLDivElement>(null);
+
+  /* spotlight */
+  const mouseX = useMotionValue(-999);
+  const mouseY = useMotionValue(-999);
+  const sx = useSpring(mouseX, { stiffness: 120, damping: 20 });
+  const sy = useSpring(mouseY, { stiffness: 120, damping: 20 });
+
+  const handleMouseMove = useCallback(
+    (e: MouseEvent) => {
+      const rect = barRef.current?.getBoundingClientRect();
+      if (!rect) return;
+      mouseX.set(e.clientX - rect.left);
+      mouseY.set(e.clientY - rect.top);
+    },
+    [mouseX, mouseY],
+  );
+
+  const handleMouseLeave = useCallback(() => {
+    mouseX.set(-999);
+    mouseY.set(-999);
+  }, [mouseX, mouseY]);
 
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-    });
-    const raf = (t: number) => {
-      lenis.raf(t);
-      requestAnimationFrame(raf);
-    };
-    requestAnimationFrame(raf);
-    return () => lenis.destroy();
-  }, []);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => setScrolled(window.scrollY > 30);
     window.addEventListener("scroll", onScroll);
 
     gsap.fromTo(
       navRef.current,
       { y: -80, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.9, ease: "power4.out" },
+      { y: 0, opacity: 1, duration: 1, ease: "expo.out", delay: 0.05 },
     );
     gsap.fromTo(
-      ".nav-mono-item",
-      { opacity: 0, y: -8 },
+      ".nav-link-item",
+      { opacity: 0, y: -6 },
       {
         opacity: 1,
         y: 0,
-        stagger: 0.06,
-        duration: 0.4,
+        stagger: 0.055,
+        duration: 0.5,
         ease: "power2.out",
-        delay: 0.4,
+        delay: 0.5,
       },
     );
 
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    const bar = barRef.current;
+    if (bar) {
+      bar.addEventListener("mousemove", handleMouseMove);
+      bar.addEventListener("mouseleave", handleMouseLeave);
+    }
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (bar) {
+        bar.removeEventListener("mousemove", handleMouseMove);
+        bar.removeEventListener("mouseleave", handleMouseLeave);
+      }
+    };
+  }, [handleMouseMove, handleMouseLeave]);
 
   const isActive = (href: string) =>
     href === "/" ? pathname === href : pathname.startsWith(href);
@@ -900,106 +707,71 @@ export function Navbar() {
 
   return (
     <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
-        .analog-tech { font-family: 'Inter', sans-serif; }
-        .mono { font-family: 'JetBrains Mono', monospace; }
-      `}</style>
-
-      <div className="pt-[64px]">
+      <div className="pt-[80px]">
         <nav
           ref={navRef}
-          className="analog-tech fixed top-0 left-0 right-0 z-50 transition-all duration-400"
-          style={{
-            background: scrolled ? "rgba(6,8,12,0.97)" : "rgba(6,8,12,0.85)",
-            backdropFilter: "blur(20px)",
-            borderBottom: "1px solid rgba(255,255,255,0.055)",
-          }}
+          className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 py-4"
         >
-          {/* top scan line */}
-          <motion.div
-            className="absolute top-0 left-0 right-0 h-px"
+          <div
+            ref={barRef}
+            className="relative w-full max-w-[900px] flex items-center justify-between h-[52px] px-3 rounded-2xl transition-all duration-500 bg-white/90 backdrop-blur-xl"
             style={{
-              background:
-                "linear-gradient(to right, transparent, rgba(249,115,22,0.6) 30%, rgba(34,211,238,0.6) 70%, transparent)",
+              border: "0.5px solid rgba(0,0,0,0.08)",
+              boxShadow: scrolled
+                ? "0 8px 32px rgba(0,0,0,0.1)"
+                : "0 4px 16px rgba(0,0,0,0.06)",
             }}
-            animate={{ opacity: [0.4, 0.8, 0.4] }}
-            transition={{ duration: 4, repeat: Infinity }}
-          />
+          >
+            {/* mouse spotlight */}
+            <motion.div
+              className="pointer-events-none absolute rounded-full"
+              style={{
+                width: 300,
+                height: 300,
+                left: sx,
+                top: sy,
+                x: "-50%",
+                y: "-50%",
+                background:
+                  "radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%)",
+              }}
+            />
 
-          <div className="max-w-[1400px] mx-auto px-5 md:px-8 h-16 flex items-center justify-between gap-4">
-            {/* ── LOGO ── */}
+            {/* LOGO */}
             <Link
               href="/"
-              className="group flex items-center gap-3 shrink-0"
-              onMouseEnter={(e) =>
-                gsap.to(e.currentTarget, {
-                  scale: 1.03,
-                  duration: 0.2,
-                  ease: "power2.out",
-                })
-              }
-              onMouseLeave={(e) =>
-                gsap.to(e.currentTarget, {
-                  scale: 1,
-                  duration: 0.2,
-                  ease: "power2.out",
-                })
-              }
+              className="nav-link-item group flex items-center gap-2.5 shrink-0 pl-1"
             >
               <div
-                className="relative w-9 h-9 flex items-center justify-center transition-all duration-300"
+                className="relative w-8 h-8 rounded-xl overflow-hidden flex items-center justify-center transition-all duration-300 bg-gray-900"
                 style={{
-                  background: "rgba(249,115,22,0.1)",
-                  border: "1px solid rgba(249,115,22,0.35)",
-                  borderRadius: "2px",
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
                 }}
               >
                 {!logoError ? (
                   <Image
                     src={logoSrc}
                     alt="Analog"
-                    width={36}
-                    height={36}
+                    width={32}
+                    height={32}
                     className="object-contain p-1"
                     onError={() => setLogoError(true)}
                     unoptimized
                   />
                 ) : (
-                  <Sparkles className="w-4 h-4 text-[#f97316]" />
+                  <Sparkles className="w-4 h-4 text-white" />
                 )}
-                {/* corner ticks */}
-                <span
-                  className="absolute -top-px -right-px w-1.5 h-1.5"
-                  style={{
-                    borderTop: "1px solid #f97316",
-                    borderRight: "1px solid #f97316",
-                  }}
-                />
-                <span
-                  className="absolute -bottom-px -left-px w-1.5 h-1.5"
-                  style={{
-                    borderBottom: "1px solid #f97316",
-                    borderLeft: "1px solid #f97316",
-                  }}
-                />
               </div>
-
-              <div className="hidden sm:block">
-                <p className="mono text-[14px] font-bold text-white tracking-[0.05em] leading-none">
-                  ANALOG
-                </p>
-                <p
-                  className="mono text-[8px] font-medium tracking-[0.2em] leading-none mt-1"
-                  style={{ color: "rgba(249,115,22,0.7)" }}
-                >
-                  SEMICONDUCTOR
-                </p>
-              </div>
+              <span
+                className="hidden sm:block text-[15px] font-bold text-gray-900"
+                style={{ letterSpacing: "-0.03em" }}
+              >
+                Analog
+              </span>
             </Link>
 
-            {/* ── CENTER NAV ── */}
-            <div className="hidden md:flex items-center">
+            {/* CENTER LINKS */}
+            <div className="hidden md:flex items-center gap-0.5 absolute left-1/2 -translate-x-1/2">
               {navigationData.map((item, index) => {
                 const active = item.href
                   ? isActive(item.href)
@@ -1007,8 +779,8 @@ export function Navbar() {
 
                 if (item.subitems) {
                   return (
-                    <div key={index} className="nav-mono-item">
-                      <SplitMegaMenu item={item} isActive={active} />
+                    <div key={index} className="nav-link-item">
+                      <BentoDropdown item={item} isActive={active} />
                     </div>
                   );
                 }
@@ -1017,24 +789,16 @@ export function Navbar() {
                   <Link
                     key={index}
                     href={item.href!}
-                    className="nav-mono-item group relative flex items-center gap-1.5 px-4 py-2 font-mono font-semibold text-[12px] tracking-[0.08em] uppercase transition-all duration-200"
-                    style={{ color: active ? "#fff" : "rgba(255,255,255,0.5)" }}
-                    onMouseEnter={(e) => {
-                      if (!active)
-                        (e.currentTarget as HTMLElement).style.color =
-                          "rgba(255,255,255,0.85)";
-                    }}
-                    onMouseLeave={(e) => {
-                      if (!active)
-                        (e.currentTarget as HTMLElement).style.color =
-                          "rgba(255,255,255,0.5)";
+                    className="nav-link-item relative group flex items-center px-3 py-2 rounded-full text-[13.5px] font-semibold transition-all duration-200"
+                    style={{
+                      color: active ? "#111" : "#6b7280",
+                      letterSpacing: "-0.01em",
                     }}
                   >
                     {active && (
-                      <motion.div
-                        layoutId="mono-active"
-                        className="absolute inset-x-2 -bottom-px h-px"
-                        style={{ background: "#f97316" }}
+                      <motion.span
+                        layoutId="nav-bg"
+                        className="absolute inset-0 rounded-full bg-gray-900/6"
                         transition={{
                           type: "spring",
                           stiffness: 400,
@@ -1042,25 +806,22 @@ export function Navbar() {
                         }}
                       />
                     )}
-                    {item.label}
+                    <span className="relative z-10 whitespace-nowrap">{item.label}</span>
                   </Link>
                 );
               })}
             </div>
 
-            {/* ── RIGHT ── */}
-            <div className="flex items-center gap-3 shrink-0">
-              <Ticker />
-
-              <Link href="/admin" className="hidden md:block">
+            {/* RIGHT SIDE */}
+            <div className="flex items-center gap-2 shrink-0 pr-1">
+              <Link href="/admin" className="hidden md:block nav-link-item">
                 <motion.button
                   whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.96 }}
-                  className="mono flex items-center gap-2 px-4 py-2 text-[11px] font-bold tracking-[0.1em] uppercase text-black transition-all"
+                  whileTap={{ scale: 0.97 }}
+                  className="flex items-center gap-2 px-4 py-2 rounded-xl text-[13px] font-semibold text-white transition-all bg-gray-900"
                   style={{
-                    background: "linear-gradient(135deg, #f97316, #fb923c)",
-                    borderRadius: "2px",
-                    boxShadow: "0 0 20px rgba(249,115,22,0.25)",
+                    boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
+                    letterSpacing: "-0.01em",
                   }}
                 >
                   <LogIn className="w-3.5 h-3.5" />
@@ -1068,25 +829,19 @@ export function Navbar() {
                 </motion.button>
               </Link>
 
-              {/* mobile burger */}
+              {/* Mobile burger */}
               <motion.button
                 whileTap={{ scale: 0.92 }}
                 onClick={() => setMobileOpen(true)}
-                className="md:hidden w-9 h-9 flex items-center justify-center transition-all"
-                style={{
-                  background: "rgba(255,255,255,0.05)",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                  borderRadius: "2px",
-                }}
+                className="md:hidden w-9 h-9 rounded-xl bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
               >
-                <Menu className="w-4 h-4 text-white/60" />
+                <Menu className="w-4.5 h-4.5 text-gray-700" />
               </motion.button>
             </div>
           </div>
         </nav>
 
-        {/* ── MOBILE DRAWER ── */}
-        <MobileDrawer
+        <BottomSheet
           open={mobileOpen}
           onClose={() => setMobileOpen(false)}
           isActive={isActive}

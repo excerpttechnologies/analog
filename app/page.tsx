@@ -6,6 +6,11 @@ import { ProductShowcase } from "@/components/home/ProductShowcase";
 import { Features } from "@/components/home/Features";
 import { AboutSection } from "@/components/home/About";
 import { CTASection } from "@/components/home/Ctasection";
+import { MarketOpportunitiesSection } from "@/components/home/Market";
+import { TargetIndustriesSection } from "@/components/home/TargetIndustriesSection";
+import { ProcessTimelineSection } from "@/components/home/ProcessTimelineSection";
+import { StatsSection } from "@/components/home/StatsSection";
+import { TrustedClientsSection } from "@/components/home/TrustedClientsSection";
 
 export const metadata: Metadata = {
   title: "SmartScope - Premium Semiconductor Solutions",
@@ -25,11 +30,17 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        {/* <ProductShowcase /> */}
+        <ProductShowcase />
         <Features />
+        <TargetIndustriesSection />
+        <ProcessTimelineSection />
+        {/* <StatsSection /> */}
+        <MarketOpportunitiesSection />
+
         <AboutSection />
+        <TrustedClientsSection />
         {/* CTA Section */}
-        <CTASection />
+        {/* <CTASection /> */}
       </main>
       <Footer />
     </>

@@ -1,574 +1,543 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import Link from "next/link";
 import {
   ArrowRight,
-  Zap,
   ChevronLeft,
   ChevronRight,
-  Shield,
-  Cpu,
-  CircuitBoard,
-  Sparkles,
-  CheckCircle,
+  ArrowUpRight,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import gsap from "gsap";
 
-// Slider content array with background images
-const sliderContent = [
+// ─── Constants ────────────────────────────────────────────────────────────────
+const ACCENT = "#0f62fe";
+const ACCENT_RGB = "15,98,254";
+const INTERVAL = 6800;
+
+// ─── Slide Data ───────────────────────────────────────────────────────────────
+interface Slide {
+  id: number;
+  index: string;
+  category: string;
+  title: string;
+  titleLines: string[];
+  subtitle: string;
+  tag: string;
+  cta: string;
+  ctaHref: string;
+  image: string;
+  imageFocal?: string;
+  spec: { label: string; value: string }[];
+}
+
+const slides: Slide[] = [
   {
     id: 1,
-    title: "Premium Analog & Digital Solutions",
+    index: "01",
+    category: "Phased Array · 5G · Satcom",
+    title: "RF Beamformers",
+    titleLines: ["RF Beam-", "formers"],
     subtitle:
-      "Cutting-edge semiconductor technology for signal processing, data conversion, and AI-enhanced analog systems.",
-    badge: "Next Generation Semiconductors",
-    ctaText: "Explore Products",
-    ctaLink: "/products",
-    secondaryCta: "Request Demo",
-    backgroundImage:
-      "https://img.freepik.com/free-photo/future-visions-business-technology-concept_23-2151893412.jpg?semt=ais_hybrid&w=740&q=80",
-    gradient: "from-blue-600 to-cyan-500",
-    gradientLight: "from-blue-500 to-cyan-400",
-    stats: [
-      { value: "500+", label: "Enterprise Clients", icon: Shield },
-      { value: "20+", label: "Years Industry", icon: Cpu },
-      { value: "99.9%", label: "Uptime SLA", icon: CircuitBoard },
+      "Quad-channel TDD beamformers with SPI control for phase and gain in radar, Satcom and 5G phased array systems.",
+    tag: "ADAR Series",
+    cta: "Explore Products",
+    ctaHref: "/products",
+    image:
+      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1000&q=85&fit=crop",
+    imageFocal: "center center",
+    spec: [
+      { label: "Channels", value: "4-Ch TDD" },
+      { label: "Interface", value: "SPI / I²C" },
+      { label: "Band", value: "24–40 GHz" },
     ],
-    features: ["16-bit Resolution", "AI-Enhanced", "Low Power"],
   },
   {
     id: 2,
-    title: "AI-Enhanced Analog Systems",
+    index: "02",
+    category: "Active Antenna · Wireless",
+    title: "RF Front End Modules",
+    titleLines: ["RF Front", "End Modules"],
     subtitle:
-      "Revolutionary AI-powered analog processing that adapts in real-time, reducing power consumption by 40% while increasing performance.",
-    badge: "AI Integration",
-    ctaText: "Learn More",
-    ctaLink: "/ai-solutions",
-    secondaryCta: "Watch Demo",
-    backgroundImage:
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1600&h=900&fit=crop",
-    gradient: "from-purple-600 to-pink-500",
-    gradientLight: "from-purple-500 to-pink-400",
-    stats: [
-      { value: "40%", label: "Power Reduction", icon: Shield },
-      { value: "2x", label: "Performance", icon: Cpu },
-      { value: "24/7", label: "AI Support", icon: CircuitBoard },
+      "High-linearity FEMs for active antenna systems — ultra-low noise, wide bandwidth, seamless next-gen integration.",
+    tag: "ADRF Series",
+    cta: "View FEM Lineup",
+    ctaHref: "/products/fem",
+    image:
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1000&q=85&fit=crop",
+    imageFocal: "center 40%",
+    spec: [
+      { label: "Noise Figure", value: "< 1.8 dB" },
+      { label: "P1dB", value: "+28 dBm" },
+      { label: "Bandwidth", value: "0.5–6 GHz" },
     ],
-    features: ["Real-time Learning", "Adaptive Processing", "Edge Ready"],
   },
   {
     id: 3,
-    title: "High-Performance Data Conversion",
+    index: "03",
+    category: "Power Management · Timing",
+    title: "Power & Clock Management",
+    titleLines: ["Power &", "Clock Mgmt"],
     subtitle:
-      "Industry-leading ADC/DAC solutions with 16-bit resolution at 10 GSPS, setting new standards for precision and speed.",
-    badge: "Data Conversion",
-    ctaText: "View Specs",
-    ctaLink: "/products/data-conversion",
-    secondaryCta: "Contact Sales",
-    backgroundImage:
-      "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=1600&h=900&fit=crop",
-    gradient: "from-emerald-600 to-teal-500",
-    gradientLight: "from-emerald-500 to-teal-400",
-    stats: [
-      { value: "16-bit", label: "Resolution", icon: Shield },
-      { value: "10 GSPS", label: "Sample Rate", icon: Cpu },
-      { value: "0.1%", label: "INL Max", icon: CircuitBoard },
+      "Ultra-low noise LDOs and precision XOs for timing and power-sensitive applications across communications and aerospace.",
+    tag: "ADM / HMC Series",
+    cta: "See Specifications",
+    ctaHref: "/products/power",
+    image:
+      "https://img3.wallspic.com/crops/5/7/1/8/6/168175/168175-the_merchandise_mart-management-ernst_young-management_consulting-business-1471x2943.jpg",
+    imageFocal: "center center",
+    spec: [
+      { label: "Noise", value: "< 1 µV rms" },
+      { label: "Jitter", value: "< 1 ps RMS" },
+      { label: "PSRR", value: "80 dB" },
     ],
-    features: ["Ultra Precision", "Low Noise", "High Speed"],
   },
   {
     id: 4,
-    title: "Quantum-Ready Architecture",
+    index: "04",
+    category: "Embedded Control · IoT",
+    title: "Microcontrollers",
+    titleLines: ["Micro-", "controllers"],
     subtitle:
-      "Future-proof semiconductor solutions designed for quantum computing integration and next-gen processing demands.",
-    badge: "Quantum Ready",
-    ctaText: "Discover Future",
-    ctaLink: "/quantum",
-    secondaryCta: "Get Whitepaper",
-    backgroundImage:
-      "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1600&h=900&fit=crop",
-    gradient: "from-orange-600 to-red-500",
-    gradientLight: "from-orange-500 to-red-400",
-    stats: [
-      { value: "1000x", label: "Faster Processing", icon: Shield },
-      { value: "99.99%", label: "Accuracy", icon: Cpu },
-      { value: "1ns", label: "Latency", icon: CircuitBoard },
+      "32-bit general-purpose MCUs for real-time edge control — ultra-low power, rich peripherals, industrial-grade reliability.",
+    tag: "ADUCM Series",
+    cta: "Explore MCUs",
+    ctaHref: "/products/mcu",
+    image:
+      "https://images.unsplash.com/photo-1591405351990-4726e331f141?w=1000&q=85&fit=crop",
+    imageFocal: "center 30%",
+    spec: [
+      { label: "Core", value: "32-bit ARM" },
+      { label: "Sleep", value: "< 900 nA" },
+      { label: "Flash", value: "Up to 1 MB" },
     ],
-    features: ["Quantum Ready", "Ultra Scalable", "Future Proof"],
   },
 ];
 
+// ─── Hero ─────────────────────────────────────────────────────────────────────
 export function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [direction, setDirection] = useState<"next" | "prev">("next");
-  const autoSlideRef = useRef<NodeJS.Timeout | null>(null);
+  const wrapRef = useRef<HTMLElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
+  const imgRef = useRef<HTMLDivElement>(null);
+  const progRef = useRef<HTMLDivElement>(null);
 
-  const currentSlide = sliderContent[activeIndex];
-  const nextSlide = sliderContent[(activeIndex + 1) % sliderContent.length];
+  const [idx, setIdx] = useState(0);
+  const [busy, setBusy] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const slide = slides[idx];
 
-  // Auto-slide functionality
-  const startAutoSlide = () => {
-    if (autoSlideRef.current) clearInterval(autoSlideRef.current);
-    autoSlideRef.current = setInterval(() => {
-      if (!isAnimating) {
-        handleNext();
+  // ── navigate ──────────────────────────────────────────────────────────────
+  const goTo = useCallback(
+    (next: number) => {
+      if (busy || next === idx) return;
+      setBusy(true);
+
+      const textEls = textRef.current?.querySelectorAll(".t");
+      const imgEl = imgRef.current;
+
+      gsap
+        .timeline({
+          onComplete: () => {
+            setIdx(next);
+            setBusy(false);
+          },
+        })
+        .to(
+          textEls ?? [],
+          {
+            y: -16,
+            opacity: 0,
+            filter: "blur(4px)",
+            stagger: 0.03,
+            duration: 0.25,
+            ease: "power2.in",
+          },
+          0,
+        )
+        .to(
+          imgEl ?? [],
+          {
+            scale: 1.05,
+            opacity: 0,
+            duration: 0.3,
+            ease: "power2.in",
+          },
+          0,
+        );
+    },
+    [busy, idx],
+  );
+
+  const goNext = useCallback(
+    () => goTo((idx + 1) % slides.length),
+    [goTo, idx],
+  );
+  const goPrev = useCallback(
+    () => goTo((idx - 1 + slides.length) % slides.length),
+    [goTo, idx],
+  );
+
+  // ── auto-advance ──────────────────────────────────────────────────────────
+  useEffect(() => {
+    timerRef.current = setInterval(goNext, INTERVAL);
+
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
       }
-    }, 6000);
-  };
+    };
+  }, [goNext]);
 
-  const stopAutoSlide = () => {
-    if (autoSlideRef.current) {
-      clearInterval(autoSlideRef.current);
-      autoSlideRef.current = null;
-    }
-  };
-
+  // ── reveal ────────────────────────────────────────────────────────────────
   useEffect(() => {
-    startAutoSlide();
-    return () => stopAutoSlide();
-  }, [activeIndex, isAnimating]);
-
-  const handlePrev = () => {
-    if (isAnimating) return;
-    setDirection("prev");
-    setIsAnimating(true);
-    setActiveIndex((prev) =>
-      prev === 0 ? sliderContent.length - 1 : prev - 1,
-    );
-  };
-
-  const handleNext = () => {
-    if (isAnimating) return;
-    setDirection("next");
-    setIsAnimating(true);
-    setActiveIndex((prev) =>
-      prev === sliderContent.length - 1 ? 0 : prev + 1,
-    );
-  };
-
-  const goToSlide = (index: number) => {
-    if (isAnimating || index === activeIndex) return;
-    setDirection(index > activeIndex ? "next" : "prev");
-    setIsAnimating(true);
-    setActiveIndex(index);
-  };
-
-  // GSAP animations for background and content
-  useEffect(() => {
-    if (!containerRef.current || !contentRef.current) return;
+    const textEls = textRef.current?.querySelectorAll(".t");
+    const imgEl = imgRef.current;
+    const prog = progRef.current;
 
     const ctx = gsap.context(() => {
-      const timeline = gsap.timeline({
-        onComplete: () => setIsAnimating(false),
-      });
-
-      const directionValue = direction === "next" ? 30 : -30;
-
-      // Animate background image transition
-      timeline
-        .to(".bg-slider-image", {
-          opacity: 0,
-          duration: 0.4,
-          ease: "power2.in",
-        })
-        .set(".bg-slider-image", {
-          backgroundImage: `url(${currentSlide.backgroundImage})`,
-        })
-        .to(".bg-slider-image", {
-          opacity: 1,
-          duration: 0.6,
-          ease: "power2.out",
-        });
-
-      // Animate gradient overlay
-      timeline.to(
-        ".gradient-overlay",
-        {
-          opacity: 0,
-          duration: 0.3,
-          ease: "power2.in",
-        },
-        "-=0.5",
-      );
-      timeline.set(".gradient-overlay", {
-        background: `linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%)`,
-      });
-      timeline.to(
-        ".gradient-overlay",
-        {
-          opacity: 1,
-          duration: 0.5,
-          ease: "power2.out",
-        },
-        "-=0.3",
-      );
-
-      // Animate content elements
-      timeline
-        .to(".content-wrapper > *", {
-          opacity: 0,
-          y: -directionValue,
-          stagger: 0.05,
-          duration: 0.25,
-          ease: "power2.in",
-        })
-        .set(".content-wrapper", { clearProps: "all" })
-        .fromTo(
-          ".hero-badge",
-          { opacity: 0, y: directionValue, scale: 0.9 },
+      if (textEls?.length) {
+        gsap.fromTo(
+          textEls,
+          { y: 24, opacity: 0, filter: "blur(6px)" },
           {
-            opacity: 1,
             y: 0,
-            scale: 1,
-            duration: 0.5,
-            ease: "back.out(0.4)",
-          },
-          "-=0.1",
-        )
-        .fromTo(
-          ".hero-title",
-          { opacity: 0, y: directionValue, filter: "blur(8px)" },
-          {
             opacity: 1,
-            y: 0,
             filter: "blur(0px)",
-            duration: 0.6,
+            stagger: 0.055,
+            duration: 0.65,
             ease: "power3.out",
           },
-          "-=0.35",
-        )
-        .fromTo(
-          ".hero-subtitle",
-          { opacity: 0, y: directionValue * 0.7, filter: "blur(4px)" },
-          {
-            opacity: 1,
-            y: 0,
-            filter: "blur(0px)",
-            duration: 0.5,
-            ease: "power3.out",
-          },
-          "-=0.4",
-        )
-        .fromTo(
-          ".feature-tag",
-          { opacity: 0, scale: 0.8, stagger: 0.05 },
-          {
-            opacity: 1,
-            scale: 1,
-            duration: 0.35,
-            stagger: 0.05,
-            ease: "back.out(0.3)",
-          },
-          "-=0.3",
-        )
-        .fromTo(
-          ".hero-cta",
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
-          "-=0.25",
-        )
-        .fromTo(
-          ".hero-stats .stat-item",
-          { opacity: 0, y: 15, stagger: 0.08 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.35,
-            stagger: 0.08,
-            ease: "power2.out",
-          },
-          "-=0.2",
         );
-    }, containerRef);
-
+      }
+      if (imgEl) {
+        gsap.fromTo(
+          imgEl,
+          { scale: 1.07, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.8, ease: "power2.out" },
+        );
+      }
+      if (prog) {
+        gsap.fromTo(
+          prog,
+          { scaleX: 0 },
+          {
+            scaleX: 1,
+            duration: INTERVAL / 1000,
+            ease: "none",
+            transformOrigin: "left center",
+          },
+        );
+      }
+    });
     return () => ctx.revert();
-  }, [activeIndex, direction, currentSlide]);
+  }, [idx]);
 
-  // Initial load animation
+  // ── mount ─────────────────────────────────────────────────────────────────
   useEffect(() => {
-    if (!containerRef.current) return;
-
     const ctx = gsap.context(() => {
-      const timeline = gsap.timeline();
-
-      timeline
-        .fromTo(
-          ".bg-slider-image",
-          { opacity: 0, scale: 1.1 },
-          { opacity: 1, scale: 1, duration: 1.2, ease: "power3.out" },
-        )
-        .fromTo(
-          ".gradient-overlay",
-          { opacity: 0 },
-          { opacity: 1, duration: 0.8, ease: "power2.out" },
-          "-=0.8",
-        )
-        .fromTo(
-          ".hero-badge",
-          { opacity: 0, y: -30, scale: 0.8 },
-          { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "back.out(0.5)" },
-          "-=0.3",
-        )
-        .fromTo(
-          ".hero-title",
-          { opacity: 0, y: 50, filter: "blur(12px)" },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.7,
-            filter: "blur(0px)",
-            ease: "power3.out",
-          },
-          "-=0.4",
-        )
-        .fromTo(
-          ".hero-subtitle",
-          { opacity: 0, y: 30, filter: "blur(8px)" },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            filter: "blur(0px)",
-            ease: "power3.out",
-          },
-          "-=0.5",
-        )
-        .fromTo(
-          ".feature-tag",
-          { opacity: 0, scale: 0.8, stagger: 0.05 },
-          {
-            opacity: 1,
-            scale: 1,
-            duration: 0.4,
-            stagger: 0.05,
-            ease: "back.out(0.3)",
-          },
-          "-=0.4",
-        )
-        .fromTo(
-          ".hero-cta",
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
-          "-=0.3",
-        )
-        .fromTo(
-          ".hero-stats .stat-item",
-          { opacity: 0, y: 20, stagger: 0.1 },
-          { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: "power2.out" },
-          "-=0.2",
-        )
-        .fromTo(
-          ".slider-dots .dot",
-          { opacity: 0, scale: 0 },
-          {
-            opacity: 1,
-            scale: 1,
-            duration: 0.4,
-            stagger: 0.05,
-            ease: "back.out(0.6)",
-          },
-          "-=0.1",
-        );
-    }, containerRef);
-
+      gsap.from(".m", {
+        opacity: 0,
+        y: 28,
+        duration: 0.85,
+        stagger: 0.07,
+        ease: "power3.out",
+        delay: 0.1,
+      });
+    }, wrapRef);
     return () => ctx.revert();
   }, []);
 
   return (
     <section
-      ref={containerRef}
-      onMouseEnter={stopAutoSlide}
-      onMouseLeave={startAutoSlide}
-      className="relative min-h-[100vh] flex items-center justify-center overflow-hidden"
+      ref={wrapRef}
+      className="relative w-full min-h-screen bg-white flex flex-col overflow-hidden"
     >
-      {/* Background Slider Image */}
-      <div
-        className="bg-slider-image absolute inset-0 bg-cover bg-center transition-all duration-700"
-        style={{
-          backgroundImage: `url(${currentSlide.backgroundImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
+      {/* ── Fonts ── */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap');
+        @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+        .hero-body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .hero-display { font-family: 'Playfair Display', Georgia, serif; }
+      `}</style>
 
-      {/* Gradient Overlay */}
-      <div className="gradient-overlay absolute inset-0 bg-gradient-to-r from-black/70 to-black/50" />
-
-      {/* Animated particles overlay */}
-      <div className="absolute inset-0 overflow-hidden">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-white/20 rounded-full"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animation: `float-particle ${3 + Math.random() * 5}s infinite ease-in-out`,
-              animationDelay: `${Math.random() * 5}s`,
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Main Content */}
-      <div
-        ref={contentRef}
-        className="relative z-10 container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl py-16 md:py-20"
-      >
-        <div className="content-wrapper max-w-3xl">
-          {/* Badge */}
-          <div className="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-lg mb-6">
-            <Sparkles className="w-4 h-4 text-yellow-300 animate-pulse" />
-            <span className="text-sm font-semibold text-white tracking-wide">
-              {currentSlide.badge}
+      {/* ── Split grid ── */}
+      <div className="flex-1 grid grid-cols-1 lg:grid-cols-[1fr_480px] xl:grid-cols-[1fr_560px] min-h-screen hero-body">
+        {/* ══ LEFT PANEL ══════════════════════════════════════════════════════ */}
+        <div className="relative flex flex-col justify-between px-8 md:px-14 xl:px-20 py-12 lg:py-14 border-r border-slate-100">
+          {/* Index + category */}
+          <div className="m flex items-center gap-4">
+            <span
+              className="text-[11px] font-bold tracking-[0.22em] uppercase"
+              style={{ color: ACCENT }}
+            >
+              {slide.index}
+            </span>
+            <div className="h-px w-8 bg-slate-300" />
+            <span className="text-[11px] text-slate-400 tracking-[0.15em] uppercase font-medium">
+              {slide.category}
             </span>
           </div>
 
-          {/* Title */}
-          <h1 className="hero-title text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-6 leading-[1.2] tracking-tight">
-            {currentSlide.title}
-          </h1>
+          {/* ── Text block ── */}
+          <div
+            ref={textRef}
+            className="flex-1 flex flex-col justify-center py-10 lg:py-0 lg:mt-10 lg:mb-8"
+          >
+            {/* Headline — Playfair Display, editorial serif */}
+            <h1
+              className="hero-display mb-6 leading-[1.0] tracking-tight"
+              style={{ fontSize: "clamp(3rem, 7.5vw, 6rem)", fontWeight: 900 }}
+            >
+              {slide.titleLines.map((line, i) => (
+                <div key={i} className="t block text-slate-900">
+                  {line}
+                </div>
+              ))}
+              {/* Accent rule */}
+              <div
+                className="t mt-3 h-1 w-16 rounded-full"
+                style={{ background: ACCENT }}
+              />
+            </h1>
 
-          {/* Subtitle */}
-          <p className="hero-subtitle text-lg md:text-xl text-white/80 mb-6 max-w-2xl leading-relaxed">
-            {currentSlide.subtitle}
-          </p>
-
-          {/* Feature Tags */}
-          <div className="flex flex-wrap gap-2 mb-8">
-            {currentSlide.features.map((feature, idx) => (
+            {/* Tag */}
+            <div className="t mb-5">
               <span
-                key={idx}
-                className="feature-tag px-3 py-1 text-xs font-medium rounded-full bg-white/10 backdrop-blur-sm text-white/90 border border-white/20"
+                className="inline-block px-3 py-1 text-[10px] font-bold tracking-[0.22em] uppercase rounded-full"
+                style={{
+                  background: `rgba(${ACCENT_RGB},0.08)`,
+                  color: ACCENT,
+                }}
               >
-                {feature}
+                {slide.tag}
+              </span>
+            </div>
+
+            {/* Subtitle */}
+            <p
+              className="t text-slate-500 leading-[1.75] mb-10 max-w-[480px]"
+              style={{
+                fontSize: "clamp(0.9rem, 1.4vw, 1.05rem)",
+                fontWeight: 300,
+              }}
+            >
+              {slide.subtitle}
+            </p>
+
+            {/* Specs */}
+            <div className="t grid grid-cols-3 gap-5 mb-10 max-w-[480px]">
+              {slide.spec.map(({ label, value }) => (
+                <div key={label}>
+                  <div className="h-px bg-slate-200 mb-3" />
+                  <p className="text-[10px] text-slate-400 tracking-[0.18em] uppercase mb-1.5 font-medium">
+                    {label}
+                  </p>
+                  <p
+                    className="font-bold text-slate-900"
+                    style={{ fontSize: "0.88rem" }}
+                  >
+                    {value}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* CTAs */}
+            <div className="t flex flex-wrap gap-3">
+              <Link
+                href={slide.ctaHref}
+                className="group inline-flex items-center gap-2.5 px-6 py-3 rounded-lg font-semibold text-sm text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-2xl"
+                style={{
+                  background: ACCENT,
+                  boxShadow: `0 4px 22px rgba(${ACCENT_RGB},0.3)`,
+                  fontSize: "0.875rem",
+                }}
+              >
+                {slide.cta}
+                <ArrowRight
+                  size={14}
+                  className="transition-transform group-hover:translate-x-1"
+                />
+              </Link>
+              <Link
+                href="/products"
+                className="inline-flex items-center gap-1.5 px-6 py-3 rounded-lg font-semibold text-sm text-slate-600 border border-slate-200 hover:border-slate-400 hover:text-slate-900 transition-all duration-200"
+                style={{ fontSize: "0.875rem" }}
+              >
+                All Products
+                <ArrowUpRight size={13} />
+              </Link>
+            </div>
+          </div>
+
+          {/* ── Bottom nav ── */}
+          <div className="m flex items-center justify-between">
+            {/* Dot pills */}
+            <div className="flex items-center gap-2">
+              {slides.map((s, i) => (
+                <button
+                  key={s.id}
+                  onClick={() => goTo(i)}
+                  aria-label={`Slide ${i + 1}`}
+                  className="transition-all duration-500 rounded-full"
+                  style={{
+                    width: i === idx ? 28 : 8,
+                    height: 8,
+                    background: i === idx ? ACCENT : "#e2e8f0",
+                  }}
+                />
+              ))}
+            </div>
+
+            {/* Counter + arrows */}
+            <div className="flex items-center gap-2">
+              <span
+                className="text-[11px] font-mono text-slate-400 mr-1 tabular-nums"
+                style={{ letterSpacing: "0.05em" }}
+              >
+                {String(idx + 1).padStart(2, "0")} /{" "}
+                {String(slides.length).padStart(2, "0")}
+              </span>
+              {[
+                { fn: goPrev, Icon: ChevronLeft, label: "Prev" },
+                { fn: goNext, Icon: ChevronRight, label: "Next" },
+              ].map(({ fn, Icon, label }) => (
+                <button
+                  key={label}
+                  onClick={fn}
+                  aria-label={label}
+                  className="w-9 h-9 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:border-slate-900 hover:text-slate-900 transition-all duration-200 hover:scale-110"
+                >
+                  <Icon size={15} />
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ══ RIGHT PANEL — Photo ═════════════════════════════════════════════ */}
+        <div className="relative overflow-hidden bg-slate-100 min-h-[400px] lg:min-h-0">
+          {/* Full-bleed image */}
+          <div ref={imgRef} className="absolute inset-0">
+            <img
+              key={slide.id}
+              src={slide.image}
+              alt={slide.title}
+              className="w-full h-full object-cover"
+              style={{ objectPosition: slide.imageFocal ?? "center center" }}
+            />
+            {/* Left-edge fade to white — blends into left panel */}
+            <div
+              className="absolute inset-y-0 left-0 w-28 pointer-events-none"
+              style={{
+                background:
+                  "linear-gradient(90deg, rgba(255,255,255,0.55) 0%, transparent 100%)",
+              }}
+            />
+            {/* Bottom dark scrim for overlay text */}
+            <div
+              className="absolute inset-x-0 bottom-0 h-48 pointer-events-none"
+              style={{
+                background:
+                  "linear-gradient(0deg, rgba(0,0,0,0.55) 0%, transparent 100%)",
+              }}
+            />
+          </div>
+
+          {/* Slide number badge — top right */}
+          <div
+            className="absolute top-6 right-6 z-10 w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold text-white hero-body"
+            style={{
+              background: ACCENT,
+              boxShadow: `0 4px 16px rgba(${ACCENT_RGB},0.45)`,
+            }}
+          >
+            {slide.index}
+          </div>
+
+          {/* Bottom label */}
+          <div className="absolute bottom-6 left-6 z-10 hero-body">
+            <p
+              className="text-white/55 mb-1 font-medium tracking-[0.15em] uppercase"
+              style={{ fontSize: "0.65rem" }}
+            >
+              {slide.category}
+            </p>
+            <p
+              className="text-white font-bold leading-tight hero-display"
+              style={{ fontSize: "clamp(1rem, 2vw, 1.3rem)" }}
+            >
+              {slide.title}
+            </p>
+          </div>
+
+          {/* Vertical branding strip */}
+          <div
+            className="absolute right-0 top-0 bottom-0 w-9 z-10 flex items-center justify-center"
+            style={{
+              background: "rgba(0,0,0,0.18)",
+              backdropFilter: "blur(2px)",
+            }}
+          >
+            <span
+              className="text-white/40 font-medium tracking-[0.28em] uppercase hero-body"
+              style={{
+                writingMode: "vertical-rl",
+                transform: "rotate(180deg)",
+                fontSize: "0.6rem",
+              }}
+            >
+              SemiCore Technologies
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Ticker strip ── */}
+      <div
+        className="relative z-20 border-t border-slate-100 overflow-hidden flex items-stretch hero-body"
+        style={{ height: 38 }}
+      >
+        {/* Label tab */}
+        <div
+          className="shrink-0 flex items-center px-5 text-[10px] font-bold tracking-[0.22em] uppercase text-white"
+          style={{ background: ACCENT }}
+        >
+          Products
+        </div>
+
+        {/* Scrolling text */}
+        <div className="flex-1 overflow-hidden flex items-center">
+          <div
+            className="flex whitespace-nowrap"
+            style={{ animation: "ticker 30s linear infinite" }}
+          >
+            {[...slides, ...slides].map((s, i) => (
+              <span
+                key={i}
+                className="inline-flex items-center gap-3 px-8 text-[10px] tracking-[0.18em] text-slate-400 uppercase font-medium"
+              >
+                <span
+                  className="w-1 h-1 rounded-full inline-block flex-shrink-0"
+                  style={{ background: ACCENT }}
+                />
+                {s.tag} — {s.category}
               </span>
             ))}
           </div>
-
-          {/* CTA Buttons */}
-          <div className="hero-cta flex flex-col sm:flex-row gap-4">
-            <Button
-              asChild
-              className={`bg-gradient-to-r ${currentSlide.gradient} hover:opacity-90 text-white font-semibold py-6 px-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-0.5 group`}
-            >
-              <Link href={currentSlide.ctaLink}>
-                {currentSlide.ctaText}
-                <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </Button>
-            <Button
-              variant="outline"
-              className="border-white/30 bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white py-6 px-8 font-semibold rounded-xl shadow-sm hover:shadow-md transition-all duration-300"
-            >
-              <Link href="/contact">{currentSlide.secondaryCta}</Link>
-            </Button>
-          </div>
-
-          {/* Stats */}
-          <div className="hero-stats mt-10 flex flex-wrap items-center gap-4 sm:gap-6 text-sm">
-            {currentSlide.stats.map((stat, idx) => {
-              const IconComponent = stat.icon;
-              return (
-                <div key={idx} className="stat-item flex items-center gap-3">
-                  <div
-                    className={`w-8 h-8 rounded-lg bg-gradient-to-r ${currentSlide.gradientLight} bg-opacity-20 flex items-center justify-center`}
-                  >
-                    <IconComponent className="w-4 h-4 text-white" />
-                  </div>
-                  <div>
-                    <p className="font-bold text-xl text-white">{stat.value}</p>
-                    <p className="text-white/60 text-xs">{stat.label}</p>
-                  </div>
-                  {idx < currentSlide.stats.length - 1 && (
-                    <div className="h-8 w-px bg-white/20 hidden sm:block" />
-                  )}
-                </div>
-              );
-            })}
-          </div>
         </div>
       </div>
 
-      {/* Navigation Buttons */}
-      <button
-        onClick={handlePrev}
-        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110 group z-20"
-        disabled={isAnimating}
-        aria-label="Previous slide"
-      >
-        <ChevronLeft className="w-5 h-5 text-white group-hover:text-cyan-300" />
-      </button>
-      <button
-        onClick={handleNext}
-        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110 group z-20"
-        disabled={isAnimating}
-        aria-label="Next slide"
-      >
-        <ChevronRight className="w-5 h-5 text-white group-hover:text-cyan-300" />
-      </button>
-
-      {/* Slide Indicators */}
-      <div className="slider-dots absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 md:gap-3">
-        {sliderContent.map((_, idx) => (
-          <button
-            key={idx}
-            onClick={() => goToSlide(idx)}
-            className="group relative"
-            aria-label={`Go to slide ${idx + 1}`}
-          >
-            <div
-              className={`dot h-1.5 rounded-full transition-all duration-500 ${
-                idx === activeIndex
-                  ? `w-8 md:w-10 bg-gradient-to-r ${currentSlide.gradient}`
-                  : "w-1.5 bg-white/40 group-hover:bg-white/60 group-hover:w-3"
-              }`}
-            />
-          </button>
-        ))}
+      {/* ── Progress bar ── */}
+      <div className="h-[2px] bg-slate-100 relative overflow-hidden">
+        <div
+          ref={progRef}
+          className="absolute inset-y-0 left-0 w-full origin-left"
+          style={{ background: ACCENT }}
+        />
       </div>
-
-      {/* Slide Counter */}
-      <div className="absolute bottom-8 right-4 md:right-8 text-xs text-white/60 font-medium">
-        {String(activeIndex + 1).padStart(2, "0")} /{" "}
-        {String(sliderContent.length).padStart(2, "0")}
-      </div>
-
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 opacity-60">
-        <span className="text-xs text-white/60">Scroll</span>
-        <div className="w-4 h-6 border border-white/30 rounded-full flex justify-center">
-          <div className="w-0.5 h-1.5 bg-white/50 rounded-full mt-1 animate-bounce" />
-        </div>
-      </div>
-
-      {/* CSS Animations */}
-      <style jsx>{`
-        @keyframes float-particle {
-          0%,
-          100% {
-            transform: translateY(0px) translateX(0px);
-            opacity: 0;
-          }
-          25% {
-            transform: translateY(-30px) translateX(15px);
-            opacity: 0.5;
-          }
-          50% {
-            transform: translateY(0px) translateX(30px);
-            opacity: 0.8;
-          }
-          75% {
-            transform: translateY(30px) translateX(15px);
-            opacity: 0.5;
-          }
-        }
-      `}</style>
     </section>
   );
 }
+
+export default Hero;

@@ -1,561 +1,574 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import {
   ArrowRight,
-  Sparkles,
-  ChevronDown,
   Zap,
-  Cpu,
+  ChevronLeft,
+  ChevronRight,
   Shield,
+  Cpu,
+  CircuitBoard,
+  Sparkles,
+  CheckCircle,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import gsap from "gsap";
 
-gsap.registerPlugin(ScrollTrigger);
+// Slider content array with background images
+const sliderContent = [
+  {
+    id: 1,
+    title: "Premium Analog & Digital Solutions",
+    subtitle:
+      "Cutting-edge semiconductor technology for signal processing, data conversion, and AI-enhanced analog systems.",
+    badge: "Next Generation Semiconductors",
+    ctaText: "Explore Products",
+    ctaLink: "/products",
+    secondaryCta: "Request Demo",
+    backgroundImage:
+      "https://img.freepik.com/free-photo/future-visions-business-technology-concept_23-2151893412.jpg?semt=ais_hybrid&w=740&q=80",
+    gradient: "from-blue-600 to-cyan-500",
+    gradientLight: "from-blue-500 to-cyan-400",
+    stats: [
+      { value: "500+", label: "Enterprise Clients", icon: Shield },
+      { value: "20+", label: "Years Industry", icon: Cpu },
+      { value: "99.9%", label: "Uptime SLA", icon: CircuitBoard },
+    ],
+    features: ["16-bit Resolution", "AI-Enhanced", "Low Power"],
+  },
+  {
+    id: 2,
+    title: "AI-Enhanced Analog Systems",
+    subtitle:
+      "Revolutionary AI-powered analog processing that adapts in real-time, reducing power consumption by 40% while increasing performance.",
+    badge: "AI Integration",
+    ctaText: "Learn More",
+    ctaLink: "/ai-solutions",
+    secondaryCta: "Watch Demo",
+    backgroundImage:
+      "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1600&h=900&fit=crop",
+    gradient: "from-purple-600 to-pink-500",
+    gradientLight: "from-purple-500 to-pink-400",
+    stats: [
+      { value: "40%", label: "Power Reduction", icon: Shield },
+      { value: "2x", label: "Performance", icon: Cpu },
+      { value: "24/7", label: "AI Support", icon: CircuitBoard },
+    ],
+    features: ["Real-time Learning", "Adaptive Processing", "Edge Ready"],
+  },
+  {
+    id: 3,
+    title: "High-Performance Data Conversion",
+    subtitle:
+      "Industry-leading ADC/DAC solutions with 16-bit resolution at 10 GSPS, setting new standards for precision and speed.",
+    badge: "Data Conversion",
+    ctaText: "View Specs",
+    ctaLink: "/products/data-conversion",
+    secondaryCta: "Contact Sales",
+    backgroundImage:
+      "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=1600&h=900&fit=crop",
+    gradient: "from-emerald-600 to-teal-500",
+    gradientLight: "from-emerald-500 to-teal-400",
+    stats: [
+      { value: "16-bit", label: "Resolution", icon: Shield },
+      { value: "10 GSPS", label: "Sample Rate", icon: Cpu },
+      { value: "0.1%", label: "INL Max", icon: CircuitBoard },
+    ],
+    features: ["Ultra Precision", "Low Noise", "High Speed"],
+  },
+  {
+    id: 4,
+    title: "Quantum-Ready Architecture",
+    subtitle:
+      "Future-proof semiconductor solutions designed for quantum computing integration and next-gen processing demands.",
+    badge: "Quantum Ready",
+    ctaText: "Discover Future",
+    ctaLink: "/quantum",
+    secondaryCta: "Get Whitepaper",
+    backgroundImage:
+      "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1600&h=900&fit=crop",
+    gradient: "from-orange-600 to-red-500",
+    gradientLight: "from-orange-500 to-red-400",
+    stats: [
+      { value: "1000x", label: "Faster Processing", icon: Shield },
+      { value: "99.99%", label: "Accuracy", icon: Cpu },
+      { value: "1ns", label: "Latency", icon: CircuitBoard },
+    ],
+    features: ["Quantum Ready", "Ultra Scalable", "Future Proof"],
+  },
+];
 
-interface HeroSectionProps {
-  title: string;
-  subtitle: string;
-  description: string;
-  ctaText: string;
-  learnMoreText: string;
-  onCtaClick?: () => void;
-  onLearnMoreClick?: () => void;
-}
+export function Hero() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [direction, setDirection] = useState<"next" | "prev">("next");
+  const autoSlideRef = useRef<NodeJS.Timeout | null>(null);
 
-export const HeroSection: React.FC<HeroSectionProps> = ({
-  title,
-  subtitle,
-  description,
-  ctaText,
-  learnMoreText,
-  onCtaClick,
-  onLearnMoreClick,
-}) => {
-  const heroRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const subtitleRef = useRef<HTMLDivElement>(null);
-  const descriptionRef = useRef<HTMLParagraphElement>(null);
-  const buttonContainerRef = useRef<HTMLDivElement>(null);
-  const imageContainerRef = useRef<HTMLDivElement>(null);
-  const scrollIndicatorRef = useRef<HTMLDivElement>(null);
-  const [activeIcon, setActiveIcon] = useState(0);
+  const currentSlide = sliderContent[activeIndex];
+  const nextSlide = sliderContent[(activeIndex + 1) % sliderContent.length];
 
-  const floatingIcons = [
-    { icon: Zap, color: "blue", delay: 0 },
-    { icon: Cpu, color: "purple", delay: 1 },
-    { icon: Shield, color: "emerald", delay: 2 },
-    { icon: Sparkles, color: "amber", delay: 3 },
-  ];
+  // Auto-slide functionality
+  const startAutoSlide = () => {
+    if (autoSlideRef.current) clearInterval(autoSlideRef.current);
+    autoSlideRef.current = setInterval(() => {
+      if (!isAnimating) {
+        handleNext();
+      }
+    }, 6000);
+  };
+
+  const stopAutoSlide = () => {
+    if (autoSlideRef.current) {
+      clearInterval(autoSlideRef.current);
+      autoSlideRef.current = null;
+    }
+  };
 
   useEffect(() => {
-    if (!heroRef.current) return;
+    startAutoSlide();
+    return () => stopAutoSlide();
+  }, [activeIndex, isAnimating]);
+
+  const handlePrev = () => {
+    if (isAnimating) return;
+    setDirection("prev");
+    setIsAnimating(true);
+    setActiveIndex((prev) =>
+      prev === 0 ? sliderContent.length - 1 : prev - 1,
+    );
+  };
+
+  const handleNext = () => {
+    if (isAnimating) return;
+    setDirection("next");
+    setIsAnimating(true);
+    setActiveIndex((prev) =>
+      prev === sliderContent.length - 1 ? 0 : prev + 1,
+    );
+  };
+
+  const goToSlide = (index: number) => {
+    if (isAnimating || index === activeIndex) return;
+    setDirection(index > activeIndex ? "next" : "prev");
+    setIsAnimating(true);
+    setActiveIndex(index);
+  };
+
+  // GSAP animations for background and content
+  useEffect(() => {
+    if (!containerRef.current || !contentRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Timeline for hero animations
-      const tl = gsap.timeline();
+      const timeline = gsap.timeline({
+        onComplete: () => setIsAnimating(false),
+      });
 
-      // Animate subtitle
-      tl.fromTo(
-        subtitleRef.current,
-        { opacity: 0, y: 30, scale: 0.9 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "back.out(0.4)" },
-        0,
-      );
+      const directionValue = direction === "next" ? 30 : -30;
 
-      // Animate title
-      tl.fromTo(
-        titleRef.current,
-        { opacity: 0, y: 50, filter: "blur(10px)" },
-        {
+      // Animate background image transition
+      timeline
+        .to(".bg-slider-image", {
+          opacity: 0,
+          duration: 0.4,
+          ease: "power2.in",
+        })
+        .set(".bg-slider-image", {
+          backgroundImage: `url(${currentSlide.backgroundImage})`,
+        })
+        .to(".bg-slider-image", {
           opacity: 1,
-          y: 0,
-          filter: "blur(0px)",
-          duration: 0.8,
-          ease: "power3.out",
-        },
-        0.1,
-      );
-
-      // Animate description
-      tl.fromTo(
-        descriptionRef.current,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
-        0.3,
-      );
-
-      // Animate buttons
-      tl.fromTo(
-        buttonContainerRef.current?.querySelectorAll("button"),
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          stagger: 0.15,
-          ease: "back.out(0.4)",
-        },
-        0.5,
-      );
-
-      // Animate image container
-      tl.fromTo(
-        imageContainerRef.current,
-        { opacity: 0, scale: 0.8, rotation: -10 },
-        {
-          opacity: 1,
-          scale: 1,
-          rotation: 0,
-          duration: 1,
-          ease: "back.out(0.5)",
-        },
-        0.2,
-      );
-
-      // Floating animation for image
-      gsap.to(imageContainerRef.current, {
-        y: -15,
-        duration: 4,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
-
-      // Rotating circles animation
-      gsap.to(".rotate-circle-1", {
-        rotation: 360,
-        duration: 25,
-        repeat: -1,
-        ease: "none",
-        transformOrigin: "center center",
-      });
-
-      gsap.to(".rotate-circle-2", {
-        rotation: -360,
-        duration: 20,
-        repeat: -1,
-        ease: "none",
-        transformOrigin: "center center",
-      });
-
-      gsap.to(".rotate-circle-3", {
-        rotation: 180,
-        duration: 15,
-        repeat: -1,
-        ease: "none",
-        transformOrigin: "center center",
-      });
-
-      // Pulse animation for floating icons
-      floatingIcons.forEach((_, idx) => {
-        gsap.to(`.floating-icon-${idx}`, {
-          y: -20,
-          x: idx % 2 === 0 ? 15 : -15,
-          duration: 3 + idx,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-          delay: idx * 0.5,
+          duration: 0.6,
+          ease: "power2.out",
         });
+
+      // Animate gradient overlay
+      timeline.to(
+        ".gradient-overlay",
+        {
+          opacity: 0,
+          duration: 0.3,
+          ease: "power2.in",
+        },
+        "-=0.5",
+      );
+      timeline.set(".gradient-overlay", {
+        background: `linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%)`,
       });
+      timeline.to(
+        ".gradient-overlay",
+        {
+          opacity: 1,
+          duration: 0.5,
+          ease: "power2.out",
+        },
+        "-=0.3",
+      );
 
-      // Scroll indicator animation
-      gsap.to(scrollIndicatorRef.current, {
-        y: 10,
-        duration: 1,
-        repeat: -1,
-        yoyo: true,
-        ease: "power1.inOut",
-      });
-    }, heroRef);
+      // Animate content elements
+      timeline
+        .to(".content-wrapper > *", {
+          opacity: 0,
+          y: -directionValue,
+          stagger: 0.05,
+          duration: 0.25,
+          ease: "power2.in",
+        })
+        .set(".content-wrapper", { clearProps: "all" })
+        .fromTo(
+          ".hero-badge",
+          { opacity: 0, y: directionValue, scale: 0.9 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.5,
+            ease: "back.out(0.4)",
+          },
+          "-=0.1",
+        )
+        .fromTo(
+          ".hero-title",
+          { opacity: 0, y: directionValue, filter: "blur(8px)" },
+          {
+            opacity: 1,
+            y: 0,
+            filter: "blur(0px)",
+            duration: 0.6,
+            ease: "power3.out",
+          },
+          "-=0.35",
+        )
+        .fromTo(
+          ".hero-subtitle",
+          { opacity: 0, y: directionValue * 0.7, filter: "blur(4px)" },
+          {
+            opacity: 1,
+            y: 0,
+            filter: "blur(0px)",
+            duration: 0.5,
+            ease: "power3.out",
+          },
+          "-=0.4",
+        )
+        .fromTo(
+          ".feature-tag",
+          { opacity: 0, scale: 0.8, stagger: 0.05 },
+          {
+            opacity: 1,
+            scale: 1,
+            duration: 0.35,
+            stagger: 0.05,
+            ease: "back.out(0.3)",
+          },
+          "-=0.3",
+        )
+        .fromTo(
+          ".hero-cta",
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
+          "-=0.25",
+        )
+        .fromTo(
+          ".hero-stats .stat-item",
+          { opacity: 0, y: 15, stagger: 0.08 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.35,
+            stagger: 0.08,
+            ease: "power2.out",
+          },
+          "-=0.2",
+        );
+    }, containerRef);
 
-    // Rotate active icon
-    const interval = setInterval(() => {
-      setActiveIcon((prev) => (prev + 1) % floatingIcons.length);
-    }, 2000);
+    return () => ctx.revert();
+  }, [activeIndex, direction, currentSlide]);
 
-    return () => {
-      ctx.revert();
-      clearInterval(interval);
-    };
+  // Initial load animation
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const ctx = gsap.context(() => {
+      const timeline = gsap.timeline();
+
+      timeline
+        .fromTo(
+          ".bg-slider-image",
+          { opacity: 0, scale: 1.1 },
+          { opacity: 1, scale: 1, duration: 1.2, ease: "power3.out" },
+        )
+        .fromTo(
+          ".gradient-overlay",
+          { opacity: 0 },
+          { opacity: 1, duration: 0.8, ease: "power2.out" },
+          "-=0.8",
+        )
+        .fromTo(
+          ".hero-badge",
+          { opacity: 0, y: -30, scale: 0.8 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "back.out(0.5)" },
+          "-=0.3",
+        )
+        .fromTo(
+          ".hero-title",
+          { opacity: 0, y: 50, filter: "blur(12px)" },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            filter: "blur(0px)",
+            ease: "power3.out",
+          },
+          "-=0.4",
+        )
+        .fromTo(
+          ".hero-subtitle",
+          { opacity: 0, y: 30, filter: "blur(8px)" },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            filter: "blur(0px)",
+            ease: "power3.out",
+          },
+          "-=0.5",
+        )
+        .fromTo(
+          ".feature-tag",
+          { opacity: 0, scale: 0.8, stagger: 0.05 },
+          {
+            opacity: 1,
+            scale: 1,
+            duration: 0.4,
+            stagger: 0.05,
+            ease: "back.out(0.3)",
+          },
+          "-=0.4",
+        )
+        .fromTo(
+          ".hero-cta",
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
+          "-=0.3",
+        )
+        .fromTo(
+          ".hero-stats .stat-item",
+          { opacity: 0, y: 20, stagger: 0.1 },
+          { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: "power2.out" },
+          "-=0.2",
+        )
+        .fromTo(
+          ".slider-dots .dot",
+          { opacity: 0, scale: 0 },
+          {
+            opacity: 1,
+            scale: 1,
+            duration: 0.4,
+            stagger: 0.05,
+            ease: "back.out(0.6)",
+          },
+          "-=0.1",
+        );
+    }, containerRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
     <section
-      ref={heroRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-white to-slate-100"
+      ref={containerRef}
+      onMouseEnter={stopAutoSlide}
+      onMouseLeave={startAutoSlide}
+      className="relative min-h-[100vh] flex items-center justify-center overflow-hidden"
     >
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-20 right-10 w-96 h-96 bg-blue-100/40 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 left-10 w-80 h-80 bg-purple-100/30 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-100/20 rounded-full blur-3xl" />
+      {/* Background Slider Image */}
+      <div
+        className="bg-slider-image absolute inset-0 bg-cover bg-center transition-all duration-700"
+        style={{
+          backgroundImage: `url(${currentSlide.backgroundImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      />
 
-        {/* Subtle Grid Pattern */}
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, rgb(14, 165, 233) 1px, transparent 1px)`,
-            backgroundSize: "40px 40px",
-          }}
-        />
+      {/* Gradient Overlay */}
+      <div className="gradient-overlay absolute inset-0 bg-gradient-to-r from-black/70 to-black/50" />
 
-        {/* Floating Icons */}
-        {floatingIcons.map((item, idx) => {
-          const Icon = item.icon;
-          return (
-            <div
-              key={idx}
-              className={`floating-icon-${idx} absolute opacity-10 hidden lg:block`}
-              style={{
-                top: `${15 + idx * 15}%`,
-                left: idx % 2 === 0 ? "5%" : "auto",
-                right: idx % 2 === 1 ? "5%" : "auto",
-              }}
-            >
-              <Icon size={40 + idx * 10} className={`text-${item.color}-400`} />
-            </div>
-          );
-        })}
+      {/* Animated particles overlay */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-white/20 rounded-full"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              animation: `float-particle ${3 + Math.random() * 5}s infinite ease-in-out`,
+              animationDelay: `${Math.random() * 5}s`,
+            }}
+          />
+        ))}
       </div>
 
-      <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left Content */}
-          <div className="flex flex-col space-y-5">
-            {/* Subtitle tag */}
-            <div
-              ref={subtitleRef}
-              className="inline-flex items-center gap-2 w-fit"
-            >
-              <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
-              {/* <span className="text-sm mt-4 md:text-base font-semibold text-blue-600 uppercase tracking-wider">
-                {subtitle}
-              </span> */}
-              <div className="flex gap-1 ml-2">
-                {[...Array(3)].map((_, i) => (
-                  <div key={i} className="w-1 h-1 bg-blue-300 rounded-full" />
-                ))}
-              </div>
-            </div>
-
-            {/* Main Title */}
-            <h1
-              ref={titleRef}
-              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight"
-            >
-              <span className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 bg-clip-text text-transparent">
-                {title}
-              </span>
-            </h1>
-
-            {/* Description */}
-            <p
-              ref={descriptionRef}
-              className="text-base md:text-lg lg:text-xl text-slate-600 leading-relaxed max-w-lg"
-            >
-              {description}
-            </p>
-
-            {/* CTA Buttons */}
-            <div
-              ref={buttonContainerRef}
-              className="flex flex-col sm:flex-row gap-4 pt-4"
-            >
-              <button
-                onClick={onCtaClick}
-                className="group px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-blue-200 transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
-                type="button"
-              >
-                {ctaText}
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </button>
-              <button
-                onClick={onLearnMoreClick}
-                className="group px-6 py-3 border-2 border-slate-200 bg-white text-slate-700 font-semibold rounded-xl hover:border-blue-300 hover:bg-blue-50 transition-all duration-300 flex items-center justify-center gap-2"
-                type="button"
-              >
-                {learnMoreText}
-                <Sparkles className="w-4 h-4 transition-transform group-hover:scale-110" />
-              </button>
-            </div>
-
-            {/* Trust Badges */}
-            <div className="flex flex-wrap items-center gap-6 pt-6">
-              <div className="flex items-center gap-2">
-                <div className="flex -space-x-2">
-                  {[1, 2, 3].map((i) => (
-                    <div
-                      key={i}
-                      className="w-6 h-6 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center text-white text-[10px] font-bold ring-2 ring-white"
-                    >
-                      {String.fromCharCode(64 + i)}
-                    </div>
-                  ))}
-                </div>
-                <span className="text-xs text-slate-500">
-                  Trusted by 500+ companies
-                </span>
-              </div>
-              <div className="flex items-center gap-1">
-                {[...Array(5)].map((_, i) => (
-                  <svg
-                    key={i}
-                    className="w-4 h-4 text-amber-400 fill-amber-400"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                  </svg>
-                ))}
-                <span className="text-xs text-slate-500 ml-1">
-                  4.9/5 rating
-                </span>
-              </div>
-            </div>
+      {/* Main Content */}
+      <div
+        ref={contentRef}
+        className="relative z-10 container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl py-16 md:py-20"
+      >
+        <div className="content-wrapper max-w-3xl">
+          {/* Badge */}
+          <div className="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-lg mb-6">
+            <Sparkles className="w-4 h-4 text-yellow-300 animate-pulse" />
+            <span className="text-sm font-semibold text-white tracking-wide">
+              {currentSlide.badge}
+            </span>
           </div>
 
-          {/* Right Image Container - Animated SVG */}
-          <div
-            ref={imageContainerRef}
-            className="relative h-[400px] md:h-[500px] flex items-center justify-center"
-          >
-            <div className="relative w-full max-w-md mx-auto">
-              {/* Animated circles background */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="rotate-circle-1 absolute w-80 h-80 border-2 border-blue-200/50 rounded-full" />
-                <div className="rotate-circle-2 absolute w-64 h-64 border border-purple-200/50 rounded-full" />
-                <div className="rotate-circle-3 absolute w-48 h-48 border-2 border-cyan-200/30 rounded-full" />
-              </div>
+          {/* Title */}
+          <h1 className="hero-title text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-6 leading-[1.2] tracking-tight">
+            {currentSlide.title}
+          </h1>
 
-              {/* Main SVG Graphic */}
-              <svg
-                viewBox="0 0 400 400"
-                className="w-full h-full relative z-10"
-                xmlns="http://www.w3.org/2000/svg"
+          {/* Subtitle */}
+          <p className="hero-subtitle text-lg md:text-xl text-white/80 mb-6 max-w-2xl leading-relaxed">
+            {currentSlide.subtitle}
+          </p>
+
+          {/* Feature Tags */}
+          <div className="flex flex-wrap gap-2 mb-8">
+            {currentSlide.features.map((feature, idx) => (
+              <span
+                key={idx}
+                className="feature-tag px-3 py-1 text-xs font-medium rounded-full bg-white/10 backdrop-blur-sm text-white/90 border border-white/20"
               >
-                <defs>
-                  <linearGradient
-                    id="heroGradient1"
-                    x1="0%"
-                    y1="0%"
-                    x2="100%"
-                    y2="100%"
+                {feature}
+              </span>
+            ))}
+          </div>
+
+          {/* CTA Buttons */}
+          <div className="hero-cta flex flex-col sm:flex-row gap-4">
+            <Button
+              asChild
+              className={`bg-gradient-to-r ${currentSlide.gradient} hover:opacity-90 text-white font-semibold py-6 px-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-0.5 group`}
+            >
+              <Link href={currentSlide.ctaLink}>
+                {currentSlide.ctaText}
+                <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Button>
+            <Button
+              variant="outline"
+              className="border-white/30 bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white py-6 px-8 font-semibold rounded-xl shadow-sm hover:shadow-md transition-all duration-300"
+            >
+              <Link href="/contact">{currentSlide.secondaryCta}</Link>
+            </Button>
+          </div>
+
+          {/* Stats */}
+          <div className="hero-stats mt-10 flex flex-wrap items-center gap-4 sm:gap-6 text-sm">
+            {currentSlide.stats.map((stat, idx) => {
+              const IconComponent = stat.icon;
+              return (
+                <div key={idx} className="stat-item flex items-center gap-3">
+                  <div
+                    className={`w-8 h-8 rounded-lg bg-gradient-to-r ${currentSlide.gradientLight} bg-opacity-20 flex items-center justify-center`}
                   >
-                    <stop offset="0%" stopColor="#3b82f6" />
-                    <stop offset="50%" stopColor="#06b6d4" />
-                    <stop offset="100%" stopColor="#8b5cf6" />
-                  </linearGradient>
-                  <linearGradient
-                    id="heroGradient2"
-                    x1="0%"
-                    y1="0%"
-                    x2="100%"
-                    y2="100%"
-                  >
-                    <stop offset="0%" stopColor="#8b5cf6" />
-                    <stop offset="100%" stopColor="#ec4899" />
-                  </linearGradient>
-                  <filter id="heroGlow">
-                    <feGaussianBlur stdDeviation="4" result="coloredBlur" />
-                    <feMerge>
-                      <feMergeNode in="coloredBlur" />
-                      <feMergeNode in="SourceGraphic" />
-                    </feMerge>
-                  </filter>
-                </defs>
-
-                {/* Outer decorative rings */}
-                <circle
-                  cx="200"
-                  cy="200"
-                  r="160"
-                  fill="none"
-                  stroke="url(#heroGradient1)"
-                  strokeWidth="1.5"
-                  strokeDasharray="10 15"
-                  opacity="0.4"
-                />
-                <circle
-                  cx="200"
-                  cy="200"
-                  r="130"
-                  fill="none"
-                  stroke="url(#heroGradient2)"
-                  strokeWidth="1"
-                  strokeDasharray="5 10"
-                  opacity="0.3"
-                />
-
-                {/* Center Core */}
-                <circle
-                  cx="200"
-                  cy="200"
-                  r="80"
-                  fill="url(#heroGradient1)"
-                  opacity="0.1"
-                />
-                <circle
-                  cx="200"
-                  cy="200"
-                  r="60"
-                  fill="url(#heroGradient1)"
-                  opacity="0.2"
-                  filter="url(#heroGlow)"
-                />
-                <circle cx="200" cy="200" r="40" fill="url(#heroGradient1)" />
-
-                {/* Center Icon */}
-                <g transform="translate(200, 200)">
-                  {/* Central chip/circuit icon */}
-                  <rect
-                    x="-25"
-                    y="-25"
-                    width="50"
-                    height="50"
-                    rx="8"
-                    fill="white"
-                    opacity="0.95"
-                  />
-                  <rect
-                    x="-15"
-                    y="-15"
-                    width="30"
-                    height="30"
-                    rx="4"
-                    fill="url(#heroGradient1)"
-                  />
-                  <circle cx="0" cy="0" r="6" fill="white" />
-
-                  {/* Circuit lines */}
-                  <line
-                    x1="-25"
-                    y1="-10"
-                    x2="-15"
-                    y2="-10"
-                    stroke="#3b82f6"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                  <line
-                    x1="15"
-                    y1="-10"
-                    x2="25"
-                    y2="-10"
-                    stroke="#3b82f6"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                  <line
-                    x1="-25"
-                    y1="10"
-                    x2="-15"
-                    y2="10"
-                    stroke="#3b82f6"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                  <line
-                    x1="15"
-                    y1="10"
-                    x2="25"
-                    y2="10"
-                    stroke="#3b82f6"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                  <line
-                    x1="-10"
-                    y1="-25"
-                    x2="-10"
-                    y2="-15"
-                    stroke="#3b82f6"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                  <line
-                    x1="10"
-                    y1="-25"
-                    x2="10"
-                    y2="-15"
-                    stroke="#3b82f6"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                  <line
-                    x1="-10"
-                    y1="15"
-                    x2="-10"
-                    y2="25"
-                    stroke="#3b82f6"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                  <line
-                    x1="10"
-                    y1="15"
-                    x2="10"
-                    y2="25"
-                    stroke="#3b82f6"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                </g>
-
-                {/* Orbiting dots */}
-                {[...Array(6)].map((_, i) => {
-                  const angle = (i / 6) * Math.PI * 2;
-                  const radius = 110;
-                  const x = 200 + Math.cos(angle) * radius;
-                  const y = 200 + Math.sin(angle) * radius;
-                  return (
-                    <circle
-                      key={i}
-                      cx={x}
-                      cy={y}
-                      r="6"
-                      fill="#3b82f6"
-                      opacity="0.6"
-                    >
-                      <animateTransform
-                        attributeName="transform"
-                        type="rotate"
-                        from={`0 200 200`}
-                        to={`360 200 200`}
-                        dur={`${12 + i * 2}s`}
-                        repeatCount="indefinite"
-                      />
-                    </circle>
-                  );
-                })}
-              </svg>
-
-              {/* Animated Pulse Ring */}
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div
-                  className="w-full h-full rounded-full border-2 border-blue-400/30 animate-ping"
-                  style={{ animationDuration: "3s" }}
-                />
-              </div>
-            </div>
+                    <IconComponent className="w-4 h-4 text-white" />
+                  </div>
+                  <div>
+                    <p className="font-bold text-xl text-white">{stat.value}</p>
+                    <p className="text-white/60 text-xs">{stat.label}</p>
+                  </div>
+                  {idx < currentSlide.stats.length - 1 && (
+                    <div className="h-8 w-px bg-white/20 hidden sm:block" />
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div
-        ref={scrollIndicatorRef}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer"
-        onClick={() =>
-          window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
-        }
+      {/* Navigation Buttons */}
+      <button
+        onClick={handlePrev}
+        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110 group z-20"
+        disabled={isAnimating}
+        aria-label="Previous slide"
       >
-        <span className="text-xs text-slate-400 font-mono">SCROLL</span>
-        <ChevronDown className="w-4 h-4 text-slate-400" />
+        <ChevronLeft className="w-5 h-5 text-white group-hover:text-cyan-300" />
+      </button>
+      <button
+        onClick={handleNext}
+        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110 group z-20"
+        disabled={isAnimating}
+        aria-label="Next slide"
+      >
+        <ChevronRight className="w-5 h-5 text-white group-hover:text-cyan-300" />
+      </button>
+
+      {/* Slide Indicators */}
+      <div className="slider-dots absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 md:gap-3">
+        {sliderContent.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => goToSlide(idx)}
+            className="group relative"
+            aria-label={`Go to slide ${idx + 1}`}
+          >
+            <div
+              className={`dot h-1.5 rounded-full transition-all duration-500 ${
+                idx === activeIndex
+                  ? `w-8 md:w-10 bg-gradient-to-r ${currentSlide.gradient}`
+                  : "w-1.5 bg-white/40 group-hover:bg-white/60 group-hover:w-3"
+              }`}
+            />
+          </button>
+        ))}
       </div>
+
+      {/* Slide Counter */}
+      <div className="absolute bottom-8 right-4 md:right-8 text-xs text-white/60 font-medium">
+        {String(activeIndex + 1).padStart(2, "0")} /{" "}
+        {String(sliderContent.length).padStart(2, "0")}
+      </div>
+
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 opacity-60">
+        <span className="text-xs text-white/60">Scroll</span>
+        <div className="w-4 h-6 border border-white/30 rounded-full flex justify-center">
+          <div className="w-0.5 h-1.5 bg-white/50 rounded-full mt-1 animate-bounce" />
+        </div>
+      </div>
+
+      {/* CSS Animations */}
+      <style jsx>{`
+        @keyframes float-particle {
+          0%,
+          100% {
+            transform: translateY(0px) translateX(0px);
+            opacity: 0;
+          }
+          25% {
+            transform: translateY(-30px) translateX(15px);
+            opacity: 0.5;
+          }
+          50% {
+            transform: translateY(0px) translateX(30px);
+            opacity: 0.8;
+          }
+          75% {
+            transform: translateY(30px) translateX(15px);
+            opacity: 0.5;
+          }
+        }
+      `}</style>
     </section>
   );
-};
-
-export default HeroSection;
+}
