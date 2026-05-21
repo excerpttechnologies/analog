@@ -49,6 +49,9 @@ export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [focusedField, setFocusedField] = useState<string | null>(null);
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
   const sectionRef = useRef<HTMLElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
@@ -63,16 +66,40 @@ export default function ContactPage() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-    setSubmitted(true);
-    setTimeout(() => {
-      setFormData({ name: "", email: "", phone: "", company: "", message: "" });
-      setSubmitted(false);
-    }, 3000);
-  };
+  const handleSubmit = async () => {
+    setIsLoading(true);
+    setError(null);
 
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitted(true);
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          company: "",
+          message: "",
+        });
+        setTimeout(() => setSubmitted(false), 5000);
+      } else {
+        setError(data.error || "Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      setError("Network error. Please check your connection and try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
   useEffect(() => {
     if (!sectionRef.current) return;
 
@@ -239,7 +266,7 @@ export default function ContactPage() {
                       </div>
                     )}
 
-                    <form onSubmit={handleSubmit} className="space-y-5">
+                    <form className="space-y-5">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div>
                           <label className="block text-sm font-semibold text-slate-700 mb-2">
@@ -349,14 +376,30 @@ export default function ContactPage() {
                           />
                         </div>
                       </div>
+                      {error && (
+                        <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200">
+                          <p className="text-red-700 font-medium">{error}</p>
+                        </div>
+                      )}
 
                       <Button
-                        type="submit"
-                        className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-semibold py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 group"
+                        onClick={handleSubmit}
+                        type="button"
+                        disabled={isLoading}
+                        className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-semibold py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 group disabled:opacity-70 disabled:cursor-not-allowed"
                       >
                         <span className="flex items-center justify-center gap-2">
-                          Send Message
-                          <Send className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                          {isLoading ? (
+                            <>
+                              <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                              Sending...
+                            </>
+                          ) : (
+                            <>
+                              Send Message
+                              <Send className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                            </>
+                          )}
                         </span>
                       </Button>
                     </form>

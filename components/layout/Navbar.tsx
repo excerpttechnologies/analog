@@ -648,6 +648,7 @@
 //   );
 // }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // "use client";
 
 // import { useState, useEffect, useRef, useCallback } from "react";
@@ -683,6 +684,18 @@
 //   Sparkles,
 //   MoveRight,
 //   ChevronRight,
+//   Car,
+//   Wifi,
+//   Factory,
+//   Smartphone,
+//   Lightbulb,
+//   Users,
+//   Eye,
+//   Target,
+//   Server,
+//   Layers,
+//   GitBranch,
+//   Network,
 // } from "lucide-react";
 // import gsap from "gsap";
 
@@ -706,89 +719,150 @@
 // }
 
 // /* ───────────────────────────
-//    DATA
+//    DATA - REQUIRED NAVBAR ITEMS
 // ─────────────────────────── */
 // const navigationData: NavItem[] = [
 //   { label: "Home", href: "/", icon: Home },
 //   {
-//     label: "Product",
+//     label: "Products",
 //     icon: Package,
 //     subitems: [
 //       {
-//         label: "RF Beamformers",
-//         href: "/products/rf-beamformers",
-//         description: "Advanced phased array solutions",
-//         icon: Radio,
-//         tag: "New",
+//         label: "PMIC",
+//         href: "/products/pmic",
+//         description: "Power Management ICs",
+//         icon: Battery,
+//         tag: "Popular",
 //         color: "#2563eb",
 //         bgColor: "#eff6ff",
 //       },
 //       {
-//         label: "RF Front End Modules",
-//         href: "/products/rf-front-end",
-//         description: "Integrated RF solutions",
-//         icon: Zap,
+//         label: "ADC/DAC",
+//         href: "/products/adc-dac",
+//         description: "Data Converters",
+//         icon: Radio,
 //         color: "#d97706",
 //         bgColor: "#fffbeb",
 //       },
 //       {
-//         label: "Power & Clock Mgmt",
-//         href: "/products/power-management",
-//         description: "Efficient power solutions",
-//         icon: Battery,
+//         label: "SERDES",
+//         href: "/products/serdes",
+//         description: "Serializer/Deserializer",
+//         icon: GitBranch,
 //         color: "#16a34a",
 //         bgColor: "#f0fdf4",
 //       },
 //       {
-//         label: "Microcontrollers",
-//         href: "/products/microcontrollers",
-//         description: "High-performance MCUs",
-//         icon: Cpu,
-//         tag: "Pro",
+//         label: "Embedded Systems",
+//         href: "/products/embedded",
+//         description: "ARM Cortex Solutions",
+//         icon: Layers,
 //         color: "#7c3aed",
 //         bgColor: "#f5f3ff",
+//       },
+//       {
+//         label: "RF Solutions",
+//         href: "/products/rf-solutions",
+//         description: "RF Front End & Beamformers",
+//         icon: Radio,
+//         color: "#dc2626",
+//         bgColor: "#fef2f2",
 //       },
 //     ],
 //   },
 //   {
-//     label: "Silicon IP",
-//     icon: Microchip,
+//     label: "Industries",
+//     icon: Building,
 //     subitems: [
 //       {
-//         label: "Multi-Protocol SERDES",
-//         href: "/silicon-ip/serdes",
-//         description: "112G PAM4 SerDes",
-//         icon: Zap,
-//         tag: "Hot",
-//         color: "#dc2626",
-//         bgColor: "#fef2f2",
+//         label: "Automotive",
+//         href: "/industries/automotive",
+//         description: "EV & ADAS Solutions",
+//         icon: Car,
+//         color: "#2563eb",
+//         bgColor: "#eff6ff",
 //       },
 //       {
-//         label: "Phase Locked Loop",
-//         href: "/silicon-ip/pll",
-//         description: "Ultra-low jitter PLL",
-//         icon: Clock,
+//         label: "Industrial",
+//         href: "/industries/industrial",
+//         description: "Factory Automation",
+//         icon: Factory,
+//         color: "#16a34a",
+//         bgColor: "#f0fdf4",
+//       },
+//       {
+//         label: "IoT",
+//         href: "/industries/iot",
+//         description: "Smart Connectivity",
+//         icon: Wifi,
 //         color: "#0891b2",
 //         bgColor: "#ecfeff",
 //       },
 //       {
-//         label: "Analog IPs",
-//         href: "/silicon-ip/analog",
-//         description: "Precision analog circuits",
-//         icon: Shield,
-//         color: "#059669",
-//         bgColor: "#ecfdf5",
+//         label: "Consumer Electronics",
+//         href: "/industries/consumer",
+//         description: "Smart Devices",
+//         icon: Smartphone,
+//         color: "#d97706",
+//         bgColor: "#fffbeb",
 //       },
 //       {
-//         label: "Digital IPs",
-//         href: "/silicon-ip/digital",
-//         description: "DSP and compute cores",
-//         icon: Cpu,
-//         color: "#9333ea",
-//         bgColor: "#faf5ff",
+//         label: "Smart Lighting",
+//         href: "/industries/lighting",
+//         description: "LED & Smart Controls",
+//         icon: Lightbulb,
+//         tag: "New",
+//         color: "#ea580c",
+//         bgColor: "#fff7ed",
 //       },
 //     ],
 //   },
+//   // {
+//   //   label: "Technology",
+//   //   icon: Microchip,
+//   //   subitems: [
+//   //     {
+//   //       label: "Analog IP",
+//   //       href: "/technology/analog-ip",
+//   //       description: "Precision analog circuits",
+//   //       icon: Shield,
+//   //       color: "#2563eb",
+//   //       bgColor: "#eff6ff",
+//   //     },
+//   //     {
+//   //       label: "Digital IP",
+//   //       href: "/technology/digital-ip",
+//   //       description: "DSP and compute cores",
+//   //       icon: Cpu,
+//   //       color: "#7c3aed",
+//   //       bgColor: "#f5f3ff",
+//   //     },
+//   //     {
+//   //       label: "Mixed Signal",
+//   //       href: "/technology/mixed-signal",
+//   //       description: "Analog + Digital integration",
+//   //       icon: GitBranch,
+//   //       color: "#16a34a",
+//   //       bgColor: "#f0fdf4",
+//   //     },
+//   //     {
+//   //       label: "Embedded",
+//   //       href: "/technology/embedded",
+//   //       description: "ARM Cortex cores",
+//   //       icon: Layers,
+//   //       color: "#d97706",
+//   //       bgColor: "#fffbeb",
+//   //     },
+//   //     {
+//   //       label: "Connectivity",
+//   //       href: "/technology/connectivity",
+//   //       description: "SERDES & interfaces",
+//   //       icon: Network,
+//   //       color: "#0891b2",
+//   //       bgColor: "#ecfeff",
+//   //     },
+//   //   ],
+//   // },
 //   {
 //     label: "Company",
 //     icon: Building,
@@ -798,30 +872,37 @@
 //         href: "/about",
 //         description: "Our story and mission",
 //         icon: Info,
-//         color: "#0284c7",
-//         bgColor: "#f0f9ff",
+//         color: "#2563eb",
+//         bgColor: "#eff6ff",
 //       },
 //       {
 //         label: "Leadership",
 //         href: "/leadership",
 //         description: "Meet our team",
 //         icon: Crown,
-//         color: "#b45309",
+//         color: "#d97706",
 //         bgColor: "#fffbeb",
 //       },
 //       // {
-//       //   label: "Career",
+//       //   label: "Vision",
+//       //   href: "/vision",
+//       //   description: "Our vision & roadmap",
+//       //   icon: Eye,
+//       //   color: "#7c3aed",
+//       //   bgColor: "#f5f3ff",
+//       // },
+//       // {
+//       //   label: "Careers",
 //       //   href: "/careers",
 //       //   description: "Join our team",
-//       //   icon: Briefcase,
+//       //   icon: Users,
 //       //   tag: "Hiring",
-//       //   color: "#15803d",
+//       //   color: "#16a34a",
 //       //   bgColor: "#f0fdf4",
 //       // },
 //     ],
 //   },
-//   { label: "Blogs", href: "/blog", icon: FileText },
-//   // { label: "Contact Us", href: "/contact", icon: Mail },
+//   // { label: "Contact", href: "/contact", icon: Mail },
 // ];
 
 // /* ───────────────────────────
@@ -849,7 +930,7 @@
 // }
 
 // /* ───────────────────────────
-//    BENTO DROPDOWN (FIXED)
+//    BENTO DROPDOWN
 // ─────────────────────────── */
 // function BentoDropdown({
 //   item,
@@ -882,6 +963,7 @@
 
 //   const subs = item.subitems ?? [];
 //   const isFour = subs.length === 4;
+//   const isFive = subs.length === 5;
 
 //   return (
 //     <div
@@ -947,12 +1029,14 @@
 //             <div
 //               className="rounded-2xl overflow-hidden bg-white border border-gray-200 shadow-2xl"
 //               style={{
-//                 minWidth: isFour ? 480 : 400,
+//                 minWidth: isFive ? 560 : isFour ? 480 : 400,
 //               }}
 //             >
 //               {/* bento grid */}
 //               <div
-//                 className={`p-3 grid gap-2 ${isFour ? "grid-cols-2" : "grid-cols-2"}`}
+//                 className={`p-3 grid gap-2 ${
+//                   isFive ? "grid-cols-2" : "grid-cols-2"
+//                 }`}
 //               >
 //                 {subs.map((sub, idx) => {
 //                   return (
@@ -1034,10 +1118,6 @@
 //                 <p className="text-[11px] text-gray-400">
 //                   Explore {item.label}
 //                 </p>
-//                 {/* <button className="group/all flex items-center gap-1.5 text-[11px] font-semibold text-gray-600 hover:text-gray-900 transition-colors">
-//                   View all
-//                   <MoveRight className="w-3 h-3 group-hover/all:translate-x-0.5 transition-transform" />
-//                 </button> */}
 //               </div>
 //             </div>
 //           </motion.div>
@@ -1048,7 +1128,7 @@
 // }
 
 // /* ───────────────────────────
-//    BOTTOM SHEET - MOBILE (FIXED)
+//    BOTTOM SHEET - MOBILE
 // ─────────────────────────── */
 // function BottomSheet({
 //   open,
@@ -1087,7 +1167,10 @@
 
 //           <motion.div
 //             ref={sheetRef}
-//             style={{ y }}
+//             style={{
+//               y,
+//               maxHeight: "85vh",
+//             }}
 //             initial={{ y: "100%" }}
 //             animate={{ y: 0 }}
 //             exit={{ y: "100%" }}
@@ -1097,9 +1180,6 @@
 //             dragElastic={{ top: 0, bottom: 0.3 }}
 //             onDragEnd={onDragEnd}
 //             className="fixed bottom-0 left-0 right-0 z-50 md:hidden flex flex-col bg-white rounded-3xl shadow-2xl"
-//             style={{
-//               maxHeight: "85vh",
-//             }}
 //           >
 //             {/* drag pill */}
 //             <div className="flex justify-center pt-3 pb-1">
@@ -1279,7 +1359,7 @@
 // }
 
 // /* ───────────────────────────
-//    MAIN NAVBAR (FIXED)
+//    MAIN NAVBAR
 // ─────────────────────────── */
 // export function Navbar() {
 //   const [mobileOpen, setMobileOpen] = useState(false);
@@ -1351,19 +1431,19 @@
 //   const isParentActive = (item: NavItem) =>
 //     item.subitems?.some((s) => pathname.startsWith(s.href)) ?? false;
 
-//   const logoSrc =
-//     "https://images.seeklogo.com/logo-png/44/1/analogue-logo-png_seeklogo-449641.png";
+//   // Logo path - using analog.PNG from public folder
+//   const logoSrc = "/images/analog.PNG";
 
 //   return (
 //     <>
-//       <div className="pt-[80px]">
+//       <div className="pt-[45px]">
 //         <nav
 //           ref={navRef}
 //           className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 py-4"
 //         >
 //           <div
 //             ref={barRef}
-//             className="relative w-full max-w-[900px] flex items-center justify-between h-[52px] px-3 rounded-2xl transition-all duration-500 bg-white/90 backdrop-blur-xl"
+//             className="relative w-full max-w-[1100px] flex items-center justify-between h-[52px] px-3 rounded-2xl transition-all duration-500 bg-white/90 backdrop-blur-xl"
 //             style={{
 //               border: "0.5px solid rgba(0,0,0,0.08)",
 //               boxShadow: scrolled
@@ -1389,21 +1469,16 @@
 //             {/* LOGO */}
 //             <Link
 //               href="/"
-//               className="nav-link-item group flex items-center gap-2.5 shrink-0 pl-1"
+//               className="nav-link-item group flex items-center gap-1 shrink-0 pl-1"
 //             >
-//               <div
-//                 className="relative w-8 h-8 rounded-xl overflow-hidden flex items-center justify-center transition-all duration-300 bg-gray-900"
-//                 style={{
-//                   boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
-//                 }}
-//               >
+//               <div className="relative  rounded-xl overflow-hidden flex items-center justify-center transition-all duration-300 ">
 //                 {!logoError ? (
 //                   <Image
 //                     src={logoSrc}
-//                     alt="Analog"
-//                     width={32}
-//                     height={32}
-//                     className="object-contain p-1"
+//                     alt="AnalogChips"
+//                     width={102}
+//                     height={102}
+//                     className="object-contain p-1 mt-2"
 //                     onError={() => setLogoError(true)}
 //                     unoptimized
 //                   />
@@ -1412,10 +1487,10 @@
 //                 )}
 //               </div>
 //               <span
-//                 className="hidden sm:block text-[15px] font-bold text-gray-900"
+//                 className="hidden sm:block text-[15px] -ml-7 font-bold text-gray-900"
 //                 style={{ letterSpacing: "-0.03em" }}
 //               >
-//                 Analog
+//                 AnalogChips
 //               </span>
 //             </Link>
 
@@ -1502,6 +1577,7 @@
 //   );
 // }
 
+///////////////////////////////////////
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
@@ -1514,56 +1590,39 @@ import {
   useMotionValue,
   useSpring,
 } from "framer-motion";
+import Lenis from "lenis";
 import {
   Menu,
   X,
+  ChevronDown,
+  Sparkles,
   Home,
   Info,
   Package,
   FileText,
   Briefcase,
   Mail,
-  LogIn,
   Cpu,
   Zap,
   Shield,
   Microchip,
+  Users,
   Crown,
   Radio,
   Battery,
   Clock,
   Building,
-  ArrowUpRight,
-  Sparkles,
-  MoveRight,
-  ChevronRight,
-  Car,
-  Wifi,
-  Factory,
-  Smartphone,
-  Lightbulb,
-  Users,
-  Eye,
-  Target,
-  Server,
-  Layers,
-  GitBranch,
-  Network,
 } from "lucide-react";
 import gsap from "gsap";
 
-/* ───────────────────────────
-   TYPES
-─────────────────────────── */
+// Types
 interface SubNavItem {
   label: string;
   href: string;
   description?: string;
   icon?: any;
-  tag?: string;
-  color?: string;
-  bgColor?: string;
 }
+
 interface NavItem {
   label: string;
   href?: string;
@@ -1571,151 +1630,72 @@ interface NavItem {
   subitems?: SubNavItem[];
 }
 
-/* ───────────────────────────
-   DATA - REQUIRED NAVBAR ITEMS
-─────────────────────────── */
+// Theme color
+const THEME_COLOR = "#0393D3";
+
+// Navigation Data
 const navigationData: NavItem[] = [
   { label: "Home", href: "/", icon: Home },
   {
-    label: "Products",
+    label: "Product",
     icon: Package,
     subitems: [
       {
-        label: "PMIC",
-        href: "/products/pmic",
-        description: "Power Management ICs",
+        label: "RF Beamformers",
+        href: "/products/rf-beamformers",
+        description: "Advanced phased array solutions",
+        icon: Radio,
+      },
+      {
+        label: "RF Front End Modules",
+        href: "/products/rf-front-end",
+        description: "Integrated RF solutions",
+        icon: Zap,
+      },
+      {
+        label: "Power & Clock Management",
+        href: "/products/power-management",
+        description: "Efficient power solutions",
         icon: Battery,
-        tag: "Popular",
-        color: "#2563eb",
-        bgColor: "#eff6ff",
       },
       {
-        label: "ADC/DAC",
-        href: "/products/adc-dac",
-        description: "Data Converters",
-        icon: Radio,
-        color: "#d97706",
-        bgColor: "#fffbeb",
-      },
-      {
-        label: "SERDES",
-        href: "/products/serdes",
-        description: "Serializer/Deserializer",
-        icon: GitBranch,
-        color: "#16a34a",
-        bgColor: "#f0fdf4",
-      },
-      {
-        label: "Embedded Systems",
-        href: "/products/embedded",
-        description: "ARM Cortex Solutions",
-        icon: Layers,
-        color: "#7c3aed",
-        bgColor: "#f5f3ff",
-      },
-      {
-        label: "RF Solutions",
-        href: "/products/rf-solutions",
-        description: "RF Front End & Beamformers",
-        icon: Radio,
-        color: "#dc2626",
-        bgColor: "#fef2f2",
+        label: "Microcontrollers",
+        href: "/products/microcontrollers",
+        description: "High-performance MCUs",
+        icon: Cpu,
       },
     ],
   },
   {
-    label: "Industries",
-    icon: Building,
+    label: "Silicon IP",
+    icon: Microchip,
     subitems: [
       {
-        label: "Automotive",
-        href: "/industries/automotive",
-        description: "EV & ADAS Solutions",
-        icon: Car,
-        color: "#2563eb",
-        bgColor: "#eff6ff",
+        label: "Multi-Protocol SERDES",
+        href: "/silicon-ip/serdes",
+        description: "112G PAM4 SerDes",
+        icon: Zap,
       },
       {
-        label: "Industrial",
-        href: "/industries/industrial",
-        description: "Factory Automation",
-        icon: Factory,
-        color: "#16a34a",
-        bgColor: "#f0fdf4",
+        label: "Phase Locked Loop",
+        href: "/silicon-ip/pll",
+        description: "Ultra-low jitter PLL",
+        icon: Clock,
       },
       {
-        label: "IoT",
-        href: "/industries/iot",
-        description: "Smart Connectivity",
-        icon: Wifi,
-        color: "#0891b2",
-        bgColor: "#ecfeff",
+        label: "Analog IPs",
+        href: "/silicon-ip/analog",
+        description: "Precision analog circuits",
+        icon: Shield,
       },
       {
-        label: "Consumer Electronics",
-        href: "/industries/consumer",
-        description: "Smart Devices",
-        icon: Smartphone,
-        color: "#d97706",
-        bgColor: "#fffbeb",
-      },
-      {
-        label: "Smart Lighting",
-        href: "/industries/lighting",
-        description: "LED & Smart Controls",
-        icon: Lightbulb,
-        tag: "New",
-        color: "#ea580c",
-        bgColor: "#fff7ed",
+        label: "Digital IPs",
+        href: "/silicon-ip/digital",
+        description: "DSP and compute cores",
+        icon: Cpu,
       },
     ],
   },
-  // {
-  //   label: "Technology",
-  //   icon: Microchip,
-  //   subitems: [
-  //     {
-  //       label: "Analog IP",
-  //       href: "/technology/analog-ip",
-  //       description: "Precision analog circuits",
-  //       icon: Shield,
-  //       color: "#2563eb",
-  //       bgColor: "#eff6ff",
-  //     },
-  //     {
-  //       label: "Digital IP",
-  //       href: "/technology/digital-ip",
-  //       description: "DSP and compute cores",
-  //       icon: Cpu,
-  //       color: "#7c3aed",
-  //       bgColor: "#f5f3ff",
-  //     },
-  //     {
-  //       label: "Mixed Signal",
-  //       href: "/technology/mixed-signal",
-  //       description: "Analog + Digital integration",
-  //       icon: GitBranch,
-  //       color: "#16a34a",
-  //       bgColor: "#f0fdf4",
-  //     },
-  //     {
-  //       label: "Embedded",
-  //       href: "/technology/embedded",
-  //       description: "ARM Cortex cores",
-  //       icon: Layers,
-  //       color: "#d97706",
-  //       bgColor: "#fffbeb",
-  //     },
-  //     {
-  //       label: "Connectivity",
-  //       href: "/technology/connectivity",
-  //       description: "SERDES & interfaces",
-  //       icon: Network,
-  //       color: "#0891b2",
-  //       bgColor: "#ecfeff",
-  //     },
-  //   ],
-  // },
   {
     label: "Company",
     icon: Building,
@@ -1725,253 +1705,124 @@ const navigationData: NavItem[] = [
         href: "/about",
         description: "Our story and mission",
         icon: Info,
-        color: "#2563eb",
-        bgColor: "#eff6ff",
       },
       {
         label: "Leadership",
         href: "/leadership",
         description: "Meet our team",
         icon: Crown,
-        color: "#d97706",
-        bgColor: "#fffbeb",
       },
-      // {
-      //   label: "Vision",
-      //   href: "/vision",
-      //   description: "Our vision & roadmap",
-      //   icon: Eye,
-      //   color: "#7c3aed",
-      //   bgColor: "#f5f3ff",
-      // },
-      // {
-      //   label: "Careers",
-      //   href: "/careers",
-      //   description: "Join our team",
-      //   icon: Users,
-      //   tag: "Hiring",
-      //   color: "#16a34a",
-      //   bgColor: "#f0fdf4",
-      // },
+      {
+        label: "Career",
+        href: "/careers",
+        description: "Join our team",
+        icon: Briefcase,
+      },
     ],
   },
-  // { label: "Contact", href: "/contact", icon: Mail },
+  { label: "Blogs", href: "/blog", icon: FileText },
+  { label: "Contact Us", href: "/contact", icon: Mail },
 ];
 
-/* ───────────────────────────
-   SPOTLIGHT HOOK
-─────────────────────────── */
-function useSpotlight(ref: React.RefObject<HTMLElement>) {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const sx = useSpring(x, { stiffness: 200, damping: 30 });
-  const sy = useSpring(y, { stiffness: 200, damping: 30 });
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const move = (e: MouseEvent) => {
-      const rect = el.getBoundingClientRect();
-      x.set(e.clientX - rect.left);
-      y.set(e.clientY - rect.top);
-    };
-    el.addEventListener("mousemove", move);
-    return () => el.removeEventListener("mousemove", move);
-  }, [ref, x, y]);
-
-  return { sx, sy };
-}
-
-/* ───────────────────────────
-   BENTO DROPDOWN
-─────────────────────────── */
-function BentoDropdown({
+// Simple Dropdown Component
+function SimpleDropdown({
   item,
   isActive,
 }: {
   item: NavItem;
   isActive: boolean;
 }) {
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  const timer = useRef<NodeJS.Timeout | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const enter = () => {
-    if (timer.current) clearTimeout(timer.current);
-    setOpen(true);
+  const handleMouseEnter = () => {
+    if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+    setIsOpen(true);
   };
-  const leave = () => {
-    timer.current = setTimeout(() => setOpen(false), 150);
+
+  const handleMouseLeave = () => {
+    hoverTimeoutRef.current = setTimeout(() => {
+      setIsOpen(false);
+    }, 150);
+  };
+
+  const handleClick = () => {
+    setIsOpen(!isOpen);
   };
 
   useEffect(() => {
-    const fn = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
-        setOpen(false);
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
       }
     };
-    document.addEventListener("mousedown", fn);
-    return () => document.removeEventListener("mousedown", fn);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-  const subs = item.subitems ?? [];
-  const isFour = subs.length === 4;
-  const isFive = subs.length === 5;
 
   return (
     <div
-      ref={ref}
-      onMouseEnter={enter}
-      onMouseLeave={leave}
       className="relative"
+      ref={dropdownRef}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       <button
-        aria-expanded={open}
-        className={`group relative flex items-center gap-1.5 px-4 py-2.5 rounded-full text-[13.5px] font-semibold transition-all duration-200 ${
-          isActive
-            ? "text-gray-900 bg-gray-900/8"
-            : "text-gray-500 hover:text-gray-900"
+        onClick={handleClick}
+        className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 group ${
+          isActive ? "text-[#0393D3]" : "text-slate-600 hover:text-slate-900"
         }`}
-        style={{ letterSpacing: "-0.01em" }}
+        aria-expanded={isOpen}
       >
-        {isActive && (
-          <motion.span
-            layoutId="nav-bg"
-            className="absolute inset-0 rounded-full bg-gray-900/6"
-            transition={{ type: "spring", stiffness: 400, damping: 35 }}
-          />
-        )}
-        <span className="relative z-10 whitespace-nowrap">{item.label}</span>
-        <motion.svg
-          animate={{ rotate: open ? 180 : 0 }}
-          transition={{ duration: 0.25 }}
-          className="relative z-10 w-3.5 h-3.5"
-          viewBox="0 0 12 12"
-          fill="none"
-        >
-          <path
-            d="M2 4L6 8L10 4"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </motion.svg>
+        <item.icon
+          className={`w-4 h-4 transition-all duration-300 ${
+            isActive
+              ? "text-[#0393D3]"
+              : "text-slate-400 group-hover:text-[#0393D3]"
+          }`}
+        />
+        {item.label}
+        <ChevronDown
+          className={`w-3.5 h-3.5 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+        />
       </button>
 
       <AnimatePresence>
-        {open && (
+        {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 10, scale: 0.97 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 6, scale: 0.98 }}
-            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute top-full left-1/2 -translate-x-1/2 mt-4 z-50"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.2 }}
+            className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-slate-100 overflow-hidden z-50"
           >
-            {/* tip arrow */}
-            <div className="flex justify-center mb-[-1px] relative z-10">
-              <div
-                className="w-2.5 h-2.5 rotate-45 bg-white border-t border-l border-gray-200"
-                style={{
-                  borderBottom: "none",
-                  borderRight: "none",
-                }}
-              />
-            </div>
-
-            <div
-              className="rounded-2xl overflow-hidden bg-white border border-gray-200 shadow-2xl"
-              style={{
-                minWidth: isFive ? 560 : isFour ? 480 : 400,
-              }}
-            >
-              {/* bento grid */}
-              <div
-                className={`p-3 grid gap-2 ${
-                  isFive ? "grid-cols-2" : "grid-cols-2"
-                }`}
-              >
-                {subs.map((sub, idx) => {
-                  return (
-                    <Link
-                      key={idx}
-                      href={sub.href}
-                      onClick={() => setOpen(false)}
-                      className={`group/tile relative flex flex-col justify-between rounded-xl p-4 transition-all duration-200 overflow-hidden`}
-                      style={{
-                        background: sub.bgColor ?? "#f8fafc",
-                        border: "1px solid rgba(0,0,0,0.06)",
-                        minHeight: 108,
-                      }}
-                    >
-                      {/* hover overlay */}
-                      <div
-                        className="absolute inset-0 opacity-0 group-hover/tile:opacity-100 transition-opacity duration-200"
-                        style={{ background: `${sub.color}08` }}
-                      />
-                      {/* border highlight */}
-                      <div
-                        className="absolute inset-0 rounded-xl opacity-0 group-hover/tile:opacity-100 transition-opacity duration-200"
-                        style={{
-                          boxShadow: `inset 0 0 0 1.5px ${sub.color}30`,
-                        }}
-                      />
-
-                      <div className="relative z-10 flex items-start justify-between mb-3">
-                        <div
-                          className="w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200 group-hover/tile:scale-110"
-                          style={{
-                            background: sub.color
-                              ? `${sub.color}15`
-                              : "#f1f5f9",
-                          }}
-                        >
-                          <sub.icon
-                            className="w-4.5 h-4.5"
-                            style={{ color: sub.color ?? "#64748b" }}
-                          />
-                        </div>
-                        {sub.tag && (
-                          <span
-                            className="text-[9px] font-bold tracking-wider px-2 py-1 rounded-full"
-                            style={{
-                              background: `${sub.color}18`,
-                              color: sub.color,
-                            }}
-                          >
-                            {sub.tag}
-                          </span>
-                        )}
-                      </div>
-
-                      <div className="relative z-10">
-                        <div className="flex items-center gap-1.5 mb-1">
-                          <p
-                            className="text-[13px] font-semibold text-gray-800 group-hover/tile:text-gray-900 leading-tight"
-                            style={{ letterSpacing: "-0.01em" }}
-                          >
-                            {sub.label}
-                          </p>
-                          <ArrowUpRight
-                            className="w-3 h-3 opacity-0 group-hover/tile:opacity-100 transition-all duration-200 -translate-x-1 group-hover/tile:translate-x-0"
-                            style={{ color: sub.color }}
-                          />
-                        </div>
-                        <p className="text-[11px] text-gray-400 leading-snug">
-                          {sub.description}
-                        </p>
-                      </div>
-                    </Link>
-                  );
-                })}
-              </div>
-
-              {/* footer */}
-              <div className="px-5 py-3 border-t border-gray-100 flex items-center justify-between">
-                <p className="text-[11px] text-gray-400">
-                  Explore {item.label}
-                </p>
-              </div>
+            <div className="py-2">
+              {item.subitems?.map((subitem, idx) => (
+                <Link
+                  key={idx}
+                  href={subitem.href}
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center gap-3 px-4 py-2.5 hover:bg-slate-50 transition-colors group"
+                >
+                  <div className="w-7 h-7 rounded-md bg-slate-100 flex items-center justify-center group-hover:bg-[#0393D3]/10 transition-colors">
+                    <subitem.icon className="w-3.5 h-3.5 text-slate-500 group-hover:text-[#0393D3]" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-slate-700 group-hover:text-[#0393D3]">
+                      {subitem.label}
+                    </p>
+                    {subitem.description && (
+                      <p className="text-xs text-slate-400 mt-0.5">
+                        {subitem.description}
+                      </p>
+                    )}
+                  </div>
+                </Link>
+              ))}
             </div>
           </motion.div>
         )}
@@ -1980,375 +1831,209 @@ function BentoDropdown({
   );
 }
 
-/* ───────────────────────────
-   BOTTOM SHEET - MOBILE
-─────────────────────────── */
-function BottomSheet({
-  open,
-  onClose,
+// Mobile Accordion Component
+function MobileAccordion({
+  item,
   isActive,
-  isParentActive,
-}: {
-  open: boolean;
-  onClose: () => void;
-  isActive: (h: string) => boolean;
-  isParentActive: (i: NavItem) => boolean;
-}) {
-  const [expanded, setExpanded] = useState<number | null>(null);
-  const sheetRef = useRef<HTMLDivElement>(null);
-  const y = useMotionValue(0);
-
-  const onDragEnd = () => {
-    if (y.get() > 120) onClose();
-  };
+  index,
+  openAccordion,
+  setOpenAccordion,
+}: any) {
+  const isOpen = openAccordion === index;
 
   return (
-    <AnimatePresence>
-      {open && (
-        <>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-            className="fixed inset-0 z-40 md:hidden"
-            style={{
-              background: "rgba(0,0,0,0.35)",
-              backdropFilter: "blur(6px)",
-            }}
+    <div className="border-b border-slate-100 last:border-0">
+      <button
+        onClick={() => setOpenAccordion(isOpen ? null : index)}
+        className="w-full flex items-center justify-between px-4 py-4 text-left"
+      >
+        <div className="flex items-center gap-3">
+          <item.icon
+            className={`w-5 h-5 ${isActive ? "text-[#0393D3]" : "text-slate-500"}`}
           />
-
-          <motion.div
-            ref={sheetRef}
-            style={{
-              y,
-              maxHeight: "85vh",
-            }}
-            initial={{ y: "100%" }}
-            animate={{ y: 0 }}
-            exit={{ y: "100%" }}
-            transition={{ type: "spring", damping: 32, stiffness: 240 }}
-            drag="y"
-            dragConstraints={{ top: 0, bottom: 400 }}
-            dragElastic={{ top: 0, bottom: 0.3 }}
-            onDragEnd={onDragEnd}
-            className="fixed bottom-0 left-0 right-0 z-50 md:hidden flex flex-col bg-white rounded-3xl shadow-2xl"
+          <span
+            className={`text-sm font-medium ${isActive ? "text-[#0393D3]" : "text-slate-700"}`}
           >
-            {/* drag pill */}
-            <div className="flex justify-center pt-3 pb-1">
-              <div className="w-10 h-1 rounded-full bg-gray-200" />
-            </div>
+            {item.label}
+          </span>
+        </div>
+        <ChevronDown
+          className={`w-4 h-4 text-slate-400 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+        />
+      </button>
 
-            {/* header */}
-            <div className="flex items-center justify-between px-5 py-3 border-b border-gray-100">
-              <div className="flex items-center gap-2.5">
-                <div className="w-7 h-7 rounded-xl bg-gray-900 flex items-center justify-center">
-                  <Sparkles className="w-3.5 h-3.5 text-white" />
-                </div>
-                <span className="text-[15px] font-bold text-gray-900">
-                  Menu
-                </span>
-              </div>
-              <button
-                onClick={onClose}
-                className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
-              >
-                <X className="w-4 h-4 text-gray-600" />
-              </button>
-            </div>
-
-            {/* items */}
-            <div className="flex-1 overflow-y-auto px-4 py-3 space-y-1.5">
-              {navigationData.map((item, index) => {
-                const active = item.href
-                  ? isActive(item.href)
-                  : isParentActive(item);
-                const isExp = expanded === index;
-
-                if (item.subitems) {
-                  return (
-                    <div
-                      key={index}
-                      className="rounded-2xl overflow-hidden border border-gray-100"
-                      style={{
-                        background: isExp ? "#fafafa" : "#fff",
-                      }}
-                    >
-                      <button
-                        onClick={() => setExpanded(isExp ? null : index)}
-                        className="w-full flex items-center justify-between px-4 py-3.5"
-                      >
-                        <div className="flex items-center gap-3">
-                          <div
-                            className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all ${
-                              active || isExp ? "bg-gray-900" : "bg-gray-100"
-                            }`}
-                          >
-                            <item.icon
-                              className={`w-4 h-4 ${
-                                active || isExp ? "text-white" : "text-gray-500"
-                              }`}
-                            />
-                          </div>
-                          <span className="text-[14px] font-semibold text-gray-800">
-                            {item.label}
-                          </span>
-                          {active && (
-                            <div className="w-1.5 h-1.5 rounded-full bg-gray-900" />
-                          )}
-                        </div>
-                        <motion.div
-                          animate={{ rotate: isExp ? 90 : 0 }}
-                          transition={{ duration: 0.22 }}
-                        >
-                          <ChevronRight className="w-4 h-4 text-gray-300" />
-                        </motion.div>
-                      </button>
-
-                      <AnimatePresence>
-                        {isExp && (
-                          <motion.div
-                            initial={{ height: 0 }}
-                            animate={{ height: "auto" }}
-                            exit={{ height: 0 }}
-                            transition={{ duration: 0.26 }}
-                            className="overflow-hidden"
-                          >
-                            <div className="px-4 pb-3 pt-1 grid grid-cols-2 gap-2">
-                              {item.subitems.map((sub, idx) => (
-                                <Link
-                                  key={idx}
-                                  href={sub.href}
-                                  onClick={onClose}
-                                  className="group flex flex-col gap-2 p-3 rounded-xl transition-all border border-gray-100"
-                                  style={{
-                                    background: sub.bgColor ?? "#f8fafc",
-                                  }}
-                                >
-                                  <div className="flex items-center justify-between">
-                                    <div
-                                      className="w-7 h-7 rounded-lg flex items-center justify-center"
-                                      style={{ background: `${sub.color}15` }}
-                                    >
-                                      <sub.icon
-                                        className="w-3.5 h-3.5"
-                                        style={{ color: sub.color }}
-                                      />
-                                    </div>
-                                    {sub.tag && (
-                                      <span
-                                        className="text-[8px] font-bold px-1.5 py-0.5 rounded-full"
-                                        style={{
-                                          background: `${sub.color}18`,
-                                          color: sub.color,
-                                        }}
-                                      >
-                                        {sub.tag}
-                                      </span>
-                                    )}
-                                  </div>
-                                  <p className="text-[11px] font-semibold text-gray-700 leading-tight">
-                                    {sub.label}
-                                  </p>
-                                </Link>
-                              ))}
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  );
-                }
-
-                return (
-                  <Link
-                    key={index}
-                    href={item.href!}
-                    onClick={onClose}
-                    className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl transition-all border border-gray-100 ${
-                      active
-                        ? "bg-gray-900 text-white"
-                        : "bg-white text-gray-700 hover:bg-gray-50"
-                    }`}
-                  >
-                    <div
-                      className={`w-9 h-9 rounded-xl flex items-center justify-center ${
-                        active ? "bg-white/15" : "bg-gray-100"
-                      }`}
-                    >
-                      <item.icon
-                        className={`w-4 h-4 ${
-                          active ? "text-white" : "text-gray-500"
-                        }`}
-                      />
-                    </div>
-                    <span className="text-[14px] font-semibold">
-                      {item.label}
-                    </span>
-                    {active && (
-                      <MoveRight className="w-3.5 h-3.5 ml-auto text-white/60" />
-                    )}
-                  </Link>
-                );
-              })}
-            </div>
-
-            {/* CTA */}
-            <div className="px-5 pb-8 pt-3 border-t border-gray-100">
-              <Link href="/contact" onClick={onClose}>
-                <motion.button
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full flex items-center justify-center gap-2.5 py-3.5 rounded-2xl bg-gray-900 text-white text-[14px] font-bold transition-all hover:bg-gray-800"
+      <AnimatePresence>
+        {isOpen && item.subitems && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="overflow-hidden"
+          >
+            <div className="pb-4 pl-12 space-y-2">
+              {item.subitems.map((subitem: any, idx: number) => (
+                <Link
+                  key={idx}
+                  href={subitem.href}
+                  className="block py-2 text-sm text-slate-600 hover:text-[#0393D3] transition-colors"
+                  onClick={() => setOpenAccordion(null)}
                 >
-                  Contact Us
-                </motion.button>
-              </Link>
+                  <div className="flex items-center gap-2">
+                    <subitem.icon className="w-3.5 h-3.5" />
+                    {subitem.label}
+                  </div>
+                  {subitem.description && (
+                    <p className="text-xs text-slate-400 mt-0.5 ml-5">
+                      {subitem.description}
+                    </p>
+                  )}
+                </Link>
+              ))}
             </div>
           </motion.div>
-        </>
-      )}
-    </AnimatePresence>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }
 
-/* ───────────────────────────
-   MAIN NAVBAR
-─────────────────────────── */
+// Main Navbar Component
 export function Navbar() {
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [openAccordion, setOpenAccordion] = useState<number | null>(null);
   const [logoError, setLogoError] = useState(false);
   const pathname = usePathname();
-  const navRef = useRef<HTMLElement>(null);
-  const barRef = useRef<HTMLDivElement>(null);
+  const navbarRef = useRef<HTMLElement>(null);
 
-  /* spotlight */
-  const mouseX = useMotionValue(-999);
-  const mouseY = useMotionValue(-999);
-  const sx = useSpring(mouseX, { stiffness: 120, damping: 20 });
-  const sy = useSpring(mouseY, { stiffness: 120, damping: 20 });
+  // Initialize Lenis smooth scrolling
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+    });
 
-  const handleMouseMove = useCallback(
-    (e: MouseEvent) => {
-      const rect = barRef.current?.getBoundingClientRect();
-      if (!rect) return;
-      mouseX.set(e.clientX - rect.left);
-      mouseY.set(e.clientY - rect.top);
-    },
-    [mouseX, mouseY],
-  );
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
 
-  const handleMouseLeave = useCallback(() => {
-    mouseX.set(-999);
-    mouseY.set(-999);
-  }, [mouseX, mouseY]);
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 30);
-    window.addEventListener("scroll", onScroll);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
 
+    window.addEventListener("scroll", handleScroll);
+
+    // GSAP animation for navbar on load
     gsap.fromTo(
-      navRef.current,
-      { y: -80, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, ease: "expo.out", delay: 0.05 },
+      navbarRef.current,
+      { y: -100, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
     );
+
+    // Stagger animation for nav items
     gsap.fromTo(
-      ".nav-link-item",
-      { opacity: 0, y: -6 },
+      ".nav-item-desktop",
+      { opacity: 0, y: -20 },
       {
         opacity: 1,
         y: 0,
-        stagger: 0.055,
         duration: 0.5,
+        stagger: 0.05,
+        delay: 0.3,
         ease: "power2.out",
-        delay: 0.5,
       },
     );
 
-    const bar = barRef.current;
-    if (bar) {
-      bar.addEventListener("mousemove", handleMouseMove);
-      bar.addEventListener("mouseleave", handleMouseLeave);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === href;
+    return pathname.startsWith(href);
+  };
+
+  const isParentActive = (item: NavItem) => {
+    if (item.subitems) {
+      return item.subitems.some((sub) => pathname.startsWith(sub.href));
     }
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      if (bar) {
-        bar.removeEventListener("mousemove", handleMouseMove);
-        bar.removeEventListener("mouseleave", handleMouseLeave);
-      }
-    };
-  }, [handleMouseMove, handleMouseLeave]);
+    return false;
+  };
 
-  const isActive = (href: string) =>
-    href === "/" ? pathname === href : pathname.startsWith(href);
-  const isParentActive = (item: NavItem) =>
-    item.subitems?.some((s) => pathname.startsWith(s.href)) ?? false;
+  // const logoSrc =
+  //   "https://images.seeklogo.com/logo-png/44/1/analogue-logo-png_seeklogo-449641.png";
 
-  // Logo path - using analog.PNG from public folder
-  const logoSrc = "/images/analog.PNG";
+  const logoSrc =
+    "https://images.seeklogo.com/logo-png/44/1/analogue-logo-png_seeklogo-449641.png";
 
   return (
-    <>
-      <div className="pt-[80px]">
-        <nav
-          ref={navRef}
-          className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 py-4"
-        >
-          <div
-            ref={barRef}
-            className="relative w-full max-w-[1100px] flex items-center justify-between h-[52px] px-3 rounded-2xl transition-all duration-500 bg-white/90 backdrop-blur-xl"
-            style={{
-              border: "0.5px solid rgba(0,0,0,0.08)",
-              boxShadow: scrolled
-                ? "0 8px 32px rgba(0,0,0,0.1)"
-                : "0 4px 16px rgba(0,0,0,0.06)",
-            }}
-          >
-            {/* mouse spotlight */}
-            <motion.div
-              className="pointer-events-none absolute rounded-full"
-              style={{
-                width: 300,
-                height: 300,
-                left: sx,
-                top: sy,
-                x: "-50%",
-                y: "-50%",
-                background:
-                  "radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%)",
-              }}
-            />
-
-            {/* LOGO */}
+    <div className="pt-14">
+      <nav
+        ref={navbarRef}
+        className={`fixed top-0 w-full z-50 transition-all duration-500 ${
+          scrolled
+            ? "bg-white/95 backdrop-blur-md shadow-lg"
+            : "bg-white/80 backdrop-blur-sm"
+        }`}
+      >
+        <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-[93vw]">
+          <div className="flex items-center justify-between h-16 ">
+            {/* Logo */}
             <Link
               href="/"
-              className="nav-link-item group flex items-center gap-1 shrink-0 pl-1"
+              className="group flex items-center gap-2.5 font-bold text-xl lg:text-2xl"
+              onMouseEnter={(e) => {
+                gsap.to(e.currentTarget, {
+                  scale: 1.02,
+                  duration: 0.2,
+                  ease: "power2.out",
+                });
+              }}
+              onMouseLeave={(e) => {
+                gsap.to(e.currentTarget, {
+                  scale: 1,
+                  duration: 0.2,
+                  ease: "power2.out",
+                });
+              }}
             >
-              <div className="relative  rounded-xl overflow-hidden flex items-center justify-center transition-all duration-300 ">
-                {!logoError ? (
-                  <Image
-                    src={logoSrc}
-                    alt="AnalogChips"
-                    width={102}
-                    height={102}
-                    className="object-contain p-1 mt-2"
-                    onError={() => setLogoError(true)}
-                    unoptimized
-                  />
-                ) : (
-                  <Sparkles className="w-4 h-4 text-white" />
-                )}
+              <div className="relative">
+                <div className="absolute inset-0 rounded-lg blur-md opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="relative w-10 h-10 lg:w-12 lg:h-12 rounded-lg overflow-hidden bg-white flex items-center justify-center">
+                  {!logoError ? (
+                    <Image
+                      src={logoSrc}
+                      alt="Analog Company Logo"
+                      width={48}
+                      height={48}
+                      className="object-contain p-1"
+                      onError={() => setLogoError(true)}
+                      unoptimized
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-[#0393D3] to-[#0277b5] flex items-center justify-center">
+                      <Sparkles className="w-5 h-5 text-white" />
+                    </div>
+                  )}
+                </div>
               </div>
-              <span
-                className="hidden sm:block text-[15px] -ml-7 font-bold text-gray-900"
-                style={{ letterSpacing: "-0.03em" }}
-              >
-                AnalogChips
+              <span className="hidden sm:inline bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
+                Analog
               </span>
             </Link>
 
-            {/* CENTER LINKS */}
-            <div className="hidden md:flex items-center gap-0.5 absolute left-1/2 -translate-x-1/2">
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center gap-2">
               {navigationData.map((item, index) => {
                 const active = item.href
                   ? isActive(item.href)
@@ -2356,8 +2041,8 @@ export function Navbar() {
 
                 if (item.subitems) {
                   return (
-                    <div key={index} className="nav-link-item">
-                      <BentoDropdown item={item} isActive={active} />
+                    <div key={index} className="nav-item-desktop">
+                      <SimpleDropdown item={item} isActive={active} />
                     </div>
                   );
                 }
@@ -2366,66 +2051,155 @@ export function Navbar() {
                   <Link
                     key={index}
                     href={item.href!}
-                    className="nav-link-item relative group flex items-center px-3 py-2 rounded-full text-[13.5px] font-semibold transition-all duration-200"
-                    style={{
-                      color: active ? "#111" : "#6b7280",
-                      letterSpacing: "-0.01em",
-                    }}
+                    className={`nav-item-desktop flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 group relative ${
+                      active
+                        ? "text-[#0393D3]"
+                        : "text-slate-600 hover:text-slate-900"
+                    }`}
                   >
+                    <item.icon
+                      className={`w-4 h-4 transition-all duration-300 ${
+                        active
+                          ? "text-[#0393D3]"
+                          : "text-slate-400 group-hover:text-[#0393D3]"
+                      }`}
+                    />
+                    {item.label}
                     {active && (
-                      <motion.span
-                        layoutId="nav-bg"
-                        className="absolute inset-0 rounded-full bg-gray-900/6"
-                        transition={{
-                          type: "spring",
-                          stiffness: 400,
-                          damping: 35,
-                        }}
+                      <motion.div
+                        layoutId="activeNav"
+                        className="absolute -bottom-0.5 left-0 right-0 h-0.5 bg-[#0393D3] rounded-full"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.3 }}
                       />
                     )}
-                    <span className="relative z-10 whitespace-nowrap">
-                      {item.label}
-                    </span>
                   </Link>
                 );
               })}
             </div>
 
-            {/* RIGHT SIDE */}
-            <div className="flex items-center gap-2 shrink-0 pr-1">
-              <Link href="/contact" className="hidden md:block nav-link-item">
-                <motion.button
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="flex items-center gap-2 px-4 py-2 rounded-xl text-[13px] font-semibold text-white transition-all bg-gray-900"
-                  style={{
-                    boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
-                    letterSpacing: "-0.01em",
-                  }}
-                >
-                  Contact Us
-                </motion.button>
-              </Link>
-
-              {/* Mobile burger */}
-              <motion.button
-                whileTap={{ scale: 0.92 }}
-                onClick={() => setMobileOpen(true)}
-                className="md:hidden w-9 h-9 rounded-xl bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
+            {/* Mobile Menu Toggle */}
+            <button
+              className="md:hidden relative w-10 h-10 rounded-lg bg-slate-100 hover:bg-slate-200 transition-all duration-300 flex items-center justify-center"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label="Toggle menu"
+              aria-expanded={isOpen}
+            >
+              <motion.div
+                animate={{ rotate: isOpen ? 90 : 0 }}
+                transition={{ duration: 0.3 }}
               >
-                <Menu className="w-4.5 h-4.5 text-gray-700" />
-              </motion.button>
-            </div>
+                {isOpen ? (
+                  <X className="w-5 h-5 text-slate-700" />
+                ) : (
+                  <Menu className="w-5 h-5 text-slate-700" />
+                )}
+              </motion.div>
+            </button>
           </div>
-        </nav>
+        </div>
 
-        <BottomSheet
-          open={mobileOpen}
-          onClose={() => setMobileOpen(false)}
-          isActive={isActive}
-          isParentActive={isParentActive}
-        />
-      </div>
-    </>
+        {/* Animated background gradient */}
+        <div className="absolute inset-0 -z-10 pointer-events-none">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#0393D3]/10 rounded-full blur-3xl" />
+        </div>
+      </nav>
+
+      {/* Mobile Navigation Sidebar */}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/50 z-40 md:hidden"
+              onClick={() => setIsOpen(false)}
+            />
+
+            {/* Sidebar Menu */}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed right-0 top-0 bottom-0 w-full max-w-sm bg-white shadow-2xl z-50 md:hidden flex flex-col"
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between p-4 border-b border-slate-200">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg overflow-hidden bg-gradient-to-br from-[#0393D3] to-[#0277b5] flex items-center justify-center">
+                    {!logoError ? (
+                      <Image
+                        src={logoSrc}
+                        alt="Analog Company Logo"
+                        width={32}
+                        height={32}
+                        className="object-contain"
+                        onError={() => setLogoError(true)}
+                        unoptimized
+                      />
+                    ) : (
+                      <Sparkles className="w-4 h-4 text-white" />
+                    )}
+                  </div>
+                  <span className="font-bold text-lg bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
+                    Menu
+                  </span>
+                </div>
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="p-2 rounded-lg hover:bg-slate-100 transition-colors"
+                >
+                  <X className="w-5 h-5 text-slate-600" />
+                </button>
+              </div>
+
+              {/* Navigation Items */}
+              <div className="flex-1 overflow-y-auto py-4">
+                {navigationData.map((item, index) => {
+                  const active = item.href
+                    ? isActive(item.href)
+                    : isParentActive(item);
+
+                  if (item.subitems) {
+                    return (
+                      <MobileAccordion
+                        key={index}
+                        item={item}
+                        isActive={active}
+                        index={index}
+                        openAccordion={openAccordion}
+                        setOpenAccordion={setOpenAccordion}
+                      />
+                    );
+                  }
+
+                  return (
+                    <Link
+                      key={index}
+                      href={item.href!}
+                      className={`flex items-center gap-3 px-4 py-4 text-sm font-medium transition-all duration-300 ${
+                        active
+                          ? "bg-gradient-to-r from-[#0393D3]/5 to-[#0393D3]/10 text-[#0393D3] border-r-4 border-[#0393D3]"
+                          : "text-slate-700 hover:bg-slate-50"
+                      }`}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <item.icon
+                        className={`w-5 h-5 ${active ? "text-[#0393D3]" : "text-slate-400"}`}
+                      />
+                      {item.label}
+                    </Link>
+                  );
+                })}
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }

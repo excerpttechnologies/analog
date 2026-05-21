@@ -8,6 +8,9 @@ body {
   padding: 0;
 }
 
+*::-webkit-scrollbar {
+  display: none;
+}
 :root {
   --background: oklch(0.98 0.001 250);
   --foreground: oklch(0.15 0.02 260);

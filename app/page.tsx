@@ -13,11 +13,11 @@ import { StatsSection } from "@/components/home/StatsSection";
 import { TrustedClientsSection } from "@/components/home/TrustedClientsSection";
 
 export const metadata: Metadata = {
-  title: "SmartScope - Premium Semiconductor Solutions",
+  title: "AnalogChips - Premium Semiconductor Solutions",
   description:
     "Cutting-edge semiconductor technology for signal processing, data conversion, and AI-enhanced analog systems.",
   openGraph: {
-    title: "SmartScope - Premium Semiconductor Solutions",
+    title: "AnalogChips - Premium Semiconductor Solutions",
     description:
       "Cutting-edge semiconductor technology for signal processing, data conversion, and AI-enhanced analog systems.",
     type: "website",

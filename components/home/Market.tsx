@@ -1673,7 +1673,7 @@ export function MarketOpportunitiesSection() {
               </div>
 
               {/* Custom progress bars */}
-              <div className="space-y-5 mb-6">
+              {/* <div className="space-y-5 mb-6">
                 {INITIATIVES.map((ini, i) => (
                   <div key={ini.name}>
                     <div className="flex justify-between items-center mb-2">
@@ -1699,10 +1699,10 @@ export function MarketOpportunitiesSection() {
                     </div>
                   </div>
                 ))}
-              </div>
+              </div> */}
 
               {/* Horizontal bar chart */}
-              <ResponsiveContainer width="100%" height={200}>
+              <ResponsiveContainer width="100%" height={350}>
                 <BarChart
                   data={INITIATIVES}
                   layout="vertical"
