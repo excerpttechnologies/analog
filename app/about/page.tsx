@@ -370,11 +370,12 @@ export default function ContactPage() {
                 </span>
               </div>
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-                Powering the Future of Analog Innovation
+                Powering India's Semiconductor Future
               </h2>
               <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-                AnalogChips is a premier provider of high-performance analog and
-                mixed-signal semiconductor solutions
+                A fabless semiconductor company focused on high-performance
+                power management solutions, aligned with India's Semiconductor
+                Mission
               </p>
             </div>
 
@@ -382,7 +383,7 @@ export default function ContactPage() {
             <div className="mb-12 rounded-2xl overflow-hidden shadow-xl">
               <div className="relative h-96 w-full">
                 <Image
-                  src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=1200&h=500&fit=crop"
+                  src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1600&h=900&fit=crop"
                   alt="AnalogChips Office"
                   fill
                   className="object-cover"
@@ -405,10 +406,10 @@ export default function ContactPage() {
                       Our Mission
                     </h3>
                     <p className="text-slate-600 leading-relaxed">
-                      To empower engineers with precision analog solutions that
-                      bridge the gap between physical and digital worlds,
-                      enabling smarter, more efficient systems across
-                      automotive, industrial, and consumer electronics.
+                      Enrich India's Semiconductor Mission's (ISM) objective by
+                      successfully deploying Indian-owned Analog IPs for
+                      domestic and overseas markets — driving a self-reliant
+                      semiconductor ecosystem.
                     </p>
                   </div>
                 </div>
@@ -423,13 +424,13 @@ export default function ContactPage() {
                       <Cpu className="w-7 h-7 text-white" />
                     </div>
                     <h3 className="text-2xl font-bold text-slate-800 mb-3">
-                      Semiconductor Expertise
+                      Our Vision
                     </h3>
                     <p className="text-slate-600 leading-relaxed">
-                      Specializing in high-precision analog, mixed-signal, and
-                      power management ICs with proven expertise in data
-                      converters, operational amplifiers, and custom ASIC
-                      solutions for mission-critical applications.
+                      "Make in India" by "Design in India" — building
+                      world-class analog power management ICs through Indian
+                      engineering talent, serving both domestic and global
+                      markets.
                     </p>
                   </div>
                 </div>
@@ -444,7 +445,7 @@ export default function ContactPage() {
               <div className="bg-white rounded-2xl border border-slate-200 shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden">
                 <div className="relative h-48 w-full">
                   <Image
-                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=300&fit=crop"
+                    src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&h=900&fit=crop"
                     alt="Team collaboration"
                     fill
                     className="object-cover"
@@ -460,16 +461,17 @@ export default function ContactPage() {
                     </h3>
                   </div>
                   <p className="text-slate-600 leading-relaxed mb-4">
-                    Founded in 2015 by a team of analog design veterans from
-                    Texas Instruments and Analog Devices, AnalogChips has grown
-                    into a trusted partner for automotive, industrial, medical,
-                    and communications industries worldwide.
+                    We are a fabless semiconductor company focused on designing
+                    high-performance power management solutions for modern
+                    electronic systems. Our portfolio addresses the growing
+                    demand for efficient, compact, and reliable power delivery
+                    across a wide range of applications.
                   </p>
                   <p className="text-slate-600 leading-relaxed">
-                    Our headquarters in Bengaluru, India, houses
-                    state-of-the-art design centers and characterization labs,
-                    enabling us to deliver cutting-edge analog solutions that
-                    push the boundaries of what's possible.
+                    Our headquarters in Bengaluru, India, houses our core design
+                    and engineering teams, enabling us to deliver cutting-edge
+                    analog power management ICs that contribute to India's
+                    semiconductor self-reliance.
                   </p>
                 </div>
               </div>
@@ -493,16 +495,19 @@ export default function ContactPage() {
                     </h3>
                   </div>
                   <p className="text-slate-600 leading-relaxed mb-4">
-                    We're pioneering the integration of on-chip machine learning
-                    capabilities that enable our analog ICs to self-calibrate in
-                    real-time, compensate for temperature and aging effects.
+                    We provide a focused portfolio of power devices: Voltage
+                    Conversion (Boost, Buck), Linear Regulators (LDO), Lighting
+                    Solutions (LED Drivers), and Protection & Control (Diode
+                    Controllers, Load Switches).
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {[
-                      "AI-Enhanced ADC",
-                      "Smart Power ICs",
-                      "Adaptive Filters",
-                      "Self-Calibrating",
+                      "Boost Converter",
+                      "Buck Regulator",
+                      "LDO Regulator",
+                      "LED Driver",
+                      "Diode Controller",
+                      "Load Switch",
                     ].map((tech) => (
                       <span
                         key={tech}
@@ -641,7 +646,7 @@ export default function ContactPage() {
             </div>
 
             {/* Testimonial */}
-            <div className="bg-gradient-to-r from-blue-600 to-cyan-600 rounded-2xl p-8 text-white text-center">
+            {/* <div className="bg-gradient-to-r from-blue-600 to-cyan-600 rounded-2xl p-8 text-white text-center">
               <div className="max-w-2xl mx-auto">
                 <div className="text-4xl mb-3">"</div>
                 <p className="text-lg md:text-xl leading-relaxed mb-4">
@@ -662,7 +667,7 @@ export default function ContactPage() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </section>
 

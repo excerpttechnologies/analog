@@ -25,102 +25,98 @@ if (typeof window !== "undefined") {
 const products = [
   {
     id: 1,
-    name: "SERDES IP",
-    category: "Silicon IP",
+    name: "Boost Converter",
+    category: "Voltage Conversion",
     description:
-      "High-speed SerDes for data communication interfaces up to 112G PAM4",
+      "Compact boost converter for efficient voltage regulation in battery-operated portable electronics",
     longDescription:
-      "Industry-leading serialization/deserialization technology enabling next-gen data centers and high-performance computing with ultra-low power consumption.",
+      "A compact Boost converter device for efficient voltage regulation in portable electronics. Optimized for stable performance in space-constrained applications. Used in consumer gadgets and IoT devices for reliable power delivery.",
     icon: Cpu,
     image:
-      "https://media.finebi.com/strapi/DALL_E_2024_11_05_15_45_59_A_futuristic_and_technical_infographic_showcasing_the_three_stages_of_data_conversion_extraction_transformation_and_loading_The_diagram_should_vis_f6d1a8a16b.webp",
+      "https://images.unsplash.com/photo-1744368191937-8fe5fde474a8?w=800&h=600&fit=crop",
     gradient: "from-blue-500 to-cyan-500",
     gradientLight: "from-blue-50 to-cyan-50",
-    specs: ["112G PAM4", "<1e-12 BER", "0.5pJ/bit"],
+    specs: ["Battery Operated", "Compact", "IoT Ready"],
     color: "blue",
   },
   {
     id: 2,
-    name: "PLL Systems",
-    category: "Silicon IP",
+    name: "Buck Regulator",
+    category: "Voltage Conversion",
     description:
-      "Ultra-low jitter phase-locked loops for clock generation and synchronization",
+      "High input voltage tolerant buck regulator for computing, networking and general electronic systems",
     longDescription:
-      "Precision clocking solutions with industry-best jitter performance, ideal for high-speed data converters and RF applications.",
+      "A highly integrated buck regulator aimed at simplifying power conversion in modern electronic systems. Designed to reduce component count and streamline board design. Used in computing (DPA systems), networking, and general-purpose electronic systems.",
     icon: Gauge,
     image:
-      "https://www.3alphadataentry.com/wp-content/uploads/2018/08/data-conversion-services-1.jpg",
+      "https://images.unsplash.com/photo-1760842543741-876d7837fa0b?w=800&h=600&fit=crop",
     gradient: "from-purple-500 to-pink-500",
     gradientLight: "from-purple-50 to-pink-50",
-    specs: ["50fs RMS jitter", "10MHz-40GHz", "Integrated VCO"],
+    specs: ["High Vin", "Low BOM", "DPA Systems"],
     color: "purple",
   },
   {
     id: 3,
-    name: "Analog IP",
-    category: "Silicon IP",
+    name: "LDO Regulator",
+    category: "Linear Regulators",
     description:
-      "Precision analog circuits for sensor and signal processing applications",
+      "Ultra low dropout regulator with high input voltage tolerance for consumer and embedded system designs",
     longDescription:
-      "High-performance analog building blocks including ADCs, DACs, amplifiers, and voltage references for precision measurement systems.",
+      "A versatile linear regulator device intended for dependable power control in everyday electronic products. Focuses on ease of use and broad compatibility across applications. Suitable for consumer electronics and embedded system designs.",
     icon: Microchip,
     image:
-      "https://media.finebi.com/strapi/DALL_E_2024_11_05_15_29_44_A_futuristic_and_technological_image_illustrating_data_being_transformed_from_one_format_to_another_The_image_should_show_digital_representations_of_4d381fc87f.webp",
+      "https://images.unsplash.com/photo-1765256931287-e7f0e36b9ba4?w=800&h=600&fit=crop",
     gradient: "from-emerald-500 to-teal-500",
     gradientLight: "from-emerald-50 to-teal-50",
-    specs: ["16-bit resolution", "1uV offset", "0.01% INL"],
+    specs: ["Ultra LDO", "High Vin", "Broad Compat."],
     color: "emerald",
   },
   {
     id: 4,
-    name: "Digital IP",
-    category: "Silicon IP",
+    name: "LED Driver",
+    category: "Lighting Solutions",
     description:
-      "Advanced digital signal processing and computation cores for edge AI",
+      "High input voltage linear LED driver with very low BOM count for commercial and industrial lighting",
     longDescription:
-      "Energy-efficient DSP cores and AI accelerators optimized for on-device intelligence and real-time signal processing.",
+      "A dedicated linear LED driver solution for lighting applications focusing on ease-of-use and very low BOM count. Provides consistent illumination control for energy-efficient lighting designs. Ideal for commercial, industrial, and decorative lighting systems.",
     icon: Zap,
     image:
-      "https://www.tarento.com/static/2c1015cb6e6c26a30affbd668d278ee6/afa5c/4_001cd4df1f.png",
-    gradient: "from-orange-500 to-red-500",
-    gradientLight: "from-orange-50 to-red-50",
-    specs: ["5 TOPS/W", "RISC-V cores", "Hardware accelerators"],
+      "https://images.unsplash.com/photo-1766596796538-75b67ff9109c?w=800&h=600&fit=crop",
+    gradient: "from-orange-500 to-amber-500",
+    gradientLight: "from-orange-50 to-amber-50",
+    specs: ["Low BOM", "High Vin", "Smart Lighting"],
     color: "orange",
   },
   {
     id: 5,
-    name: "AI Converters",
-    category: "Technology",
+    name: "Ideal Diode Controller",
+    category: "Protection & Control",
     description:
-      "ML-enhanced ADC/DAC for intelligent signal acquisition and processing",
+      "Robust power handling for battery management systems used in automotive, computing and industrial equipment",
     longDescription:
-      "Revolutionary data converters that use machine learning to adapt and optimize performance in real-time.",
+      "Designed to deliver robust power handling for battery management systems (BMS). Enhances system reliability through efficient load management. Used in applications such as computing infrastructure, automotive, and industrial equipment.",
     icon: Bot,
     image:
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1763372278600-fd0b0997a7b8?w=800&h=600&fit=crop",
     gradient: "from-indigo-500 to-purple-500",
     gradientLight: "from-indigo-50 to-purple-50",
-    specs: [
-      "AI-assisted calibration",
-      "40% power saving",
-      "Real-time adaptation",
-    ],
+    specs: ["BMS Compatible", "High Input V", "Automotive Ready"],
     color: "indigo",
   },
   {
     id: 6,
-    name: "Precision Analog",
-    category: "Technology",
+    name: "Load Switch",
+    category: "Protection & Control",
     description:
-      "Ultra-low noise analog front-ends for precision measurement systems",
+      "Single N-Channel load switch for controlled power distribution in USB-powered and portable device applications",
     longDescription:
-      "Highest precision analog front-ends for medical imaging, scientific instrumentation, and industrial automation.",
+      "A protection-oriented device that helps safeguard electronic systems during operation. Enables controlled power distribution and improved system safety. Commonly implemented in USB-powered and portable device applications.",
     icon: Target,
     image:
-      "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1758549885116-c8bd6bc619e8?w=800&h=600&fit=crop",
     gradient: "from-rose-500 to-orange-500",
     gradientLight: "from-rose-50 to-orange-50",
-    specs: ["0.5nV/√Hz noise", "140dB CMRR", "±0.5ppm/°C drift"],
+    specs: ["N-Channel", "USB Ready", "System Safety"],
     color: "rose",
   },
 ];
@@ -360,14 +356,14 @@ export function ProductShowcase() {
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             <span className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 bg-clip-text text-transparent">
-              Product Categories
+              Power Management ICs
             </span>
           </h2>
 
           <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-            Comprehensive semiconductor solutions spanning silicon IP, advanced
-            analog systems, and AI-enhanced technologies for next-generation
-            applications.
+            A focused portfolio of high-performance power devices — Boost & Buck
+            converters, LDO regulators, LED drivers, and protection & control
+            ICs for modern electronic systems.
           </p>
         </div>
       </div>

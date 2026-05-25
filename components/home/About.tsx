@@ -26,19 +26,19 @@ if (typeof window !== "undefined") {
 const cards = [
   {
     id: 1,
-    title: "Company Intro",
+    title: "Company Overview",
     subtitle: "Who We Are",
     description:
-      "AnalogChips is a leading innovator in analog and mixed-signal semiconductor solutions, delivering precision, reliability, and performance for mission-critical applications.",
+      "A fabless semiconductor company focused on designing high-performance power management solutions for modern electronic systems.",
     longDescription:
-      "Founded in 2015 by a team of analog design veterans from Texas Instruments, Analog Devices, and Maxim Integrated, AnalogChips has grown into a trusted partner for automotive, industrial, medical, and communications industries worldwide. Our headquarters in Austin, Texas, houses state-of-the-art design centers and characterization labs, enabling us to deliver cutting-edge analog solutions that push the boundaries of what's possible.",
+      "We are a fabless semiconductor company focused on designing high-performance power management solutions for modern electronic systems. Our portfolio addresses the growing demand for efficient, compact, and reliable power delivery across a wide range of applications. We provide a focused portfolio of power devices: Voltage Conversion (Boost, Buck), Linear Regulators (LDO), Lighting Solutions (LED Drivers), and Protection & Control (Diode Controllers, Load Switches).",
     icon: Award,
     image:
       "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=800&h=600&fit=crop",
     gradient: "from-blue-500 to-cyan-500",
     lightGradient: "from-blue-50 to-cyan-50",
-    stats: "Founded 2015",
-    metric: "200+ Employees",
+    stats: "Fabless Design",
+    metric: "Indian Owned IPs",
     layout: "left",
     color: "blue",
   },
@@ -47,34 +47,34 @@ const cards = [
     title: "Our Mission",
     subtitle: "Why We Exist",
     description:
-      "To empower engineers with precision analog solutions that bridge the gap between physical and digital worlds, enabling smarter, more efficient systems.",
+      "Enrich India's Semiconductor Mission by successfully deploying Indian-owned Analog IPs for domestic and overseas markets.",
     longDescription:
-      "We believe that exceptional analog design is the foundation of all great electronic systems. Our mission is to provide engineers with high-performance amplifiers, data converters, power management ICs, and interface solutions that deliver unmatched accuracy, low power consumption, and robust reliability. From sensor interfaces to signal conditioning chains, we're committed to making analog design simpler, faster, and more innovative for our customers worldwide.",
+      "We are dedicated to enriching the India Semiconductor Mission's (ISM) objective by successfully deploying Indian-owned Analog IPs for both domestic and overseas markets. As a fabless semiconductor company, we focus on designing high-performance power management solutions for modern electronic systems. Our portfolio addresses the growing demand for efficient, compact, and reliable power delivery across a wide range of applications — from IoT devices and consumer electronics to automotive and industrial systems.",
     icon: Target,
     image:
       "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop",
     gradient: "from-emerald-500 to-teal-500",
     lightGradient: "from-emerald-50 to-teal-50",
-    stats: "100M+ Units",
-    metric: "99.8% Reliability",
+    stats: "ISM Aligned",
+    metric: "Indian Owned IPs",
     layout: "right",
     color: "emerald",
   },
   {
     id: 3,
-    title: "Semiconductor Expertise",
-    subtitle: "Deep Technical Mastery",
+    title: "Our Vision",
+    subtitle: "Where We're Headed",
     description:
-      "Specializing in high-precision analog, mixed-signal, and power management ICs from 180nm to 40nm process nodes.",
+      "\"Make in India\" by \"Design in India\" — championing indigenous semiconductor innovation for the world.",
     longDescription:
-      "Our engineering team brings over 200 years of combined analog design experience, with proven expertise in data converters (ADCs/DACs), operational amplifiers, comparators, voltage references, power management ICs, and interface products. We maintain strategic partnerships with leading foundries including TSMC, TowerJazz, and X-FAB, allowing us to optimize each design for the ideal process technology. Our rigorous characterization and qualification processes ensure every chip meets automotive-grade (AEC-Q100) and industrial reliability standards.",
+      "Our vision is to lead the \"Make in India\" movement through the power of \"Design in India.\" We are committed to building world-class analog IP that originates from Indian engineering talent and serves global markets. By developing Indian-owned semiconductor intellectual property, we aim to establish India as a credible, high-quality source of analog design excellence on the global stage.",
     icon: Microscope,
     image:
       "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=800&h=600&fit=crop",
     gradient: "from-purple-500 to-pink-500",
     lightGradient: "from-purple-50 to-pink-50",
-    stats: "50+ Design Wins",
-    metric: "200+ Years Exp",
+    stats: "Make in India",
+    metric: "Design in India",
     layout: "left",
     color: "purple",
   },

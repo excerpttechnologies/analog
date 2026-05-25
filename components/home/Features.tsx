@@ -492,69 +492,75 @@ if (typeof window !== "undefined") {
 const features = [
   {
     icon: Zap,
-    title: "Lightning Speed",
-    description: "5x faster processing with 3nm architecture",
+    title: "Boost Converter",
+    description:
+      "Compact boost converter for efficient voltage regulation in battery-operated portable electronics",
     gradient: "from-blue-50 to-indigo-50",
     iconBg: "bg-blue-100",
     iconColor: "text-blue-600",
     color: "blue",
-    metric: "2.5 GHz",
+    metric: "Battery Operated",
     badge: "NEW",
   },
   {
     icon: Cpu,
-    title: "Neural Compute",
-    description: "AI-optimized cores for machine learning",
+    title: "Buck Regulator",
+    description:
+      "High input voltage tolerant buck regulator for computing, networking and general electronics",
     gradient: "from-purple-50 to-pink-50",
     iconBg: "bg-purple-100",
     iconColor: "text-purple-600",
     color: "purple",
-    metric: "100B Transistors",
-    badge: "AI",
+    metric: "High Vin",
+    badge: "POWER",
   },
   {
     icon: Shield,
-    title: "Quantum Security",
-    description: "Hardware-level encryption with zero-trust architecture",
+    title: "LDO Regulator",
+    description:
+      "Ultra low dropout regulator with high input voltage tolerance for consumer and embedded systems",
     gradient: "from-emerald-50 to-teal-50",
     iconBg: "bg-emerald-100",
     iconColor: "text-emerald-600",
     color: "emerald",
-    metric: "ISO 27001",
-    badge: "SECURE",
+    metric: "Ultra LDO",
+    badge: "LINEAR",
   },
   {
     icon: Globe,
-    title: "Global Mesh",
-    description: "50+ edge locations with <10ms latency",
+    title: "LED Driver",
+    description:
+      "High input voltage linear LED driver for commercial, industrial and decorative lighting with low BOM",
     gradient: "from-cyan-50 to-blue-50",
     iconBg: "bg-cyan-100",
     iconColor: "text-cyan-600",
     color: "cyan",
-    metric: "Global",
-    badge: "24/7",
+    metric: "Smart Lighting",
+    badge: "LED",
   },
   {
     icon: Battery,
-    title: "Eco Power",
-    description: "40% less energy, 100% renewable compatible",
+    title: "Ideal Diode Controller",
+    description:
+      "Robust power handling for battery management systems used in computing, automotive and industrial",
     gradient: "from-lime-50 to-emerald-50",
     iconBg: "bg-lime-100",
     iconColor: "text-lime-600",
     color: "lime",
-    metric: "Green",
-    badge: "ECO",
+    metric: "BMS Ready",
+    badge: "PROTECT",
   },
   {
     icon: Cloud,
-    title: "Hybrid Cloud",
-    description: "Seamless edge-to-cloud deployment",
+    title: "Load Switch",
+    description:
+      "Single N-Channel load switch for controlled power distribution in USB-powered and portable devices",
     gradient: "from-violet-50 to-indigo-50",
     iconBg: "bg-violet-100",
     iconColor: "text-violet-600",
     color: "violet",
-    metric: "Any Scale",
-    badge: "FLEX",
+    metric: "N-Channel",
+    badge: "SWITCH",
   },
 ];
 
@@ -688,20 +694,21 @@ export function Features() {
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 mb-4">
             <Sparkles className="w-3 h-3 text-slate-600" />
             <span className="text-xs font-medium text-slate-600 uppercase tracking-wide">
-              Capabilities
+              Product Portfolio
             </span>
           </div>
 
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">
-            Engineered for
+            Power Management
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-slate-700 to-slate-500">
-              Peak Performance
+              IC Portfolio
             </span>
           </h2>
 
           <p className="text-slate-500 max-w-2xl mx-auto">
-            Discover the technology powering the next generation of
-            semiconductor solutions.
+            A focused portfolio of high-performance power devices — Voltage
+            Conversion, Linear Regulators, Lighting Solutions, and Protection &
+            Control.
           </p>
         </div>
 
@@ -833,9 +840,12 @@ export function Features() {
         {/* Simple CTA */}
         <div className="text-center">
           <div className="inline-flex items-center gap-3">
-            <button className="px-6 py-2.5 bg-slate-900 text-white text-sm font-medium rounded-full hover:bg-slate-800 transition-all duration-300 hover:scale-105 shadow-sm">
+            <Link
+              href={"/products"}
+              className="px-6 py-2.5 bg-slate-900 text-white text-sm font-medium rounded-full hover:bg-slate-800 transition-all duration-300 hover:scale-105 shadow-sm"
+            >
               Explore Technology
-            </button>
+            </Link>
             <Link
               href={"/contact"}
               className="px-6 py-2.5 border border-slate-200 text-slate-600 text-sm font-medium rounded-full hover:border-slate-300 hover:bg-slate-50 transition-all duration-300 flex items-center gap-1 group"

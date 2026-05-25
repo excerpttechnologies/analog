@@ -180,15 +180,15 @@ export function CTASection() {
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 shadow-lg mb-6 animate-pulse">
           <Sparkles className="w-4 h-4 text-yellow-300" />
           <span className="text-sm font-semibold text-white tracking-wide">
-            Limited Time Offer
+            Make in India · Design in India
           </span>
         </div>
 
         {/* Main Title */}
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-          Ready to Transform{' '}
+          Ready to Power{' '}
           <span className="relative inline-block">
-            Your Projects?
+            Your Next Design?
             <svg
               className="absolute -bottom-2 left-0 w-full"
               height="8"
@@ -216,25 +216,24 @@ export function CTASection() {
 
         {/* Description */}
         <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed">
-          Join hundreds of enterprises leveraging SmartScope technology to accelerate innovation,
-          reduce costs, and stay ahead of the competition.
+          Partner with us for high-performance power management ICs — Boost, Buck, LDO, LED Drivers, and Protection solutions built for modern electronic systems.
         </p>
 
         {/* Statistics */}
         <div className="flex flex-wrap justify-center gap-6 md:gap-10 mb-10">
           <div className="text-center">
-            <p className="text-2xl md:text-3xl font-bold text-white">500+</p>
-            <p className="text-sm text-white/80">Enterprise Clients</p>
+            <p className="text-2xl md:text-3xl font-bold text-white">6</p>
+            <p className="text-sm text-white/80">Product Families</p>
           </div>
           <div className="w-px h-12 bg-white/30 hidden md:block" />
           <div className="text-center">
-            <p className="text-2xl md:text-3xl font-bold text-white">99.9%</p>
-            <p className="text-sm text-white/80">Satisfaction Rate</p>
+            <p className="text-2xl md:text-3xl font-bold text-white">ISM</p>
+            <p className="text-sm text-white/80">Mission Aligned</p>
           </div>
           <div className="w-px h-12 bg-white/30 hidden md:block" />
           <div className="text-center">
-            <p className="text-2xl md:text-3xl font-bold text-white">24/7</p>
-            <p className="text-sm text-white/80">Support Available</p>
+            <p className="text-2xl md:text-3xl font-bold text-white">India</p>
+            <p className="text-sm text-white/80">Owned Analog IPs</p>
           </div>
         </div>
 
@@ -245,7 +244,7 @@ export function CTASection() {
             className="group relative px-8 py-4 rounded-xl bg-white text-blue-600 font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden"
           >
             <span className="relative z-10 flex items-center gap-2">
-              Start Your Journey
+              Explore Products
               <ArrowRight className="button-icon w-5 h-5 transition-transform duration-300" />
             </span>
             
@@ -266,15 +265,15 @@ export function CTASection() {
         <div className="mt-12 flex flex-wrap justify-center gap-6 text-xs text-white/70">
           <div className="flex items-center gap-2">
             <Shield className="w-4 h-4" />
-            <span>ISO 27001 Certified</span>
+            <span>Fabless Semiconductor</span>
           </div>
           <div className="flex items-center gap-2">
             <Sparkles className="w-4 h-4" />
-            <span>GDPR Compliant</span>
+            <span>Indian Owned Analog IPs</span>
           </div>
           <div className="flex items-center gap-2">
             <TrendingUp className="w-4 h-4" />
-            <span>99.99% Uptime SLA</span>
+            <span>ISM Mission Aligned</span>
           </div>
         </div>
       </div>

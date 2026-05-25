@@ -13,13 +13,13 @@ import { StatsSection } from "@/components/home/StatsSection";
 import { TrustedClientsSection } from "@/components/home/TrustedClientsSection";
 
 export const metadata: Metadata = {
-  title: "AnalogChips - Premium Semiconductor Solutions",
+  title: "ACT - Analog Circuit Technologies | Power Management ICs",
   description:
-    "Cutting-edge semiconductor technology for signal processing, data conversion, and AI-enhanced analog systems.",
+    "A fabless semiconductor company designing high-performance power management solutions. Boost converters, Buck regulators, LDO, LED Drivers and more — Made in India, Designed in India.",
   openGraph: {
-    title: "AnalogChips - Premium Semiconductor Solutions",
+    title: "ACT - Analog Circuit Technologies | Power Management ICs",
     description:
-      "Cutting-edge semiconductor technology for signal processing, data conversion, and AI-enhanced analog systems.",
+      "A fabless semiconductor company designing high-performance power management solutions. Boost converters, Buck regulators, LDO, LED Drivers and more — Made in India, Designed in India.",
     type: "website",
   },
 };
