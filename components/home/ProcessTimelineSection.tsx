@@ -339,7 +339,7 @@ export function ProcessTimelineSection() {
           </div>
 
           <h2 className="mb-4 text-4xl font-bold leading-tight tracking-tight text-white md:text-5xl lg:text-6xl">
-            Semiconductor{" "}
+            {/* Semiconductor{" "} */}
             <span
               className="bg-clip-text text-transparent"
               style={{
@@ -347,9 +347,9 @@ export function ProcessTimelineSection() {
                 transition: "background-image 0.5s ease",
               }}
             >
-              development
+              Development
             </span>{" "}
-            timeline
+            Timeline
           </h2>
           <p className="mx-auto max-w-2xl text-base leading-relaxed text-slate-400 md:text-lg">
             From concept to silicon — a meticulously engineered process ensuring

@@ -32,15 +32,15 @@ export default function Home() {
         <Hero />
         <ProductShowcase />
         <Features />
-        <TargetIndustriesSection />
+        {/* <TargetIndustriesSection /> */}
         <ProcessTimelineSection />
         {/* <StatsSection /> */}
         <MarketOpportunitiesSection />
 
         <AboutSection />
-        <TrustedClientsSection />
+        {/* <TrustedClientsSection /> */}
         {/* CTA Section */}
-        {/* <CTASection /> */}
+        <CTASection />
       </main>
       <Footer />
     </>
