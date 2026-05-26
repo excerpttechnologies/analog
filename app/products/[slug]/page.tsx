@@ -10,26 +10,17 @@ import {
   Zap,
   Shield,
   Microchip,
-  Target,
   Sparkles,
   CheckCircle,
   Battery,
   Radio,
-  GitBranch,
   Layers,
-  Wifi,
-  Home,
-  Briefcase,
   Mail,
-  Phone,
-  MapPin,
   TrendingUp,
   Clock,
   Thermometer,
-  Package,
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Navbar } from "@/components/layout/Navbar";
@@ -40,14 +31,14 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-// Product data - Supporting multiple slug variations
+// Requirement-based products only
 const productsData: Record<string, any> = {
   // Boost Converter
   "boost-converter": {
     id: "boost-converter",
     name: "Boost Converter",
     fullName: "Synchronous Boost Converter",
-    category: "Power Management",
+    category: "Voltage Conversion",
     description:
       "Compact boost converter for efficient voltage regulation in battery-operated portable electronics",
     longDescription:
@@ -101,7 +92,7 @@ const productsData: Record<string, any> = {
     id: "buck-regulator",
     name: "Buck Regulator",
     fullName: "High Vin Synchronous Buck Regulator",
-    category: "Power Management",
+    category: "Voltage Conversion",
     description:
       "High input voltage tolerant buck regulator for computing, networking and general electronics",
     longDescription:
@@ -152,7 +143,7 @@ const productsData: Record<string, any> = {
     id: "ldo-regulator",
     name: "LDO Regulator",
     fullName: "Ultra-Low Dropout Linear Regulator",
-    category: "Power Management",
+    category: "Linear Regulators",
     description:
       "Ultra low dropout regulator with high input voltage tolerance for consumer and embedded systems",
     longDescription:
@@ -203,7 +194,7 @@ const productsData: Record<string, any> = {
     id: "led-driver",
     name: "LED Driver",
     fullName: "Linear LED Driver",
-    category: "Power Management",
+    category: "Lighting Solutions",
     description:
       "High input voltage linear LED driver for commercial, industrial and decorative lighting with low BOM",
     longDescription:
@@ -254,7 +245,7 @@ const productsData: Record<string, any> = {
     id: "ideal-diode-controller",
     name: "Ideal Diode Controller",
     fullName: "Ideal Diode Controller with Reverse Protection",
-    category: "Power Management",
+    category: "Protection & Control",
     description:
       "Robust power handling for battery management systems used in computing, automotive and industrial",
     longDescription:
@@ -305,7 +296,7 @@ const productsData: Record<string, any> = {
     id: "load-switch",
     name: "Load Switch",
     fullName: "Single N-Channel Load Switch",
-    category: "Power Management",
+    category: "Protection & Control",
     description:
       "Single N-Channel load switch for controlled power distribution in USB-powered and portable devices",
     longDescription:
@@ -348,246 +339,6 @@ const productsData: Record<string, any> = {
       { label: "IQ", value: "1µA", icon: Battery },
       { label: "Iout", value: "2A", icon: Clock },
       { label: "Vin", value: "0.8V-5.5V", icon: Thermometer },
-    ],
-  },
-
-  // ADC/DAC
-  "adc-dac": {
-    id: "adc-dac",
-    name: "ADC/DAC",
-    fullName: "Data Converters",
-    category: "Data Conversion",
-    description:
-      "Precision analog-to-digital and digital-to-analog converters for high-fidelity signal processing.",
-    longDescription:
-      "Industry-leading ADC/DAC solutions with 16-bit resolution at 10 GSPS, setting new standards for precision and speed in data conversion applications. Our data converters feature ultra-low noise, high linearity, and low power consumption, making them ideal for demanding applications in communications, test and measurement, and defense systems.",
-    specs: [
-      { label: "Resolution", value: "16-bit" },
-      { label: "Sample Rate", value: "10 GSPS" },
-      { label: "SNR", value: "78dBFS" },
-      { label: "INL", value: "<0.1%" },
-      { label: "Power", value: "1.5W" },
-      { label: "Interface", value: "JESD204B/C" },
-    ],
-    applications: [
-      "Wireless Communications (5G/6G)",
-      "Test & Measurement Equipment",
-      "Radar & Electronic Warfare",
-      "Medical Imaging",
-      "Software Defined Radio",
-      "Satellite Communications",
-    ],
-    features: [
-      "16-bit resolution with <0.1% INL",
-      "10 GSPS sampling rate",
-      "SNR: 78dBFS, SFDR: 85dBc",
-      "Low power consumption: 1.5W",
-      "JESD204B/C high-speed serial interface",
-      "Digital down-conversion (DDC) options",
-    ],
-    image:
-      "https://images.unsplash.com/photo-1581092335871-4d6e2e1b0a5a?w=800&h=600&fit=crop",
-    icon: Radio,
-    gradient: "from-emerald-500 to-teal-500",
-    lightGradient: "from-emerald-50 to-teal-50",
-    color: "emerald",
-    advantages: [
-      { label: "Resolution", value: "16-bit", icon: TrendingUp },
-      { label: "Sample Rate", value: "10 GSPS", icon: Battery },
-      { label: "SNR", value: "78dBFS", icon: Clock },
-      { label: "Power", value: "1.5W", icon: Thermometer },
-    ],
-  },
-
-  // SERDES
-  serdes: {
-    id: "serdes",
-    name: "SERDES",
-    fullName: "Serializer/Deserializer",
-    category: "Connectivity",
-    description:
-      "High-speed serial interface solutions for data communication and video transmission.",
-    longDescription:
-      "Multi-protocol SERDES IP supporting 3.125 Gbps data rates for high-bandwidth video, networking, and inter-chip communication with low EMI and cable equalization. Our SERDES solutions feature spread spectrum clocking, adaptive equalization, and low power consumption.",
-    specs: [
-      { label: "Data Rate", value: "3.125 Gbps" },
-      { label: "Protocols", value: "Multi-Protocol" },
-      { label: "SSC Support", value: "Yes" },
-      { label: "Cable EQ", value: "Adaptive" },
-      { label: "Power", value: "<100mW" },
-      { label: "BER", value: "<1e-12" },
-    ],
-    applications: [
-      "Automotive Camera Systems",
-      "Infotainment & Display",
-      "Industrial Networking",
-      "Video Transmission",
-      "High-speed Backplanes",
-      "FPGA/ASIC Interfaces",
-    ],
-    features: [
-      "Data rate: 3.125 Gbps per lane",
-      "Supports multiple protocols (LVDS, MIPI, HDMI)",
-      "Spread Spectrum Clocking (SSC)",
-      "Adaptive cable equalization",
-      "Low EMI emission",
-      "Built-in self-test (BIST)",
-    ],
-    image:
-      "https://images.unsplash.com/photo-1581092335871-4d6e2e1b0a5a?w=800&h=600&fit=crop",
-    icon: GitBranch,
-    gradient: "from-purple-500 to-pink-500",
-    lightGradient: "from-purple-50 to-pink-50",
-    color: "purple",
-    advantages: [
-      { label: "Data Rate", value: "3.125 Gbps", icon: TrendingUp },
-      { label: "Power", value: "<100mW", icon: Battery },
-      { label: "BER", value: "<1e-12", icon: Clock },
-      { label: "SSC", value: "Supported", icon: Thermometer },
-    ],
-  },
-
-  // Embedded Systems
-  "embedded-systems": {
-    id: "embedded-systems",
-    name: "Embedded Systems",
-    fullName: "Embedded Processors",
-    category: "Embedded",
-    description:
-      "ARM Cortex-M based embedded processors with integrated analog peripherals.",
-    longDescription:
-      "ARM Cortex-M based embedded processors with integrated analog peripherals for industrial control and edge AI applications. Our embedded solutions feature TrustZone security, DSP extensions, and ultra-low power operation, making them ideal for IoT gateways, industrial controllers, and smart sensors.",
-    specs: [
-      { label: "Core", value: "Cortex-M4/M7" },
-      { label: "Frequency", value: "200MHz" },
-      { label: "Flash", value: "2MB" },
-      { label: "RAM", value: "512KB" },
-      { label: "Security", value: "TrustZone" },
-      { label: "Power", value: "<100µA/MHz" },
-    ],
-    applications: [
-      "Industrial Control Systems",
-      "Edge Computing Devices",
-      "IoT Gateways",
-      "Smart Sensors",
-      "Motor Control",
-      "Building Automation",
-    ],
-    features: [
-      "ARM Cortex-M4/M7 core with FPU",
-      "Operating frequency up to 200MHz",
-      "Flash memory: 2MB, RAM: 512KB",
-      "TrustZone security architecture",
-      "DSP extensions and SIMD instructions",
-      "Ultra-low power: <100µA/MHz",
-    ],
-    image:
-      "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=800&h=600&fit=crop",
-    icon: Layers,
-    gradient: "from-orange-500 to-red-500",
-    lightGradient: "from-orange-50 to-red-50",
-    color: "orange",
-    advantages: [
-      { label: "Core", value: "Cortex-M4/M7", icon: TrendingUp },
-      { label: "Frequency", value: "200MHz", icon: Battery },
-      { label: "Memory", value: "2MB/512KB", icon: Clock },
-      { label: "Power", value: "<100µA/MHz", icon: Thermometer },
-    ],
-  },
-
-  // RF Solutions
-  "rf-solutions": {
-    id: "rf-solutions",
-    name: "RF Solutions",
-    fullName: "RF Front End & Beamformers",
-    category: "RF & Wireless",
-    description:
-      "Advanced RF front-end modules and beamforming solutions for wireless communications.",
-    longDescription:
-      "Advanced RF front-end modules and beamforming solutions for 5G, radar, and satellite communications. Our RF solutions feature integrated LNAs, PAs, phase shifters, and beamforming networks, providing complete front-end solutions for phased array systems.",
-    specs: [
-      { label: "Frequency", value: "6-18 GHz" },
-      { label: "Channels", value: "32" },
-      { label: "Beamforming", value: "Analog/Digital" },
-      { label: "NF", value: "<3dB" },
-      { label: "Output Power", value: "+30dBm" },
-      { label: "Control", value: "SPI" },
-    ],
-    applications: [
-      "5G Infrastructure",
-      "Phased Array Radar",
-      "Satellite Communications",
-      "Defense & Aerospace",
-      "Electronic Warfare",
-      "Wireless Backhaul",
-    ],
-    features: [
-      "Frequency range: 6-18 GHz coverage",
-      "32-channel beamforming capability",
-      "Integrated LNA and power amplifier",
-      "6-bit phase and amplitude control",
-      "SPI digital interface for control",
-      "Low noise figure: <3dB",
-    ],
-    image:
-      "https://images.unsplash.com/photo-1581092335871-4d6e2e1b0a5a?w=800&h=600&fit=crop",
-    icon: Wifi,
-    gradient: "from-indigo-500 to-purple-500",
-    lightGradient: "from-indigo-50 to-purple-50",
-    color: "indigo",
-    advantages: [
-      { label: "Frequency", value: "6-18 GHz", icon: TrendingUp },
-      { label: "Channels", value: "32", icon: Battery },
-      { label: "NF", value: "<3dB", icon: Clock },
-      { label: "Output Power", value: "+30dBm", icon: Thermometer },
-    ],
-  },
-
-  // PMIC
-  pmic: {
-    id: "pmic",
-    name: "PMIC",
-    fullName: "Power Management ICs",
-    category: "Power Management",
-    description:
-      "High-efficiency power management ICs with integrated protection for automotive and industrial applications.",
-    longDescription:
-      "Our PMIC portfolio includes buck/boost converters, LDO regulators, battery management systems, and power sequencing solutions. Designed for automotive (AEC-Q100) and industrial grade applications with 92% peak efficiency. The devices feature wide input voltage ranges, high output current capabilities, and comprehensive protection features including over-voltage, over-current, short-circuit, and thermal shutdown protection.",
-    specs: [
-      { label: "Efficiency", value: "92% Peak" },
-      { label: "Input Voltage", value: "2.7V - 40V" },
-      { label: "Output Current", value: "Up to 10A" },
-      { label: "Switching Frequency", value: "500kHz - 2MHz" },
-      { label: "Protection", value: "OVP, OCP, SCP, Thermal" },
-      { label: "Qualification", value: "AEC-Q100" },
-    ],
-    applications: [
-      "Electric Vehicle Power Management",
-      "Industrial Automation Systems",
-      "Consumer Electronics",
-      "Telecom Infrastructure",
-      "Medical Devices",
-      "Renewable Energy Systems",
-    ],
-    features: [
-      "High-efficiency synchronous buck/boost converters",
-      "Low-dropout (LDO) regulators with ultra-low noise",
-      "Battery management and charging solutions",
-      "Power sequencing and voltage monitoring",
-      "I2C/PMBus interface for digital control",
-      "Wide temperature range: -40°C to 125°C",
-    ],
-    image:
-      "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=800&h=600&fit=crop",
-    icon: Battery,
-    gradient: "from-blue-500 to-cyan-500",
-    lightGradient: "from-blue-50 to-cyan-50",
-    color: "blue",
-    advantages: [
-      { label: "Efficiency", value: "92%", icon: TrendingUp },
-      { label: "Vin Range", value: "2.7V-40V", icon: Battery },
-      { label: "Iout", value: "10A", icon: Clock },
-      { label: "Qualification", value: "AEC-Q100", icon: Thermometer },
     ],
   },
 };
@@ -857,29 +608,29 @@ export default function ProductDetailPage() {
               </div>
             </div>
 
-            {/* CTA Section */}
+            {/* Requirement-aligned CTA Section */}
             <div className="mt-16 pt-12 border-t border-slate-200">
               <div className="bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-8 md:p-12 text-center">
                 <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                  Interested in {product.name} Solutions?
+                  Need More Information?
                 </h3>
                 <p className="text-slate-300 mb-6 max-w-2xl mx-auto">
-                  Contact our sales team for pricing, samples, and technical
-                  support
+                  Contact our team to learn more about our semiconductor and
+                  power management solutions.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Link
                     href="/contact"
                     className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
                   >
-                    Request Quote
+                    Contact Team
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                   <Link
-                    href="/contact"
+                    href="/products"
                     className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-white/10 backdrop-blur-sm text-white font-semibold border border-white/20 hover:bg-white/20 transition-all duration-300"
                   >
-                    Contact Sales
+                    Learn More
                     <Mail className="w-4 h-4" />
                   </Link>
                 </div>

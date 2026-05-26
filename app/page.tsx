@@ -35,7 +35,7 @@ export default function Home() {
         {/* <TargetIndustriesSection /> */}
         <ProcessTimelineSection />
         {/* <StatsSection /> */}
-        <MarketOpportunitiesSection />
+        {/* <MarketOpportunitiesSection /> */}
 
         <AboutSection />
         {/* <TrustedClientsSection /> */}

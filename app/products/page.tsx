@@ -33,6 +33,7 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+// Requirement-based products only
 const products = [
   {
     id: "boost-converter",
@@ -246,13 +247,13 @@ const products = [
   },
 ];
 
+// Requirement-based categories only
 const categories = [
   "All",
   "Voltage Conversion",
   "Linear Regulators",
   "Lighting Solutions",
   "Protection & Control",
-  "RF & Wireless",
 ];
 
 export default function ProductsPage() {
@@ -351,9 +352,8 @@ export default function ProductsPage() {
             </h1>
 
             <p className="text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-              Comprehensive semiconductor solutions spanning power management,
-              data conversion, connectivity, embedded systems, and RF
-              technologies.
+              Comprehensive power management and analog semiconductor solutions
+              for modern electronic systems.
             </p>
           </div>
         </section>
@@ -502,21 +502,21 @@ export default function ProductsPage() {
               </div>
             )}
 
-            {/* CTA Section */}
+            {/* Requirement-aligned CTA Section */}
             <div className="mt-20 pt-12 border-t border-slate-200">
               <div className="bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-8 md:p-12 text-center">
                 <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                  Need Custom Solutions?
+                  Need More Information?
                 </h3>
                 <p className="text-slate-300 mb-6 max-w-2xl mx-auto">
-                  Contact our sales team for enterprise implementations and
-                  custom IP development
+                  Contact our team to learn more about our semiconductor and
+                  power management solutions.
                 </p>
                 <Link
                   href="/contact"
                   className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
                 >
-                  Get in Touch
+                  Contact Team
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>

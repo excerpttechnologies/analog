@@ -1760,6 +1760,7 @@ export function MarketOpportunitiesSection() {
               "Automotive Electronics",
               "Industrial Equipment",
               "Smart Lighting",
+              "Data Infrastructure",
             ].map((market) => (
               <span
                 key={market}

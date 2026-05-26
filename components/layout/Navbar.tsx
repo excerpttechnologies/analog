@@ -5636,17 +5636,19 @@ const navigationData: NavItem[] = [
         icon: Crown,
         stat: "Expert Team",
       },
-      {
-        label: "Career",
-        href: "/careers",
-        description: "Join our team",
-        icon: Briefcase,
-        tag: "HIRING",
-        stat: "Open Roles",
-      },
+      // {
+      //   label: "Career",
+      //   href: "/careers",
+      //   description: "Join our team",
+      //   icon: Briefcase,
+      //   tag: "HIRING",
+      //   stat: "Open Roles",
+      // },
     ],
   },
-  { label: "Blogs", href: "/blog", icon: FileText },
+  { label: "Market", href: "/market", icon: FileText },
+  { label: "Technology", href: "/technology", icon: FileText },
+  // { label: "Blogs", href: "/blog", icon: FileText },
   { label: "Contact Us", href: "/contact", icon: Mail },
 ];
 
