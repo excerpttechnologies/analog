@@ -163,7 +163,7 @@ const products = [
       "Smart Lighting",
     ],
     image:
-      "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop",
+      "https://www.electronics-lab.com/wp-content/uploads/2023/05/003-7.jpg",
     icon: Layers,
     gradient: "from-orange-500 to-amber-500",
     lightGradient: "from-orange-50 to-amber-50",
@@ -198,7 +198,7 @@ const products = [
       "Battery Management Systems",
     ],
     image:
-      "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=800&h=600&fit=crop",
+      "https://core-electronics.com.au/media/catalog/product/cache/d5cf359726a1656c2b36f3682d3bbc67/P/O/POLOLU-5389-2.jpg",
     icon: GitBranch,
     gradient: "from-red-500 to-rose-500",
     lightGradient: "from-red-50 to-rose-50",

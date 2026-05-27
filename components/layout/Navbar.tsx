@@ -6389,8 +6389,7 @@ export function Navbar() {
   const isParentActive = (item: NavItem) =>
     item.subitems?.some((s) => pathname.startsWith(s.href)) ?? false;
 
-  const logoSrc =
-    "https://images.seeklogo.com/logo-png/44/1/analogue-logo-png_seeklogo-449641.png";
+  const logoSrc = "/images/analog.png";
 
   return (
     <>
@@ -6441,45 +6440,24 @@ export function Navbar() {
                 })
               }
             >
-              <div
-                className="relative w-9 h-9 flex items-center justify-center transition-all duration-300"
-                style={{
-                  background: "rgba(249,115,22,0.1)",
-                  border: "1px solid rgba(249,115,22,0.35)",
-                  borderRadius: "2px",
-                }}
-              >
+              <div className="relative flex items-center justify-center mt-2 ml-0 sm:ml-6">
                 {!logoError ? (
                   <Image
                     src={logoSrc}
-                    alt="Analog"
-                    width={36}
-                    height={36}
-                    className="object-contain p-1"
+                    alt="Analogchips Logo"
+                    width={220}
+                    height={70}
+                    className="h-24   w-auto object-contain"
                     onError={() => setLogoError(true)}
                     unoptimized
+                    priority
                   />
                 ) : (
-                  <Sparkles className="w-4 h-4 text-[#f97316]" />
+                  <Sparkles className="w-5 h-5 text-[#3B82F6]" />
                 )}
-                {/* corner ticks */}
-                <span
-                  className="absolute -top-px -right-px w-1.5 h-1.5"
-                  style={{
-                    borderTop: "1px solid #f97316",
-                    borderRight: "1px solid #f97316",
-                  }}
-                />
-                <span
-                  className="absolute -bottom-px -left-px w-1.5 h-1.5"
-                  style={{
-                    borderBottom: "1px solid #f97316",
-                    borderLeft: "1px solid #f97316",
-                  }}
-                />
               </div>
 
-              <div className="hidden sm:block">
+              {/* <div className="hidden sm:block">
                 <p className="mono text-[14px] font-bold text-white tracking-[0.05em] leading-none">
                   ANALOG
                 </p>
@@ -6489,7 +6467,7 @@ export function Navbar() {
                 >
                   SEMICONDUCTOR
                 </p>
-              </div>
+              </div> */}
             </Link>
 
             {/* ── CENTER NAV ── */}

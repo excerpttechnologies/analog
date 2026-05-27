@@ -326,10 +326,10 @@ export function ProductShowcase() {
   return (
     <section
       ref={sectionRef}
-      className="relative font-['Instrument_Sans',sans-serif] py-24 md:py-20 overflow-hidden bg-white"
+      className="relative font-['Instrument_Sans',sans-serif] py-20  overflow-hidden bg-white"
     >
       {/* White Theme Background */}
-      <div className="absolute inset-0 -z-10">
+      <div className="absolute   inset-0 -z-10">
         <div className="absolute top-20 left-10 w-72 h-72 bg-blue-100/30 rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-100/20 rounded-full blur-3xl" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-cyan-100/10 rounded-full blur-3xl" />
@@ -344,7 +344,7 @@ export function ProductShowcase() {
         />
       </div>
 
-      <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
+      <div className="container  mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
         {/* Header Section */}
         <div ref={titleRef} className="text-center mb-16 md:mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200/50 shadow-sm mb-6">
@@ -369,7 +369,7 @@ export function ProductShowcase() {
       </div>
 
       {/* Marquee Row 1 - Left to Right */}
-      <div className="relative mb-8 overflow-hidden">
+      <div className="relative mb-6 overflow-hidden">
         <div
           ref={marqueeRef1}
           className="flex gap-6 animate-marquee"
@@ -385,8 +385,8 @@ export function ProductShowcase() {
         </div>
 
         {/* Edge Fades */}
-        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+        <div className="absolute md:block hidden inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+        <div className="absolute md:block hidden inset-y-0 right-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
       </div>
 
       {/* Marquee Row 2 - Right to Left */}
@@ -408,13 +408,13 @@ export function ProductShowcase() {
         </div>
 
         {/* Edge Fades */}
-        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-y-0 md:block hidden left-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+        <div className="absolute  md:block hidden  inset-y-0 right-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
       </div>
 
       {/* Footer Section */}
       <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl mt-16">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 border-t border-slate-200">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-5 border-t border-slate-200">
           <p className="text-sm text-slate-500">
             Explore our complete portfolio of semiconductor solutions
           </p>
@@ -426,13 +426,6 @@ export function ProductShowcase() {
             View All Products
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </Link>
-        </div>
-
-        {/* Counter */}
-        <div className="text-center mt-6">
-          <span className="font-mono text-xs text-slate-400 tracking-widest">
-            {products.length} / {products.length} SOLUTIONS
-          </span>
         </div>
       </div>
 

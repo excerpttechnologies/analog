@@ -671,7 +671,7 @@ export function Features() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-24 md:py-32 overflow-hidden bg-white"
+      className="relative pb-24 overflow-hidden bg-white"
     >
       {/* Minimal Background */}
       <div className="absolute inset-0 -z-10">

@@ -1657,7 +1657,8 @@ const sliderContent = [
     ctaLink: "/products",
     secondaryCta: "Contact Us",
     backgroundImage:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&h=900&fit=crop",
+      "https://png.pngtree.com/thumb_back/fh260/background/20230722/pngtree-symbolic-code-fragment-illuminates-computer-screen-embodying-coding-and-programming-3d-image_3785571.jpg",
+    // backgroundImage: "/images/banner.png",
     gradient: "from-blue-600 to-cyan-500",
     gradientLight: "from-blue-500 to-cyan-400",
     stats: [
@@ -1677,7 +1678,7 @@ const sliderContent = [
     ctaLink: "/products",
     secondaryCta: "Contact Us",
     backgroundImage:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&h=900&fit=crop",
+      "https://media.istockphoto.com/id/1752904635/photo/digital-battery-hologram-on-future-tech-background-innovations-and-efficiency-of-power-supply.jpg?s=612x612&w=0&k=20&c=6kJaASlCqmN0ikGBmImFuXkmpFqcgvEreSA3M3qZM8s=",
     gradient: "from-emerald-600 to-teal-500",
     gradientLight: "from-emerald-500 to-teal-400",
     stats: [
@@ -1697,7 +1698,7 @@ const sliderContent = [
     ctaLink: "/products",
     secondaryCta: "Contact Us",
     backgroundImage:
-      "https://images.unsplash.com/photo-1563770660941-20978e870e26?w=1600&h=900&fit=crop",
+      "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1920&auto=format&fit=crop",
     gradient: "from-purple-600 to-pink-500",
     gradientLight: "from-purple-500 to-pink-400",
     stats: [
@@ -1717,7 +1718,7 @@ const sliderContent = [
     ctaLink: "/about",
     secondaryCta: "Contact Us",
     backgroundImage:
-      "https://images.unsplash.com/photo-1587845323226-bad89242c735?w=1600&h=900&fit=crop",
+      "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1600&auto=format&fit=crop",
     gradient: "from-orange-600 to-red-500",
     gradientLight: "from-orange-500 to-red-400",
     stats: [
@@ -2047,9 +2048,9 @@ export function Hero() {
       {/* Main Content */}
       <div
         ref={contentRef}
-        className="relative z-10 container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl py-16 md:py-20"
+        className="relative z-10 container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl  py-16 md:py-20"
       >
-        <div className="content-wrapper max-w-3xl">
+        <div className="content-wrapper max-w-5xl">
           {/* Badge */}
           <div className="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-lg mb-6">
             <Sparkles className="w-4 h-4 text-yellow-300 animate-pulse" />
@@ -2059,17 +2060,17 @@ export function Hero() {
           </div>
 
           {/* Title */}
-          <h1 className="hero-title text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-6 leading-[1.2] tracking-tight">
+          <h1 className="hero-title text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-5 leading-[1.2] tracking-tight">
             {currentSlide.title}
           </h1>
 
           {/* Subtitle */}
-          <p className="hero-subtitle text-lg md:text-xl text-white/80 mb-6 max-w-2xl leading-relaxed">
+          <p className="hero-subtitle text-md md:text-xl text-white/80 mb-6 max-w-2xl leading-relaxed">
             {currentSlide.subtitle}
           </p>
 
           {/* Feature Tags */}
-          <div className="flex flex-wrap gap-2 mb-8">
+          {/* <div className="flex flex-wrap gap-2 mb-6">
             {currentSlide.features.map((feature, idx) => (
               <span
                 key={idx}
@@ -2078,13 +2079,13 @@ export function Hero() {
                 {feature}
               </span>
             ))}
-          </div>
+          </div> */}
 
           {/* CTA Buttons */}
           <div className="hero-cta flex flex-col sm:flex-row gap-4">
             <Button
               asChild
-              className={`bg-gradient-to-r ${currentSlide.gradient} hover:opacity-90 text-white font-semibold py-6 px-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-0.5 group`}
+              className={`bg-gradient-to-r ${currentSlide.gradient} hover:opacity-90 text-white font-semibold py-6 px-8 rounded shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-0.5 group`}
             >
               <Link href={currentSlide.ctaLink}>
                 {currentSlide.ctaText}
@@ -2093,14 +2094,14 @@ export function Hero() {
             </Button>
             <Button
               variant="outline"
-              className="border-white/30 bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white py-6 px-8 font-semibold rounded-xl shadow-sm hover:shadow-md transition-all duration-300"
+              className="border-white/30 bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white py-6 px-8 font-semibold rounded shadow-sm hover:shadow-md transition-all duration-300"
             >
               <Link href="/contact">{currentSlide.secondaryCta}</Link>
             </Button>
           </div>
 
           {/* Stats */}
-          <div className="hero-stats mt-10 flex flex-wrap items-center gap-4 sm:gap-6 text-sm">
+          {/* <div className="hero-stats mt-10 flex flex-wrap items-center gap-4 sm:gap-6 text-sm">
             {currentSlide.stats.map((stat, idx) => {
               const IconComponent = stat.icon;
               return (
@@ -2120,7 +2121,7 @@ export function Hero() {
                 </div>
               );
             })}
-          </div>
+          </div> */}
         </div>
       </div>
 

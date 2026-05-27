@@ -227,7 +227,7 @@ const productsData: Record<string, any> = {
       "Multiple channel options available",
     ],
     image:
-      "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop",
+      "https://www.electronics-lab.com/wp-content/uploads/2023/05/003-7.jpg",
     icon: Radio,
     gradient: "from-cyan-500 to-blue-500",
     lightGradient: "from-cyan-50 to-blue-50",
@@ -278,7 +278,7 @@ const productsData: Record<string, any> = {
       "Automotive qualified option available",
     ],
     image:
-      "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=800&h=600&fit=crop",
+      "https://core-electronics.com.au/media/catalog/product/cache/d5cf359726a1656c2b36f3682d3bbc67/P/O/POLOLU-5389-2.jpg",
     icon: Shield,
     gradient: "from-lime-500 to-emerald-500",
     lightGradient: "from-lime-50 to-emerald-50",

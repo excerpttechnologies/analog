@@ -1,13 +1,20 @@
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
-import Link from 'next/link';
-import { ArrowRight, Sparkles, Rocket, Zap, Shield, TrendingUp } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useEffect, useRef } from "react";
+import Link from "next/link";
+import {
+  ArrowRight,
+  Sparkles,
+  Rocket,
+  Zap,
+  Shield,
+  TrendingUp,
+} from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 // Register ScrollTrigger
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
@@ -22,55 +29,56 @@ export function CTASection() {
 
     const ctx = gsap.context(() => {
       // Main content animation
-      gsap.fromTo(contentRef.current,
-        { 
-          opacity: 0, 
+      gsap.fromTo(
+        contentRef.current,
+        {
+          opacity: 0,
           y: 50,
           scale: 0.9,
-          filter: 'blur(10px)'
+          filter: "blur(10px)",
         },
         {
           opacity: 1,
           y: 0,
           scale: 1,
-          filter: 'blur(0px)',
+          filter: "blur(0px)",
           duration: 1.2,
-          ease: 'back.out(0.4)',
+          ease: "back.out(0.4)",
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 80%',
-            toggleActions: 'play none none reverse',
+            start: "top 80%",
+            toggleActions: "play none none reverse",
           },
-        }
+        },
       );
 
       // Button hover animation (GSAP powered)
       if (buttonRef.current) {
-        buttonRef.current.addEventListener('mouseenter', () => {
+        buttonRef.current.addEventListener("mouseenter", () => {
           gsap.to(buttonRef.current, {
             scale: 1.05,
-            boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
+            boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
             duration: 0.3,
-            ease: 'power2.out',
+            ease: "power2.out",
           });
-          gsap.to(buttonRef.current.querySelector('.button-icon'), {
+          gsap.to(buttonRef.current.querySelector(".button-icon"), {
             x: 5,
             duration: 0.3,
-            ease: 'power2.out',
+            ease: "power2.out",
           });
         });
 
-        buttonRef.current.addEventListener('mouseleave', () => {
+        buttonRef.current.addEventListener("mouseleave", () => {
           gsap.to(buttonRef.current, {
             scale: 1,
-            boxShadow: '0 10px 20px rgba(0,0,0,0.1)',
+            boxShadow: "0 10px 20px rgba(0,0,0,0.1)",
             duration: 0.3,
-            ease: 'power2.out',
+            ease: "power2.out",
           });
-          gsap.to(buttonRef.current.querySelector('.button-icon'), {
+          gsap.to(buttonRef.current.querySelector(".button-icon"), {
             x: 0,
             duration: 0.3,
-            ease: 'power2.out',
+            ease: "power2.out",
           });
         });
       }
@@ -78,7 +86,7 @@ export function CTASection() {
       // Floating icons animation
       floatingIconsRef.current.forEach((icon, index) => {
         if (!icon) return;
-        
+
         gsap.to(icon, {
           y: -20,
           x: index % 2 === 0 ? 15 : -15,
@@ -86,21 +94,20 @@ export function CTASection() {
           duration: 3 + index,
           repeat: -1,
           yoyo: true,
-          ease: 'sine.inOut',
+          ease: "sine.inOut",
           delay: index * 0.5,
         });
       });
 
       // Background pulse animation
-      gsap.to('.bg-pulse', {
+      gsap.to(".bg-pulse", {
         scale: 1.1,
         opacity: 0.5,
         duration: 4,
         repeat: -1,
         yoyo: true,
-        ease: 'sine.inOut',
+        ease: "sine.inOut",
       });
-
     }, sectionRef);
 
     return () => ctx.revert();
@@ -115,7 +122,7 @@ export function CTASection() {
       <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500">
         {/* Animated pulse effect */}
         <div className="bg-pulse absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-400 opacity-0" />
-        
+
         {/* Animated particles */}
         <div className="absolute inset-0 overflow-hidden">
           {[...Array(30)].map((_, i) => (
@@ -133,11 +140,11 @@ export function CTASection() {
         </div>
 
         {/* Grid pattern overlay */}
-        <div 
+        <div
           className="absolute inset-0 opacity-10"
           style={{
             backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 1px)`,
-            backgroundSize: '40px 40px',
+            backgroundSize: "40px 40px",
           }}
         />
       </div>
@@ -145,18 +152,20 @@ export function CTASection() {
       {/* Floating Icons */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {[
-          { icon: Sparkles, top: '10%', left: '10%', size: 40 },
-          { icon: Rocket, top: '20%', right: '15%', size: 35 },
-          { icon: Zap, bottom: '25%', left: '15%', size: 45 },
-          { icon: Shield, bottom: '15%', right: '10%', size: 38 },
-          { icon: TrendingUp, top: '70%', left: '20%', size: 30 },
-          { icon: Sparkles, top: '80%', right: '20%', size: 32 },
+          { icon: Sparkles, top: "10%", left: "10%", size: 40 },
+          { icon: Rocket, top: "20%", right: "15%", size: 35 },
+          { icon: Zap, bottom: "25%", left: "15%", size: 45 },
+          { icon: Shield, bottom: "15%", right: "10%", size: 38 },
+          { icon: TrendingUp, top: "70%", left: "20%", size: 30 },
+          { icon: Sparkles, top: "80%", right: "20%", size: 32 },
         ].map((item, idx) => {
           const IconComponent = item.icon;
           return (
             <div
               key={idx}
-              ref={(el) => { floatingIconsRef.current[idx] = el; }}
+              ref={(el) => {
+                floatingIconsRef.current[idx] = el;
+              }}
               className="absolute text-white/10"
               style={{
                 top: item.top,
@@ -186,7 +195,7 @@ export function CTASection() {
 
         {/* Main Title */}
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-          Ready to Power{' '}
+          Ready to Power{" "}
           <span className="relative inline-block">
             Your Next Design?
             <svg
@@ -216,7 +225,9 @@ export function CTASection() {
 
         {/* Description */}
         <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed">
-          Partner with us for high-performance power management ICs — Boost, Buck, LDO, LED Drivers, and Protection solutions built for modern electronic systems.
+          Partner with us for high-performance power management ICs — Boost,
+          Buck, LDO, LED Drivers, and Protection solutions built for modern
+          electronic systems.
         </p>
 
         {/* Statistics */}
@@ -239,19 +250,20 @@ export function CTASection() {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button
-            ref={buttonRef}
+          <Link
+            href={"/products"}
+            // ref={buttonRef}
             className="group relative px-8 py-4 rounded-xl bg-white text-blue-600 font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden"
           >
             <span className="relative z-10 flex items-center gap-2">
               Explore Products
               <ArrowRight className="button-icon w-5 h-5 transition-transform duration-300" />
             </span>
-            
+
             {/* Animated background on hover */}
             <div className="absolute inset-0 bg-gradient-to-r from-slate-100 to-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-          </button>
-          
+          </Link>
+
           <Link
             href="/contact"
             className="px-8 py-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/30 text-white font-semibold text-lg hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-2 group"
@@ -281,7 +293,8 @@ export function CTASection() {
       {/* CSS Animations */}
       <style jsx>{`
         @keyframes float-particle {
-          0%, 100% {
+          0%,
+          100% {
             transform: translateY(0px) translateX(0px);
             opacity: 0;
           }
