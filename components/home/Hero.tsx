@@ -1656,8 +1656,7 @@ const sliderContent = [
     ctaText: "Explore Products",
     ctaLink: "/products",
     secondaryCta: "Contact Us",
-    backgroundImage:
-      "https://png.pngtree.com/thumb_back/fh260/background/20230722/pngtree-symbolic-code-fragment-illuminates-computer-screen-embodying-coding-and-programming-3d-image_3785571.jpg",
+    backgroundImage: "/images/slider1.jpg",
     // backgroundImage: "/images/banner.png",
     gradient: "from-blue-600 to-cyan-500",
     gradientLight: "from-blue-500 to-cyan-400",

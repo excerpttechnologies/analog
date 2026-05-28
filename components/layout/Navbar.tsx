@@ -5536,6 +5536,8 @@ import {
   Building,
   ChevronDown,
   Sparkles,
+  Globe,
+  TrendingUp,
 } from "lucide-react";
 import gsap from "gsap";
 
@@ -5557,7 +5559,7 @@ interface NavItem {
 // Theme color
 const THEME_COLOR = "#0393D3";
 
-// Navigation Data
+// Complete Navigation Data
 const navigationData: NavItem[] = [
   { label: "Home", href: "/", icon: Home },
   {
@@ -5620,6 +5622,8 @@ const navigationData: NavItem[] = [
       },
     ],
   },
+  { label: "Market", href: "/market", icon: Globe },
+  { label: "Technology", href: "/technology", icon: TrendingUp },
   { label: "Contact Us", href: "/contact", icon: Mail },
 ];
 
@@ -5846,7 +5850,7 @@ export function Navbar() {
     return false;
   };
 
-  const logoSrc = "/images/analog.png";
+  const logoSrc = "/images/analog2.png";
 
   return (
     <div className="pt-16">
@@ -5855,7 +5859,7 @@ export function Navbar() {
         className={`fixed top-0 w-full z-50 transition-all duration-500 ${
           scrolled
             ? "bg-white/95 backdrop-blur-md shadow-lg"
-            : "bg-white/80 backdrop-blur-sm"
+            : "bg-white backdrop-blur-sm"
         }`}
       >
         <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
@@ -5863,14 +5867,14 @@ export function Navbar() {
             {/* Logo - Larger size, transparent background */}
             <Link href="/" className="group flex items-center shrink-0">
               <div className="relative">
-                <div className="relative w-32  h-32 lg:w-40 lg:h-40 flex items-center justify-center">
+                <div className="relative w-32 h-32 lg:w-40 lg:h-40 flex items-center justify-center">
                   {!logoError ? (
                     <Image
                       src={logoSrc}
                       alt="AnalogChips Logo"
                       width={160}
                       height={160}
-                      className="object-contain mt-3"
+                      className="object-contain mt-2"
                       onError={() => setLogoError(true)}
                       unoptimized
                       priority
@@ -5884,8 +5888,8 @@ export function Navbar() {
               </div>
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-2">
+            {/* Desktop Navigation - All items */}
+            <div className="hidden md:flex items-center gap-1">
               {navigationData.map((item, index) => {
                 const active = item.href
                   ? isActive(item.href)
