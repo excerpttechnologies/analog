@@ -500,6 +500,7 @@ const features = [
     iconColor: "text-blue-600",
     color: "blue",
     metric: "Battery Operated",
+    link: "boost-converter",
     badge: "NEW",
   },
   {
@@ -512,6 +513,7 @@ const features = [
     iconColor: "text-purple-600",
     color: "purple",
     metric: "High Vin",
+    link: "buck-regulator",
     badge: "POWER",
   },
   {
@@ -524,6 +526,7 @@ const features = [
     iconColor: "text-emerald-600",
     color: "emerald",
     metric: "Ultra LDO",
+    link: "ldo-regulator",
     badge: "LINEAR",
   },
   {
@@ -536,6 +539,7 @@ const features = [
     iconColor: "text-cyan-600",
     color: "cyan",
     metric: "Smart Lighting",
+    link: "led-driver",
     badge: "LED",
   },
   {
@@ -548,6 +552,7 @@ const features = [
     iconColor: "text-lime-600",
     color: "lime",
     metric: "BMS Ready",
+    link: "ideal-diode-controller",
     badge: "PROTECT",
   },
   {
@@ -560,13 +565,14 @@ const features = [
     iconColor: "text-violet-600",
     color: "violet",
     metric: "N-Channel",
+    link: "load-switch",
     badge: "SWITCH",
   },
 ];
 
 const stats = [
-  { value: "500+", label: "Enterprise Clients", change: "+28%", icon: Users },
-  { value: "50+", label: "Global Patents", change: "+12", icon: Award },
+  { value: "200+", label: "Enterprise Clients", change: "+28%", icon: Users },
+  { value: "30+", label: "Global Patents", change: "+12", icon: Award },
   {
     value: "99.999%",
     label: "Uptime SLA",
@@ -688,7 +694,7 @@ export function Features() {
         />
       </div>
 
-      <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-6xl">
+      <div className="container mx-auto pt-5  px-4 md:px-6 lg:px-8 max-w-6xl">
         {/* Header - Minimal & Clean */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 mb-4">
@@ -719,7 +725,8 @@ export function Features() {
             const isHovered = hoveredIndex === idx;
 
             return (
-              <div
+              <Link
+                href={`/products/${feature.link}`}
                 key={idx}
                 className="feature-card-new group cursor-pointer"
                 onMouseEnter={() => setHoveredIndex(idx)}
@@ -759,11 +766,11 @@ export function Features() {
                   {/* Metric */}
                   <div className="flex items-center justify-between pt-3 border-t border-slate-50">
                     <span className="text-xs text-slate-400">Performance</span>
-                    <span
+                    {/* <span
                       className={`text-sm font-mono font-semibold text-${feature.color}-600`}
                     >
                       {feature.metric}
-                    </span>
+                    </span> */}
                   </div>
 
                   {/* Hover Arrow */}
@@ -775,7 +782,7 @@ export function Features() {
                     />
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
@@ -838,7 +845,7 @@ export function Features() {
         </div> */}
 
         {/* Simple CTA */}
-        <div className="text-center">
+        {/* <div className="text-center">
           <div className="inline-flex items-center gap-3">
             <Link
               href={"/products"}
@@ -854,7 +861,7 @@ export function Features() {
               <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
             </Link>
           </div>
-        </div>
+        </div> */}
 
         {/* Floating Decorations */}
         <div className="absolute top-20 right-20 float-decoration opacity-30 pointer-events-none hidden lg:block">

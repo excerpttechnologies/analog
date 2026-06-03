@@ -27,6 +27,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { ProcessTimelineSection } from "@/components/home/ProcessTimelineSection";
 
 // Register ScrollTrigger
 if (typeof window !== "undefined") {
@@ -39,7 +40,7 @@ const products = [
     id: "boost-converter",
     name: "Boost Converter",
     fullName: "Boost Converter for Battery Operated Systems",
-    category: "Voltage Conversion",
+    category: "Switching Regulators",
     description:
       "A compact Boost converter device for efficient voltage regulation in portable electronics.",
     longDescription:
@@ -57,8 +58,7 @@ const products = [
       "Portable Electronics",
       "Wearables",
     ],
-    image:
-      "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=800&h=600&fit=crop",
+    image: "/images/boost.jfif",
     icon: Battery,
     gradient: "from-blue-500 to-cyan-500",
     lightGradient: "from-blue-50 to-cyan-50",
@@ -74,7 +74,7 @@ const products = [
     id: "buck-regulator",
     name: "Buck Regulator",
     fullName: "High Input Voltage Tolerant Buck Regulator",
-    category: "Voltage Conversion",
+    category: "Switching Regulators",
     description:
       "A highly integrated buck regulator aimed at simplifying power conversion in modern electronic systems.",
     longDescription:
@@ -92,8 +92,7 @@ const products = [
       "General-Purpose Electronics",
       "Industrial Systems",
     ],
-    image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=600&fit=crop",
+    image: "/images/buck.jfif",
     icon: Zap,
     gradient: "from-emerald-500 to-teal-500",
     lightGradient: "from-emerald-50 to-teal-50",
@@ -127,8 +126,7 @@ const products = [
       "Everyday Electronics",
       "IoT Modules",
     ],
-    image:
-      "https://images.unsplash.com/photo-1563770660941-20978e870e26?w=800&h=600&fit=crop",
+    image: "/images/ldo.jfif",
     icon: Radio,
     gradient: "from-purple-500 to-pink-500",
     lightGradient: "from-purple-50 to-pink-50",
@@ -162,8 +160,7 @@ const products = [
       "Decorative Lighting",
       "Smart Lighting",
     ],
-    image:
-      "https://www.electronics-lab.com/wp-content/uploads/2023/05/003-7.jpg",
+    image: "/images/led.jfif",
     icon: Layers,
     gradient: "from-orange-500 to-amber-500",
     lightGradient: "from-orange-50 to-amber-50",
@@ -197,8 +194,7 @@ const products = [
       "Industrial Equipment",
       "Battery Management Systems",
     ],
-    image:
-      "https://core-electronics.com.au/media/catalog/product/cache/d5cf359726a1656c2b36f3682d3bbc67/P/O/POLOLU-5389-2.jpg",
+    image: "/images/ideal.jfif",
     icon: GitBranch,
     gradient: "from-red-500 to-rose-500",
     lightGradient: "from-red-50 to-rose-50",
@@ -232,8 +228,7 @@ const products = [
       "Power Distribution",
       "System Protection",
     ],
-    image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=600&fit=crop",
+    image: "/images/load.jfif",
     icon: Wifi,
     gradient: "from-indigo-500 to-purple-500",
     lightGradient: "from-indigo-50 to-purple-50",
@@ -250,7 +245,7 @@ const products = [
 // Requirement-based categories only
 const categories = [
   "All",
-  "Voltage Conversion",
+  "Switching Regulators",
   "Linear Regulators",
   "Lighting Solutions",
   "Protection & Control",
@@ -352,8 +347,9 @@ export default function ProductsPage() {
             </h1>
 
             <p className="text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-              Comprehensive power management and analog semiconductor solutions
-              for modern electronic systems.
+              Comprehensive Analog IPs and Products including Power management,
+              Data Converters, Clocking Solutions and Interface Circuits for
+              modern electronic Systems and Solutions.
             </p>
           </div>
         </section>
@@ -409,11 +405,11 @@ export default function ProductsPage() {
                     onMouseLeave={() => handleCardHover(index, false)}
                   >
                     <div
-                      className={`absolute inset-0 bg-gradient-to-r ${product.gradient} rounded-2xl blur-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-500`}
+                      className={`absolute inset-0 bg-gradient-to-r ${product.gradient} rounded-xl blur-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-500`}
                     />
 
                     <Card className="relative overflow-hidden bg-white border-slate-200 hover:shadow-xl transition-all duration-500 h-full flex flex-col group-hover:-translate-y-2 cursor-pointer">
-                      <div className="relative h-48 overflow-hidden">
+                      <div className="relative b h-48 overflow-hidden">
                         <Image
                           src={product.image}
                           alt={product.name}
@@ -501,7 +497,8 @@ export default function ProductsPage() {
                 </p>
               </div>
             )}
-
+            <br />
+            <ProcessTimelineSection />
             {/* Requirement-aligned CTA Section */}
             <div className="mt-20 pt-12 border-t border-slate-200">
               <div className="bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-8 md:p-12 text-center">

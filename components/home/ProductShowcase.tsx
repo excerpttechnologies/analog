@@ -32,8 +32,7 @@ const products = [
     longDescription:
       "A compact Boost converter device for efficient voltage regulation in portable electronics. Optimized for stable performance in space-constrained applications. Used in consumer gadgets and IoT devices for reliable power delivery.",
     icon: Cpu,
-    image:
-      "https://images.unsplash.com/photo-1744368191937-8fe5fde474a8?w=800&h=600&fit=crop",
+    image: "/images/boost.jfif",
     gradient: "from-blue-500 to-cyan-500",
     gradientLight: "from-blue-50 to-cyan-50",
     specs: ["Battery Operated", "Compact", "IoT Ready"],
@@ -48,8 +47,7 @@ const products = [
     longDescription:
       "A highly integrated buck regulator aimed at simplifying power conversion in modern electronic systems. Designed to reduce component count and streamline board design. Used in computing (DPA systems), networking, and general-purpose electronic systems.",
     icon: Gauge,
-    image:
-      "https://images.unsplash.com/photo-1760842543741-876d7837fa0b?w=800&h=600&fit=crop",
+    image: "/images/buck.jfif",
     gradient: "from-purple-500 to-pink-500",
     gradientLight: "from-purple-50 to-pink-50",
     specs: ["High Vin", "Low BOM", "DPA Systems"],
@@ -64,8 +62,7 @@ const products = [
     longDescription:
       "A versatile linear regulator device intended for dependable power control in everyday electronic products. Focuses on ease of use and broad compatibility across applications. Suitable for consumer electronics and embedded system designs.",
     icon: Microchip,
-    image:
-      "https://images.unsplash.com/photo-1765256931287-e7f0e36b9ba4?w=800&h=600&fit=crop",
+    image: "/images/ldo.jfif",
     gradient: "from-emerald-500 to-teal-500",
     gradientLight: "from-emerald-50 to-teal-50",
     specs: ["Ultra LDO", "High Vin", "Broad Compat."],
@@ -80,8 +77,7 @@ const products = [
     longDescription:
       "A dedicated linear LED driver solution for lighting applications focusing on ease-of-use and very low BOM count. Provides consistent illumination control for energy-efficient lighting designs. Ideal for commercial, industrial, and decorative lighting systems.",
     icon: Zap,
-    image:
-      "https://images.unsplash.com/photo-1766596796538-75b67ff9109c?w=800&h=600&fit=crop",
+    image: "/images/led.jfif",
     gradient: "from-orange-500 to-amber-500",
     gradientLight: "from-orange-50 to-amber-50",
     specs: ["Low BOM", "High Vin", "Smart Lighting"],
@@ -96,8 +92,7 @@ const products = [
     longDescription:
       "Designed to deliver robust power handling for battery management systems (BMS). Enhances system reliability through efficient load management. Used in applications such as computing infrastructure, automotive, and industrial equipment.",
     icon: Bot,
-    image:
-      "https://images.unsplash.com/photo-1763372278600-fd0b0997a7b8?w=800&h=600&fit=crop",
+    image: "/images/ideal.jfif",
     gradient: "from-indigo-500 to-purple-500",
     gradientLight: "from-indigo-50 to-purple-50",
     specs: ["BMS Compatible", "High Input V", "Automotive Ready"],
@@ -112,8 +107,7 @@ const products = [
     longDescription:
       "A protection-oriented device that helps safeguard electronic systems during operation. Enables controlled power distribution and improved system safety. Commonly implemented in USB-powered and portable device applications.",
     icon: Target,
-    image:
-      "https://images.unsplash.com/photo-1758549885116-c8bd6bc619e8?w=800&h=600&fit=crop",
+    image: "/images/load.jfif",
     gradient: "from-rose-500 to-orange-500",
     gradientLight: "from-rose-50 to-orange-50",
     specs: ["N-Channel", "USB Ready", "System Safety"],
@@ -346,7 +340,7 @@ export function ProductShowcase() {
 
       <div className="container  mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
         {/* Header Section */}
-        <div ref={titleRef} className="text-center mb-16 md:mb-20">
+        {/* <div ref={titleRef} className="text-center mb-16 md:mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200/50 shadow-sm mb-6">
             <Sparkles className="w-4 h-4 text-blue-600" />
             <span className="text-sm font-semibold bg-gradient-to-r from-blue-700 to-cyan-700 bg-clip-text text-transparent">
@@ -365,7 +359,7 @@ export function ProductShowcase() {
             converters, LDO regulators, LED drivers, and protection & control
             ICs for modern electronic systems.
           </p>
-        </div>
+        </div> */}
       </div>
 
       {/* Marquee Row 1 - Left to Right */}

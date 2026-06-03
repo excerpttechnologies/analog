@@ -18,10 +18,11 @@ import {
 const processSteps = [
   {
     id: 0,
-    name: "Research",
+    name: "Feasibility",
     icon: Microscope,
-    description:
-      "Market analysis, feasibility study, and specification definition to lay the groundwork for innovation.",
+    // description:
+    //   "Market analysis, feasibility study, and specification definition.",
+    description: "",
     duration: "4–6 weeks",
     phase: "Phase 01",
     accentLight: "#3B82F6",
@@ -37,10 +38,9 @@ const processSteps = [
   },
   {
     id: 1,
-    name: "Architecture",
+    name: "IP / Product Design",
     icon: Cpu,
-    description:
-      "Block diagram design, component selection, and simulation to build the blueprint of your silicon.",
+    description: "",
     duration: "6–8 weeks",
     phase: "Phase 02",
     accentLight: "#8B5CF6",
@@ -48,14 +48,18 @@ const processSteps = [
     bg: "from-indigo-500/10 to-purple-500/5",
     border: "border-indigo-500/30",
     glow: "shadow-indigo-500/20",
-    details: ["Circuit design", "Layout planning", "Thermal analysis"],
+    details: [
+      "Architecture",
+      "Circuit Design",
+      "Layout Design",
+      "Package Design",
+    ],
   },
   {
     id: 2,
     name: "Fabrication",
     icon: CircuitBoard,
-    description:
-      "Mask generation, wafer processing, and precision manufacturing at nanoscale dimensions.",
+    description: "",
     duration: "12–16 weeks",
     phase: "Phase 03",
     accentLight: "#EC4899",
@@ -63,14 +67,18 @@ const processSteps = [
     bg: "from-purple-500/10 to-pink-500/5",
     border: "border-purple-500/30",
     glow: "shadow-purple-500/20",
-    details: ["Photolithography", "Etching & deposition", "Wafer sort"],
+    details: [
+      "Foundry Partnering",
+      "Packaging Partnering",
+
+      "Assembly Partnering",
+    ],
   },
   {
     id: 3,
     name: "Testing",
     icon: TestTube,
-    description:
-      "Functional validation, parametric testing, and reliability verification across environmental extremes.",
+    description: "",
     duration: "4–8 weeks",
     phase: "Phase 04",
     accentLight: "#F97316",
@@ -78,14 +86,19 @@ const processSteps = [
     bg: "from-orange-500/10 to-red-500/5",
     border: "border-orange-500/30",
     glow: "shadow-orange-500/20",
-    details: ["ATE testing", "Temperature cycling", "Burn-in"],
+    details: [
+      "Wafer Sorting",
+      "Board Bringup",
+      "Bench Level Testing",
+      "ATE Testing",
+      "Qualification Testing",
+    ],
   },
   {
     id: 4,
     name: "Deployment",
     icon: Rocket,
-    description:
-      "Production ramp, customer qualification, and market launch to bring silicon to the world.",
+    description: "",
     duration: "4–6 weeks",
     phase: "Phase 05",
     accentLight: "#10B981",
@@ -93,7 +106,12 @@ const processSteps = [
     bg: "from-green-500/10 to-emerald-500/5",
     border: "border-green-500/30",
     glow: "shadow-green-500/20",
-    details: ["Volume production", "Quality certification", "Field support"],
+    details: [
+      "Prototype Production",
+      "Volume Production",
+      "Quality certification",
+      "Field support",
+    ],
   },
 ];
 
@@ -305,7 +323,7 @@ export function ProcessTimelineSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative font-['Instrument_Sans',sans-serif] overflow-hidden bg-slate-950 py-28"
+      className="relative font-['Instrument_Sans',sans-serif] rounded-xl overflow-hidden bg-slate-950 py-20"
     >
       {/* ── Background ── */}
       <GridPattern />
@@ -332,24 +350,9 @@ export function ProcessTimelineSection() {
             transition: "opacity 0.7s ease, transform 0.7s ease",
           }}
         >
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-800/60 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-slate-300 backdrop-blur-sm">
-            <CircuitBoard className="h-3.5 w-3.5 text-blue-400" />
-            Our process
-            <ChevronRight className="h-3 w-3 text-slate-500" />
-          </div>
-
           <h2 className="mb-4 text-4xl font-bold leading-tight tracking-tight text-white md:text-5xl lg:text-6xl">
             {/* Semiconductor{" "} */}
-            <span
-              className="bg-clip-text text-transparent"
-              style={{
-                backgroundImage: `linear-gradient(135deg, ${step.accentLight}, #818CF8)`,
-                transition: "background-image 0.5s ease",
-              }}
-            >
-              Development
-            </span>{" "}
-            Timeline
+            Development Timeline
           </h2>
           <p className="mx-auto max-w-2xl text-base leading-relaxed text-slate-400 md:text-lg">
             From concept to silicon — a meticulously engineered process ensuring
@@ -416,16 +419,6 @@ export function ProcessTimelineSection() {
                   style={{ color: step.accentLight }}
                 >
                   {step.phase}
-                </span>
-                <span
-                  className="rounded-full px-3 py-0.5 text-xs font-medium"
-                  style={{
-                    background: `${step.accentLight}18`,
-                    color: step.accentLight,
-                    border: `1px solid ${step.accentLight}30`,
-                  }}
-                >
-                  {step.duration}
                 </span>
               </div>
 

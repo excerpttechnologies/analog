@@ -107,11 +107,10 @@ export default function AboutPage() {
           {
             opacity: 1,
             y: 0,
-            duration: 0.6,
-            delay: index * 0.1,
+            duration: 0.4,
             scrollTrigger: {
               trigger: ref.current,
-              start: "top 85%",
+              start: "top 90%",
               toggleActions: "play none none reverse",
             },
           },
@@ -181,7 +180,7 @@ export default function AboutPage() {
               </div>
               <div className="relative rounded-2xl overflow-hidden shadow-xl">
                 <Image
-                  src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=600&fit=crop"
+                  src="/images/about-analog.jfif"
                   alt="AnalogChips Office"
                   width={600}
                   height={400}
@@ -262,7 +261,7 @@ export default function AboutPage() {
             <div className="grid md:grid-cols-2 gap-8">
               <div className="rounded-2xl overflow-hidden shadow-lg">
                 <Image
-                  src="https://www.gasworld.com/wp-content/files/gwml/semiconductor_494012.jpg"
+                  src="/images/semiconductor.jpg"
                   alt="Semiconductor innovation"
                   width={600}
                   height={400}
@@ -297,7 +296,7 @@ export default function AboutPage() {
         </section>
 
         {/* Product Categories */}
-        <section
+        {/* <section
           ref={productsRef}
           className="py-20 bg-slate-50 opacity-0 translate-y-8 transition-all duration-700"
         >
@@ -339,7 +338,7 @@ export default function AboutPage() {
               })}
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* India Semiconductor Mission Section */}
         <section className="py-20 bg-gradient-to-r from-cyan-600 to-blue-600">

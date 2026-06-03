@@ -33,8 +33,7 @@ const cards = [
     longDescription:
       "We are a fabless semiconductor company focused on designing high-performance power management solutions for modern electronic systems. Our portfolio addresses the growing demand for efficient, compact, and reliable power delivery across a wide range of applications. We provide a focused portfolio of power devices: Voltage Conversion (Boost, Buck), Linear Regulators (LDO), Lighting Solutions (LED Drivers), and Protection & Control (Diode Controllers, Load Switches).",
     icon: Award,
-    image:
-      "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=800&h=600&fit=crop",
+    image: "/images/company.jfif",
     gradient: "from-blue-500 to-cyan-500",
     lightGradient: "from-blue-50 to-cyan-50",
     stats: "Fabless Design",
@@ -51,8 +50,7 @@ const cards = [
     longDescription:
       "We are dedicated to enriching the India Semiconductor Mission's (ISM) objective by successfully deploying Indian-owned Analog IPs for both domestic and overseas markets. As a fabless semiconductor company, we focus on designing high-performance power management solutions for modern electronic systems. Our portfolio addresses the growing demand for efficient, compact, and reliable power delivery across a wide range of applications — from IoT devices and consumer electronics to automotive and industrial systems.",
     icon: Target,
-    image:
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop",
+    image: "/images/mission.jfif",
     gradient: "from-emerald-500 to-teal-500",
     lightGradient: "from-emerald-50 to-teal-50",
     stats: "ISM Aligned",
@@ -65,12 +63,11 @@ const cards = [
     title: "Our Vision",
     subtitle: "Where We're Headed",
     description:
-      "\"Make in India\" by \"Design in India\" — championing indigenous semiconductor innovation for the world.",
+      '"Make in India" by "Design in India" — championing indigenous semiconductor innovation for the world.',
     longDescription:
-      "Our vision is to lead the \"Make in India\" movement through the power of \"Design in India.\" We are committed to building world-class analog IP that originates from Indian engineering talent and serves global markets. By developing Indian-owned semiconductor intellectual property, we aim to establish India as a credible, high-quality source of analog design excellence on the global stage.",
+      'Our vision is to lead the "Make in India" movement through the power of "Design in India." We are committed to building world-class analog IP that originates from Indian engineering talent and serves global markets. By developing Indian-owned semiconductor intellectual property, we aim to establish India as a credible, high-quality source of analog design excellence on the global stage.',
     icon: Microscope,
-    image:
-      "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=800&h=600&fit=crop",
+    image: "/images/vision.jfif",
     gradient: "from-purple-500 to-pink-500",
     lightGradient: "from-purple-50 to-pink-50",
     stats: "Make in India",
@@ -87,32 +84,13 @@ const cards = [
     longDescription:
       "Since our founding in 2015, we've successfully launched over 200 distinct analog products, serving more than 500 customers across 40 countries. Our executive team brings experience from industry giants, having collectively led over 1,000 successful tape-outs throughout their careers. This deep domain knowledge allows us to anticipate market needs, avoid common pitfalls, and deliver first-pass silicon success for complex analog designs. Our cumulative industry experience exceeds 500 years across the organization.",
     icon: Clock,
-    image:
-      "https://img.magnific.com/free-photo/businessman-big-office_53876-144319.jpg?semt=ais_hybrid&w=740&q=80",
+    image: "/images/experience.avif",
     gradient: "from-orange-500 to-red-500",
     lightGradient: "from-orange-50 to-red-50",
     stats: "9+ Years",
     metric: "500+ Years",
     layout: "right",
     color: "orange",
-  },
-  {
-    id: 5,
-    title: "AI + Analog Solutions",
-    subtitle: "Future-Ready Technology",
-    description:
-      "Integrating intelligent algorithms with precision analog to create self-calibrating, adaptive, and predictive analog systems.",
-    longDescription:
-      "The future of analog is intelligent. We're pioneering the integration of on-chip machine learning capabilities that enable our analog ICs to self-calibrate in real-time, compensate for temperature and aging effects, and even predict failure modes before they occur. Our AI-enhanced data converters achieve unprecedented linearity through digital correction algorithms, while our smart power management ICs learn system load patterns to optimize efficiency dynamically. This fusion of analog expertise with artificial intelligence is creating a new generation of 'cognitive analog' solutions that adapt, learn, and perform better over time.",
-    icon: Binary,
-    image:
-      "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&h=600&fit=crop",
-    gradient: "from-indigo-500 to-violet-500",
-    lightGradient: "from-indigo-50 to-violet-50",
-    stats: "15 AI Patents",
-    metric: "40% Efficiency",
-    layout: "left",
-    color: "indigo",
   },
 ];
 

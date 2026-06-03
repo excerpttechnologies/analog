@@ -5562,48 +5562,49 @@ const THEME_COLOR = "#0393D3";
 // Complete Navigation Data
 const navigationData: NavItem[] = [
   { label: "Home", href: "/", icon: Home },
-  {
-    label: "Products",
-    icon: Package,
-    subitems: [
-      {
-        label: "Boost Converter",
-        href: "/products/boost-converter",
-        description: "Battery operated systems",
-        icon: Zap,
-      },
-      {
-        label: "Buck Regulator",
-        href: "/products/buck-regulator",
-        description: "High input voltage tolerant",
-        icon: Battery,
-      },
-      {
-        label: "LDO Regulator",
-        href: "/products/ldo-regulator",
-        description: "Ultra low dropout",
-        icon: Cpu,
-      },
-      {
-        label: "LED Driver",
-        href: "/products/led-driver",
-        description: "Linear LED driver, low BOM",
-        icon: Radio,
-      },
-      {
-        label: "Ideal Diode Controller",
-        href: "/products/ideal-diode-controller",
-        description: "High Vin tolerant",
-        icon: Shield,
-      },
-      {
-        label: "Load Switch",
-        href: "/products/load-switch",
-        description: "Single N-Channel",
-        icon: Microchip,
-      },
-    ],
-  },
+  // {
+  //   label: "Products",
+  //   icon: Package,
+  //   subitems: [
+  //     {
+  //       label: "Boost Converter",
+  //       href: "/products/boost-converter",
+  //       description: "Battery operated systems",
+  //       icon: Zap,
+  //     },
+  //     {
+  //       label: "Buck Regulator",
+  //       href: "/products/buck-regulator",
+  //       description: "High input voltage tolerant",
+  //       icon: Battery,
+  //     },
+  //     {
+  //       label: "LDO Regulator",
+  //       href: "/products/ldo-regulator",
+  //       description: "Ultra low dropout",
+  //       icon: Cpu,
+  //     },
+  //     {
+  //       label: "LED Driver",
+  //       href: "/products/led-driver",
+  //       description: "Linear LED driver, low BOM",
+  //       icon: Radio,
+  //     },
+  //     {
+  //       label: "Ideal Diode Controller",
+  //       href: "/products/ideal-diode-controller",
+  //       description: "High Vin tolerant",
+  //       icon: Shield,
+  //     },
+  //     {
+  //       label: "Load Switch",
+  //       href: "/products/load-switch",
+  //       description: "Single N-Channel",
+  //       icon: Microchip,
+  //     },
+  //   ],
+  // },
+  { label: "Products", href: "/products", icon: Home },
   {
     label: "Company",
     icon: Building,
@@ -5620,10 +5621,16 @@ const navigationData: NavItem[] = [
         description: "Meet our team",
         icon: Crown,
       },
+      {
+        label: "Careers",
+        href: "/careers",
+        description: "Join our team",
+        icon: Crown,
+      },
     ],
   },
   { label: "Market", href: "/market", icon: Globe },
-  { label: "Technology", href: "/technology", icon: TrendingUp },
+  // { label: "Technology", href: "/technology", icon: TrendingUp },
   { label: "Contact Us", href: "/contact", icon: Mail },
 ];
 
@@ -5678,13 +5685,6 @@ function SimpleDropdown({
         }`}
         aria-expanded={isOpen}
       >
-        <item.icon
-          className={`w-4 h-4 transition-all duration-300 ${
-            isActive
-              ? `text-[${THEME_COLOR}]`
-              : "text-slate-400 group-hover:text-slate-900"
-          }`}
-        />
         {item.label}
         <ChevronDown
           className={`w-3.5 h-3.5 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
@@ -5706,20 +5706,12 @@ function SimpleDropdown({
                   key={idx}
                   href={subitem.href}
                   onClick={() => setIsOpen(false)}
-                  className="flex items-center gap-3 px-4 py-2.5 hover:bg-slate-50 transition-colors group"
+                  className="flex items-center border-b border-b-gray-200 gap-3 px-4 py-2.5 hover:bg-slate-50 transition-colors group"
                 >
-                  <div className="w-7 h-7 rounded-md bg-slate-100 flex items-center justify-center group-hover:bg-[#0393D3]/10 transition-colors">
-                    <subitem.icon className="w-3.5 h-3.5 text-slate-500 group-hover:text-[#0393D3]" />
-                  </div>
                   <div className="flex-1">
                     <p className="text-sm font-medium text-slate-700 group-hover:text-[#0393D3]">
                       {subitem.label}
                     </p>
-                    {subitem.description && (
-                      <p className="text-xs text-slate-400 mt-0.5">
-                        {subitem.description}
-                      </p>
-                    )}
                   </div>
                 </Link>
               ))}
@@ -5913,13 +5905,6 @@ export function Navbar() {
                         : "text-slate-600 hover:text-slate-900"
                     }`}
                   >
-                    <item.icon
-                      className={`w-4 h-4 transition-all duration-300 ${
-                        active
-                          ? "text-[#0393D3]"
-                          : "text-slate-400 group-hover:text-slate-900"
-                      }`}
-                    />
                     {item.label}
                     {active && (
                       <motion.div

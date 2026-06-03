@@ -858,53 +858,34 @@ const DOMESTIC = [
     name: "Government Organisations",
     tag: "Indigenisation",
     icon: Shield,
-    desc: "BEL, ISRO, DRDO etc. — supporting indigenisation projects with defense and space-grade ICs.",
+    desc: "",
     longDesc:
-      "Strategic semiconductor partner for BEL, ISRO, DRDO and allied organisations under India's indigenisation drive. Our solutions cover defense electronics, radar systems, satellite telemetry, and secure communications for national security and space applications.",
+      "Strategic semiconductor partner for Defence and Space Applications under India's indigenisation drive.",
     accent: "#DC2626",
     stat: "Indigenisation",
-    items: [
-      "BEL",
-      "ISRO",
-      "DRDO",
-      "Defense Electronics",
-      "Indigenisation Projects",
-    ],
+    items: [],
   },
   {
     name: "Automotive Industries",
     tag: "OEM & Tier-1",
     icon: Car,
-    desc: "Tata Motors, Hyundai, Mahindra, Maruti, Hero Motors and more — EV & ADAS solutions.",
+    desc: "",
     longDesc:
-      "Supplying precision analog ICs to India's leading automotive OEMs including Tata Motors, Hyundai, Mahindra, Maruti, and Hero Motors. Our solutions address EV power management, ADAS sensors, battery monitoring, and in-vehicle networking.",
+      "Supplying precision analog ICs to India's leading automotive OEMs including EV power management, ADAS sensors, battery monitoring, and in-vehicle networking.",
     accent: "#2563EB",
     stat: "OEM & Tier-1",
-    items: [
-      "Tata Motors",
-      "Hyundai",
-      "Mahindra",
-      "Maruti",
-      "Hero Motors",
-      "EV & ADAS",
-    ],
+    items: [],
   },
   {
     name: "System Level Designers",
     tag: "Engineering",
     icon: Cpu,
-    desc: "L&T, Wipro, Tech Mahindra and others — embedded and mixed-signal design support.",
+    desc: "",
     longDesc:
-      "Enabling system integrators and engineering services firms such as L&T, Wipro, and Tech Mahindra with robust analog and mixed-signal ICs for industrial, embedded, and IoT system designs.",
+      "Enabling system integrators and engineering services firms with robust analog and mixed-signal ICs for industrial, embedded, and IoT system designs.",
     accent: "#7C3AED",
     stat: "Engineering",
-    items: [
-      "L&T",
-      "Wipro",
-      "Tech Mahindra",
-      "Embedded Systems",
-      "Mixed-Signal Design",
-    ],
+    items: [],
   },
   {
     name: "Home Appliances Manufacturers",
@@ -915,13 +896,7 @@ const DOMESTIC = [
       "Powering India's consumer appliance industry with energy-efficient analog solutions. Our ICs enable intelligent motor control, efficient power management, and sensor integration for washing machines, refrigerators, microwave ovens, fans, and more.",
     accent: "#059669",
     stat: "Smart Devices",
-    items: [
-      "Washing Machines",
-      "Refrigerators",
-      "Microwave Ovens",
-      "Fans",
-      "Motor Control",
-    ],
+    items: [],
   },
   {
     name: "EV & Lighting Industries",
@@ -932,13 +907,7 @@ const DOMESTIC = [
       "Providing semiconductor solutions for the rapidly growing EV charging infrastructure and smart lighting sectors. Our ICs support efficient power conversion, battery management, and LED driver applications.",
     accent: "#EA580C",
     stat: "Energy",
-    items: [
-      "EV Charging",
-      "Battery Management",
-      "LED Drivers",
-      "Smart Lighting",
-      "Power Conversion",
-    ],
+    items: [],
   },
   {
     name: "Plug-in Replacement",
@@ -949,12 +918,7 @@ const DOMESTIC = [
       "Offering pin-compatible, performance-matched alternatives to MNC analog IPs and devices used in domestic electronic designs. Our plug-in replacements enable seamless migration, supply chain resilience, and cost optimisation.",
     accent: "#0891B2",
     stat: "MNC Analog IPs",
-    items: [
-      "Pin-Compatible",
-      "Performance-Matched",
-      "Supply Chain Resilience",
-      "Cost Optimisation",
-    ],
+    items: [],
   },
 ];
 
@@ -1159,7 +1123,7 @@ function MarketCard({
       {/* Header row */}
       <div className="flex items-center gap-4 p-5">
         {/* Icon */}
-        <div
+        {/* <div
           className="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center"
           style={{
             background: `${item.accent}10`,
@@ -1167,7 +1131,7 @@ function MarketCard({
           }}
         >
           <Icon size={22} color={item.accent} />
-        </div>
+        </div> */}
 
         {/* Text */}
         <div className="flex-1 min-w-0">
@@ -1399,21 +1363,12 @@ export function MarketOpportunitiesSection() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-5 md:px-8">
         {/* ── HEADER ─────────────────────────────────────────────────────── */}
-        <div ref={headerRef} className="mb-16">
+        <div ref={headerRef} className="mb-10">
           {/* Eyebrow */}
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
-            <span className="text-xs font-bold tracking-widest uppercase text-blue-600">
-              Potential Customers
-            </span>
-            <span
-              className="mos-divider flex-1 h-px bg-gradient-to-r from-blue-200 to-transparent"
-              style={{ maxWidth: 120 }}
-            />
-          </div>
+      
 
           {/* Title */}
-          <h2 className="mb-5 overflow-hidden leading-tight">
+          <h2 className=" overflow-hidden leading-tight">
             <span className="inline-block overflow-hidden align-bottom mr-4">
               <span
                 className="mos-title-word inline-block text-4xl md:text-5xl lg:text-6xl font-bold"
@@ -1438,314 +1393,39 @@ export function MarketOpportunitiesSection() {
             </span>
           </h2>
 
-          <p className="mos-sub text-base text-slate-500 max-w-xl leading-relaxed">
+          {/* <p className="mos-sub text-base text-slate-500 max-w-xl leading-relaxed">
             Serving domestic industries and global semiconductor ecosystems with
             advanced analog and mixed-signal technologies.
-          </p>
+          </p> */}
         </div>
-
-        {/* ── STATS ROW ──────────────────────────────────────────────────── */}
-        <div
-          ref={statsRef}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 mos-summary-row"
-        >
-          {SUMMARY_STATS.map((s, i) => (
-            <div
-              key={i}
-              className="mos-summary-card rounded-2xl p-5 relative overflow-hidden group cursor-default bg-white border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300"
-            >
-              <div
-                className="absolute top-0 left-0 right-0 h-[2px]"
-                style={{
-                  background: `linear-gradient(90deg, transparent, ${s.color}, transparent)`,
-                }}
-              />
-              <div
-                className="text-3xl font-bold mb-1"
-                style={{ color: s.color }}
-              >
-                {s.val}
-              </div>
-              <div className="text-sm font-semibold text-slate-700 mb-0.5">
-                {s.label}
-              </div>
-              <div className="text-xs text-slate-400">{s.sub}</div>
-            </div>
-          ))}
-        </div>
-
-        <div className="mos-divider h-px bg-gradient-to-r from-slate-200 to-transparent mb-16" />
 
         {/* ── TABS + MARKET CARDS ────────────────────────────────────────── */}
-        <div className="mb-20">
+        <div className="mb-14">
           {/* Tabs */}
-          <div className="flex items-center justify-between flex-wrap gap-4 mb-8">
-            <h3 className="text-2xl font-bold text-slate-800">
-              Market Segments
-            </h3>
-            <div className="flex gap-3">
-              <button
-                className={`px-6 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 flex items-center gap-2 ${
-                  tab === "domestic"
-                    ? "bg-blue-600 text-white shadow-md"
-                    : "bg-white text-slate-600 border border-slate-200 hover:border-slate-300 hover:shadow-sm"
-                }`}
-                onClick={() => setTab("domestic")}
-              >
-                <Building2 size={14} />
-                Domestic Market
-              </button>
-              <button
-                className={`px-6 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 flex items-center gap-2 ${
-                  tab === "overseas"
-                    ? "bg-purple-600 text-white shadow-md"
-                    : "bg-white text-slate-600 border border-slate-200 hover:border-slate-300 hover:shadow-sm"
-                }`}
-                onClick={() => setTab("overseas")}
-              >
-                <Globe size={14} />
-                Overseas Market
-              </button>
-            </div>
-          </div>
 
           {/* Market Opportunity Description */}
-          <div className="mb-8 p-6 rounded-2xl bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-100">
-            <h4 className="text-lg font-semibold text-slate-800 mb-2">
+          <div className="mb-8 p-5 rounded-2xl -mt-8 bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-100">
+            {/* <h4 className="text-lg font-semibold text-slate-800 mb-2">
               Market Opportunity
-            </h4>
-            <p className="text-slate-600 text-sm leading-relaxed">
-              The demand for efficient power management is rapidly increasing
+            </h4> */}
+            <p className="text-slate-600 text-lg leading-relaxed">
+              The demand for efficient Analog IPs and Products is rapidly increasing
               due to growth in IoT and connected devices, electrification of
               automotive systems, expansion of data infrastructure, and need for
-              energy-efficient electronics. Power management ICs are critical
+              energy-efficient electronics. Analog ICs are critical
               enablers in all modern electronic designs.
             </p>
           </div>
 
           {/* Grid of accordion cards — 2 cols on md+ */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {markets.map((m, i) => (
+            {markets.map((m:any, i) => (
               <MarketCard key={`${tab}-${i}`} item={m} index={i} />
             ))}
           </div>
         </div>
 
         {/* ── CHARTS ─────────────────────────────────────────────────────── */}
-        <div ref={chartsRef}>
-          <div className="flex items-center gap-3 mb-8">
-            <Activity size={18} color="#2563EB" />
-            <h3 className="text-2xl font-bold text-slate-800">
-              Performance Analytics
-            </h3>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* ── Chart 1: Revenue Growth ─────────────────────────────── */}
-            <div className="mos-chart-card bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300">
-              <div className="flex items-start justify-between mb-6">
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <LineChartIcon size={16} color="#2563EB" />
-                    <span className="text-slate-800 font-bold text-lg">
-                      Revenue Growth
-                    </span>
-                  </div>
-                  <p className="text-xs text-slate-400">
-                    Revenue trajectory 2020–2024
-                  </p>
-                </div>
-                <div className="flex flex-col gap-1.5 text-right">
-                  {[
-                    { color: "#2563EB", label: "Domestic" },
-                    { color: "#7C3AED", label: "Overseas" },
-                    { color: "#059669", label: "Total" },
-                  ].map((l) => (
-                    <div
-                      key={l.label}
-                      className="flex items-center gap-2 justify-end"
-                    >
-                      <span className="text-xs text-slate-500">{l.label}</span>
-                      <span
-                        className="w-6 h-0.5 rounded-full"
-                        style={{ background: l.color }}
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <ResponsiveContainer width="100%" height={260}>
-                <AreaChart
-                  data={GROWTH_DATA}
-                  margin={{ top: 4, right: 4, left: -24, bottom: 0 }}
-                >
-                  <defs>
-                    {[
-                      ["domestic", "#2563EB"],
-                      ["overseas", "#7C3AED"],
-                      ["total", "#059669"],
-                    ].map(([k, c]) => (
-                      <linearGradient
-                        key={k}
-                        id={`mos-grad-${k}`}
-                        x1="0"
-                        y1="0"
-                        x2="0"
-                        y2="1"
-                      >
-                        <stop offset="0%" stopColor={c} stopOpacity={0.15} />
-                        <stop offset="100%" stopColor={c} stopOpacity={0} />
-                      </linearGradient>
-                    ))}
-                  </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
-                  <XAxis
-                    dataKey="year"
-                    tick={{ fill: "#94A3B8", fontSize: 11 }}
-                    axisLine={false}
-                    tickLine={false}
-                  />
-                  <YAxis
-                    tick={{ fill: "#94A3B8", fontSize: 11 }}
-                    axisLine={false}
-                    tickLine={false}
-                  />
-                  <Tooltip content={<ChartTip />} />
-                  {[
-                    { key: "domestic", color: "#2563EB" },
-                    { key: "overseas", color: "#7C3AED" },
-                    { key: "total", color: "#059669" },
-                  ].map(({ key, color }) => (
-                    <Area
-                      key={key}
-                      type="monotone"
-                      dataKey={key}
-                      name={key.charAt(0).toUpperCase() + key.slice(1)}
-                      stroke={color}
-                      strokeWidth={2.5}
-                      fill={`url(#mos-grad-${key})`}
-                      dot={{
-                        r: 4,
-                        fill: "#FFFFFF",
-                        stroke: color,
-                        strokeWidth: 2,
-                      }}
-                      activeDot={{ r: 6, fill: color }}
-                      isAnimationActive={chartGo}
-                      animationDuration={1400}
-                      animationEasing="ease-out"
-                    />
-                  ))}
-                </AreaChart>
-              </ResponsiveContainer>
-              {/* inline stats */}
-              <div className="grid grid-cols-3 gap-3 mt-5 pt-4 border-t border-slate-100">
-                {[
-                  { label: "Domestic Growth", val: "+102%", color: "#2563EB" },
-                  { label: "Overseas Growth", val: "+89%", color: "#7C3AED" },
-                  { label: "2024 Revenue", val: "$157M", color: "#059669" },
-                ].map((s) => (
-                  <div key={s.label} className="text-center">
-                    <div
-                      className="text-xl font-bold mb-0.5"
-                      style={{ color: s.color }}
-                    >
-                      {s.val}
-                    </div>
-                    <div className="text-xs text-slate-400">{s.label}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* ── Chart 2: Strategic Initiatives ─────────────────────── */}
-            <div className="mos-chart-card bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300">
-              <div className="flex items-start gap-3 mb-6">
-                <Briefcase size={16} color="#DC2626" />
-                <div>
-                  <span className="text-slate-800 font-bold text-lg block">
-                    Strategic Initiatives
-                  </span>
-                  <p className="text-xs text-slate-400">
-                    Key milestones & achievement tracking
-                  </p>
-                </div>
-              </div>
-
-              {/* Custom progress bars */}
-              {/* <div className="space-y-5 mb-6">
-                {INITIATIVES.map((ini, i) => (
-                  <div key={ini.name}>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm font-semibold text-slate-700">
-                        {ini.name}
-                      </span>
-                      <span
-                        className="text-sm font-bold"
-                        style={{ color: ini.color }}
-                      >
-                        {ini.value}%
-                      </span>
-                    </div>
-                    <div className="relative h-2 rounded-full overflow-hidden bg-slate-100">
-                      <div
-                        className="absolute left-0 top-0 h-full rounded-full transition-all duration-1000"
-                        style={{
-                          background: `linear-gradient(90deg, ${ini.color}bb, ${ini.color})`,
-                          width: chartGo ? `${ini.value}%` : "0%",
-                          transitionDelay: `${i * 0.1}s`,
-                        }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div> */}
-
-              {/* Horizontal bar chart */}
-              <ResponsiveContainer width="100%" height={350}>
-                <BarChart
-                  data={INITIATIVES}
-                  layout="vertical"
-                  margin={{ top: 0, right: 4, left: 0, bottom: 0 }}
-                >
-                  <CartesianGrid
-                    strokeDasharray="3 3"
-                    stroke="#E2E8F0"
-                    horizontal={false}
-                  />
-                  <XAxis
-                    type="number"
-                    domain={[0, 100]}
-                    tick={{ fill: "#94A3B8", fontSize: 10 }}
-                    axisLine={false}
-                    tickLine={false}
-                  />
-                  <YAxis
-                    dataKey="name"
-                    type="category"
-                    width={130}
-                    tick={{ fill: "#64748B", fontSize: 11 }}
-                    axisLine={false}
-                    tickLine={false}
-                  />
-                  <Tooltip content={<BarTip />} />
-                  <Bar
-                    dataKey="value"
-                    name="Progress (%)"
-                    radius={[0, 6, 6, 0]}
-                    isAnimationActive={chartGo}
-                    animationDuration={1400}
-                    animationEasing="ease-out"
-                  >
-                    {INITIATIVES.map((ini, idx) => (
-                      <Cell key={idx} fill={ini.color} opacity={0.85} />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-        </div>
 
         {/* ── TARGET MARKETS ──────────────────────────────────────────────── */}
         <div className="mt-16 pt-8">

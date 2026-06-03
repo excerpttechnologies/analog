@@ -38,11 +38,14 @@ const productsData: Record<string, any> = {
     id: "boost-converter",
     name: "Boost Converter",
     fullName: "Synchronous Boost Converter",
-    category: "Voltage Conversion",
+    category: "Switching Regulators",
     description:
       "Compact boost converter for efficient voltage regulation in battery-operated portable electronics",
-    longDescription:
-      "Our advanced synchronous boost converter delivers exceptional power conversion efficiency for battery-operated portable electronics. Featuring a wide input voltage range of 2.5V to 5.5V and output up to 12V, this device is ideal for applications requiring voltage step-up from single-cell Li-Ion batteries. The integrated synchronous rectification eliminates external Schottky diodes, reducing BOM cost and PCB footprint while achieving up to 95% efficiency. With true shutdown isolation and output disconnect during shutdown, the device prevents battery drain when not in operation. The built-in soft-start feature limits inrush current during startup, and comprehensive protection features include over-current limiting, over-voltage protection, and thermal shutdown.",
+    longDescription: [
+      "Compact Boost converter device for efficient voltage regulation in portable electronics.",
+      " Optimized for stable performance in space-constrained applications.",
+      "Used in consumer gadgets and IoT devices for reliable power delivery",
+    ],
     specs: [
       { label: "Input Voltage", value: "2.5V - 5.5V" },
       { label: "Output Voltage", value: "Up to 12V" },
@@ -54,36 +57,35 @@ const productsData: Record<string, any> = {
       { label: "Operating Temp", value: "-40°C to +85°C" },
     ],
     applications: [
-      "Portable Medical Devices",
-      "Bluetooth Speakers",
+      "Portable Consumer Devices",
+
       "Battery-Powered IoT Sensors",
       "Handheld Instruments",
-      "LED Backlighting",
+
       "USB Power Banks",
-      "Wearable Electronics",
-      "Smart Home Devices",
+
+      "Mobile POS",
+      "Industrial Metering Instruments",
     ],
     features: [
       "Synchronous rectification for high efficiency",
-      "True shutdown isolation",
+
       "Adjustable soft-start",
       "Over-current and over-voltage protection",
       "Thermal shutdown protection",
-      "Low quiescent current (25µA)",
+      "Low quiescent current ",
       "Power good indicator",
-      "Output disconnect during shutdown",
     ],
-    image:
-      "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=800&h=600&fit=crop",
+    image: "/images/boost.jfif",
     icon: Zap,
     gradient: "from-blue-500 to-cyan-500",
     lightGradient: "from-blue-50 to-cyan-50",
     color: "blue",
     advantages: [
-      { label: "Efficiency", value: "Up to 95%", icon: TrendingUp },
-      { label: "IQ", value: "25µA", icon: Battery },
-      { label: "Switching", value: "1.2MHz", icon: Clock },
-      { label: "Temp Range", value: "-40°C to +85°C", icon: Thermometer },
+      { label: "VIN Range", value: "0.8V - 5.0V", icon: TrendingUp },
+      { label: "Switching Current", value: "5A", icon: Battery },
+      // { label: "Switching Frequency", value: "1.2MHz", icon: Clock },
+      { label: "Temp Range", value: "-40°C to +125°C", icon: Thermometer },
     ],
   },
 
@@ -92,15 +94,21 @@ const productsData: Record<string, any> = {
     id: "buck-regulator",
     name: "Buck Regulator",
     fullName: "High Vin Synchronous Buck Regulator",
-    category: "Voltage Conversion",
+    category: "Switching Regulators",
     description:
       "High input voltage tolerant buck regulator for computing, networking and general electronics",
-    longDescription:
-      "Our high-input voltage synchronous buck regulator is designed for demanding computing, networking, and industrial applications. With an input voltage range of 4.5V to 40V, it can handle wide input variations while delivering up to 3A of continuous output current. The device utilizes peak current mode control with internal compensation, simplifying design while maintaining excellent line and load regulation. The switching frequency is adjustable from 300kHz to 2.2MHz, allowing optimization between efficiency and component size. Features include power-good flag, enable pin, and programmable soft-start. Protection features include cycle-by-cycle current limiting, frequency foldback, and thermal shutdown with auto-recovery.",
+    longDescription: [
+      "Highly integrated buck regulator designed to simplify power conversion in modern electronic systems.",
+      "Reduces component count and streamlines PCB design.",
+      "Delivers efficient and stable voltage regulation across a wide input range.",
+      "Ideal for computing (DPA systems), networking equipment, and general-purpose electronics. ",
+      "Optimized for high performance, reliability, and compact system integration.",
+      " Supports energy-efficient power management in embedded and industrial applications.",
+    ],
     specs: [
       { label: "Input Voltage", value: "4.5V - 40V" },
       { label: "Output Current", value: "Up to 3A" },
-      { label: "Switching Frequency", value: "300kHz - 2.2MHz" },
+      // { label: "Switching Frequency", value: "300kHz - 2.2MHz" },
       { label: "Peak Efficiency", value: "92%" },
       { label: "Quiescent Current", value: "40µA" },
       { label: "Package", value: "QFN-16, SOP-8" },
@@ -115,7 +123,7 @@ const productsData: Record<string, any> = {
       "Distributed Power Systems",
     ],
     features: [
-      "Wide input voltage range (4.5V to 40V)",
+      "Wide input voltage range",
       "Adjustable switching frequency",
       "Peak current mode control",
       "Power-good flag output",
@@ -124,16 +132,15 @@ const productsData: Record<string, any> = {
       "Frequency foldback protection",
       "Thermal shutdown with auto-recovery",
     ],
-    image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=600&fit=crop",
+    image: "/images/buck.jfif",
     icon: Battery,
     gradient: "from-purple-500 to-pink-500",
     lightGradient: "from-purple-50 to-pink-50",
     color: "purple",
     advantages: [
-      { label: "Vin Range", value: "4.5V-40V", icon: TrendingUp },
-      { label: "Iout", value: "3A", icon: Battery },
-      { label: "Fsw", value: "Up to 2.2MHz", icon: Clock },
+      { label: "Vin Range", value: "4.5V-17V", icon: TrendingUp },
+      { label: "Iout", value: "7A MAX", icon: Battery },
+      // { label: "Fsw", value: "Up to 2.2MHz", icon: Clock },
       { label: "Temp Range", value: "-40°C to +125°C", icon: Thermometer },
     ],
   },
@@ -146,8 +153,11 @@ const productsData: Record<string, any> = {
     category: "Linear Regulators",
     description:
       "Ultra low dropout regulator with high input voltage tolerance for consumer and embedded systems",
-    longDescription:
-      "Our ultra-low dropout linear regulator provides clean, stable voltage with minimal input-to-output differential. Featuring a dropout voltage of just 200mV at 1A, it's ideal for applications where input voltage is close to output voltage. The device operates from 2.7V to 20V input and delivers up to 1.5A output current with excellent line and load regulation. Ultra-low output noise (30µVrms) makes it perfect for noise-sensitive applications like audio and RF. The regulator is stable with small ceramic output capacitors, reducing board space and cost. Protection features include current limiting, thermal shutdown, and reverse current protection.",
+    longDescription: [
+      "A versatile linear regulator device intended for dependable power control in everyday electronic products.",
+      "Focuses on ease of use and broad compatibility across applications.",
+      " Suitable for consumer electronics and embedded system designs.",
+    ],
     specs: [
       { label: "Input Voltage", value: "2.7V - 20V" },
       { label: "Output Current", value: "Up to 1.5A" },
@@ -158,34 +168,31 @@ const productsData: Record<string, any> = {
       { label: "Package", value: "SOT-223, DFN-8" },
     ],
     applications: [
-      "Audio Equipment",
-      "RF Power Supplies",
-      "Sensor Interfaces",
-      "Post-Regulation for SMPS",
-      "Portable Electronics",
-      "Medical Instruments",
+      "Automotive ECUs and Infotainment",
+      "ADAS Cameras",
+      "Industrial Control Units ",
+      "Portable Battery and Powered Systems",
+      "Telematics and Connectivity Modules",
+      "Body Electronics and Control Modules",
     ],
     features: [
-      "Ultra-low dropout voltage (200mV @ 1A)",
-      "Low output noise (30µVrms)",
-      "High PSRR (70dB @ 1kHz)",
-      "Stable with ceramic capacitors",
+      "Ultra-low dropout voltage ",
+      "High Output Voltage Accuracy",
       "Current limiting protection",
       "Thermal shutdown protection",
-      "Reverse current protection",
-      "Adjustable output voltage option",
+      "Compatible with Low ESR cermaic capactors",
+      "Power Good Indicator",
     ],
-    image:
-      "https://images.unsplash.com/photo-1563770660941-20978e870e26?w=800&h=600&fit=crop",
+    image: "/images/ldo.jfif",
     icon: Shield,
     gradient: "from-emerald-500 to-teal-500",
     lightGradient: "from-emerald-50 to-teal-50",
     color: "emerald",
     advantages: [
-      { label: "Dropout", value: "200mV", icon: TrendingUp },
-      { label: "Noise", value: "30µVrms", icon: Battery },
-      { label: "PSRR", value: "70dB", icon: Clock },
-      { label: "Iout", value: "1.5A", icon: Thermometer },
+      { label: "VIN Range", value: "4V to 40V", icon: TrendingUp },
+      { label: "Drop-out Voltage ", value: "300mV ", icon: Battery },
+      { label: "Load Current", value: "300mA Max", icon: Clock },
+      { label: "Temperature Range", value: "-40C to +125C", icon: Thermometer },
     ],
   },
 
@@ -197,8 +204,11 @@ const productsData: Record<string, any> = {
     category: "Lighting Solutions",
     description:
       "High input voltage linear LED driver for commercial, industrial and decorative lighting with low BOM",
-    longDescription:
-      "Our high-input voltage linear LED driver provides a simple, cost-effective solution for driving LED strings in commercial and industrial lighting applications. Operating from 6V to 60V input, it can drive up to 350mA per channel with excellent current regulation (±3%). The device features PWM dimming capability with a wide duty cycle range, enabling smooth brightness control from 0% to 100%. Built-in thermal foldback reduces LED current when junction temperature exceeds programmed threshold, ensuring reliable operation. No external inductors or switching noise makes it ideal for EMI-sensitive environments.",
+    longDescription: [
+      "A dedicated linear LED driver solution for lighting applications focusing on ease-of-use and very low BOM count.",
+      "Provides consistent illumination control for energy-efficient lighting designs.",
+      "Ideal for commercial, industrial, and decorative lighting systems.",
+    ],
     specs: [
       { label: "Input Voltage", value: "6V - 60V" },
       { label: "Output Current", value: "Up to 350mA/ch" },
@@ -217,26 +227,21 @@ const productsData: Record<string, any> = {
       "Industrial Illumination",
     ],
     features: [
-      "Wide input voltage range (6V to 60V)",
+      "Wide input voltage range",
       "No external inductors required",
       "PWM dimming capability",
-      "Thermal foldback protection",
-      "Open-circuit protection",
-      "Short-circuit protection",
-      "Low EMI operation",
-      "Multiple channel options available",
+      "Over Temperature Protection",
     ],
-    image:
-      "https://www.electronics-lab.com/wp-content/uploads/2023/05/003-7.jpg",
+    image: "/images/led.jfif",
     icon: Radio,
     gradient: "from-cyan-500 to-blue-500",
     lightGradient: "from-cyan-50 to-blue-50",
     color: "cyan",
     advantages: [
-      { label: "Vin Range", value: "6V-60V", icon: TrendingUp },
-      { label: "Iout", value: "350mA", icon: Battery },
-      { label: "Dimming", value: "5kHz PWM", icon: Clock },
-      { label: "Accuracy", value: "±3%", icon: Thermometer },
+      { label: "Vin Range", value: "2.5V-55V", icon: TrendingUp },
+      { label: "Iout", value: "180mA", icon: Battery },
+      { label: "Dimming", value: "2KHz PWM", icon: Clock },
+      { label: "LED Accuracy", value: "±3.5%", icon: Thermometer },
     ],
   },
 
@@ -248,8 +253,11 @@ const productsData: Record<string, any> = {
     category: "Protection & Control",
     description:
       "Robust power handling for battery management systems used in computing, automotive and industrial",
-    longDescription:
-      "Our ideal diode controller replaces conventional Schottky diodes with a low-loss MOSFET solution, reducing power dissipation and voltage drop in battery management and OR-ing applications. The device controls an external N-channel MOSFET to emulate an ideal diode with forward voltage drop as low as 20mV at 10A. Fast reverse current detection (100ns) prevents reverse current flow during input short-circuit or power supply failures. Wide operating voltage range from 4V to 65V accommodates automotive and industrial power buses. Gate drive voltage up to 12V ensures low RDS(on) for standard MOSFETs.",
+    longDescription: [
+      "Designed to deliver robust power handling for Battery Management Systems (BMS).",
+      "Improves system reliability through efficient load management.",
+      "Suitable for computing infrastructure, automotive, and industrial equipment applications.",
+    ],
     specs: [
       { label: "Input Voltage", value: "4V - 65V" },
       { label: "Reverse Detection", value: "100ns" },
@@ -261,33 +269,31 @@ const productsData: Record<string, any> = {
     ],
     applications: [
       "Battery Management Systems",
-      "Power OR-ing",
-      "Input Reverse Polarity Protection",
-      "UPS Systems",
-      "Automotive Electronics",
-      "Redundant Power Supplies",
+      "Automotive infotainment Systems",
+      "ADAS Cameras",
+      "Power Trains ",
+      "Lightning Systems",
     ],
     features: [
-      "Replaces Schottky diodes with MOSFET",
-      "Fast reverse current detection (100ns)",
-      "Wide operating voltage range (4V to 65V)",
+      "Wide operating voltage range ",
       "Low forward voltage drop",
       "Enable pin for control",
-      "Status indicator output",
       "Low quiescent current",
-      "Automotive qualified option available",
     ],
-    image:
-      "https://core-electronics.com.au/media/catalog/product/cache/d5cf359726a1656c2b36f3682d3bbc67/P/O/POLOLU-5389-2.jpg",
+    image: "/images/ideal.jfif",
     icon: Shield,
     gradient: "from-lime-500 to-emerald-500",
     lightGradient: "from-lime-50 to-emerald-50",
     color: "lime",
     advantages: [
-      { label: "Vin Range", value: "4V-65V", icon: TrendingUp },
-      { label: "Forward Drop", value: "20mV", icon: Battery },
-      { label: "Detection", value: "100ns", icon: Clock },
-      { label: "Package", value: "SOT-23-6", icon: Thermometer },
+      { label: "Voltage Range", value: "3.5V to 60V", icon: TrendingUp },
+
+      { label: "Low IQ ", value: "100µA", icon: Thermometer },
+      {
+        label: "Temperature Range ",
+        value: "-40C to +125C",
+        icon: Thermometer,
+      },
     ],
   },
 
@@ -299,8 +305,11 @@ const productsData: Record<string, any> = {
     category: "Protection & Control",
     description:
       "Single N-Channel load switch for controlled power distribution in USB-powered and portable devices",
-    longDescription:
-      "Our integrated load switch provides a complete power distribution solution in a compact package, featuring an N-channel MOSFET with low RDS(on) of 25mΩ at 5V. Operating from 0.8V to 5.5V input, it supports continuous current up to 2A with minimal voltage drop. The device includes slew rate control to limit inrush current during turn-on, reducing supply droop and EMI. Integrated output discharge resistor ensures quick turn-off and prevents floating outputs. Thermal shutdown protection safeguards the device during overcurrent conditions. Ultra-low quiescent current (1µA) makes it ideal for battery-powered applications.",
+    longDescription: [
+      "A protection-oriented device that helps safeguard electronic systems during operation.",
+      "Enables controlled power distribution and improved system safety.",
+      "Commonly implemented in USB-powered and portable device applications.",
+    ],
     specs: [
       { label: "Input Voltage", value: "0.8V - 5.5V" },
       { label: "Continuous Current", value: "2A" },
@@ -311,34 +320,30 @@ const productsData: Record<string, any> = {
       { label: "Output Discharge", value: "200Ω" },
     ],
     applications: [
-      "USB Power Distribution",
-      "Portable Electronics",
+      "Consumer Electronics",
+      "Multi Rail Systems and Power Sequencing",
       "Battery-Powered Devices",
-      "Peripheral Power Switching",
-      "SSD Power Management",
-      "IoT Sensor Nodes",
+      "Telecom Systems & Switches",
+      "SSD ",
+      "Setup Boxes ",
     ],
     features: [
       "Integrated N-channel MOSFET",
-      "Low RDS(on) (25mΩ typical)",
-      "Ultra-low quiescent current (1µA)",
+      "Low RDS(on) ",
       "Slew rate control for inrush limiting",
-      "Output discharge resistor",
-      "Thermal shutdown protection",
-      "Under-voltage lockout",
-      "Quick output discharge",
+      "Output Discharge Resistor",
+      "Power Good Indicator",
+      "Programmamble Start-up and Discharge Rate",
     ],
-    image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=600&fit=crop",
+    image: "/images/load.jfif",
     icon: Microchip,
     gradient: "from-violet-500 to-indigo-500",
     lightGradient: "from-violet-50 to-indigo-50",
     color: "violet",
     advantages: [
+      { label: "VIN Range ", value: "2V to 5V ", icon: TrendingUp },
       { label: "RDS(on)", value: "25mΩ", icon: TrendingUp },
-      { label: "IQ", value: "1µA", icon: Battery },
-      { label: "Iout", value: "2A", icon: Clock },
-      { label: "Vin", value: "0.8V-5.5V", icon: Thermometer },
+      { label: "Iout", value: "3A", icon: Clock },
     ],
   },
 };
@@ -455,18 +460,17 @@ export default function ProductDetailPage() {
 
           <div
             ref={heroRef}
-            className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl py-16"
+            className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl py-8"
           >
             <div className="flex flex-col md:flex-row gap-8 items-center">
               <div className="flex-1">
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200 shadow-sm mb-6">
-                  <Sparkles className="w-4 h-4 text-blue-600" />
                   <span className="text-sm font-semibold bg-gradient-to-r from-blue-700 to-cyan-700 bg-clip-text text-transparent">
                     {product.category}
                   </span>
                 </div>
 
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 bg-clip-text text-transparent">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-3 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 bg-clip-text text-transparent">
                   {product.fullName}
                 </h1>
 
@@ -474,22 +478,14 @@ export default function ProductDetailPage() {
                   {product.description}
                 </p>
               </div>
-
-              <div className="flex-shrink-0">
-                <div
-                  className={`w-32 h-32 rounded-2xl bg-gradient-to-r ${product.gradient} flex items-center justify-center shadow-xl`}
-                >
-                  <Icon className="w-16 h-16 text-white" />
-                </div>
-              </div>
             </div>
           </div>
         </section>
 
         {/* Main Content */}
-        <section className="py-16">
+        <section className="pb-16 -mt-12">
           <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div className="grid grid-cols-1  gap-12">
               {/* Left Column - Image & Description */}
               <div ref={contentRef}>
                 <div className="relative h-80 rounded-2xl overflow-hidden mb-6 shadow-xl">
@@ -504,14 +500,32 @@ export default function ProductDetailPage() {
                   />
                 </div>
                 <div className="prose prose-slate max-w-none">
-                  <p className="text-slate-600 leading-relaxed">
-                    {product.longDescription}
-                  </p>
+                  <ul
+                    style={{
+                      listStyle: "dot",
+                      paddingLeft: "1.5rem",
+                    }}
+                    className="text-slate-600 flex flex-col gap-y-1   font-bold leading-relaxed"
+                  >
+                    {product?.longDescription?.map(
+                      (desc: string, i: number) => (
+                        <li
+                          key={Math.random()}
+                          className="flex items-center justify-start gap-x-2"
+                        >
+                          <span className="text-3xl font-bold flex justify-center items-center -mt-4 ">
+                            .
+                          </span>{" "}
+                          {desc}
+                        </li>
+                      ),
+                    )}
+                  </ul>
                 </div>
               </div>
 
               {/* Right Column - Technical Specs */}
-              <div ref={specsRef}>
+              {/* <div ref={specsRef}>
                 <Card className="bg-white border-slate-200 shadow-md overflow-hidden">
                   <div className="p-6">
                     <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
@@ -535,7 +549,7 @@ export default function ProductDetailPage() {
                     </div>
                   </div>
                 </Card>
-              </div>
+              </div> */}
             </div>
 
             {/* Advantages / Key Metrics Section */}
@@ -552,14 +566,14 @@ export default function ProductDetailPage() {
                         key={idx}
                         className={`p-4 rounded-xl bg-gradient-to-r ${product.lightGradient} border border-slate-200 shadow-sm text-center`}
                       >
-                        <AdvIcon
+                        {/* <AdvIcon
                           className={`w-8 h-8 text-${product.color}-600 mx-auto mb-2`}
-                        />
+                        /> */}
+                        <div className="text-xs text-slate-500 font-bold mt-1">
+                          {adv.label}
+                        </div>
                         <div className="text-xl font-bold text-slate-900">
                           {adv.value}
-                        </div>
-                        <div className="text-xs text-slate-500 mt-1">
-                          {adv.label}
                         </div>
                       </div>
                     );
@@ -580,7 +594,7 @@ export default function ProductDetailPage() {
                     className="flex items-center gap-3 p-3 rounded-xl bg-white border border-slate-200 shadow-sm"
                   >
                     <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                    <span className="text-slate-700">{app}</span>
+                    <span className="text-slate-700 font-semibold">{app}</span>
                   </div>
                 ))}
               </div>
@@ -595,14 +609,16 @@ export default function ProductDetailPage() {
                 {product.features.map((feature: string, idx: number) => (
                   <div
                     key={idx}
-                    className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100"
+                    className="flex items-center gap-3 p-3 rounded-xl shadow bg-slate-50 border border-slate-100"
                   >
                     <div
-                      className={`w-8 h-8 rounded-lg bg-gradient-to-r ${product.gradient} flex items-center justify-center`}
+                      className={`w-8 h-8 rounded-lg  ${product.gradient} flex items-center justify-center`}
                     >
-                      <Zap className="w-4 h-4 text-white" />
+                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
                     </div>
-                    <span className="text-slate-700">{feature}</span>
+                    <span className="text-slate-700 font-semibold">
+                      {feature}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -615,8 +631,7 @@ export default function ProductDetailPage() {
                   Need More Information?
                 </h3>
                 <p className="text-slate-300 mb-6 max-w-2xl mx-auto">
-                  Contact our team to learn more about our semiconductor and
-                  power management solutions.
+                  Contact our team to learn more.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Link

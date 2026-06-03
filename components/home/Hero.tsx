@@ -1649,9 +1649,10 @@ import gsap from "gsap";
 const sliderContent = [
   {
     id: 1,
-    title: "Design in India. Power the World.",
+    title: "Design in India, Make in India ",
+    title2: "for the World.",
     subtitle:
-      "A fabless semiconductor company designing high-performance power management solutions for modern electronic systems — built on India's semiconductor mission.",
+      "Fabless semiconductor Analog IP and Product company, enabling self reliant indigenization mission to support Indian and Global market .",
     badge: "Make in India · Design in India",
     ctaText: "Explore Products",
     ctaLink: "/products",
@@ -1669,55 +1670,14 @@ const sliderContent = [
   },
   {
     id: 2,
-    title: "High-Performance Power Management ICs",
-    subtitle:
-      "Our portfolio addresses the growing demand for efficient, compact, and reliable power delivery across a wide range of applications.",
-    badge: "Boost · Buck · LDO · LED Drivers",
-    ctaText: "View Products",
-    ctaLink: "/products",
-    secondaryCta: "Contact Us",
-    backgroundImage:
-      "https://media.istockphoto.com/id/1752904635/photo/digital-battery-hologram-on-future-tech-background-innovations-and-efficiency-of-power-supply.jpg?s=612x612&w=0&k=20&c=6kJaASlCqmN0ikGBmImFuXkmpFqcgvEreSA3M3qZM8s=",
-    gradient: "from-emerald-600 to-teal-500",
-    gradientLight: "from-emerald-500 to-teal-400",
-    stats: [
-      { value: "Boost", label: "Converter", icon: Shield },
-      { value: "LDO", label: "Regulators", icon: Cpu },
-      { value: "LED", label: "Drivers", icon: CircuitBoard },
-    ],
-    features: ["Voltage Conversion", "Linear Regulators", "Lighting Solutions"],
-  },
-  {
-    id: 3,
-    title: "Powering IoT, Automotive & Industrial",
-    subtitle:
-      "From consumer gadgets and IoT devices to computing infrastructure and automotive systems — our ICs deliver reliable power where it matters most.",
-    badge: "Protection & Control Solutions",
-    ctaText: "View Products",
-    ctaLink: "/products",
-    secondaryCta: "Contact Us",
-    backgroundImage:
-      "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1920&auto=format&fit=crop",
-    gradient: "from-purple-600 to-pink-500",
-    gradientLight: "from-purple-500 to-pink-400",
-    stats: [
-      { value: "IoT", label: "& Embedded", icon: Shield },
-      { value: "Auto", label: "& Industrial", icon: Cpu },
-      { value: "Smart", label: "Lighting", icon: CircuitBoard },
-    ],
-    features: ["Diode Controllers", "Load Switches", "Battery Management"],
-  },
-  {
-    id: 4,
     title: "Enriching India's Semiconductor Mission",
     subtitle:
-      "Deploying Indian-owned Analog IPs for domestic and overseas markets — contributing to a self-reliant semiconductor ecosystem.",
+      "Deploying Indian-owned Analog IPs and Products for domestic and overseas markets — contributing to a self-reliant semiconductor ecosystem.",
     badge: "India Semiconductor Mission",
     ctaText: "About Us",
     ctaLink: "/about",
     secondaryCta: "Contact Us",
-    backgroundImage:
-      "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1600&auto=format&fit=crop",
+    backgroundImage: "/images/slider4.avif",
     gradient: "from-orange-600 to-red-500",
     gradientLight: "from-orange-500 to-red-400",
     stats: [
@@ -1727,6 +1687,44 @@ const sliderContent = [
     ],
     features: ["Fabless Design", "Indian Owned IPs", "Global Deployment"],
   },
+  // {
+  //   id: 3,
+  //   title: "High-Performance Power Management ICs",
+  //   subtitle:
+  //     "Our portfolio addresses the growing demand for efficient, compact, and reliable power delivery across a wide range of applications.",
+  //   badge: "Boost · Buck · LDO · LED Drivers",
+  //   ctaText: "View Products",
+  //   ctaLink: "/products",
+  //   secondaryCta: "Contact Us",
+  //   backgroundImage: "/images/slider2.jpg",
+  //   gradient: "from-emerald-600 to-teal-500",
+  //   gradientLight: "from-emerald-500 to-teal-400",
+  //   stats: [
+  //     { value: "Boost", label: "Converter", icon: Shield },
+  //     { value: "LDO", label: "Regulators", icon: Cpu },
+  //     { value: "LED", label: "Drivers", icon: CircuitBoard },
+  //   ],
+  //   features: ["Voltage Conversion", "Linear Regulators", "Lighting Solutions"],
+  // },
+  // {
+  //   id: 4,
+  //   title: "Powering IoT, Automotive & Industrial",
+  //   subtitle:
+  //     "From consumer gadgets and IoT devices to computing infrastructure and automotive systems — our ICs deliver reliable power where it matters most.",
+  //   badge: "Protection & Control Solutions",
+  //   ctaText: "View Products",
+  //   ctaLink: "/products",
+  //   secondaryCta: "Contact Us",
+  //   backgroundImage: "/images/slider3.avif",
+  //   gradient: "from-purple-600 to-pink-500",
+  //   gradientLight: "from-purple-500 to-pink-400",
+  //   stats: [
+  //     { value: "IoT", label: "& Embedded", icon: Shield },
+  //     { value: "Auto", label: "& Industrial", icon: Cpu },
+  //     { value: "Smart", label: "Lighting", icon: CircuitBoard },
+  //   ],
+  //   features: ["Diode Controllers", "Load Switches", "Battery Management"],
+  // },
 ];
 
 export function Hero() {
@@ -2047,20 +2045,17 @@ export function Hero() {
       {/* Main Content */}
       <div
         ref={contentRef}
-        className="relative z-10 container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl  py-16 md:py-20"
+        className="relative z-10 container  float-left px-4 md:px-6 lg:px-8 max-w-7xl  py-16 md:py-20"
       >
-        <div className="content-wrapper max-w-5xl">
+        <div className="content-wrapper  max-w-5xl mr-auto">
           {/* Badge */}
-          <div className="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-lg mb-6">
-            <Sparkles className="w-4 h-4 text-yellow-300 animate-pulse" />
-            <span className="text-sm font-semibold text-white tracking-wide">
-              {currentSlide.badge}
-            </span>
-          </div>
 
           {/* Title */}
-          <h1 className="hero-title text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-5 leading-[1.2] tracking-tight">
+          <h1 className="hero-title text-4xl whitespace-nowrap md:text-5xl lg:text-6xl  font-bold text-white mb-5 leading-[1.2] tracking-tight">
             {currentSlide.title}
+          </h1>
+          <h1 className="hero-title text-4xl whitespace-nowrap md:text-5xl lg:text-6xl  font-bold text-white mb-5 leading-[1.2] tracking-tight">
+            {currentSlide.title2}
           </h1>
 
           {/* Subtitle */}

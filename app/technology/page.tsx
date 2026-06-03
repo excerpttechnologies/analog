@@ -267,12 +267,12 @@ const Page = () => {
                 </p>
 
                 {/* Learn more link */}
-                <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                {/* <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <span className="text-xs font-semibold text-cyan-600 inline-flex items-center gap-1">
                     Learn more
                     <ArrowRight className="w-3 h-3" />
                   </span>
-                </div>
+                </div> */}
               </div>
             ))}
           </div>
@@ -282,13 +282,13 @@ const Page = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               <div className="space-y-2">
                 <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
-                  50+
+                  30+
                 </div>
                 <p className="text-sm text-gray-500">Patents Filed</p>
               </div>
               <div className="space-y-2">
                 <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
-                  500+
+                  200+
                 </div>
                 <p className="text-sm text-gray-500">Global Clients</p>
               </div>
@@ -300,7 +300,7 @@ const Page = () => {
               </div>
               <div className="space-y-2">
                 <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
-                  200+
+                  100+
                 </div>
                 <p className="text-sm text-gray-500">Products Delivered</p>
               </div>

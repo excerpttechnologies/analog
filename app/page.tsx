@@ -30,17 +30,17 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <ProductShowcase />
-        <Features />
+        {/* <ProductShowcase /> */}
+        {/* <Features /> */}
         {/* <TargetIndustriesSection /> */}
-        <ProcessTimelineSection />
+        {/* <ProcessTimelineSection /> */}
         {/* <StatsSection /> */}
         {/* <MarketOpportunitiesSection /> */}
 
         <AboutSection />
         {/* <TrustedClientsSection /> */}
         {/* CTA Section */}
-        <CTASection />
+        {/* <CTASection /> */}
       </main>
       <Footer />
     </>
