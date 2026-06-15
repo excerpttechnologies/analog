@@ -14,8 +14,6 @@
 //   Briefcase,
 //   CheckCircle,
 //   ArrowRight,
-//   Mail,
-//   Linkedin,
 //   Sparkles,
 //   Layers,
 //   Radio,
@@ -24,13 +22,12 @@
 //   Microchip,
 //   Bluetooth,
 //   Users,
-//   Globe,
-//   Clock,
+//   Building,
 // } from "lucide-react";
 // import { Navbar } from "@/components/layout/Navbar";
 // import { Footer } from "@/components/layout/Footer";
 
-// // Semiconductor Expertise Data
+// // Semiconductor Expertise Data - Generic company content
 // const expertiseAreas = [
 //   {
 //     name: "Analog IC Design",
@@ -66,7 +63,7 @@
 //   },
 // ];
 
-// // Company Values
+// // Company Values - Generic semiconductor values
 // const companyValues = [
 //   {
 //     title: "Innovation First",
@@ -133,391 +130,62 @@
 //                 </span>
 //               </div>
 //               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6">
-//                 Executive Leadership
+//                 Leadership Team
 //               </h1>
 //               <p className="text-lg md:text-xl text-slate-600 leading-relaxed">
-//                 Visionary leaders driving innovation in analog and mixed-signal
-//                 semiconductor technology
+//                 Leadership information will be updated soon.
 //               </p>
 //             </div>
 //           </div>
 //         </section>
 
-//         {/* Founder/CEO Section */}
+//         {/* Leadership Team Placeholder Section - Replaces fake executive profile */}
 //         <section
 //           ref={(el) => addToRefs(el, 0)}
-//           className="py-20 opacity-0 translate-y-8 transition-all duration-700 ease-out"
-//         >
-//           <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-6xl">
-//             <div className="grid md:grid-cols-2 gap-12 items-center">
-//               {/* Founder Image */}
-//               <div className="relative">
-//                 <div className="relative aspect-square max-w-md mx-auto md:mx-0 rounded-2xl overflow-hidden shadow-xl">
-//                   <Image
-//                     src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&h=500&fit=crop"
-//                     alt="Founder & CEO"
-//                     width={500}
-//                     height={500}
-//                     className="object-cover"
-//                   />
-//                 </div>
-//               </div>
-
-//               {/* Founder Info */}
-//               <div>
-//                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 border border-cyan-100 mb-4">
-//                   <Briefcase className="w-3.5 h-3.5 text-cyan-600" />
-//                   <span className="text-xs font-medium text-cyan-700">
-//                     Founder & CEO
-//                   </span>
-//                 </div>
-//                 <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-2">
-//                   Gautam Kumar Singh
-//                 </h2>
-//                 <p className="text-cyan-600 font-medium mb-4">
-//                   Chief Executive Officer
-//                 </p>
-//                 <p className="text-slate-600 leading-relaxed mb-6">
-//                   With over 20 years of semiconductor industry experience,
-//                   Gautam leads AnalogCore's strategic vision and growth. His
-//                   expertise spans product leadership, business development, and
-//                   innovation management across Fortune 500 companies.
-//                 </p>
-
-//                 <div className="flex gap-4 mb-6">
-//                   <div>
-//                     <p className="text-2xl font-bold text-slate-900">20+</p>
-//                     <p className="text-xs text-slate-500">Years Experience</p>
-//                   </div>
-//                   <div>
-//                     <p className="text-2xl font-bold text-slate-900">50+</p>
-//                     <p className="text-xs text-slate-500">Products Launched</p>
-//                   </div>
-//                   <div>
-//                     <p className="text-2xl font-bold text-slate-900">20+</p>
-//                     <p className="text-xs text-slate-500">Patents</p>
-//                   </div>
-//                 </div>
-
-//                 <div className="flex gap-3">
-//                   <a
-//                     href="https://linkedin.com/in/gautam-kumar-singh"
-//                     target="_blank"
-//                     rel="noopener noreferrer"
-//                     className="p-2 rounded-lg bg-slate-100 hover:bg-cyan-50 transition-colors"
-//                   >
-//                     <Linkedin className="w-4 h-4 text-slate-600" />
-//                   </a>
-//                   <a
-//                     href="mailto:gautam@analogcore.com"
-//                     className="p-2 rounded-lg bg-slate-100 hover:bg-cyan-50 transition-colors"
-//                   >
-//                     <Mail className="w-4 h-4 text-slate-600" />
-//                   </a>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </section>
-
-//         {/* Company Introduction */}
-//         <section
-//           ref={(el) => addToRefs(el, 1)}
-//           className="py-20 bg-slate-50 opacity-0 translate-y-8 transition-all duration-700 ease-out"
-//         >
-//           <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-4xl text-center">
-//             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 border border-cyan-100 mb-4">
-//               <Users className="w-3.5 h-3.5 text-cyan-600" />
-//               <span className="text-xs font-medium text-cyan-700">
-//                 Company Overview
-//               </span>
-//             </div>
-//             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
-//               Engineering Tomorrow's Semiconductor Solutions
-//             </h2>
-//             <p className="text-lg text-slate-600 leading-relaxed">
-//               AnalogCore Technologies is a leading provider of analog and
-//               mixed-signal semiconductor IP, delivering innovative solutions for
-//               automotive, industrial, consumer, and communications applications.
-//               Our team combines deep technical expertise with a commitment to
-//               quality and customer success.
-//             </p>
-//           </div>
-//         </section>
-
-//         {/* Semiconductor Expertise Section */}
-//         <section
-//           ref={(el) => addToRefs(el, 2)}
-//           className="py-20 opacity-0 translate-y-8 transition-all duration-700 ease-out"
+//           className="py-8 opacity-0 translate-y-8 transition-all duration-700 ease-out"
 //         >
 //           <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-6xl">
 //             <div className="text-center mb-12">
 //               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 border border-cyan-100 mb-4">
-//                 <Cpu className="w-3.5 h-3.5 text-cyan-600" />
+//                 <Users className="w-3.5 h-3.5 text-cyan-600" />
 //                 <span className="text-xs font-medium text-cyan-700">
-//                   Core Competencies
+//                   Executive Team
 //                 </span>
 //               </div>
 //               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-//                 Semiconductor Expertise
+//                 Coming Soon
 //               </h2>
 //               <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-//                 Deep technical capabilities across the semiconductor ecosystem
+//                 Detailed leadership profiles are currently being finalized and
+//                 will be published soon.
 //               </p>
 //             </div>
 
-//             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-//               {expertiseAreas.map((area, idx) => {
-//                 const Icon = area.icon;
-//                 return (
-//                   <div
-//                     key={idx}
-//                     className="group p-4 text-center rounded-xl border border-slate-200 bg-white hover:border-cyan-300 hover:shadow-md transition-all duration-300"
-//                   >
-//                     <div className="w-12 h-12 rounded-lg bg-cyan-50 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform duration-300">
-//                       <Icon className="w-6 h-6 text-cyan-600" />
+//             {/* Professional Placeholder Cards */}
+//             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+//               {[1, 2, 3].map((item) => (
+//                 <div
+//                   key={item}
+//                   className="group relative bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+//                 >
+//                   {/* Placeholder Image */}
+//                   <div className="relative h-64 bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
+//                     <div className="w-28 h-28 rounded-full bg-white shadow-md flex items-center justify-center">
+//                       <Building className="w-14 h-14 text-slate-400" />
 //                     </div>
-//                     <h3 className="font-semibold text-slate-900 mb-1">
-//                       {area.name}
-//                     </h3>
-//                     <p className="text-xs text-slate-500">{area.description}</p>
 //                   </div>
-//                 );
-//               })}
-//             </div>
-//           </div>
-//         </section>
 
-//         {/* Innovation Focus & Technical Excellence */}
-//         <section
-//           ref={(el) => addToRefs(el, 3)}
-//           className="py-20 bg-slate-50 opacity-0 translate-y-8 transition-all duration-700 ease-out"
-//         >
-//           <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-6xl">
-//             <div className="grid md:grid-cols-2 gap-12">
-//               {/* Innovation Focus */}
-//               <div className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">
-//                 <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-100 to-blue-100 flex items-center justify-center mb-6">
-//                   <Sparkles className="w-7 h-7 text-cyan-600" />
-//                 </div>
-//                 <h3 className="text-2xl font-bold text-slate-900 mb-4">
-//                   Innovation Focus
-//                 </h3>
-//                 <p className="text-slate-600 leading-relaxed mb-6">
-//                   We continuously invest in R&D to push the boundaries of analog
-//                   and mixed-signal design, developing cutting-edge IP solutions
-//                   that enable next-generation electronic systems.
-//                 </p>
-//                 <ul className="space-y-3">
-//                   {[
-//                     "Advanced process nodes (3nm, 5nm, 7nm)",
-//                     "High-speed interface development",
-//                     "Low-power design methodologies",
-//                     "Automotive-grade solutions",
-//                   ].map((item, idx) => (
-//                     <li
-//                       key={idx}
-//                       className="flex items-center gap-2 text-sm text-slate-600"
-//                     >
-//                       <CheckCircle className="w-4 h-4 text-cyan-500" />
-//                       {item}
-//                     </li>
-//                   ))}
-//                 </ul>
-//               </div>
-
-//               {/* Technical Excellence */}
-//               <div className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">
-//                 <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-100 to-blue-100 flex items-center justify-center mb-6">
-//                   <Award className="w-7 h-7 text-cyan-600" />
-//                 </div>
-//                 <h3 className="text-2xl font-bold text-slate-900 mb-4">
-//                   Technical Excellence
-//                 </h3>
-//                 <p className="text-slate-600 leading-relaxed mb-6">
-//                   Our commitment to quality and precision ensures every IP
-//                   solution meets the highest standards of performance,
-//                   reliability, and manufacturability.
-//                 </p>
-//                 <ul className="space-y-3">
-//                   {[
-//                     "Rigorous verification methodology",
-//                     "ISO 9001 certified processes",
-//                     "AEC-Q100 qualified designs",
-//                     "24/7 technical support",
-//                   ].map((item, idx) => (
-//                     <li
-//                       key={idx}
-//                       className="flex items-center gap-2 text-sm text-slate-600"
-//                     >
-//                       <CheckCircle className="w-4 h-4 text-cyan-500" />
-//                       {item}
-//                     </li>
-//                   ))}
-//                 </ul>
-//               </div>
-//             </div>
-//           </div>
-//         </section>
-
-//         {/* Vision & Mission */}
-//         <section
-//           ref={(el) => addToRefs(el, 4)}
-//           className="py-20 opacity-0 translate-y-8 transition-all duration-700 ease-out"
-//         >
-//           <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-6xl">
-//             <div className="grid md:grid-cols-2 gap-12">
-//               <div className="text-center md:text-left">
-//                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 border border-cyan-100 mb-4">
-//                   <Eye className="w-3.5 h-3.5 text-cyan-600" />
-//                   <span className="text-xs font-medium text-cyan-700">
-//                     Vision
-//                   </span>
-//                 </div>
-//                 <h3 className="text-2xl font-bold text-slate-900 mb-4">
-//                   Our Vision
-//                 </h3>
-//                 <p className="text-slate-600 leading-relaxed">
-//                   To be the world's leading provider of innovative analog and
-//                   mixed-signal semiconductor IP, enabling our customers to
-//                   create breakthrough products that transform industries and
-//                   improve lives.
-//                 </p>
-//               </div>
-
-//               <div className="text-center md:text-left">
-//                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 border border-cyan-100 mb-4">
-//                   <Target className="w-3.5 h-3.5 text-cyan-600" />
-//                   <span className="text-xs font-medium text-cyan-700">
-//                     Mission
-//                   </span>
-//                 </div>
-//                 <h3 className="text-2xl font-bold text-slate-900 mb-4">
-//                   Our Mission
-//                 </h3>
-//                 <p className="text-slate-600 leading-relaxed">
-//                   To deliver world-class semiconductor IP solutions through
-//                   continuous innovation, technical excellence, and unwavering
-//                   commitment to quality, enabling our customers to succeed in
-//                   the rapidly evolving electronics landscape.
-//                 </p>
-//               </div>
-//             </div>
-//           </div>
-//         </section>
-
-//         {/* Core Values */}
-//         <section
-//           ref={(el) => addToRefs(el, 5)}
-//           className="py-20 bg-slate-50 opacity-0 translate-y-8 transition-all duration-700 ease-out"
-//         >
-//           <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-6xl">
-//             <div className="text-center mb-12">
-//               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 border border-cyan-100 mb-4">
-//                 <Heart className="w-3.5 h-3.5 text-cyan-600" />
-//                 <span className="text-xs font-medium text-cyan-700">
-//                   Our Principles
-//                 </span>
-//               </div>
-//               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-//                 Core Values
-//               </h2>
-//               <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-//                 Principles that guide our decisions and define our culture
-//               </p>
-//             </div>
-
-//             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-//               {companyValues.map((value, idx) => {
-//                 const Icon = value.icon;
-//                 return (
-//                   <div
-//                     key={idx}
-//                     className="text-center p-6 rounded-xl bg-white border border-slate-200 hover:border-cyan-300 hover:shadow-md transition-all duration-300"
-//                   >
-//                     <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-50 to-blue-50 flex items-center justify-center mx-auto mb-4">
-//                       <Icon className="w-7 h-7 text-cyan-600" />
+//                   {/* Placeholder Content */}
+//                   <div className="p-6 text-center">
+//                     <div className="h-5 w-32 bg-slate-200 rounded mx-auto mb-2 animate-pulse" />
+//                     <div className="h-4 w-24 bg-slate-100 rounded mx-auto mb-4 animate-pulse" />
+//                     <div className="space-y-2">
+//                       <div className="h-3 w-full bg-slate-100 rounded animate-pulse" />
+//                       <div className="h-3 w-3/4 bg-slate-100 rounded mx-auto animate-pulse" />
 //                     </div>
-//                     <h3 className="font-semibold text-slate-900 mb-2">
-//                       {value.title}
-//                     </h3>
-//                     <p className="text-sm text-slate-500">
-//                       {value.description}
-//                     </p>
-//                   </div>
-//                 );
-//               })}
-//             </div>
-//           </div>
-//         </section>
-
-//         {/* Industry Experience Summary */}
-//         <section
-//           ref={(el) => addToRefs(el, 6)}
-//           className="py-20 opacity-0 translate-y-8 transition-all duration-700 ease-out"
-//         >
-//           <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-6xl">
-//             <div className="bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-8 md:p-12">
-//               <div className="grid md:grid-cols-2 gap-8 items-center">
-//                 <div>
-//                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 mb-4">
-//                     <Briefcase className="w-3.5 h-3.5 text-cyan-400" />
-//                     <span className="text-xs font-medium text-cyan-400">
-//                       Industry Experience
-//                     </span>
-//                   </div>
-//                   <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-//                     50+ Years Combined Leadership Experience
-//                   </h3>
-//                   <p className="text-slate-300 leading-relaxed">
-//                     Our leadership team brings decades of semiconductor industry
-//                     expertise, driving innovation and delivering excellence
-//                     across global markets.
-//                   </p>
-//                 </div>
-//                 <div className="grid grid-cols-3 gap-4">
-//                   <div className="text-center">
-//                     <p className="text-3xl font-bold text-cyan-400">100+</p>
-//                     <p className="text-xs text-slate-400">Tapeouts</p>
-//                   </div>
-//                   <div className="text-center">
-//                     <p className="text-3xl font-bold text-cyan-400">200+</p>
-//                     <p className="text-xs text-slate-400">Patents</p>
-//                   </div>
-//                   <div className="text-center">
-//                     <p className="text-3xl font-bold text-cyan-400">15+</p>
-//                     <p className="text-xs text-slate-400">Countries</p>
 //                   </div>
 //                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </section>
-
-//         {/* CTA Section */}
-//         <section className="py-20">
-//           <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-4xl text-center">
-//             <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
-//               Ready to Innovate Together?
-//             </h2>
-//             <p className="text-slate-600 mb-8">
-//               Contact our leadership team to discuss how we can help bring your
-//               semiconductor vision to life
-//             </p>
-//             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-//               <Link
-//                 href="/contact"
-//                 className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-cyan-600 text-white font-medium hover:bg-cyan-700 transition-colors"
-//               >
-//                 Contact Our Team
-//                 <ArrowRight className="w-4 h-4" />
-//               </Link>
-//               <Link
-//                 href="/products"
-//                 className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-slate-200 bg-white text-slate-700 font-medium hover:border-cyan-300 hover:text-cyan-600 transition-colors"
-//               >
-//                 Explore Solutions
-//               </Link>
+//               ))}
 //             </div>
 //           </div>
 //         </section>
@@ -552,67 +220,74 @@ import {
   Bluetooth,
   Users,
   Building,
+  Mail,
+  Linkedin,
 } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 
-// Semiconductor Expertise Data - Generic company content
-const expertiseAreas = [
+// Leadership Team Data
+const leadershipTeam = [
   {
-    name: "Analog IC Design",
-    icon: Microchip,
-    description: "High-performance analog circuit design",
+    name: "Leadership #1",
+    title: "Chief Executive Officer",
+    expertise: "30+ years in Analog & Mixed-Signal IC Design",
+    description:
+      "Leading strategic vision and technical direction with deep expertise in analog semiconductor development.",
+    image: "/images/leadership-1.jpg",
+    linkedin: "#",
+    email: "#",
   },
   {
-    name: "Mixed-Signal",
-    icon: Radio,
-    description: "Integrated analog/digital solutions",
-  },
-  { name: "SERDES", icon: Wifi, description: "High-speed serial interfaces" },
-  {
-    name: "PLL Design",
-    icon: Activity,
-    description: "Clock generation & synchronization",
-  },
-  { name: "ASIC/SoC", icon: Layers, description: "Custom silicon solutions" },
-  {
-    name: "Verification",
-    icon: Shield,
-    description: "Comprehensive design verification",
+    name: "Leadership #2",
+    title: "Chief Technology Officer",
+    expertise: "28+ years in Power Management & IP Development",
+    description:
+      "Driving innovation in power management solutions and analog IP portfolio development.",
+    image: "/images/leadership-2.jpg",
+    linkedin: "#",
+    email: "#",
   },
   {
-    name: "Power Management",
-    icon: Zap,
-    description: "Efficient power solutions",
+    name: "Leadership #3",
+    title: "VP of Engineering",
+    expertise: "32+ years in Product Development & Verification",
+    description:
+      "Overseeing product development lifecycle and engineering excellence across all initiatives.",
+    image: "/images/leadership-3.jpg",
+    linkedin: "#",
+    email: "#",
   },
   {
-    name: "RF Design",
-    icon: Bluetooth,
-    description: "Wireless communication systems",
+    name: "Leadership #4",
+    title: "VP of Marketing & Sales",
+    expertise: "30+ years in Semiconductor Marketing & Customer Relations",
+    description:
+      "Building customer relationships and driving market adoption of analog IPs and products.",
+    image: "/images/leadership-4.jpg",
+    linkedin: "#",
+    email: "#",
   },
 ];
 
-// Company Values - Generic semiconductor values
-const companyValues = [
+// Advisory Board Members
+const advisoryMembers = [
   {
-    title: "Innovation First",
-    description: "Continuous R&D and breakthrough solutions",
-    icon: Sparkles,
+    name: "Member #1",
+    title: "Strategic Advisor",
+    expertise:
+      "Industry veteran with extensive semiconductor ecosystem experience",
+    description:
+      "Providing strategic guidance on market expansion and technology roadmap.",
+    image: "/images/advisory-1.jpg",
   },
   {
-    title: "Precision Engineering",
-    description: "Meticulous attention to detail",
-    icon: Target,
-  },
-  {
-    title: "Customer Focus",
-    description: "Tailored solutions that exceed expectations",
-    icon: Users,
-  },
-  {
-    title: "Technical Excellence",
-    description: "Highest standards of engineering",
-    icon: Award,
+    name: "Member #2",
+    title: "Technical Advisor",
+    expertise: "Expert in advanced analog and mixed-signal architectures",
+    description:
+      "Advising on technical innovation and next-generation product development.",
+    image: "/images/advisory-2.jpg",
   },
 ];
 
@@ -620,7 +295,6 @@ export default function LeadershipPage() {
   const sectionsRef = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {
-    // Simple fade-in animation for sections
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -649,7 +323,12 @@ export default function LeadershipPage() {
       <Navbar />
       <main className="bg-white">
         {/* Hero Section */}
-        <section className="relative py-24 md:py-32 bg-gradient-to-b from-slate-50 to-white">
+        <section className="relative py-20  bg-gradient-to-b from-slate-50 to-white overflow-hidden">
+          <div className="absolute inset-0 -z-10">
+            <div className="absolute top-20 left-10 w-96 h-96 bg-blue-200/30 rounded-full blur-3xl" />
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-cyan-200/30 rounded-full blur-3xl" />
+          </div>
+
           <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-6xl">
             <div className="text-center max-w-3xl mx-auto">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 border border-cyan-100 mb-6">
@@ -662,16 +341,18 @@ export default function LeadershipPage() {
                 Leadership Team
               </h1>
               <p className="text-lg md:text-xl text-slate-600 leading-relaxed">
-                Leadership information will be updated soon.
+                ACT Technical leadership and Management team comes with 120+
+                years of Analog focused Semiconductor Domain expertise for IPs
+                and Product development, Marketing and Customer relationship.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Leadership Team Placeholder Section - Replaces fake executive profile */}
+        {/* Leadership Team Section */}
         <section
           ref={(el) => addToRefs(el, 0)}
-          className="py-8 opacity-0 translate-y-8 transition-all duration-700 ease-out"
+          className="py-10 opacity-0 translate-y-8 transition-all duration-700 ease-out"
         >
           <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-6xl">
             <div className="text-center mb-12">
@@ -682,39 +363,149 @@ export default function LeadershipPage() {
                 </span>
               </div>
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-                Coming Soon
+                Meet Our Leadership
               </h2>
               <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                Detailed leadership profiles are currently being finalized and
-                will be published soon.
+                Experienced leaders driving ACT's innovation for the Development
+                of Analog IPs and Products
               </p>
             </div>
 
-            {/* Professional Placeholder Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-              {[1, 2, 3].map((item) => (
+            {/* Leadership Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-8">
+              {leadershipTeam.map((leader, index) => (
                 <div
-                  key={item}
-                  className="group relative bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                  key={index}
+                  className="group relative bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
                 >
-                  {/* Placeholder Image */}
-                  <div className="relative h-64 bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
-                    <div className="w-28 h-28 rounded-full bg-white shadow-md flex items-center justify-center">
-                      <Building className="w-14 h-14 text-slate-400" />
+                  {/* Image Placeholder - Replace with actual photos */}
+                  <div className="relative h-64 bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center overflow-hidden">
+                    <div className="w-32 h-32 rounded-full bg-white shadow-md flex items-center justify-center border-4 border-white">
+                      <Building className="w-16 h-16 text-slate-400" />
                     </div>
+                    {/* Overlay gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
 
-                  {/* Placeholder Content */}
+                  {/* Content */}
                   <div className="p-6 text-center">
-                    <div className="h-5 w-32 bg-slate-200 rounded mx-auto mb-2 animate-pulse" />
-                    <div className="h-4 w-24 bg-slate-100 rounded mx-auto mb-4 animate-pulse" />
-                    <div className="space-y-2">
-                      <div className="h-3 w-full bg-slate-100 rounded animate-pulse" />
-                      <div className="h-3 w-3/4 bg-slate-100 rounded mx-auto animate-pulse" />
+                    <h3 className="text-xl font-bold text-slate-900 mb-1">
+                      {leader.name}
+                    </h3>
+                    <p className="text-sm font-semibold text-cyan-600 mb-2">
+                      {leader.title}
+                    </p>
+                    <p className="text-xs text-slate-500 mb-3">
+                      {leader.expertise}
+                    </p>
+                    <p className="text-sm text-slate-600 leading-relaxed">
+                      {leader.description}
+                    </p>
+
+                    {/* Social Links */}
+                    <div className="flex items-center justify-center gap-3 mt-4 pt-3 border-t border-slate-100">
+                      <a
+                        href={leader.email}
+                        className="p-2 rounded-lg bg-slate-50 hover:bg-cyan-50 transition-colors duration-300"
+                        aria-label="Email"
+                      >
+                        <Mail className="w-4 h-4 text-slate-500 hover:text-cyan-600" />
+                      </a>
+                      <a
+                        href={leader.linkedin}
+                        className="p-2 rounded-lg bg-slate-50 hover:bg-cyan-50 transition-colors duration-300"
+                        aria-label="LinkedIn"
+                      >
+                        <Linkedin className="w-4 h-4 text-slate-500 hover:text-cyan-600" />
+                      </a>
                     </div>
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Advisory Board Section */}
+        <section
+          ref={(el) => addToRefs(el, 1)}
+          className="py-16 bg-slate-50 opacity-0 translate-y-8 transition-all duration-700 ease-out"
+        >
+          <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-6xl">
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 border border-cyan-100 mb-4">
+                <Award className="w-3.5 h-3.5 text-cyan-600" />
+                <span className="text-xs font-medium text-cyan-700">
+                  Advisory Board
+                </span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+                Advisory Board
+              </h2>
+              <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+                Meet the experienced leaders and advisory board members driving
+                ACT's innovation for the Development of Analog IPs and Products
+              </p>
+            </div>
+
+            {/* Advisory Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              {advisoryMembers.map((member, index) => (
+                <div
+                  key={index}
+                  className="group relative bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+                >
+                  <div className="flex flex-col md:flex-row">
+                    {/* Image Section */}
+                    <div className="md:w-2/5 relative h-48 md:h-auto bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
+                      <div className="w-24 h-24 rounded-full bg-white shadow-md flex items-center justify-center">
+                        <Briefcase className="w-12 h-12 text-slate-400" />
+                      </div>
+                    </div>
+
+                    {/* Content Section */}
+                    <div className="md:w-3/5 p-6">
+                      <h3 className="text-xl font-bold text-slate-900 mb-1">
+                        {member.name}
+                      </h3>
+                      <p className="text-sm font-semibold text-cyan-600 mb-2">
+                        {member.title}
+                      </p>
+                      <p className="text-xs text-slate-500 mb-3">
+                        {member.expertise}
+                      </p>
+                      <p className="text-sm text-slate-600 leading-relaxed">
+                        {member.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Future Addition Notice */}
+        <section
+          ref={(el) => addToRefs(el, 2)}
+          className="py-16 opacity-0 translate-y-8 transition-all duration-700 ease-out"
+        >
+          <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-4xl">
+            <div className="bg-gradient-to-r from-slate-50 to-blue-50 rounded-2xl p-8 text-center border border-slate-200">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200 mb-4">
+                <Users className="w-3.5 h-3.5 text-cyan-600" />
+                <span className="text-xs font-medium text-slate-700">
+                  Growing Team
+                </span>
+              </div>
+              <h3 className="text-2xl font-bold text-slate-900 mb-3">
+                More Leaders Joining Soon
+              </h3>
+              <p className="text-slate-600">
+                We are continuously expanding our leadership team with top
+                industry talent. Stay tuned for updates as we add more
+                experienced professionals to drive our mission forward.
+              </p>
             </div>
           </div>
         </section>

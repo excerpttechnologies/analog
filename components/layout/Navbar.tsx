@@ -5864,9 +5864,9 @@ export function Navbar() {
                     <Image
                       src={logoSrc}
                       alt="AnalogChips Logo"
-                      width={160}
-                      height={160}
-                      className="object-contain mt-2"
+                      width={110}
+                      height={110}
+                      className="object-contain "
                       onError={() => setLogoError(true)}
                       unoptimized
                       priority
