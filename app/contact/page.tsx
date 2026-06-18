@@ -200,40 +200,70 @@ export default function ContactPage() {
         ref={sectionRef}
         className="bg-gradient-to-b from-slate-50 via-white to-slate-50"
       >
-        {/* Hero Section */}
-        <section className="relative min-h-[45vh] flex items-center justify-center overflow-hidden">
-          <div className="absolute inset-0 -z-10">
-            <div className="absolute top-20 left-10 w-96 h-96 bg-blue-200/30 rounded-full blur-3xl" />
-            <div className="absolute bottom-20 right-10 w-96 h-96 bg-cyan-200/30 rounded-full blur-3xl" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-200/20 rounded-full blur-3xl" />
+        <section className="relative bg-gradient-to-br from-[#0F2747] via-[#1a3a5e] to-[#0F2747] overflow-hidden">
+          {/* Geometric Abstract Background Shapes */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-[#3B5F8A]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+            <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#3B5F8A]/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#3B5F8A]/5 rounded-full blur-3xl" />
+
+            {/* Grid Pattern */}
             <div
               className="absolute inset-0 opacity-[0.03]"
               style={{
-                backgroundImage: `radial-gradient(circle at 1px 1px, rgb(14, 165, 233) 1px, transparent 1px)`,
+                backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 1px)`,
                 backgroundSize: "40px 40px",
               }}
             />
+
+            {/* Circuit Lines Decoration */}
+            <svg className="absolute inset-0 w-full h-full opacity-[0.05]">
+              <line
+                x1="10%"
+                y1="20%"
+                x2="30%"
+                y2="40%"
+                stroke="white"
+                strokeWidth="1"
+              />
+              <line
+                x1="30%"
+                y1="40%"
+                x2="50%"
+                y2="35%"
+                stroke="white"
+                strokeWidth="1"
+              />
+              <line
+                x1="50%"
+                y1="35%"
+                x2="70%"
+                y2="50%"
+                stroke="white"
+                strokeWidth="1"
+              />
+              <line
+                x1="70%"
+                y1="50%"
+                x2="90%"
+                y2="30%"
+                stroke="white"
+                strokeWidth="1"
+              />
+              <circle cx="10%" cy="20%" r="3" fill="white" opacity="0.3" />
+              <circle cx="30%" cy="40%" r="3" fill="white" opacity="0.3" />
+              <circle cx="50%" cy="35%" r="3" fill="white" opacity="0.3" />
+              <circle cx="70%" cy="50%" r="3" fill="white" opacity="0.3" />
+              <circle cx="90%" cy="30%" r="3" fill="white" opacity="0.3" />
+            </svg>
           </div>
 
-          <div
-            ref={heroRef}
-            className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl text-center py-16"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200 shadow-sm mb-6">
-              <Sparkles className="w-4 h-4 text-blue-600" />
-              <span className="text-sm font-semibold bg-gradient-to-r from-blue-700 to-cyan-700 bg-clip-text text-transparent">
-                Connect With Us
-              </span>
+          <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-6xl relative z-10">
+            <div className="py-12  text-center">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight">
+                Contact Us
+              </h1>
             </div>
-
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 bg-clip-text text-transparent">
-              Get In Touch
-            </h1>
-
-            <p className="text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-              Connect with AnalogChips Technology for advanced semiconductor,
-              analog, and silicon IP solutions.
-            </p>
           </div>
         </section>
 
@@ -540,7 +570,7 @@ export default function ContactPage() {
         </section>
 
         {/* Social Media Links */}
-        <section className="py-8">
+        {/* <section className="py-8">
           <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
             <div className="flex justify-center gap-4">
               {[
@@ -589,10 +619,10 @@ export default function ContactPage() {
               })}
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* CTA Section - Get In Touch */}
-        <section className="py-16">
+        {/* <section className="py-16">
           <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
             <div ref={ctaRef}>
               <Card className="bg-gradient-to-r from-blue-600 via-cyan-600 to-teal-600 overflow-hidden relative group">
@@ -659,21 +689,7 @@ export default function ContactPage() {
               </Card>
             </div>
           </div>
-        </section>
-
-        {/* Quick Response Indicator */}
-        <section className="py-8">
-          <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
-            <div className="flex justify-center">
-              <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-green-50 border border-green-200 shadow-sm">
-                <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-sm font-medium text-green-700">
-                  🚀 Quick Response | Average reply time: 4 hours
-                </span>
-              </div>
-            </div>
-          </div>
-        </section>
+        </section> */}
       </main>
       <Footer />
     </>

@@ -372,7 +372,7 @@ export function Hero() {
       ref={containerRef}
       onMouseEnter={stopAutoSlide}
       onMouseLeave={startAutoSlide}
-      className="relative min-h-[100vh] flex items-center justify-center overflow-hidden"
+      className="relative min-h-[75vh] flex items-center justify-center overflow-hidden"
     >
       {/* Background Slider Image */}
       <div
@@ -412,15 +412,15 @@ export function Hero() {
           {/* Badge */}
 
           {/* Title */}
-          <h1 className="hero-title text-4xl whitespace-nowrap md:text-5xl lg:text-6xl  font-bold text-white mb-5 leading-[1.2] tracking-tight">
+          <h1 className="hero-title text-4xl whitespace-nowrap md:text-5xl lg:text-6xl  font-bold text-white mb-4 leading-[1.1] tracking-tight">
             {currentSlide.title}
           </h1>
-          <h1 className="hero-title text-4xl whitespace-nowrap md:text-5xl lg:text-6xl  font-bold text-white mb-5 leading-[1.2] tracking-tight">
+          <h1 className="hero-title text-4xl whitespace-nowrap md:text-5xl lg:text-6xl  font-bold text-white mb-5 leading-[1.1] tracking-tight">
             {currentSlide.title2}
           </h1>
 
           {/* Subtitle */}
-          <p className="hero-subtitle text-md md:text-xl text-white/80 mb-6 max-w-2xl leading-relaxed">
+          <p className="hero-subtitle text-lg md:text-2xl text-white/80 leading-8 mb-7 max-w-3xl ">
             {currentSlide.subtitle}
           </p>
 

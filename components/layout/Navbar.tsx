@@ -5845,28 +5845,28 @@ export function Navbar() {
   const logoSrc = "/images/analog2.png";
 
   return (
-    <div className="pt-16">
+    <div className="pt-20">
       <nav
         ref={navbarRef}
-        className={`fixed top-0 w-full z-50 transition-all duration-500 ${
+        className={`fixed top-0 w-full border-b border-gray-50 z-50 transition-all duration-500 ${
           scrolled
             ? "bg-white/95 backdrop-blur-md shadow-lg"
             : "bg-white backdrop-blur-sm"
         }`}
       >
-        <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
-          <div className="flex items-center justify-between h-[4.5rem]">
+        <div className="container mx-auto px-4 md:px-6 lg:px-7 max-w-7xl">
+          <div className="flex items-center justify-between h-[5rem]">
             {/* Logo - Larger size, transparent background */}
             <Link href="/" className="group flex items-center shrink-0">
               <div className="relative">
-                <div className="relative w-32 h-32 lg:w-40 lg:h-40 flex items-center justify-center">
+                <div className="relative w-44 h-44 md:w-56 md:h-52 lg:w-60 lg:h-56 flex items-center justify-center">
                   {!logoError ? (
                     <Image
                       src={logoSrc}
                       alt="AnalogChips Logo"
-                      width={110}
-                      height={110}
-                      className="object-contain "
+                      width={200}
+                      height={160}
+                      className="object-contain mt-5"
                       onError={() => setLogoError(true)}
                       unoptimized
                       priority
@@ -5899,7 +5899,7 @@ export function Navbar() {
                   <Link
                     key={index}
                     href={item.href!}
-                    className={`nav-item-desktop flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 group relative ${
+                    className={`nav-item-desktop flex items-center gap-1.5 px-3 py-2 rounded-lg text-md font-medium transition-all duration-300  group relative ${
                       active
                         ? "text-[#0393D3]"
                         : "text-slate-600 hover:text-slate-900"

@@ -23,7 +23,7 @@ export const getCompanyEmailTemplate = (data: {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       line-height: 1.6;
       color: #1e293b;
-      background-color: #f1f5f9;
+      background-color: #f0f2f5;
       margin: 0;
       padding: 20px;
     }
@@ -31,49 +31,57 @@ export const getCompanyEmailTemplate = (data: {
       max-width: 600px;
       margin: 0 auto;
       background-color: #ffffff;
-      border-radius: 16px;
+      border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     }
     .header {
-      background: linear-gradient(135deg, #1e3a8a, #06b6d4);
-      padding: 32px 24px;
+      background: linear-gradient(135deg, #0d2a4a, #1e6bb8);
+      padding: 30px 24px;
       text-align: center;
+      position: relative;
     }
-    .logo-container {
-      margin-bottom: 16px;
+    .header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #f5c518, #f5c518, #f5c518);
     }
     .logo {
-      max-width: 180px;
+      max-width: 160px;
       height: auto;
       background: white;
-      border-radius: 12px;
+      border-radius: 8px;
       padding: 8px 16px;
       display: inline-block;
     }
     .header h1 {
-      color: white;
-      margin: 0;
-      font-size: 24px;
+      color: #ffffff;
+      margin: 12px 0 4px;
+      font-size: 22px;
       font-weight: 700;
+      letter-spacing: -0.5px;
     }
     .header p {
       color: rgba(255,255,255,0.8);
-      margin: 8px 0 0;
-      font-size: 14px;
+      margin: 0;
+      font-size: 13px;
     }
     .content {
-      padding: 32px;
+      padding: 30px 28px;
     }
     .alert-badge {
-      background-color: #fee2e2;
-      border-left: 4px solid #ef4444;
+      background: #fef3c7;
+      border-left: 4px solid #f59e0b;
       padding: 12px 16px;
-      border-radius: 8px;
+      border-radius: 6px;
       margin-bottom: 24px;
     }
     .alert-badge span {
-      color: #dc2626;
+      color: #92400e;
       font-size: 13px;
       font-weight: 600;
       display: flex;
@@ -81,9 +89,9 @@ export const getCompanyEmailTemplate = (data: {
       gap: 8px;
     }
     .section {
-      margin-bottom: 24px;
-      border-bottom: 1px solid #e2e8f0;
-      padding-bottom: 16px;
+      margin-bottom: 18px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid #f1f5f9;
     }
     .section:last-child {
       border-bottom: none;
@@ -95,78 +103,110 @@ export const getCompanyEmailTemplate = (data: {
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      color: #64748b;
-      margin-bottom: 6px;
+      color: #94a3b8;
+      margin-bottom: 4px;
       display: flex;
       align-items: center;
       gap: 6px;
     }
+    .label-icon {
+      font-size: 14px;
+    }
     .value {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 500;
       color: #0f172a;
       word-break: break-word;
-      line-height: 1.5;
+      padding-left: 22px;
+    }
+    .value a {
+      color: #1e6bb8;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .value a:hover {
+      text-decoration: underline;
     }
     .message-box {
-      background-color: #f8fafc;
-      border-radius: 12px;
-      padding: 20px;
-      margin-top: 8px;
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-top: 4px;
       border: 1px solid #e2e8f0;
+      margin-left: 22px;
     }
     .message-box .value {
-      white-space: pre-wrap;
+      padding: 0;
       font-size: 14px;
-      line-height: 1.6;
+      font-weight: 400;
+      line-height: 1.7;
+      white-space: pre-wrap;
+    }
+    .badge {
+      display: inline-block;
+      background: #10b981;
+      color: white;
+      font-size: 10px;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-weight: 600;
+      margin-left: 8px;
+      vertical-align: middle;
     }
     .action-buttons {
       display: flex;
-      gap: 12px;
-      margin-top: 16px;
+      gap: 10px;
+      margin-top: 20px;
       flex-wrap: wrap;
     }
     .btn {
       display: inline-block;
       padding: 10px 20px;
-      border-radius: 8px;
+      border-radius: 6px;
       font-size: 13px;
       font-weight: 600;
       text-decoration: none;
       text-align: center;
+      transition: all 0.2s;
     }
     .btn-primary {
-      background: linear-gradient(135deg, #1e3a8a, #06b6d4);
+      background: #0d2a4a;
       color: white;
+    }
+    .btn-primary:hover {
+      background: #1e6bb8;
     }
     .btn-secondary {
       background: #f1f5f9;
       color: #1e293b;
       border: 1px solid #e2e8f0;
     }
+    .btn-secondary:hover {
+      background: #e2e8f0;
+    }
     .footer {
-      background-color: #f8fafc;
-      padding: 24px;
+      background: #f8fafc;
+      padding: 20px 24px;
       text-align: center;
       font-size: 12px;
-      color: #64748b;
+      color: #94a3b8;
       border-top: 1px solid #e2e8f0;
     }
-    .badge {
-      display: inline-block;
-      background-color: #10b981;
-      color: white;
-      font-size: 11px;
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-weight: 600;
+    .footer p {
+      margin: 2px 0;
     }
     @media (max-width: 480px) {
       .content {
-        padding: 20px;
+        padding: 20px 16px;
       }
       .action-buttons {
         flex-direction: column;
+      }
+      .value {
+        padding-left: 0;
+      }
+      .message-box {
+        margin-left: 0;
       }
     }
   </style>
@@ -174,54 +214,51 @@ export const getCompanyEmailTemplate = (data: {
 <body>
   <div class="container">
     <div class="header">
-      <div class="logo-container">
-        <img 
-          src="https://res.cloudinary.com/dxzluoydo/image/upload/v1779182002/analog10_qruzqp.png" 
-          alt="AnalogChips Technology" 
-          class="logo"
-          style="max-width: 180px; height: auto; background: white; border-radius: 12px; padding: 8px 16px;"
-        />
-      </div>
+      <img 
+        src="https://res.cloudinary.com/dxzluoydo/image/upload/v1781780196/analog1_sbkzrz.png" 
+        alt="AnalogChips Technology" 
+        class="logo"
+      />
       <h1>New Contact Form Submission</h1>
       <p>AnalogChips Technology</p>
     </div>
     
     <div class="content">
       <div class="alert-badge">
-        <span>🔔 ACTION REQUIRED - New Inquiry Received</span>
+        <span>🔔 ACTION REQUIRED — New Inquiry Received</span>
       </div>
       
       <div class="section">
         <div class="label">
-          <span>📅</span> TIMESTAMP
+          <span class="label-icon">📅</span> TIMESTAMP
         </div>
         <div class="value">${data.timestamp}</div>
       </div>
       
       <div class="section">
         <div class="label">
-          <span>👤</span> FULL NAME
+          <span class="label-icon">👤</span> FULL NAME
         </div>
         <div class="value">${data.name}</div>
       </div>
       
       <div class="section">
         <div class="label">
-          <span>✉️</span> EMAIL ADDRESS
+          <span class="label-icon">✉️</span> EMAIL ADDRESS
         </div>
         <div class="value">
-          <a href="mailto:${data.email}" style="color: #06b6d4; text-decoration: none;">${data.email}</a>
-          <span class="badge" style="margin-left: 10px;">Reply Directly</span>
+          <a href="mailto:${data.email}">${data.email}</a>
+          <span class="badge">Reply Directly</span>
         </div>
       </div>
       
       ${data.phone ? `
       <div class="section">
         <div class="label">
-          <span>📞</span> PHONE NUMBER
+          <span class="label-icon">📞</span> PHONE NUMBER
         </div>
         <div class="value">
-          <a href="tel:${data.phone}" style="color: #06b6d4; text-decoration: none;">${data.phone}</a>
+          <a href="tel:${data.phone}">${data.phone}</a>
         </div>
       </div>
       ` : ''}
@@ -229,7 +266,7 @@ export const getCompanyEmailTemplate = (data: {
       ${data.company ? `
       <div class="section">
         <div class="label">
-          <span>🏢</span> COMPANY
+          <span class="label-icon">🏢</span> COMPANY
         </div>
         <div class="value">${data.company}</div>
       </div>
@@ -237,7 +274,7 @@ export const getCompanyEmailTemplate = (data: {
       
       <div class="section">
         <div class="label">
-          <span>💬</span> MESSAGE
+          <span class="label-icon">💬</span> MESSAGE
         </div>
         <div class="message-box">
           <div class="value">${data.message.replace(/\n/g, '<br>')}</div>
@@ -245,22 +282,24 @@ export const getCompanyEmailTemplate = (data: {
       </div>
       
       <div class="action-buttons">
-        <a href="mailto:${data.email}" class="btn btn-primary">📧 Reply to ${data.name}</a>
-        <a href="tel:${data.phone || ''}" class="btn btn-secondary">📞 Call Customer</a>
+        <a href="mailto:${data.email}?subject=Response to your inquiry about AnalogChips products" class="btn btn-primary">
+          📧 Reply to ${data.name.split(' ')[0]}
+        </a>
+        ${data.phone ? `<a href="tel:${data.phone}" class="btn btn-secondary">📞 Call</a>` : ''}
       </div>
     </div>
     
     <div class="footer">
       <p>This is an automated message from AnalogChips Technology website contact form.</p>
       <p>© ${new Date().getFullYear()} AnalogChips Technology Pvt Ltd. All rights reserved.</p>
-      <p>Bangalore, India</p>
+      <p>Bengaluru, India</p>
     </div>
   </div>
 </body>
 </html>
 `;
 
-// Email HTML template for the user (auto-reply)
+// Email HTML template for the user (auto-reply thank you)
 export const getUserEmailTemplate = (data: {
   name: string;
 }) => `
@@ -280,7 +319,7 @@ export const getUserEmailTemplate = (data: {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       line-height: 1.6;
       color: #1e293b;
-      background-color: #f1f5f9;
+      background-color: #f0f2f5;
       margin: 0;
       padding: 20px;
     }
@@ -288,111 +327,170 @@ export const getUserEmailTemplate = (data: {
       max-width: 600px;
       margin: 0 auto;
       background-color: #ffffff;
-      border-radius: 16px;
+      border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     }
     .header {
-      background: linear-gradient(135deg, #1e3a8a, #06b6d4);
-      padding: 40px 24px;
+      background: linear-gradient(135deg, #0d2a4a, #1e6bb8);
+      padding: 40px 24px 30px;
       text-align: center;
+      position: relative;
     }
-    .logo-container {
-      margin-bottom: 16px;
+    .header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #f5c518, #f5c518, #f5c518);
     }
     .logo {
-      max-width: 180px;
+      max-width: 160px;
       height: auto;
       background: white;
-      border-radius: 12px;
+      border-radius: 8px;
       padding: 8px 16px;
       display: inline-block;
     }
+    .header .checkmark {
+      font-size: 48px;
+      display: block;
+      margin: 8px 0 4px;
+    }
     .header h1 {
-      color: white;
-      margin: 16px 0 0;
-      font-size: 28px;
+      color: #ffffff;
+      margin: 8px 0 4px;
+      font-size: 26px;
       font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .header p {
+      color: rgba(255,255,255,0.85);
+      margin: 0;
+      font-size: 14px;
     }
     .content {
-      padding: 40px 32px;
+      padding: 30px 28px;
     }
     .greeting {
       font-size: 20px;
       font-weight: 600;
       color: #0f172a;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
     .message {
       color: #475569;
-      margin-bottom: 24px;
-      font-size: 16px;
+      margin-bottom: 16px;
+      font-size: 15px;
+      line-height: 1.7;
     }
-    .info-box {
-      background-color: #f0f9ff;
-      border-radius: 12px;
-      padding: 20px;
-      margin: 24px 0;
-      border-left: 4px solid #06b6d4;
+    .thank-you-box {
+      background: #f0fdf4;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 16px 0;
+      border-left: 4px solid #22c55e;
     }
-    .info-box p {
-      margin: 0 0 10px;
-      color: #0c4a6e;
+    .thank-you-box p {
+      color: #166534;
+      font-size: 14px;
+      margin: 0;
     }
-    .info-box p:last-child {
-      margin-bottom: 0;
+    .next-steps {
+      margin: 20px 0 16px;
+    }
+    .next-steps h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 10px;
     }
     .step {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: #1e293b;
+    }
+    .step:last-child {
+      margin-bottom: 0;
     }
     .step-number {
-      width: 28px;
-      height: 28px;
-      background: #06b6d4;
+      width: 26px;
+      height: 26px;
+      background: #0d2a4a;
       color: white;
       border-radius: 50%;
-      display: inline-flex;
+      display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 14px;
+      font-size: 12px;
       font-weight: 700;
+      flex-shrink: 0;
+      padding:7px;
+      margin:2px;
     }
-    .contact-links {
-      margin-top: 24px;
-      padding-top: 24px;
+    .contact-info {
+      margin-top: 20px;
+      padding-top: 20px;
       border-top: 1px solid #e2e8f0;
+    }
+    .contact-info p {
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 8px;
     }
     .contact-item {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 16px;
+      gap: 10px;
+      margin-bottom: 6px;
       color: #475569;
+      font-size: 13px;
+    }
+    .contact-item:last-child {
+      margin-bottom: 0;
+    }
+    .contact-item a {
+      color: #1e6bb8;
+      text-decoration: none;
+    }
+    .contact-item a:hover {
+      text-decoration: underline;
+    }
+    .contact-icon {
+      font-size: 14px;
+      width: 22px;
+      text-align: center;
     }
     .footer {
-      background-color: #f8fafc;
-      padding: 24px;
+      background: #f8fafc;
+      padding: 20px 24px;
       text-align: center;
       font-size: 12px;
-      color: #64748b;
+      color: #94a3b8;
       border-top: 1px solid #e2e8f0;
     }
-    .button {
-      display: inline-block;
-      background: linear-gradient(135deg, #1e3a8a, #06b6d4);
-      color: white;
-      text-decoration: none;
-      padding: 12px 28px;
-      border-radius: 8px;
-      font-weight: 600;
-      margin-top: 16px;
+    .footer p {
+      margin: 2px 0;
+    }
+    .footer .note {
+      font-size: 11px;
+      color: #cbd5e1;
+      margin-top: 6px;
     }
     @media (max-width: 480px) {
       .content {
-        padding: 24px 20px;
+        padding: 20px 16px;
+      }
+      .step {
+        font-size: 13px;
+      }
+      .header h1 {
+        font-size: 22px;
       }
     }
   </style>
@@ -400,63 +498,68 @@ export const getUserEmailTemplate = (data: {
 <body>
   <div class="container">
     <div class="header">
-      <div class="logo-container">
-        <img 
-          src="https://res.cloudinary.com/dxzluoydo/image/upload/v1779182002/analog10_qruzqp.png" 
-          alt="AnalogChips Technology" 
-          class="logo"
-          style="max-width: 180px; height: auto; background: white; border-radius: 12px; padding: 8px 16px;"
-        />
-      </div>
-      <h1>Thank You for Reaching Out!</h1>
+      <img 
+        src="https://res.cloudinary.com/dxzluoydo/image/upload/v1781780196/analog1_sbkzrz.png" 
+        alt="AnalogChips Technology" 
+        class="logo"
+      />
+    
+      <h1>Thank You!</h1>
+      <p>We've received your inquiry</p>
     </div>
     
     <div class="content">
       <div class="greeting">Dear ${data.name},</div>
       
       <div class="message">
-        Thank you for contacting <strong>AnalogChips Technology</strong>. We have received your inquiry and our team will review it shortly.
+        Thank you for reaching out to <strong>AnalogChips Technology</strong>. We appreciate your interest in our semiconductor and power management solutions.
       </div>
       
-      <div class="info-box">
-        <p><strong>📋 What happens next?</strong></p>
+      <div class="thank-you-box">
+        <p>✅ Your message has been received successfully. Our team will review your inquiry and get back to you shortly.</p>
+      </div>
+      
+      <div class="next-steps">
+        <h3>📋 What happens next?</h3>
         <div class="step">
           <span class="step-number">1</span>
-          <span>Our technical team will review your inquiry</span>
+          <span>Our team reviews your inquiry</span>
         </div>
         <div class="step">
           <span class="step-number">2</span>
-          <span>You'll receive a response within 24 business hours</span>
+          <span>We respond within <strong>24 business hours</strong></span>
         </div>
         <div class="step">
           <span class="step-number">3</span>
-          <span>We may schedule a technical consultation call</span>
+          <span>We discuss your specific requirements</span>
         </div>
       </div>
       
       <div class="message">
-        In the meantime, feel free to explore our product portfolio and technical documentation.
+        In the meantime, feel free to explore our product portfolio on our website.
       </div>
       
-      <a href="https://www.analog-chips.com" class="button">Visit Our Website</a>
-      
-      <div class="contact-links">
+      <div class="contact-info">
+        <p>📬 <strong>Need immediate assistance?</strong></p>
         <div class="contact-item">
-          <span>📞</span> Call us: <a href="tel:+918012345678" style="color: #06b6d4; text-decoration: none;">+91 80 1234 5678</a>
+          <span class="contact-icon">📞</span>
+          Call us: <a href="tel:+918012345678">+91 80 1234 5678</a>
         </div>
         <div class="contact-item">
-          <span>✉️</span> Email: <a href="mailto:sales@analog-chips.com" style="color: #06b6d4; text-decoration: none;">sales@analog-chips.com</a>
+          <span class="contact-icon">✉️</span>
+          Email: <a href="mailto:sales@analog-chips.com">sales@analog-chips.com</a>
         </div>
         <div class="contact-item">
-          <span>🌐</span> Website: <a href="https://www.analog-chips.com" style="color: #06b6d4; text-decoration: none;">www.analog-chips.com</a>
+          <span class="contact-icon">🌐</span>
+          Website: <a href="https://www.analog-chips.com">www.analog-chips.com</a>
         </div>
       </div>
     </div>
     
     <div class="footer">
       <p>© ${new Date().getFullYear()} AnalogChips Technology Pvt Ltd. All rights reserved.</p>
-      <p>Bangalore, India</p>
-      <p style="margin-top: 8px; font-size: 11px;">This is an automated response, please do not reply to this email.</p>
+      <p>Bengaluru, India</p>
+      <p class="note">This is an automated response. Please do not reply to this email.</p>
     </div>
   </div>
 </body>
