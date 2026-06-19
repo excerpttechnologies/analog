@@ -30,7 +30,7 @@ const sliderContent = [
     ctaText: "Explore Products",
     ctaLink: "/products",
     secondaryCta: "Contact Us",
-    backgroundImage: "/images/slider1.png",
+    backgroundImage: "/images/slider-1.png",
     // backgroundImage: "/images/banner.png",
     gradient: "from-blue-600 to-cyan-500",
     gradientLight: "from-blue-500 to-cyan-400",
@@ -47,7 +47,7 @@ const sliderContent = [
     ctaText: "About Us",
     ctaLink: "/about",
     secondaryCta: "Contact Us",
-    backgroundImage: "/images/slider2.png",
+    backgroundImage: "/images/slider-2.png",
     gradient: "from-orange-600 to-red-500",
     gradientLight: "from-orange-500 to-red-400",
 
@@ -63,7 +63,7 @@ const sliderContent = [
     ctaText: "Leadership",
     ctaLink: "/leadership",
     secondaryCta: "Contact Us",
-    backgroundImage: "/images/slider3.png",
+    backgroundImage: "/images/slider-3.png",
     gradient: "from-green-600 to-green-500",
     gradientLight: "from-orange-500 to-red-400",
 
@@ -80,7 +80,7 @@ const sliderContent = [
     ctaText: "Markets",
     ctaLink: "/market",
     secondaryCta: "Contact Us",
-    backgroundImage: "/images/slider4.png",
+    backgroundImage: "/images/slider-4.png",
     gradient: "from-red-600 to-[#001635]",
     gradientLight: "from-orange-500 to-red-400",
 
@@ -184,7 +184,7 @@ export function Hero() {
         "-=0.5",
       );
       timeline.set(".gradient-overlay", {
-        background: `linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%)`,
+        background: `linear-gradient(135deg, rgba(0, 0, 0, 0.92) 0%,transparent 100%)`,
       });
       timeline.to(
         ".gradient-overlay",
@@ -372,15 +372,13 @@ export function Hero() {
       ref={containerRef}
       onMouseEnter={stopAutoSlide}
       onMouseLeave={startAutoSlide}
-      className="relative min-h-[75vh] flex items-center justify-center overflow-hidden"
+      className="relative md:min-h-[65vh] h-[40vh] flex items-center justify-center overflow-hidden"
     >
       {/* Background Slider Image */}
       <div
         className="bg-slider-image absolute inset-0 bg-cover bg-center transition-all duration-700"
         style={{
           backgroundImage: `url(${currentSlide.backgroundImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
         }}
       />
 
@@ -406,21 +404,21 @@ export function Hero() {
       {/* Main Content */}
       <div
         ref={contentRef}
-        className="relative z-10 container  float-left px-4 md:px-6 lg:px-8 max-w-7xl  py-16 md:py-20"
+        className="relative z-10 container  float-left px-4  max-w-8xl  py-16 md:py-20"
       >
-        <div className="content-wrapper  max-w-5xl mr-auto">
+        <div className="content-wrapper  md:max-w-8xl max-w-[85vw] mr-auto">
           {/* Badge */}
 
           {/* Title */}
-          <h1 className="hero-title text-4xl whitespace-nowrap md:text-5xl lg:text-6xl  font-bold text-white mb-4 leading-[1.1] tracking-tight">
+          <h1 className="hero-title text-2xl md:text-4xl lg:text-5xl  whitespace-nowrap font-bold text-white mb-3.5 leading-[1.1] tracking-tight">
             {currentSlide.title}
           </h1>
-          <h1 className="hero-title text-4xl whitespace-nowrap md:text-5xl lg:text-6xl  font-bold text-white mb-5 leading-[1.1] tracking-tight">
+          <h1 className="hero-title text-2xl whitespace-nowrap md:text-4xl lg:text-5xl  font-bold text-white mb-4 leading-[1.1] tracking-tight">
             {currentSlide.title2}
           </h1>
 
           {/* Subtitle */}
-          <p className="hero-subtitle text-lg md:text-2xl text-white/80 leading-8 mb-7 max-w-3xl ">
+          <p className="hero-subtitle text-md md:text-xl text-white/80 md:leading-8 leading-6 mb-7 max-w-[80vw] md:max-w-3xl ">
             {currentSlide.subtitle}
           </p>
 
@@ -438,7 +436,7 @@ export function Hero() {
 
           {/* CTA Buttons */}
           <div className="hero-cta flex flex-col sm:flex-row gap-4">
-            <Button
+            {/* <Button
               asChild
               className={`bg-gradient-to-r ${currentSlide.gradient} hover:opacity-90 text-white font-semibold py-6 px-8 rounded shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-0.5 group`}
             >
@@ -446,10 +444,10 @@ export function Hero() {
                 {currentSlide.ctaText}
                 <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Link>
-            </Button>
+            </Button> */}
             <Button
               variant="outline"
-              className="border-white/30 bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white py-6 px-8 font-semibold rounded shadow-sm hover:shadow-md transition-all duration-300"
+              className="border-white/30 bg-white/10 backdrop-blur-sm w-fit hover:bg-white/20 text-white md:py-6 py-5  px-8 font-semibold rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
             >
               <Link href="/contact">{currentSlide.secondaryCta}</Link>
             </Button>
@@ -483,7 +481,7 @@ export function Hero() {
       {/* Navigation Buttons */}
       <button
         onClick={handlePrev}
-        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110 group z-20"
+        className="absolute hidden left-4 md:left-8 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 md:flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110 group z-20"
         disabled={isAnimating}
         aria-label="Previous slide"
       >
@@ -491,7 +489,7 @@ export function Hero() {
       </button>
       <button
         onClick={handleNext}
-        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110 group z-20"
+        className="absolute  hidden right-4 md:right-8 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 md:flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110 group z-20"
         disabled={isAnimating}
         aria-label="Next slide"
       >

@@ -374,7 +374,7 @@ export function Footer() {
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-12">
           {/* Brand Section */}
-          <div className="">
+          <div className="sm:ml-0 -ml-8">
             <div className="flex items-center gap-2">
               <img src="/images/analog1.png" alt="" className="h-32" />
             </div>

@@ -620,7 +620,7 @@ export function MarketOpportunitiesSection() {
         </div>
       </section>
       <br />
-      <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-6xl">
+      <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
         {/* Market Opportunities Description */}
         <div
           className={`space-y-6 transition-all duration-1000 transform ${
@@ -651,7 +651,7 @@ export function MarketOpportunitiesSection() {
 
         {/* Market Segments Grid */}
         <div
-          className={`mt-16 transition-all duration-1000 delay-300 transform ${
+          className={`mt-6 transition-all duration-1000 delay-300 transform ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >

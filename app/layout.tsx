@@ -7,11 +7,11 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Analog App",
+  title: "Analogchips",
   description: "Analog",
   generator: "Analog.app",
   icons: {
-    icon: "/images/analog.png",
+    icon: "/images/logo.png",
   },
 };
 

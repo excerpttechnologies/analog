@@ -322,7 +322,7 @@ const cards = [
     title: "Our Vision",
     subtitle: "Where We're Headed",
     description:
-      '"Make in India by Design in India" — Enriching India Semiconductor Mission by successfully deploying Indian-owned Analog IPs and Products for domestic and overseas markets.',
+      "Make in India by Design in India — Enriching India Semiconductor Mission by successfully deploying Indian-owned Analog IPs and Products for domestic and overseas markets.",
     color: "purple",
   },
   {
@@ -354,8 +354,8 @@ export function AboutSection() {
 
       {/* Company Overview - Full Width */}
       <div className="max-w-7xl mx-auto px-2 md:px-4 ">
-        <div className="bg-white  border-slate-100 p-8 md:p-12">
-          <h3 className="text-2xl md:text-4xl font-bold text-slate-900 mb-4">
+        <div className="bg-white  border-slate-100 p-8 md:p-10">
+          <h3 className="text-2xl md:text-4xl font-bold text-slate-900 mb-2">
             Company Overview
           </h3>
           <p className="text-base md:text-lg text-slate-600 leading-relaxed mb-4">
@@ -376,9 +376,9 @@ export function AboutSection() {
           </p>
 
           {/* Strengths - Bullet Points */}
-          <div className="mt-6 flex flex-wrap  gap-2">
+          <div className="mt-5 flex flex-wrap  gap-2">
             {strengths.map((strength, idx) => (
-              <div key={idx} className="flex items-center gap-2 p-2 ">
+              <div key={idx} className="flex items-center gap-2 py-2 ">
                 <div className="w-2 h-2 rounded-full bg-blue-500 flex-shrink-0" />
                 <span className="text-sm font-medium text-slate-700">
                   {strength}
@@ -390,12 +390,12 @@ export function AboutSection() {
       </div>
 
       {/* Vision & Mission - 2 Cards in One Row */}
-      <div className="max-w-6xl mx-auto ">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {cards.slice(1).map((card) => (
+      <div className="max-w-7xl sm:px-12 px-8 mx-auto ">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
+          {cards.slice(1).map((card, i) => (
             <div
               key={card.id}
-              className="bg-white rounded-md  border border-slate-100 px-9 py-6  hover:shadow-md transition-shadow duration-300"
+              className={`bg-white  ${i == 0 && "md:border-r"} px-3   `}
             >
               <div className="flex items-center gap-2.5 mb-3"></div>
               <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">

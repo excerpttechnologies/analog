@@ -5678,7 +5678,7 @@ function SimpleDropdown({
       onMouseLeave={handleMouseLeave}
     >
       <button
-        className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 group ${
+        className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-md font-medium transition-all duration-300 group ${
           isActive
             ? `text-[${THEME_COLOR}]`
             : "text-slate-600 hover:text-slate-900"
@@ -5854,7 +5854,7 @@ export function Navbar() {
             : "bg-white backdrop-blur-sm"
         }`}
       >
-        <div className="container mx-auto px-4 md:px-6 lg:px-7 max-w-7xl">
+        <div className=" sm:px-0 pr-3 sm:w-[95vw] mx-auto">
           <div className="flex items-center justify-between h-[5rem]">
             {/* Logo - Larger size, transparent background */}
             <Link href="/" className="group flex items-center shrink-0">
@@ -5866,7 +5866,7 @@ export function Navbar() {
                       alt="AnalogChips Logo"
                       width={200}
                       height={160}
-                      className="object-contain mt-5"
+                      className="object-contain mt-5 -ml-5 lg:-ml-16"
                       onError={() => setLogoError(true)}
                       unoptimized
                       priority
@@ -5881,7 +5881,7 @@ export function Navbar() {
             </Link>
 
             {/* Desktop Navigation - All items */}
-            <div className="hidden md:flex items-center gap-1">
+            <div className="hidden md:flex sm:gap-x-6 items-center gap-1">
               {navigationData.map((item, index) => {
                 const active = item.href
                   ? isActive(item.href)
@@ -5971,23 +5971,6 @@ export function Navbar() {
               {/* Header */}
               <div className="flex items-center justify-between p-4 border-b border-slate-200">
                 <div className="flex items-center gap-2">
-                  <div className="w-12 h-12 rounded-lg overflow-hidden flex items-center justify-center">
-                    {!logoError ? (
-                      <Image
-                        src={logoSrc}
-                        alt="AnalogChips Logo"
-                        width={48}
-                        height={48}
-                        className="object-contain"
-                        onError={() => setLogoError(true)}
-                        unoptimized
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-[#0393D3] to-[#0277b5] flex items-center justify-center rounded-lg">
-                        <Sparkles className="w-6 h-6 text-white" />
-                      </div>
-                    )}
-                  </div>
                   <span className="font-bold text-lg bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
                     Menu
                   </span>

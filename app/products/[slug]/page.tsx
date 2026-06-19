@@ -22,6 +22,34 @@
 //   Gauge,
 //   Plug,
 //   Leaf,
+//   Monitor,
+//   Wifi,
+//   Factory,
+//   Smartphone,
+//   Laptop,
+//   Server,
+//   Power,
+//   Home,
+//   Car,
+//   Lightbulb,
+//   Building,
+//   Cloud,
+//   Database,
+//   Network,
+//   HardDrive,
+//   Cctv,
+//   Fan,
+//   Watch,
+//   Headphones,
+//   Speaker,
+//   Printer,
+//   Camera,
+//   Drone,
+//   Robot,
+//   Satellite,
+//   ShieldCheck,
+//   Zap as ZapIcon,
+//   Cpu as CpuIcon,
 // } from "lucide-react";
 // import { Card } from "@/components/ui/card";
 // import gsap from "gsap";
@@ -44,13 +72,6 @@
 //     category: "Switching Regulators",
 //     description:
 //       "Highly integrated high-input-voltage buck regulator designed to simplify power conversion with excellent transient response and low standby power consumption.",
-//     longDescription: [
-//       "Highly integrated high-input-voltage buck regulator designed to simplify power conversion with excellent transient response and low standby power consumption.",
-//       "Ideal for distributed power supply applications requiring efficient voltage step-down conversion.",
-//       "Features wide input voltage support, high conversion efficiency, and fast dynamic response.",
-//       "Integrated protection features ensure reliable operation across various load conditions.",
-//       "Compact solution footprint enables space-constrained designs.",
-//     ],
 //     specs: [
 //       { label: "Input Voltage", value: "4.5V to 17V" },
 //       { label: "Output Current", value: "7A Max" },
@@ -59,11 +80,10 @@
 //       { label: "Efficiency", value: "High Conversion Efficiency" },
 //     ],
 //     applications: [
-//       "Computing Systems",
-//       "Networking Equipment",
-//       "Industrial Automation",
-//       "Consumer Electronics",
-//       "Distributed Power Systems",
+//       { name: "Computing", icon: Monitor },
+//       { name: "Networking", icon: Wifi },
+//       { name: "Industrial", icon: Factory },
+//       { name: "Consumer Electronics", icon: Smartphone },
 //     ],
 //     features: [
 //       "Wide Input Voltage Support",
@@ -72,7 +92,7 @@
 //       "Compact Solution Footprint",
 //       "Integrated Protection Features",
 //     ],
-//     image: "/images/buck.jfif",
+//     image: "/images/buck_.png",
 //     icon: Zap,
 //     gradient: "from-emerald-500 to-teal-500",
 //     lightGradient: "from-emerald-50 to-teal-50",
@@ -93,12 +113,6 @@
 //     category: "Switching Regulators",
 //     description:
 //       "A highly integrated DC-DC boost converter combining high efficiency, low power consumption, and reliable operation for portable and industrial systems.",
-//     longDescription: [
-//       "A highly integrated DC-DC boost converter combining high efficiency, low power consumption, and reliable operation for portable and industrial systems.",
-//       "Features integrated power MOSFETs and low quiescent current for improved battery life.",
-//       "Wide input voltage support enables operation from various power sources including single-cell batteries.",
-//       "Fast dynamic response ensures stable output during load transients.",
-//     ],
 //     specs: [
 //       { label: "Input Voltage", value: "0.8V to 5V" },
 //       { label: "Switching Current", value: "5A Max" },
@@ -107,12 +121,12 @@
 //       { label: "Quiescent Current", value: "Low Quiescent Current" },
 //     ],
 //     applications: [
-//       "Portable Electronics",
-//       "Battery-Powered Devices",
-//       "IoT and Connected Systems",
-//       "Industrial Monitoring Equipment",
-//       "USB Power Solutions",
-//       "Energy Storage and Backup Systems",
+//       { name: "Portable Electronics", icon: Laptop },
+//       { name: "Battery-Powered Devices", icon: Battery },
+//       { name: "IoT and Connected Systems", icon: Wifi },
+//       { name: "Industrial Monitoring Equipment", icon: Factory },
+//       { name: "USB Power Solutions", icon: Plug },
+//       { name: "Energy Storage and Backup Systems", icon: Power },
 //     ],
 //     features: [
 //       "Wide Input Voltage Support",
@@ -122,7 +136,7 @@
 //       "Integrated Protection Features",
 //       "Compact Solution with minimal external components",
 //     ],
-//     image: "/images/boost.jfif",
+//     image: "/images/boost_.png",
 //     icon: Battery,
 //     gradient: "from-blue-500 to-cyan-500",
 //     lightGradient: "from-blue-50 to-cyan-50",
@@ -142,13 +156,7 @@
 //     fullName: "Ultra Low Drop Out Voltage Regulator",
 //     category: "Linear Regulators",
 //     description:
-//       "Low dropout linear regulator designed to provide stable and efficient power delivery for always-on systems, industrial electronics and battery-powered applications.",
-//     longDescription: [
 //       "Low dropout linear regulator designed to provide stable and efficient power delivery, making it ideal for always-on systems, industrial electronics and battery-powered applications.",
-//       "Features wide input voltage capability and fast load response.",
-//       "Low dropout architecture enables efficient operation even when input voltage is close to output voltage.",
-//       "Integrated protection features ensure reliable operation under fault conditions.",
-//     ],
 //     specs: [
 //       { label: "Input Voltage", value: "4V to 40V" },
 //       { label: "Dropout Voltage", value: "300mV" },
@@ -157,12 +165,12 @@
 //       { label: "Output Regulation", value: "Stable Output" },
 //     ],
 //     applications: [
-//       "Industrial Automation Equipment",
-//       "Communication and Connectivity Modules",
-//       "Embedded Processing Systems",
-//       "Smart Metering Solutions",
-//       "Sensor and Monitoring Equipment",
-//       "Battery-Powered Electronic Systems",
+//       { name: "Industrial Automation Equipment", icon: Factory },
+//       { name: "Communication and Connectivity Modules", icon: Wifi },
+//       { name: "Embedded Processing Systems", icon: Cpu },
+//       { name: "Smart Metering Solutions", icon: Monitor },
+//       { name: "Sensor and Monitoring Equipment", icon: Radio },
+//       { name: "Battery-Powered Electronic Systems", icon: Battery },
 //     ],
 //     features: [
 //       "Wide Input Voltage Capability",
@@ -173,7 +181,7 @@
 //       "Integrated Protection Features",
 //       "Compact Solution with Minimal External Components",
 //     ],
-//     image: "/images/ldo.jfif",
+//     image: "/images/ldo_.png",
 //     icon: Radio,
 //     gradient: "from-purple-500 to-pink-500",
 //     lightGradient: "from-purple-50 to-pink-50",
@@ -194,12 +202,6 @@
 //     category: "Lighting Solutions",
 //     description:
 //       "A compact linear LED driver providing accurate current regulation, simplified design, and cost-effective solutions across automotive, industrial and consumer applications.",
-//     longDescription: [
-//       "A compact linear LED driver providing accurate current regulation, simplified design, and cost-effective solutions across automotive, industrial and consumer applications.",
-//       "Features PWM dimming support and uniform LED brightness across supply variations.",
-//       "No external inductors required, enabling compact and cost-effective lighting solutions.",
-//       "Easy integration into existing lighting platforms with minimal design complexity.",
-//     ],
 //     specs: [
 //       { label: "Input Voltage", value: "2.5V to 55V" },
 //       { label: "Output Current", value: "180mA" },
@@ -208,13 +210,13 @@
 //       { label: "Current Accuracy", value: "Accurate Regulation" },
 //     ],
 //     applications: [
-//       "Industrial Indicators",
-//       "Building and Architectural Lighting",
-//       "Smart Home Lighting Systems",
-//       "Consumer Electronics",
-//       "Signage and Information Displays",
-//       "Portable Lighting Equipment",
-//       "Smart City Infrastructure",
+//       { name: "Industrial Indicators", icon: Factory },
+//       { name: "Building and Architectural Lighting", icon: Building },
+//       { name: "Smart Home Lighting Systems", icon: Home },
+//       { name: "Consumer Electronics", icon: Smartphone },
+//       { name: "Signage and Information Displays", icon: Monitor },
+//       { name: "Portable Lighting Equipment", icon: Lightbulb },
+//       { name: "Smart City Infrastructure", icon: Cloud },
 //     ],
 //     features: [
 //       "Uniform LED Brightness across supply variations",
@@ -224,7 +226,7 @@
 //       "PWM Dimming Support",
 //       "Easy Integration into Existing Lighting Platforms",
 //     ],
-//     image: "/images/led.jfif",
+//     image: "/images/led_.png",
 //     icon: Layers,
 //     gradient: "from-orange-500 to-amber-500",
 //     lightGradient: "from-orange-50 to-amber-50",
@@ -245,12 +247,6 @@
 //     category: "Protection & Control",
 //     description:
 //       "Single Channel High-side load switch with low RDS(ON) and integrated protection features for controlled power distribution.",
-//     longDescription: [
-//       "Single Channel High-side load switch with low RDS(ON) and integrated protection features for controlled power distribution.",
-//       "Features programmable soft start, discharge rate control, and power good indicator for reliable system operation.",
-//       "Low quiescent current makes it ideal for battery-powered applications.",
-//       "Integrated N-channel MOSFET provides efficient power switching with minimal power loss.",
-//     ],
 //     specs: [
 //       { label: "Input Voltage", value: "2V to 5V" },
 //       { label: "RDS(ON)", value: "25mΩ" },
@@ -259,13 +255,13 @@
 //       { label: "Quiescent Current", value: "Low Quiescent Current" },
 //     ],
 //     applications: [
-//       "Power Distribution Subsystems",
-//       "Networking and Communication Equipment",
-//       "Battery-Powered Equipment",
-//       "Computing Platforms",
-//       "Industrial Automation Systems",
-//       "IoT and Edge Devices",
-//       "Embedded Processing Systems",
+//       { name: "Power Distribution Subsystems", icon: Power },
+//       { name: "Networking and Communication Equipment", icon: Wifi },
+//       { name: "Battery-Powered Equipment", icon: Battery },
+//       { name: "Computing Platforms", icon: Monitor },
+//       { name: "Industrial Automation Systems", icon: Factory },
+//       { name: "IoT and Edge Devices", icon: Radio },
+//       { name: "Embedded Processing Systems", icon: Cpu },
 //     ],
 //     features: [
 //       "Integrated N-channel MOSFET",
@@ -275,7 +271,7 @@
 //       "Programmable discharge rate",
 //       "Power Good Indicator",
 //     ],
-//     image: "/images/load.jfif",
+//     image: "/images/load_.png",
 //     icon: Gauge,
 //     gradient: "from-indigo-500 to-purple-500",
 //     lightGradient: "from-indigo-50 to-purple-50",
@@ -296,28 +292,22 @@
 //     category: "Protection & Control",
 //     description:
 //       "An ideal diode controller designed for efficient power-path management, minimizing power loss while protecting against reverse current conditions.",
-//     longDescription: [
-//       "An ideal diode controller designed for efficient power-path management, minimizing power loss while protecting against reverse current conditions.",
-//       "Features reverse current protection, reduced power dissipation, and supports redundant power architectures.",
-//       "Ultra-low forward voltage drop with external MOSFET reduces power loss compared to traditional diodes.",
-//       "Ideal for OR-ing applications and battery management systems requiring high reliability.",
-//     ],
 //     specs: [
 //       { label: "Input Voltage", value: "3.5V to 60V" },
-//       { label: "Quiescent Current", value: "100µA" },
+//       { label: "Low IQ", value: "100µA" },
 //       { label: "Forward Drop", value: "Ultra-Low with external MOSFET" },
 //       { label: "Operating Temp", value: "-40°C to +125°C" },
 //       { label: "Protection", value: "Reverse Current Protection" },
 //     ],
 //     applications: [
-//       "Battery Management Systems (BMS)",
-//       "Computing and Server Platforms",
-//       "Networking and Telecom Equipment",
-//       "Industrial Automation Systems",
-//       "Power Distribution Modules",
-//       "Communication Infrastructure",
-//       "Redundant Power Supply Architectures",
-//       "Advanced Electronic Control Systems",
+//       { name: "Battery Management Systems (BMS)", icon: Battery },
+//       { name: "Computing and Server Platforms", icon: Server },
+//       { name: "Networking and Telecom Equipment", icon: Wifi },
+//       { name: "Industrial Automation Systems", icon: Factory },
+//       { name: "Power Distribution Modules", icon: Power },
+//       { name: "Communication Infrastructure", icon: Network },
+//       { name: "Redundant Power Supply Architectures", icon: Database },
+//       { name: "Advanced Electronic Control Systems", icon: ShieldCheck },
 //     ],
 //     features: [
 //       "Reverse Current Protection",
@@ -327,7 +317,7 @@
 //       "Compact Implementation",
 //       "Simplified Integration into Power Architectures",
 //     ],
-//     image: "/images/ideal.jfif",
+//     image: "/images/ideal_.png",
 //     icon: Plug,
 //     gradient: "from-red-500 to-rose-500",
 //     lightGradient: "from-red-50 to-rose-50",
@@ -432,42 +422,26 @@
 //   return (
 //     <>
 //       <Navbar />
-//       <main
-//         ref={sectionRef}
-//         className="bg-gradient-to-b from-slate-50 via-white to-slate-50 min-h-screen"
-//       >
+//       <main ref={sectionRef} className="bg-gray-50 min-h-screen">
 //         {/* Hero Section */}
-//         <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden">
-//           <div className="absolute inset-0 -z-10">
-//             <div className="absolute top-20 left-10 w-96 h-96 bg-blue-200/30 rounded-full blur-3xl" />
-//             <div className="absolute bottom-20 right-10 w-96 h-96 bg-cyan-200/30 rounded-full blur-3xl" />
-//             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-200/20 rounded-full blur-3xl" />
-//             <div
-//               className="absolute inset-0 opacity-[0.03]"
-//               style={{
-//                 backgroundImage: `radial-gradient(circle at 1px 1px, rgb(14, 165, 233) 1px, transparent 1px)`,
-//                 backgroundSize: "40px 40px",
-//               }}
-//             />
-//           </div>
-
+//         <section className="relative min-h-[30vh]  flex items-center justify-center overflow-hidden">
 //           <div
 //             ref={heroRef}
-//             className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl py-8"
+//             className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl "
 //           >
-//             <div className="flex flex-col md:flex-row gap-8 items-center">
+//             <div className="flex flex-col md:flex-row  items-center">
 //               <div className="flex-1">
-//                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200 shadow-sm mb-6">
+//                 {/* <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200 shadow-sm mb-6">
 //                   <span className="text-sm font-semibold bg-gradient-to-r from-blue-700 to-cyan-700 bg-clip-text text-transparent">
 //                     {product.category}
 //                   </span>
-//                 </div>
+//                 </div> */}
 
-//                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-3 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 bg-clip-text text-transparent">
+//                 <h1 className="text-3xl md:text-4xl font-bold mb-3 px-1.5 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 bg-clip-text text-transparent">
 //                   {product.fullName}
 //                 </h1>
 
-//                 <p className="text-lg text-slate-600 leading-relaxed">
+//                 <p className="text-lg px-1.5 text-slate-600 leading-relaxed">
 //                   {product.description}
 //                 </p>
 //               </div>
@@ -476,103 +450,93 @@
 //         </section>
 
 //         {/* Main Content */}
-//         <section className="pb-16 -mt-12">
+//         <section className="pb-16 -mt-4">
 //           <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
 //             <div className="grid grid-cols-1 gap-12">
-//               {/* Left Column - Image & Description */}
-//               <div ref={contentRef}>
-//                 <div className="relative h-80 rounded-2xl overflow-hidden mb-6 shadow-xl">
+//               {/* Left Column - Image & Right Column - Target Specifications */}
+//               <div
+//                 ref={contentRef}
+//                 className="grid grid-cols-1 lg:grid-cols-2 gap-8"
+//               >
+//                 <div className="relative h-92   bg-white   box-border">
 //                   <Image
 //                     src={product.image}
 //                     alt={product.name}
 //                     fill
-//                     className="object-cover"
+//                     className="object-cover    object-center"
 //                   />
 //                   <div
-//                     className={`absolute inset-0 bg-gradient-to-r ${product.gradient} mix-blend-multiply opacity-30`}
+//                     className={`absolute inset-0  mix-blend-multiply opacity-30`}
 //                   />
 //                 </div>
-//                 <div className="prose prose-slate max-w-none">
-//                   <ul
-//                     style={{
-//                       listStyle: "dot",
-//                       paddingLeft: "1.5rem",
-//                     }}
-//                     className="text-slate-600 flex flex-col gap-y-1 font-bold leading-relaxed"
-//                   >
-//                     {product?.longDescription?.map(
-//                       (desc: string, i: number) => (
-//                         <li
-//                           key={i}
-//                           className="flex items-center justify-start gap-x-2"
-//                         >
-//                           <span className="text-3xl font-bold flex justify-center items-center -mt-4">
-//                             •
-//                           </span>
-//                           {desc}
-//                         </li>
-//                       ),
-//                     )}
-//                   </ul>
+
+//                 {/* Right Column - Target Specifications */}
+//                 <div>
+//                   <h2 className="text-xl font-bold text-slate-900 mb-4">
+//                     Target Specifications
+//                   </h2>
+//                   {product.advantages && (
+//                     <div className="grid gap-2.5">
+//                       {product.advantages.map((adv: any, idx: number) => {
+//                         const AdvIcon = adv.icon;
+//                         return (
+//                           <div
+//                             key={idx}
+//                             className={`p-4 rounded-lg bg-gradient-to-r  border border-slate-200 shadow-sm hover:shadow-md transition-shadow duration-200`}
+//                           >
+//                             <div className="flex items-start gap-2">
+//                               <AdvIcon className="w-4 h-4 text-slate-700 flex-shrink-0 mt-0.5" />
+//                               <div>
+//                                 <div className="text-[10px] font-medium text-slate-500 uppercase tracking-wide">
+//                                   {adv.label}
+//                                 </div>
+//                                 <div className="text-sm font-bold text-slate-900">
+//                                   {adv.value}
+//                                 </div>
+//                               </div>
+//                             </div>
+//                           </div>
+//                         );
+//                       })}
+//                     </div>
+//                   )}
 //                 </div>
 //               </div>
 //             </div>
 
-//             {/* Advantages / Key Metrics Section */}
-//             {product.advantages && (
-//               <div className="mt-12">
-//                 <h2 className="text-2xl font-bold text-slate-900 mb-6">
-//                   Key Advantages
-//                 </h2>
-//                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-//                   {product.advantages.map((adv: any, idx: number) => {
-//                     const AdvIcon = adv.icon;
-//                     return (
-//                       <div
-//                         key={idx}
-//                         className={`p-4 rounded-xl bg-gradient-to-r ${product.lightGradient} border border-slate-200 shadow-sm text-center`}
-//                       >
-//                         <div className="text-xs text-slate-500 font-bold mt-1">
-//                           {adv.label}
-//                         </div>
-//                         <div className="text-xl font-bold text-slate-900">
-//                           {adv.value}
-//                         </div>
-//                       </div>
-//                     );
-//                   })}
-//                 </div>
-//               </div>
-//             )}
-
 //             {/* Applications Section */}
 //             <div ref={featuresRef} className="mt-12">
 //               <h2 className="text-2xl font-bold text-slate-900 mb-6">
-//                 Key Applications
+//                 Target Applications
 //               </h2>
 //               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//                 {product.applications.map((app: string, idx: number) => (
-//                   <div
-//                     key={idx}
-//                     className="flex items-center gap-3 p-3 rounded-xl bg-white border border-slate-200 shadow-sm"
-//                   >
-//                     <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-//                     <span className="text-slate-700 font-medium">{app}</span>
-//                   </div>
-//                 ))}
+//                 {product.applications.map((app: any, idx: number) => {
+//                   const AppIcon = app.icon;
+//                   return (
+//                     <div
+//                       key={idx}
+//                       className="flex items-center gap-3 p-3 rounded-xl bg-white border border-slate-200 shadow-sm"
+//                     >
+//                       <AppIcon className="w-5 h-5 text-slate-700 flex-shrink-0" />
+//                       <span className="text-slate-700 font-medium">
+//                         {app.name}
+//                       </span>
+//                     </div>
+//                   );
+//                 })}
 //               </div>
 //             </div>
 
 //             {/* Features Section */}
 //             <div className="mt-12">
 //               <h2 className="text-2xl font-bold text-slate-900 mb-6">
-//                 Key Features
+//                 Planned Features
 //               </h2>
 //               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 //                 {product.features.map((feature: string, idx: number) => (
 //                   <div
 //                     key={idx}
-//                     className="flex items-center gap-3 p-3 rounded-xl shadow bg-slate-50 border border-slate-100"
+//                     className="flex items-center gap-3 p-3 rounded-xl shadow bg-white border border-slate-100"
 //                   >
 //                     <div
 //                       className={`w-8 h-8 rounded-lg bg-gradient-to-r ${product.gradient} flex items-center justify-center`}
@@ -625,7 +589,6 @@
 
 "use client";
 
-import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, notFound } from "next/navigation";
@@ -670,22 +633,14 @@ import {
   Printer,
   Camera,
   Drone,
-  Robot,
   Satellite,
   ShieldCheck,
   Zap as ZapIcon,
   Cpu as CpuIcon,
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-
-// Register ScrollTrigger
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 // Updated product data based on the provided semiconductor products
 const productsData: Record<string, any> = {
@@ -717,7 +672,7 @@ const productsData: Record<string, any> = {
       "Compact Solution Footprint",
       "Integrated Protection Features",
     ],
-    image: "/images/buck.jfif",
+    image: "/images/buck_.png",
     icon: Zap,
     gradient: "from-emerald-500 to-teal-500",
     lightGradient: "from-emerald-50 to-teal-50",
@@ -761,7 +716,7 @@ const productsData: Record<string, any> = {
       "Integrated Protection Features",
       "Compact Solution with minimal external components",
     ],
-    image: "/images/boost.jfif",
+    image: "/images/boost_.png",
     icon: Battery,
     gradient: "from-blue-500 to-cyan-500",
     lightGradient: "from-blue-50 to-cyan-50",
@@ -806,7 +761,7 @@ const productsData: Record<string, any> = {
       "Integrated Protection Features",
       "Compact Solution with Minimal External Components",
     ],
-    image: "/images/ldo.jfif",
+    image: "/images/ldo_.png",
     icon: Radio,
     gradient: "from-purple-500 to-pink-500",
     lightGradient: "from-purple-50 to-pink-50",
@@ -851,7 +806,7 @@ const productsData: Record<string, any> = {
       "PWM Dimming Support",
       "Easy Integration into Existing Lighting Platforms",
     ],
-    image: "/images/led.jfif",
+    image: "/images/led_.png",
     icon: Layers,
     gradient: "from-orange-500 to-amber-500",
     lightGradient: "from-orange-50 to-amber-50",
@@ -896,7 +851,7 @@ const productsData: Record<string, any> = {
       "Programmable discharge rate",
       "Power Good Indicator",
     ],
-    image: "/images/load.jfif",
+    image: "/images/load_.png",
     icon: Gauge,
     gradient: "from-indigo-500 to-purple-500",
     lightGradient: "from-indigo-50 to-purple-50",
@@ -942,7 +897,7 @@ const productsData: Record<string, any> = {
       "Compact Implementation",
       "Simplified Integration into Power Architectures",
     ],
-    image: "/images/ideal.jfif",
+    image: "/images/ideal_.png",
     icon: Plug,
     gradient: "from-red-500 to-rose-500",
     lightGradient: "from-red-50 to-rose-50",
@@ -961,102 +916,19 @@ export default function ProductDetailPage() {
   const slug = params.slug as string;
   const product = productsData[slug];
 
-  const sectionRef = useRef<HTMLElement>(null);
-  const heroRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const specsRef = useRef<HTMLDivElement>(null);
-  const featuresRef = useRef<HTMLDivElement>(null);
-
   if (!product) {
     notFound();
   }
 
   const Icon = product.icon;
 
-  useEffect(() => {
-    if (!sectionRef.current) return;
-
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        heroRef.current,
-        { opacity: 0, y: 50, filter: "blur(10px)" },
-        {
-          opacity: 1,
-          y: 0,
-          filter: "blur(0px)",
-          duration: 1,
-          ease: "power3.out",
-        },
-      );
-
-      gsap.fromTo(
-        contentRef.current,
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          delay: 0.3,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: contentRef.current,
-            start: "top 85%",
-            toggleActions: "play none none reverse",
-          },
-        },
-      );
-
-      gsap.fromTo(
-        specsRef.current,
-        { opacity: 0, x: -30 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.6,
-          delay: 0.4,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: specsRef.current,
-            start: "top 85%",
-            toggleActions: "play none none reverse",
-          },
-        },
-      );
-
-      gsap.fromTo(
-        featuresRef.current,
-        { opacity: 0, x: 30 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.6,
-          delay: 0.5,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: featuresRef.current,
-            start: "top 85%",
-            toggleActions: "play none none reverse",
-          },
-        },
-      );
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
     <>
       <Navbar />
-      <main
-        ref={sectionRef}
-        className="bg-gradient-to-b from-slate-50 via-white to-slate-50 min-h-screen"
-      >
+      <main className="bg-gray-50 min-h-screen">
         {/* Hero Section */}
         <section className="relative min-h-[30vh]  flex items-center justify-center overflow-hidden">
-          <div
-            ref={heroRef}
-            className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl "
-          >
+          <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl ">
             <div className="flex flex-col md:flex-row  items-center">
               <div className="flex-1">
                 {/* <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200 shadow-sm mb-6">
@@ -1065,11 +937,11 @@ export default function ProductDetailPage() {
                   </span>
                 </div> */}
 
-                <h1 className="text-3xl md:text-4xl font-bold mb-3 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 bg-clip-text text-transparent">
+                <h1 className="text-3xl md:text-4xl font-bold mb-3 px-1.5 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 bg-clip-text text-transparent">
                   {product.fullName}
                 </h1>
 
-                <p className="text-lg text-slate-600 leading-relaxed">
+                <p className="text-lg px-1.5 text-slate-600 leading-relaxed">
                   {product.description}
                 </p>
               </div>
@@ -1078,23 +950,20 @@ export default function ProductDetailPage() {
         </section>
 
         {/* Main Content */}
-        <section className="pb-16 -mt-3">
+        <section className="pb-16 -mt-4">
           <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
             <div className="grid grid-cols-1 gap-12">
               {/* Left Column - Image & Right Column - Target Specifications */}
-              <div
-                ref={contentRef}
-                className="grid grid-cols-1 lg:grid-cols-2 gap-8"
-              >
-                <div className="relative h-80 rounded-2xl overflow-hidden shadow-xl">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div className="relative h-92   bg-white   box-border">
                   <Image
                     src={product.image}
                     alt={product.name}
                     fill
-                    className="object-cover"
+                    className="object-cover    object-center"
                   />
                   <div
-                    className={`absolute inset-0 bg-gradient-to-r ${product.gradient} mix-blend-multiply opacity-30`}
+                    className={`absolute inset-0  mix-blend-multiply opacity-30`}
                   />
                 </div>
 
@@ -1110,7 +979,7 @@ export default function ProductDetailPage() {
                         return (
                           <div
                             key={idx}
-                            className={`p-3 rounded-xl bg-gradient-to-r ${product.lightGradient} border border-slate-200 shadow-sm hover:shadow-md transition-shadow duration-200`}
+                            className={`p-4 rounded-lg bg-gradient-to-r  border border-slate-200 shadow-sm hover:shadow-md transition-shadow duration-200`}
                           >
                             <div className="flex items-start gap-2">
                               <AdvIcon className="w-4 h-4 text-slate-700 flex-shrink-0 mt-0.5" />
@@ -1132,19 +1001,8 @@ export default function ProductDetailPage() {
               </div>
             </div>
 
-            {/* Product Development Notice */}
-            <div className="mt-8 p-4 bg-amber-50 border border-amber-200 rounded-xl">
-              <p className="text-sm text-amber-800">
-                <strong>Product Development Notice:</strong> The products
-                presented on this page represent our current development
-                roadmap. Final specifications, features and availability may
-                change during the product development cycle. Please contact us
-                for the latest product status.
-              </p>
-            </div>
-
             {/* Applications Section */}
-            <div ref={featuresRef} className="mt-12">
+            <div className="mt-12">
               <h2 className="text-2xl font-bold text-slate-900 mb-6">
                 Target Applications
               </h2>
@@ -1175,7 +1033,7 @@ export default function ProductDetailPage() {
                 {product.features.map((feature: string, idx: number) => (
                   <div
                     key={idx}
-                    className="flex items-center gap-3 p-3 rounded-xl shadow bg-slate-50 border border-slate-100"
+                    className="flex items-center gap-3 p-3 rounded-xl shadow bg-white border border-slate-100"
                   >
                     <div
                       className={`w-8 h-8 rounded-lg bg-gradient-to-r ${product.gradient} flex items-center justify-center`}

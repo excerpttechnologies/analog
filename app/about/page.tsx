@@ -362,8 +362,8 @@ export default function AboutPage() {
         </section>
 
         {/* Section 2: Company Overview */}
-        <section className="py-12 bg-white">
-          <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-6xl">
+        <section className="py-10 bg-white">
+          <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
             <div
               ref={sectionRef}
               className={`space-y-6 transition-all duration-1000 transform ${
@@ -409,8 +409,8 @@ export default function AboutPage() {
         </section>
 
         {/* Section 3: Two Column Layout */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-6xl">
+        <section className="py-0 pb-20 bg-white">
+          <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
             <div
               ref={contentRef}
               className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-start transition-all duration-1000 delay-300 transform ${
@@ -423,7 +423,7 @@ export default function AboutPage() {
               <div className="relative group">
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl transform transition-transform duration-700 group-hover:scale-[1.02]">
                   <Image
-                    src="/images/about-analog.jfif"
+                    src="/images/about-analog.png"
                     alt="Semiconductor Technology"
                     width={600}
                     height={500}
