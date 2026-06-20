@@ -5854,19 +5854,19 @@ export function Navbar() {
             : "bg-white backdrop-blur-sm"
         }`}
       >
-        <div className=" sm:px-0 pr-3 sm:w-[95vw] mx-auto">
+        <div className=" sm:px-0 pr-3 sm:w-[96vw] mx-auto">
           <div className="flex items-center justify-between h-[5rem]">
             {/* Logo - Larger size, transparent background */}
             <Link href="/" className="group flex items-center shrink-0">
               <div className="relative">
-                <div className="relative w-44 h-44 md:w-56 md:h-52 lg:w-60 lg:h-56 flex items-center justify-center">
+                <div className="relative w-52 h-52 md:h-62 md:w-62 lg:w-72 lg:h-62 flex items-center justify-center">
                   {!logoError ? (
                     <Image
                       src={logoSrc}
                       alt="AnalogChips Logo"
-                      width={200}
+                      width={270}
                       height={160}
-                      className="object-contain mt-5 -ml-5 lg:-ml-16"
+                      className="object-contain mt-7 -ml-7 lg:-ml-20"
                       onError={() => setLogoError(true)}
                       unoptimized
                       priority

@@ -323,7 +323,7 @@ export default function LeadershipPage() {
       <Navbar />
       <main className="bg-white">
         {/* Hero Section */}
-        <section className="relative py-20  bg-gradient-to-b from-slate-50 to-white overflow-hidden">
+        <section className="relative py-12  bg-gradient-to-b from-slate-50 to-white overflow-hidden">
           <div className="absolute inset-0 -z-10">
             <div className="absolute top-20 left-10 w-96 h-96 bg-blue-200/30 rounded-full blur-3xl" />
             <div className="absolute bottom-20 right-10 w-96 h-96 bg-cyan-200/30 rounded-full blur-3xl" />
@@ -331,11 +331,6 @@ export default function LeadershipPage() {
 
           <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-6xl">
             <div className="text-center max-w-3xl mx-auto">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 border border-cyan-100 mb-6">
-                <span className="text-xs font-medium text-cyan-700">
-                  Leadership
-                </span>
-              </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6">
                 Leadership Team
               </h1>

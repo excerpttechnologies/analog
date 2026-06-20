@@ -376,11 +376,11 @@ export function AboutSection() {
           </p>
 
           {/* Strengths - Bullet Points */}
-          <div className="mt-5 flex flex-wrap  gap-2">
+          <div className="mt-5 flex flex-wrap flex-col md:grid md:grid-cols-2  ">
             {strengths.map((strength, idx) => (
               <div key={idx} className="flex items-center gap-2 py-2 ">
                 <div className="w-2 h-2 rounded-full bg-blue-500 flex-shrink-0" />
-                <span className="text-sm font-medium text-slate-700">
+                <span className="text-sm md:text-lg font-medium text-slate-700">
                   {strength}
                 </span>
               </div>
@@ -401,7 +401,7 @@ export function AboutSection() {
               <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
                 {card.title}
               </h3>
-              <p className="text-base text-slate-600 leading-relaxed">
+              <p className=" md:text-lg text-slate-600 leading-relaxed">
                 {card.description}
               </p>
             </div>

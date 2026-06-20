@@ -471,7 +471,7 @@ export default function ProductsPage() {
                         </p>
 
                         {/* Specs */}
-                        <div className="flex flex-wrap gap-1.5 mb-4">
+                        {/* <div className="flex flex-wrap gap-1.5 mb-4">
                           {product.specs.slice(0, 4).map((spec, idx) => (
                             <span
                               key={idx}
@@ -480,7 +480,7 @@ export default function ProductsPage() {
                               {spec}
                             </span>
                           ))}
-                        </div>
+                        </div> */}
 
                         {/* Learn More */}
                         <div

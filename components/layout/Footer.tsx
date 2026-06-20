@@ -472,8 +472,16 @@ export function Footer() {
         {/* Bottom Section - Copyright */}
         <div className="border-t border-gray-800 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-gray-400">
-            &copy; {currentYear} Excerpt Technologies Private Limited. All
-            Rights Reserved.
+            © {currentYear} Analogchips Technologies Private Limited. All Rights
+            Reserved. | Designed & Developed by{" "}
+            <a
+              href="https://excerptech.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:text-blue-400 transition-colors"
+            >
+              Excerpt Technologies
+            </a>
           </p>
 
           <button
