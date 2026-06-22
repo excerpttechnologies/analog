@@ -579,10 +579,11 @@ import gsap from "gsap";
 const sliderContent = [
   {
     id: 1,
-    title: "Design in India. Make in India.",
-    title2: "Deliver worldwide.",
+    title: "Design in India.",
+    title2: "Make in India.",
+    title3: "Deliver worldwide.",
     subtitle:
-      "Delivering globally competitive Analog IPs and semiconductor solutions that serve customers across India and international markets.",
+      "Deliver globally competitive Analog IPs and semiconductor solutions that serve customers across India and international markets.",
     ctaText: "Explore Products",
     ctaLink: "/products",
     secondaryCta: "Contact Us",
@@ -607,24 +608,25 @@ const sliderContent = [
   },
   {
     id: 3,
-    title: "Advancing India's Semiconductor",
-    title2: "Self-Reliance.",
+    title: "Advancing India's",
+    title2: "Semiconductor",
+    title3: "Self-Reliance.",
     subtitle:
       "Building indigenous Analog IPs and products that strengthen the domestic ecosystem and contribute to India's growing semiconductor capabilities.",
     ctaText: "About Us",
     ctaLink: "/about",
     secondaryCta: "Contact Us",
-    backgroundImage: "/images/slider-3.png",
+    backgroundImage: "/images/s2.png",
     gradient: "from-orange-600 to-red-500",
     gradientLight: "from-orange-500 to-red-400",
     features: ["Fabless Design", "Indian Owned IPs", "Global Deployment"],
   },
   {
     id: 4,
-    title: "Engineering Analog Excellence",
-    title2: "",
+    title: "Engineering ",
+    title2: "Analog Excellence",
     subtitle:
-      "Delivering high-performance Analog and Mixed-Signal Product and IPs that enable automotive, industrial and consumer applications.",
+      "Deliver high-performance Analog and Mixed-Signal Product and IPs that enable automotive, industrial and consumer applications.",
     ctaText: "Leadership",
     ctaLink: "/leadership",
     secondaryCta: "Contact Us",
@@ -991,7 +993,7 @@ export function Hero() {
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
-      className="relative min-h-[50vh] md:min-h-[66vh]  flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing select-none"
+      className="relative min-h-[50vh] md:min-h-[70vh]  flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing select-none"
     >
       {/* Background Slider Image */}
       <div
@@ -1036,9 +1038,39 @@ export function Hero() {
           <h1 className="hero-title text-xl md:text-2xl lg:text-3xl  font-bold text-white mb-2 leading-[1.1] tracking-tight">
             {currentSlide.title}
           </h1>
-          <h1 className="hero-title text-xl md:text-2xl lg:text-3xl  font-bold text-white mb-4 leading-[1.1] tracking-tight">
-            {currentSlide.title2}
-          </h1>
+          {currentSlide.id == 1 && (
+            <h1 className="hero-title text-xl md:text-2xl lg:text-3xl text-yellow-500  font-bold mb-2 leading-[1.1] tracking-tight">
+              {currentSlide.title2}
+            </h1>
+          )}
+
+          {currentSlide.id == 2 && (
+            <h1 className="hero-title text-xl md:text-2xl lg:text-3xl text-sky-500  font-bold  mb-2 leading-[1.1] tracking-tight">
+              {currentSlide.title2}
+            </h1>
+          )}
+
+          {currentSlide.id == 3 && (
+            <h1 className="hero-title text-xl md:text-2xl lg:text-3xl text-yellow-500  font-bold  mb-2 leading-[1.1] tracking-tight">
+              {currentSlide.title2}
+            </h1>
+          )}
+
+          {currentSlide.id == 4 && (
+            <h1 className="hero-title text-xl md:text-2xl lg:text-3xl text-sky-500  font-bold  mb-2 leading-[1.1] tracking-tight">
+              {currentSlide.title2}
+            </h1>
+          )}
+
+          {currentSlide.id == 3 ? (
+            <h1 className="hero-title text-xl md:text-2xl lg:text-3xl  font-bold text-yellow-500 mb-4 leading-[1.1] tracking-tight">
+              {currentSlide.title3}
+            </h1>
+          ) : (
+            <h1 className="hero-title text-xl md:text-2xl lg:text-3xl  font-bold text-white mb-4 leading-[1.1] tracking-tight">
+              {currentSlide.title3}
+            </h1>
+          )}
 
           {/* Subtitle */}
           <p

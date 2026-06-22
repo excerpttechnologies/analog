@@ -434,23 +434,24 @@ export default function ProductsPage() {
                   >
                     <Card className="overflow-hidden bg-white border border-slate-200 hover:shadow-xl transition-all duration-300 h-full flex flex-col hover:-translate-y-1 px-0.5">
                       {/* Image Section */}
-                      <div className="relative rounded-xl overflow-hidden h-72  overflow-hidden bg-slate-100 -mt-5">
-                        <Image
+                      <div className="relative rounded-xl overflow-hidden h-fit  overflow-hidden bg-slate-100 -mt-6">
+                        {/* <Image
                           src={product.image}
                           alt={product.name}
                           fill
                           className="w-full  object-cover object-center h-full transition-transform duration-500 group-hover:scale-105"
-                        />
-                        <div
+                        /> */}
+                        {/* <div
                           className={`absolute inset-0 bg-gradient-to-t from-black/20 to-transparent`}
-                        />
+                        /> */}
 
                         {/* Category Badge */}
-                        <div className="absolute top-3 left-3">
+
+                        {/* <div className="absolute top-3 left-3">
                           <span className="px-3 py-1 rounded-md bg-white/90 backdrop-blur-sm text-xs font-medium text-slate-700 shadow-sm">
                             {product.category}
                           </span>
-                        </div>
+                        </div> */}
 
                         {/* Icon */}
                         <div className="absolute bottom-3 right-3 p-2 rounded-lg bg-white/90 backdrop-blur-sm shadow-sm">

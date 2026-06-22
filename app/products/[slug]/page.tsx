@@ -950,7 +950,7 @@ export default function ProductDetailPage() {
         </section>
 
         {/* Main Content */}
-        <section className="pb-16 -mt-4">
+        <section className="pb-16 lg:-mt-4 sm:-mt-2 ">
           <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
             <div className="grid grid-cols-1 gap-12">
               {/* Left Column - Image & Right Column - Target Specifications */}
@@ -1045,6 +1045,14 @@ export default function ProductDetailPage() {
                     </span>
                   </div>
                 ))}
+              </div>
+            </div>
+
+            <div className="flex w-full justify-center items-center py-10">
+              <div className="bg-yellow-100 w-full border border-yellow-400 text-yellow-800 px-6 py-4 rounded-lg shadow-md">
+                <p className="text-lg font-semibold">
+                  Status : Under Development
+                </p>
               </div>
             </div>
 

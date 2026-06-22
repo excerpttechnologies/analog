@@ -925,10 +925,10 @@ export default function CareersPage() {
               <h2 className="text-[#0d2a4a] text-xl font-bold mb-4">
                 Open Positions
               </h2>
-              <p className="text-slate-500 text-sm mb-4">
+              {/* <p className="text-slate-500 text-sm mb-4">
                 {jobs.length} roles available
-              </p>
-              <div className="flex flex-col gap-3">
+              </p> */}
+              {/* <div className="flex flex-col gap-3">
                 {jobs.map((job, i) => (
                   <JobCard
                     key={job.title}
@@ -937,16 +937,20 @@ export default function CareersPage() {
                     onSelect={setSelectedJob}
                   />
                 ))}
+              </div> */}
+
+              <div className="bg-yellow-100 border border-yellow-400 text-yellow-800 px-4 py-3 rounded-lg text-center">
+                <h3 className="font-semibold text-lg">Coming Soon</h3>
               </div>
 
               {/* Email contact */}
               <p className="text-slate-500 text-xs mt-6 text-center">
                 Or send your CV to{" "}
                 <a
-                  href="mailto:careers@fermionic.design"
+                  href="mailto:careers@analog-chips.com"
                   className="text-[#1e6bb8] font-medium hover:underline"
                 >
-                  careers@fermionic.design
+                  careers@analog-chips.com
                 </a>
               </p>
             </div>

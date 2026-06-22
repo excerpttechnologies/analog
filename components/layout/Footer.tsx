@@ -454,11 +454,11 @@ export function Footer() {
             </h4>
             <div className="flex flex-col space-y-2">
               <a
-                href="mailto:sales@fermonic.com"
+                href="mailto:careers@analog-chips.com"
                 className="flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-colors duration-200"
               >
                 <Mail className="w-4 h-4" />
-                sales@analog-chips.com
+                careers@analog-chips.com
               </a>
               <p className="text-gray-200">Address :</p>
               <p className="text-sm text-gray-300">
