@@ -5562,49 +5562,7 @@ const THEME_COLOR = "#0393D3";
 // Complete Navigation Data
 const navigationData: NavItem[] = [
   { label: "Home", href: "/", icon: Home },
-  // {
-  //   label: "Products",
-  //   icon: Package,
-  //   subitems: [
-  //     {
-  //       label: "Boost Converter",
-  //       href: "/products/boost-converter",
-  //       description: "Battery operated systems",
-  //       icon: Zap,
-  //     },
-  //     {
-  //       label: "Buck Regulator",
-  //       href: "/products/buck-regulator",
-  //       description: "High input voltage tolerant",
-  //       icon: Battery,
-  //     },
-  //     {
-  //       label: "LDO Regulator",
-  //       href: "/products/ldo-regulator",
-  //       description: "Ultra low dropout",
-  //       icon: Cpu,
-  //     },
-  //     {
-  //       label: "LED Driver",
-  //       href: "/products/led-driver",
-  //       description: "Linear LED driver, low BOM",
-  //       icon: Radio,
-  //     },
-  //     {
-  //       label: "Ideal Diode Controller",
-  //       href: "/products/ideal-diode-controller",
-  //       description: "High Vin tolerant",
-  //       icon: Shield,
-  //     },
-  //     {
-  //       label: "Load Switch",
-  //       href: "/products/load-switch",
-  //       description: "Single N-Channel",
-  //       icon: Microchip,
-  //     },
-  //   ],
-  // },
-  { label: "Products", href: "/products", icon: Home },
+
   {
     label: "Company",
     icon: Building,
@@ -5629,6 +5587,8 @@ const navigationData: NavItem[] = [
       },
     ],
   },
+  { label: "Products", href: "/products", icon: Home },
+
   { label: "Market", href: "/market", icon: Globe },
   // { label: "Technology", href: "/technology", icon: TrendingUp },
   { label: "Contact Us", href: "/contact", icon: Mail },

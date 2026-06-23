@@ -22,19 +22,17 @@
 // const sliderContent = [
 //   {
 //     id: 1,
-//     title: "Design in India. Make in India.",
-//     title2: "Deliver worldwide.",
+//     title: "Design in India.",
+//     title2: "Make in India.",
+//     title3: "Deliver worldwide.",
 //     subtitle:
-//       "Delivering globally competitive Analog IPs and semiconductor solutions that serve customers across India and international markets.",
-
+//       "Deliver globally competitive Analog IPs and semiconductor solutions that serve customers across India and international markets.",
 //     ctaText: "Explore Products",
 //     ctaLink: "/products",
 //     secondaryCta: "Contact Us",
 //     backgroundImage: "/images/slider-1.png",
-//     // backgroundImage: "/images/banner.png",
 //     gradient: "from-blue-600 to-cyan-500",
 //     gradientLight: "from-blue-500 to-cyan-400",
-
 //     features: ["Power Management", "Analog ICs", "Domestic & Overseas"],
 //   },
 //   {
@@ -43,46 +41,41 @@
 //     title2: "From Silicon to Solutions.",
 //     subtitle:
 //       "We partner with semiconductor and system companies to transform complex analog challenges into production-ready silicon and real-world solutions.",
-
 //     ctaText: "Markets",
 //     ctaLink: "/market",
 //     secondaryCta: "Contact Us",
-//     backgroundImage: "/images/slider4.png",
+//     backgroundImage: "/images/slider-2.png",
 //     gradient: "from-red-600 to-[#001635]",
 //     gradientLight: "from-orange-500 to-red-400",
-
 //     features: ["Fabless Design", "Indian Owned IPs", "Global Deployment"],
 //   },
 //   {
 //     id: 3,
-//     title: "Advancing India's Semiconductor",
-//     title2: "Self-Reliance.",
+//     title: "Advancing India's",
+//     title2: "Semiconductor",
+//     title3: "Self-Reliance.",
 //     subtitle:
 //       "Building indigenous Analog IPs and products that strengthen the domestic ecosystem and contribute to India's growing semiconductor capabilities.",
-
 //     ctaText: "About Us",
 //     ctaLink: "/about",
 //     secondaryCta: "Contact Us",
-//     backgroundImage: "/images/slider2.png",
+//     backgroundImage: "/images/slider-3.png",
 //     gradient: "from-orange-600 to-red-500",
 //     gradientLight: "from-orange-500 to-red-400",
-
 //     features: ["Fabless Design", "Indian Owned IPs", "Global Deployment"],
 //   },
-
 //   {
 //     id: 4,
-//     title: "Engineering Analog Excellence",
+//     title: "Engineering ",
+//     title2: "Analog Excellence",
 //     subtitle:
-//       "Delivering high-performance Analog and Mixed-Signal Product and IPs that enable automotive, industrial and consumer applications.",
-
+//       "Deliver high-performance Analog and Mixed-Signal Product and IPs that enable automotive, industrial and consumer applications.",
 //     ctaText: "Leadership",
 //     ctaLink: "/leadership",
 //     secondaryCta: "Contact Us",
-//     backgroundImage: "/images/slider-3.png",
+//     backgroundImage: "/images/slider-4.png",
 //     gradient: "from-green-600 to-green-500",
 //     gradientLight: "from-orange-500 to-red-400",
-
 //     features: ["Fabless Design", "Indian Owned IPs", "Global Deployment"],
 //   },
 // ];
@@ -94,9 +87,11 @@
 //   const [isAnimating, setIsAnimating] = useState(false);
 //   const [direction, setDirection] = useState<"next" | "prev">("next");
 //   const autoSlideRef = useRef<NodeJS.Timeout | null>(null);
+//   const [touchStartX, setTouchStartX] = useState(0);
+//   const [touchEndX, setTouchEndX] = useState(0);
+//   const [isDragging, setIsDragging] = useState(false);
 
 //   const currentSlide = sliderContent[activeIndex];
-//   const nextSlide = sliderContent[(activeIndex + 1) % sliderContent.length];
 
 //   // Auto-slide functionality
 //   const startAutoSlide = () => {
@@ -145,6 +140,67 @@
 //     setActiveIndex(index);
 //   };
 
+//   // Touch handlers for swipe
+//   const handleTouchStart = (e: React.TouchEvent) => {
+//     setTouchStartX(e.touches[0].clientX);
+//     setIsDragging(true);
+//   };
+
+//   const handleTouchMove = (e: React.TouchEvent) => {
+//     if (!isDragging) return;
+//     setTouchEndX(e.touches[0].clientX);
+
+//     // Calculate drag distance for visual feedback
+//     const dragDistance = touchStartX - e.touches[0].clientX;
+//     if (Math.abs(dragDistance) > 20) {
+//       // Add visual feedback here if needed
+//     }
+//   };
+
+//   const handleTouchEnd = () => {
+//     setIsDragging(false);
+//     const swipeDistance = touchStartX - touchEndX;
+
+//     if (Math.abs(swipeDistance) > 50) {
+//       if (swipeDistance > 0) {
+//         // Swipe left - next
+//         handleNext();
+//       } else {
+//         // Swipe right - prev
+//         handlePrev();
+//       }
+//     }
+//   };
+
+//   // Mouse drag handlers for desktop
+//   const handleMouseDown = (e: React.MouseEvent) => {
+//     setTouchStartX(e.clientX);
+//     setIsDragging(true);
+//   };
+
+//   const handleMouseMove = (e: React.MouseEvent) => {
+//     if (!isDragging) return;
+//     setTouchEndX(e.clientX);
+//   };
+
+//   const handleMouseUp = () => {
+//     if (!isDragging) return;
+//     setIsDragging(false);
+//     const swipeDistance = touchStartX - touchEndX;
+
+//     if (Math.abs(swipeDistance) > 50) {
+//       if (swipeDistance > 0) {
+//         handleNext();
+//       } else {
+//         handlePrev();
+//       }
+//     }
+//   };
+
+//   const handleMouseLeave = () => {
+//     setIsDragging(false);
+//   };
+
 //   // GSAP animations for background and content
 //   useEffect(() => {
 //     if (!containerRef.current || !contentRef.current) return;
@@ -183,7 +239,7 @@
 //         "-=0.5",
 //       );
 //       timeline.set(".gradient-overlay", {
-//         background: `linear-gradient(135deg, rgba(0, 0, 0, 0.92) 0%,transparent 100%)`,
+//         background: `linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 100%)`,
 //       });
 //       timeline.to(
 //         ".gradient-overlay",
@@ -370,23 +426,34 @@
 //     <section
 //       ref={containerRef}
 //       onMouseEnter={stopAutoSlide}
-//       onMouseLeave={startAutoSlide}
-//       className="relative md:min-h-[65vh] h-[40vh] flex items-center justify-center overflow-hidden"
+//       onMouseLeave={() => {
+//         startAutoSlide();
+//         handleMouseLeave();
+//       }}
+//       onTouchStart={handleTouchStart}
+//       onTouchMove={handleTouchMove}
+//       onTouchEnd={handleTouchEnd}
+//       onMouseDown={handleMouseDown}
+//       onMouseMove={handleMouseMove}
+//       onMouseUp={handleMouseUp}
+//       className="relative min-h-[50vh] md:min-h-[70vh]  flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing select-none"
 //     >
 //       {/* Background Slider Image */}
 //       <div
-//         className="bg-slider-image absolute inset-0 bg-cover bg-center transition-all duration-700"
+//         className="bg-slider-image absolute inset-0 bg-cover  transition-all duration-700 "
 //         style={{
 //           backgroundImage: `url(${currentSlide.backgroundImage})`,
+//           backgroundSize: "cover",
+//           backgroundPosition: currentSlide.id == 2 ? "center" : "",
+//           backgroundRepeat: "no-repeat",
 //         }}
 //       />
 
 //       {/* Gradient Overlay */}
-//       <div className="gradient-overlay absolute inset-0 bg-gradient-to-r from-black/70 to-black/50" />
 
 //       {/* Animated particles overlay */}
-//       <div className="absolute inset-0 overflow-hidden">
-//         {[...Array(20)].map((_, i) => (
+//       <div className="absolute inset-0 overflow-hidden pointer-events-none">
+//         {[...Array(15)].map((_, i) => (
 //           <div
 //             key={i}
 //             className="absolute w-1 h-1 bg-white/20 rounded-full"
@@ -403,100 +470,74 @@
 //       {/* Main Content */}
 //       <div
 //         ref={contentRef}
-//         className="relative z-10 container  float-left px-4  max-w-8xl  py-16 md:py-20"
+//         className="relative z-10 container min-h-[50vh] md:min-h-[60vh] p-6 pt-10 mx-auto max-w-7xl"
 //       >
-//         <div className="content-wrapper  md:max-w-8xl max-w-[85vw] mr-auto">
+//         <div
+//           className={`content-wrapper h-full ${currentSlide.id == 2 ? "max-w-3xl" : "max-w-md"}  `}
+//         >
 //           {/* Badge */}
 
 //           {/* Title */}
-//           <h1 className="hero-title text-2xl md:text-4xl lg:text-5xl  whitespace-nowrap font-bold text-white mb-3.5 leading-[1.1] tracking-tight">
+//           <h1 className="hero-title text-xl md:text-2xl lg:text-3xl  font-bold text-white mb-2 leading-[1.1] tracking-tight">
 //             {currentSlide.title}
 //           </h1>
-//           <h1 className="hero-title text-2xl whitespace-nowrap md:text-4xl lg:text-5xl  font-bold text-white mb-4 leading-[1.1] tracking-tight">
-//             {currentSlide.title2}
-//           </h1>
+//           {currentSlide.id == 1 && (
+//             <h1 className="hero-title text-xl md:text-2xl lg:text-3xl text-yellow-500  font-bold mb-2 leading-[1.1] tracking-tight">
+//               {currentSlide.title2}
+//             </h1>
+//           )}
+
+//           {currentSlide.id == 2 && (
+//             <h1 className="hero-title text-xl md:text-2xl lg:text-3xl text-sky-500  font-bold  mb-2 leading-[1.1] tracking-tight">
+//               {currentSlide.title2}
+//             </h1>
+//           )}
+
+//           {currentSlide.id == 3 && (
+//             <h1 className="hero-title text-xl md:text-2xl lg:text-3xl text-yellow-500  font-bold  mb-2 leading-[1.1] tracking-tight">
+//               {currentSlide.title2}
+//             </h1>
+//           )}
+
+//           {currentSlide.id == 4 && (
+//             <h1 className="hero-title text-xl md:text-2xl lg:text-3xl text-sky-500  font-bold  mb-2 leading-[1.1] tracking-tight">
+//               {currentSlide.title2}
+//             </h1>
+//           )}
+
+//           {currentSlide.id == 3 ? (
+//             <h1 className="hero-title text-xl md:text-2xl lg:text-3xl  font-bold text-yellow-500 mb-4 leading-[1.1] tracking-tight">
+//               {currentSlide.title3}
+//             </h1>
+//           ) : (
+//             <h1 className="hero-title text-xl md:text-2xl lg:text-3xl  font-bold text-white mb-4 leading-[1.1] tracking-tight">
+//               {currentSlide.title3}
+//             </h1>
+//           )}
 
 //           {/* Subtitle */}
-//           <p className="hero-subtitle text-md md:text-xl text-white/80 md:leading-8 leading-6 mb-7 max-w-[80vw] md:max-w-3xl ">
+//           <p
+//             className={`hero-subtitle text-sm md:text-base lg:text-lg text-white/80 leading-6 mb-4 ${currentSlide.id == 2 ? "max-w-fit" : "max-w-md"} `}
+//           >
 //             {currentSlide.subtitle}
 //           </p>
 
 //           {/* Feature Tags */}
-//           {/* <div className="flex flex-wrap gap-2 mb-6">
-//             {currentSlide.features.map((feature, idx) => (
-//               <span
-//                 key={idx}
-//                 className="feature-tag px-3 py-1 text-xs font-medium rounded-full bg-white/10 backdrop-blur-sm text-white/90 border border-white/20"
-//               >
-//                 {feature}
-//               </span>
-//             ))}
-//           </div> */}
 
-//           {/* CTA Buttons */}
-//           <div className="hero-cta flex flex-col sm:flex-row gap-4">
-//             {/* <Button
-//               asChild
-//               className={`bg-gradient-to-r ${currentSlide.gradient} hover:opacity-90 text-white font-semibold py-6 px-8 rounded shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-0.5 group`}
-//             >
-//               <Link href={currentSlide.ctaLink}>
-//                 {currentSlide.ctaText}
-//                 <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-//               </Link>
-//             </Button> */}
+//           {/* CTA Buttons - Removed Explore Products button, only Contact Us remains */}
+//           {/* <div className="hero-cta">
 //             <Button
 //               variant="outline"
-//               className="border-white/30 bg-white/10 backdrop-blur-sm w-fit hover:bg-white/20 text-white md:py-6 py-5  px-8 font-semibold rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
+//               className="border-white/30 bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white py-2 px-6 text-sm font-semibold rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
 //             >
-//               <Link href="/contact">{currentSlide.secondaryCta}</Link>
+//               <Link href="/contact">Contact Us</Link>
 //             </Button>
-//           </div>
-
-//           {/* Stats */}
-//           {/* <div className="hero-stats mt-10 flex flex-wrap items-center gap-4 sm:gap-6 text-sm">
-//             {currentSlide.stats.map((stat, idx) => {
-//               const IconComponent = stat.icon;
-//               return (
-//                 <div key={idx} className="stat-item flex items-center gap-3">
-//                   <div
-//                     className={`w-8 h-8 rounded-lg bg-gradient-to-r ${currentSlide.gradientLight} bg-opacity-20 flex items-center justify-center`}
-//                   >
-//                     <IconComponent className="w-4 h-4 text-white" />
-//                   </div>
-//                   <div>
-//                     <p className="font-bold text-xl text-white">{stat.value}</p>
-//                     <p className="text-white/60 text-xs">{stat.label}</p>
-//                   </div>
-//                   {idx < currentSlide.stats.length - 1 && (
-//                     <div className="h-8 w-px bg-white/20 hidden sm:block" />
-//                   )}
-//                 </div>
-//               );
-//             })}
 //           </div> */}
 //         </div>
 //       </div>
 
-//       {/* Navigation Buttons */}
-//       <button
-//         onClick={handlePrev}
-//         className="absolute hidden left-4 md:left-8 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 md:flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110 group z-20"
-//         disabled={isAnimating}
-//         aria-label="Previous slide"
-//       >
-//         <ChevronLeft className="w-5 h-5 text-white group-hover:text-cyan-300" />
-//       </button>
-//       <button
-//         onClick={handleNext}
-//         className="absolute  hidden right-4 md:right-8 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 md:flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110 group z-20"
-//         disabled={isAnimating}
-//         aria-label="Next slide"
-//       >
-//         <ChevronRight className="w-5 h-5 text-white group-hover:text-cyan-300" />
-//       </button>
-
 //       {/* Slide Indicators */}
-//       <div className="slider-dots absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 md:gap-3">
+//       <div className="slider-dots absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-1.5 md:gap-2 z-20">
 //         {sliderContent.map((_, idx) => (
 //           <button
 //             key={idx}
@@ -505,27 +546,22 @@
 //             aria-label={`Go to slide ${idx + 1}`}
 //           >
 //             <div
-//               className={`dot h-1.5 rounded-full transition-all duration-500 ${
+//               className={`dot h-1 rounded-full transition-all duration-500 ${
 //                 idx === activeIndex
-//                   ? `w-8 md:w-10 bg-gradient-to-r ${currentSlide.gradient}`
-//                   : "w-1.5 bg-white/40 group-hover:bg-white/60 group-hover:w-3"
+//                   ? `w-5 md:w-6 bg-gradient-to-r ${currentSlide.gradient}`
+//                   : "w-1.5 bg-white/40 group-hover:bg-white/60 group-hover:w-2"
 //               }`}
 //             />
 //           </button>
 //         ))}
 //       </div>
 
-//       {/* Slide Counter */}
-//       <div className="absolute bottom-8 right-4 md:right-8 text-xs text-white/60 font-medium">
-//         {String(activeIndex + 1).padStart(2, "0")} /{" "}
-//         {String(sliderContent.length).padStart(2, "0")}
-//       </div>
-
-//       {/* Scroll Indicator */}
-//       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 opacity-60">
-//         <span className="text-xs text-white/60">Scroll</span>
-//         <div className="w-4 h-6 border border-white/30 rounded-full flex justify-center">
-//           <div className="w-0.5 h-1.5 bg-white/50 rounded-full mt-1 animate-bounce" />
+//       {/* Swipe Indicator */}
+//       <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex items-center gap-2 opacity-50 md:hidden">
+//         <span className="text-[10px] text-white/60">Swipe</span>
+//         <div className="w-5 h-5 rounded-full border border-white/30 flex items-center justify-center">
+//           <ChevronLeft className="w-2.5 h-2.5 text-white/60" />
+//           <ChevronRight className="w-2.5 h-2.5 text-white/60" />
 //         </div>
 //       </div>
 
@@ -555,8 +591,6 @@
 //   );
 // }
 
-//////////////////////////
-
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -583,7 +617,7 @@ const sliderContent = [
     title2: "Make in India.",
     title3: "Deliver worldwide.",
     subtitle:
-      "Deliver globally competitive Analog IPs and semiconductor solutions that serve customers across India and international markets.",
+      "Deliver globally competitive Analog & Mixed Signal IPs and semiconductor solutions that serve customers across India and international markets.",
     ctaText: "Explore Products",
     ctaLink: "/products",
     secondaryCta: "Contact Us",
@@ -616,7 +650,7 @@ const sliderContent = [
     ctaText: "About Us",
     ctaLink: "/about",
     secondaryCta: "Contact Us",
-    backgroundImage: "/images/s2.png",
+    backgroundImage: "/images/slider-3.png",
     gradient: "from-orange-600 to-red-500",
     gradientLight: "from-orange-500 to-red-400",
     features: ["Fabless Design", "Indian Owned IPs", "Global Deployment"],
@@ -644,6 +678,7 @@ export function Hero() {
   const [isAnimating, setIsAnimating] = useState(false);
   const [direction, setDirection] = useState<"next" | "prev">("next");
   const autoSlideRef = useRef<NodeJS.Timeout | null>(null);
+  const isHoveringRef = useRef(false);
   const [touchStartX, setTouchStartX] = useState(0);
   const [touchEndX, setTouchEndX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
@@ -668,7 +703,9 @@ export function Hero() {
   };
 
   useEffect(() => {
-    startAutoSlide();
+    if (!isHoveringRef.current) {
+      startAutoSlide();
+    }
     return () => stopAutoSlide();
   }, [activeIndex, isAnimating]);
 
@@ -982,8 +1019,12 @@ export function Hero() {
   return (
     <section
       ref={containerRef}
-      onMouseEnter={stopAutoSlide}
+      onMouseEnter={() => {
+        isHoveringRef.current = true;
+        stopAutoSlide();
+      }}
       onMouseLeave={() => {
+        isHoveringRef.current = false;
         startAutoSlide();
         handleMouseLeave();
       }}
@@ -1092,6 +1133,24 @@ export function Hero() {
           </div> */}
         </div>
       </div>
+
+      {/* Left Arrow */}
+      <button
+        onClick={handlePrev}
+        aria-label="Previous slide"
+        className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 z-20 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-300"
+      >
+        <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
+      </button>
+
+      {/* Right Arrow */}
+      <button
+        onClick={handleNext}
+        aria-label="Next slide"
+        className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 z-20 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-300"
+      >
+        <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
+      </button>
 
       {/* Slide Indicators */}
       <div className="slider-dots absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-1.5 md:gap-2 z-20">

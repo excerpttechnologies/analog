@@ -322,7 +322,7 @@ const cards = [
     title: "Our Vision",
     subtitle: "Where We're Headed",
     description:
-      "Make in India by Design in India — Enriching India Semiconductor Mission by successfully deploying Indian-owned Analog IPs and Products for domestic and overseas markets.",
+      ' "Make in India by Design in India" — Enriching India Semiconductor Mission by successfully deploying Indian-owned Analog IPs and Products for domestic and overseas markets.',
     color: "purple",
   },
   {
@@ -330,7 +330,7 @@ const cards = [
     title: "Our Mission",
     subtitle: "Why We Exist",
     description:
-      "Globally trusted partner for Analog IP solutions enabling seamless integration with full chip designs including SoCs and providing world class drop-in replacements for high performance Analog products.",
+      "Globally trusted partner for Analog & Mixed Signal IP solutions enabling seamless integration with full chip designs including SoCs and providing world class drop-in replacements for high performance Analog products.",
     color: "emerald",
   },
 ];

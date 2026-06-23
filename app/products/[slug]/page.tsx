@@ -651,7 +651,7 @@ const productsData: Record<string, any> = {
     fullName: "Buck Regulator for Distributed Power Supply Applications",
     category: "Switching Regulators",
     description:
-      "Highly integrated high-input-voltage buck regulator designed to simplify power conversion with excellent transient response and low standby power consumption.",
+      "Highly integrated, high-input voltage, high efficiency buck regulator designed to simplify power conversion with excellent transient response and low standby power consumption.",
     specs: [
       { label: "Input Voltage", value: "4.5V to 17V" },
       { label: "Output Current", value: "7A Max" },
@@ -688,11 +688,11 @@ const productsData: Record<string, any> = {
   // Boost Converter
   "boost-converter": {
     id: "boost-converter",
-    name: "Boost Converter",
-    fullName: "Synchronous Boost Converter",
+    name: "Boost Regulator",
+    fullName: "Synchronous Boost Regulator",
     category: "Switching Regulators",
     description:
-      "A highly integrated DC-DC boost converter combining high efficiency, low power consumption, and reliable operation for portable and industrial systems.",
+      "Highly integrated, high efficiency DC-DC boost regulator combining high efficiency, low power consumption, and reliable operation for portable and industrial systems.",
     specs: [
       { label: "Input Voltage", value: "0.8V to 5V" },
       { label: "Switching Current", value: "5A Max" },
@@ -1063,8 +1063,8 @@ export default function ProductDetailPage() {
                   Need More Information?
                 </h3>
                 <p className="text-slate-300 mb-6 max-w-2xl mx-auto">
-                  Contact our team to learn more about our semiconductor and
-                  power management solutions.
+                  Contact our team to learn more about our products & IP
+                  solutions.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Link

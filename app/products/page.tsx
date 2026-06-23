@@ -26,7 +26,7 @@ const products = [
     fullName: "Buck Regulator for Distributed Power Supply Applications",
     category: "Switching Regulators",
     description:
-      "Highly integrated high-input-voltage buck regulator designed to simplify power conversion with excellent transient response and low standby power consumption.",
+      "Highly integrated, high-input voltage, high efficiency buck regulator designed to simplify power conversion with excellent transient response and low standby power consumption",
     longDescription:
       "A highly integrated high-input-voltage buck regulator designed to simplify power conversion with excellent transient response and low standby power consumption. Ideal for distributed power supply applications requiring efficient voltage step-down conversion.",
     specs: [
@@ -56,11 +56,11 @@ const products = [
   },
   {
     id: "boost-converter",
-    name: "Boost Converter",
-    fullName: "Synchronous Boost Converter",
+    name: "Boost Regulator",
+    fullName: "Synchronous Boost Regulator",
     category: "Switching Regulators",
     description:
-      "A highly integrated DC-DC boost converter combining high efficiency, low power consumption, and reliable operation for portable and industrial systems.",
+      "Highly integrated, high efficiency DC-DC boost regulator combining high efficiency, low power consumption, and reliable operation for portable and industrial systems.",
     longDescription:
       "A highly integrated DC-DC boost converter combining high efficiency, low power consumption, and reliable operation for portable and industrial systems. Features integrated power MOSFETs and low quiescent current for improved battery life.",
     specs: [

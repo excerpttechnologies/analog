@@ -950,7 +950,7 @@ export default function CareersPage() {
                   href="mailto:careers@analog-chips.com"
                   className="text-[#1e6bb8] font-medium hover:underline"
                 >
-                  careers@analog-chips.com
+                  careers@analogchips.com
                 </a>
               </p>
             </div>

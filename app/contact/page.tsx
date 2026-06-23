@@ -494,7 +494,7 @@ export default function ContactPage() {
                               href="mailto:sales@analog-chips.com"
                               className="text-slate-800 font-medium hover:text-blue-600 transition-colors break-all"
                             >
-                              sales@analog-chips.com
+                              sales@analogchips.com
                             </a>
                           </div>
                         </div>

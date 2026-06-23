@@ -458,7 +458,7 @@ export function Footer() {
                 className="flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-colors duration-200"
               >
                 <Mail className="w-4 h-4" />
-                careers@analog-chips.com
+                sales@analogchips.com
               </a>
               <p className="text-gray-200">Address :</p>
               <p className="text-sm text-gray-300">
@@ -472,7 +472,7 @@ export function Footer() {
         {/* Bottom Section - Copyright */}
         <div className="border-t border-gray-800 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-gray-400">
-            © {currentYear} Analogchips Technologies Private Limited. All Rights
+            © {currentYear} AnalogChips Technologies Private Limited. All Rights
             Reserved. | Designed & Developed by{" "}
             <a
               href="https://excerptech.com/"
