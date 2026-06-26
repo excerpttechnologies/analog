@@ -372,11 +372,15 @@ export function Footer() {
     <footer ref={footerRef} className="bg-[#0B1A2E] text-white">
       <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:py-10">
           {/* Brand Section */}
           <div className="sm:ml-0 -ml-8">
-            <div className="flex items-center gap-2">
-              <img src="/images/analog1.png" alt="" className="h-32" />
+            <div className="flex items-center   gap-2">
+              <img
+                src="/images/act-final2.webp"
+                alt=""
+                className="h-14 md:ml-0 m-8"
+              />
             </div>
           </div>
 
@@ -458,12 +462,12 @@ export function Footer() {
                 className="flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-colors duration-200"
               >
                 <Mail className="w-4 h-4" />
-                sales@analogchips.com
+                sales@analog-chips.com
               </a>
               <p className="text-gray-200">Address :</p>
-              <p className="text-sm text-gray-300">
-                No. 197, 7th A Main, Kalyan HBCS, Hampinagar, Bengaluru –
-                560104, Karnataka, India
+              <p className="text-sm flex flex-col gap-y-1 text-gray-300">
+                <span>No. 197, 7th A Main, Kalyan HBCS, Hampinagar,</span>
+                <span>Bengaluru - 560104, Karnataka, India</span>
               </p>
             </div>
           </div>
@@ -473,15 +477,7 @@ export function Footer() {
         <div className="border-t border-gray-800 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-gray-400">
             © {currentYear} AnalogChips Technologies Private Limited. All Rights
-            Reserved. | Designed & Developed by{" "}
-            <a
-              href="https://excerptech.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-blue-400 transition-colors"
-            >
-              Excerpt Technologies
-            </a>
+            Reserved.
           </p>
 
           <button

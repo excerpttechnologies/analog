@@ -330,15 +330,15 @@ export default function LeadershipPage() {
           </div>
 
           <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-6xl">
-            <div className="text-center max-w-3xl mx-auto">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6">
+            <div className=" max-w-3xl mx-auto">
+              <h1 className="text-4xl text-center md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6">
                 Leadership Team
               </h1>
               <p className="text-lg md:text-xl text-slate-600 leading-relaxed">
-                ACT Technical leadership and Management team comes with 120+
-                years of Analog focussed Semiconductor Domain expertise for the
-                IPs and Product development, Marketing and Customer
-                relationship.
+                ACT Technical leadership and Management team comes with a
+                combined 120+ years of Analog focussed Semiconductor Domain
+                expertise for the IPs and Product development, Marketing and
+                Customer relationship.
               </p>
             </div>
           </div>

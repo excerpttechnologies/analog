@@ -918,12 +918,12 @@ export default function CareersPage() {
         </section>
 
         {/* Main Content - Jobs Left, Form Right */}
-        <section className="max-w-7xl mx-auto px-6 py-10">
+        <section className="max-w-7xl mx-auto px-5 borderborder rounded-lg py-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Left Column - Jobs List */}
-            <div>
+            <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 sticky top-6">
               <h2 className="text-[#0d2a4a] text-xl font-bold mb-4">
-                Open Positions
+                Job Openings
               </h2>
               {/* <p className="text-slate-500 text-sm mb-4">
                 {jobs.length} roles available
@@ -939,20 +939,20 @@ export default function CareersPage() {
                 ))}
               </div> */}
 
-              <div className="bg-yellow-100 border border-yellow-400 text-yellow-800 px-4 py-3 rounded-lg text-center">
-                <h3 className="font-semibold text-lg">Coming Soon</h3>
+              <div className=" h-62 px-4 py-3  flex justify-center items-center text-center">
+                <h3 className="font-semibold text-lg">Coming Soon !</h3>
               </div>
 
               {/* Email contact */}
-              <p className="text-slate-500 text-xs mt-6 text-center">
+              {/* <p className="text-slate-500 text-xs mt-6 text-center">
                 Or send your CV to{" "}
                 <a
                   href="mailto:careers@analog-chips.com"
                   className="text-[#1e6bb8] font-medium hover:underline"
                 >
-                  careers@analogchips.com
+                  careers@analog-chips.com
                 </a>
-              </p>
+              </p> */}
             </div>
 
             {/* Right Column - Application Form */}
@@ -999,7 +999,6 @@ export default function CareersPage() {
                         onChange={(e) =>
                           setForm({ ...form, name: e.target.value })
                         }
-                        placeholder="Jane Doe"
                         className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#1e6bb8]/30 focus:border-[#1e6bb8] transition"
                       />
                     </div>
@@ -1015,14 +1014,13 @@ export default function CareersPage() {
                         onChange={(e) =>
                           setForm({ ...form, email: e.target.value })
                         }
-                        placeholder="jane@example.com"
                         className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#1e6bb8]/30 focus:border-[#1e6bb8] transition"
                       />
                     </div>
 
                     <div>
                       <label className="block text-xs font-semibold text-[#0d2a4a] uppercase tracking-wider mb-1">
-                        Phone
+                        Phone <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="tel"
@@ -1030,7 +1028,6 @@ export default function CareersPage() {
                         onChange={(e) =>
                           setForm({ ...form, phone: e.target.value })
                         }
-                        placeholder="+91 98765 43210"
                         className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#1e6bb8]/30 focus:border-[#1e6bb8] transition"
                       />
                     </div>
@@ -1047,12 +1044,12 @@ export default function CareersPage() {
                         className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#1e6bb8]/30 focus:border-[#1e6bb8] transition bg-white"
                       >
                         <option value="">Select a role…</option>
-                        {jobs.map((j) => (
+                        {/* {jobs.map((j) => (
                           <option key={j.title} value={j.title}>
                             {j.title}
                           </option>
-                        ))}
-                        <option value="Other">Other / General</option>
+                        ))} */}
+                        {/* <option value="Other">Other / General</option> */}
                       </select>
                     </div>
 
@@ -1066,7 +1063,6 @@ export default function CareersPage() {
                         onChange={(e) =>
                           setForm({ ...form, message: e.target.value })
                         }
-                        placeholder="Tell us about yourself…"
                         className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#1e6bb8]/30 focus:border-[#1e6bb8] transition resize-none"
                       />
                     </div>
@@ -1124,13 +1120,21 @@ export default function CareersPage() {
 
                     {error && <p className="text-red-500 text-sm">{error}</p>}
 
-                    <button
+                    {/* <button
                       type="submit"
                       disabled={loading}
                       className="w-full flex items-center justify-center gap-2 bg-[#0d2a4a] text-white font-semibold py-3 rounded-lg hover:bg-[#1e6bb8] active:scale-[0.98] transition-all duration-200 text-sm disabled:opacity-70"
                     >
                       {loading ? "Sending..." : "Submit Application"}
                       <ArrowRight size={16} />
+                    </button> */}
+
+                    <button
+                      type="submit"
+                      disabled={true}
+                      className="w-full  flex items-center justify-center gap-2 bg-[#0d2a4a] text-white font-semibold py-3 rounded-lg hover:bg-[#1e6bb8] active:scale-[0.98] transition-all duration-200 text-sm disabled:opacity-70"
+                    >
+                      Coming soon !
                     </button>
                   </form>
                 )}

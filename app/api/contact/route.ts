@@ -3,29 +3,52 @@ import nodemailer from 'nodemailer';
 import { getCompanyEmailTemplate, getUserEmailTemplate } from './email-templates';
 
 // Configure Nodemailer transporter with more robust settings
+// const transporter = nodemailer.createTransport({
+//   host: process.env.SMTP_HOST || 'smtp.hostinger.com',
+//   port: parseInt(process.env.SMTP_PORT || '587'),
+//   secure: true,
+//   // auth: {
+//   //   user: process.env.SMTP_USER,
+//   //   pass: process.env.SMTP_PASS,
+//   // },
+
+//   auth: {
+//     user: "sales@analog-chips.com",
+//     pass: "SSRachips1@",
+//   },
+
+// });
+
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST || 'smtp.gmail.com',
-  port: parseInt(process.env.SMTP_PORT || '587'),
-  secure: process.env.SMTP_SECURE === 'true',
+  host: 'smtp.office365.com',
+  port: 587,
+  secure: false,
+  requireTLS: true,
   auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
+    user: "sales@analog-chips.com",
+    pass: "SSRachips1@",
   },
-  tls: {
-    rejectUnauthorized: false
+});
+
+transporter.verify((err, success) => {
+  if (err) {
+    console.error(err);
+  } else {
+    console.log("SMTP Ready");
   }
 });
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    console.log('📨 Contact form received:', {
-      name: body.name,
-      email: body.email,
-      phone: body.phone,
-      company: body.company,
-      messageLength: body.message?.length || 0
-    });
+
+    // console.log('📨 Contact form received:', {
+    //   name: body.name,
+    //   email: body.email,
+    //   phone: body.phone,
+    //   company: body.company,
+    //   messageLength: body.message?.length || 0
+    // });
 
     const { name, email, phone, company, message } = body;
 

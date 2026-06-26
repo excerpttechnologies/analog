@@ -215,7 +215,7 @@ export const getCompanyEmailTemplate = (data: {
   <div class="container">
     <div class="header">
       <img 
-        src="https://res.cloudinary.com/dxzluoydo/image/upload/v1781780196/analog1_sbkzrz.png" 
+        src="https://res.cloudinary.com/dxzluoydo/image/upload/v1782479076/act-final2_vahnwr.png" 
         alt="AnalogChips Technology" 
         class="logo"
       />
@@ -499,7 +499,7 @@ export const getUserEmailTemplate = (data: {
   <div class="container">
     <div class="header">
       <img 
-        src="https://res.cloudinary.com/dxzluoydo/image/upload/v1781780196/analog1_sbkzrz.png" 
+        src="https://res.cloudinary.com/dxzluoydo/image/upload/v1782479076/act-final2_vahnwr.png" 
         alt="AnalogChips Technology" 
         class="logo"
       />

@@ -274,12 +274,12 @@ export default function ContactPage() {
               {/* Contact Form */}
               <div ref={formRef}>
                 <Card className="bg-white border-slate-200 shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500">
-                  <div className="p-6 md:p-8">
+                  <div className="px-6 md:px-8">
                     <div className="mb-6">
-                      <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-2">
+                      <h2 className="text-2xl md:text-3xl font-bold text-[#F0B100] mb-2">
                         Send us a Message
                       </h2>
-                      <p className="text-slate-600">
+                      <p className="text-slate-800 font-medium leading-relaxed">
                         Fill out the form below and we'll get back to you within
                         24 hours
                       </p>
@@ -313,7 +313,6 @@ export default function ContactPage() {
                               onChange={handleChange}
                               onFocus={() => setFocusedField("name")}
                               onBlur={() => setFocusedField(null)}
-                              placeholder="John Doe"
                               className="w-full pl-9 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
                               required
                             />
@@ -334,7 +333,6 @@ export default function ContactPage() {
                               onChange={handleChange}
                               onFocus={() => setFocusedField("email")}
                               onBlur={() => setFocusedField(null)}
-                              placeholder="john@company.com"
                               className="w-full pl-9 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
                               required
                             />
@@ -358,7 +356,6 @@ export default function ContactPage() {
                               onChange={handleChange}
                               onFocus={() => setFocusedField("phone")}
                               onBlur={() => setFocusedField(null)}
-                              placeholder="+91 XXXXX XXXXX"
                               className="w-full pl-9 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
                             />
                           </div>
@@ -378,7 +375,6 @@ export default function ContactPage() {
                               onChange={handleChange}
                               onFocus={() => setFocusedField("company")}
                               onBlur={() => setFocusedField(null)}
-                              placeholder="Your Company"
                               className="w-full pl-9 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
                             />
                           </div>
@@ -399,7 +395,6 @@ export default function ContactPage() {
                             onChange={handleChange}
                             onFocus={() => setFocusedField("message")}
                             onBlur={() => setFocusedField(null)}
-                            placeholder="Tell us about your project or inquiry..."
                             rows={5}
                             className="w-full pl-9 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none"
                             required
@@ -416,7 +411,7 @@ export default function ContactPage() {
                         onClick={handleSubmit}
                         type="button"
                         disabled={isLoading}
-                        className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-semibold py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 group disabled:opacity-70 disabled:cursor-not-allowed"
+                        className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-semibold py-6 rounded-xl shadow-lg hover:shadow-xl transition-all text-lg duration-300 transform hover:-translate-y-0.5 group disabled:opacity-70 disabled:cursor-not-allowed"
                       >
                         <span className="flex items-center justify-center gap-2">
                           {isLoading ? (
@@ -442,19 +437,19 @@ export default function ContactPage() {
                 {/* Address Card */}
                 <div ref={infoRef} className="mb-6">
                   <Card className="bg-white border-slate-200 shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden">
-                    <div className="p-6">
-                      <h3 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-                        <Building className="w-5 h-5 text-blue-600" />
-                        Our Office
+                    <div className="px-6">
+                      <h3 className="text-2xl flex it md:text-3xl font-bold text-[#F0B100] mb-2 gap-x-2">
+                        {/* <Building className="w-5 h-5 text-blue-600" /> */}
+                        Registered Office
                       </h3>
 
                       <div className="space-y-4">
-                        <div className="flex items-start gap-3 group">
+                        <div className="flex items-start gap-3 group mt-5">
                           <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-blue-100 to-cyan-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
                             <MapPin className="w-5 h-5 text-blue-600" />
                           </div>
                           <div>
-                            <p className="text-sm text-slate-500 mb-1">
+                            <p className=" text-slate-800 font-bold mb-1">
                               Address
                             </p>
                             <p className="text-slate-800 font-medium leading-relaxed">
@@ -474,12 +469,14 @@ export default function ContactPage() {
                             <Phone className="w-5 h-5 text-blue-600" />
                           </div>
                           <div>
-                            <p className="text-sm text-slate-500 mb-1">Phone</p>
+                            <p className="text-slate-800 font-bold mb-1">
+                              Phone
+                            </p>
                             <a
-                              href="tel:+91XXXXXXXXX"
+                              href="tel:+91 9113074387"
                               className="text-slate-800 font-medium hover:text-blue-600 transition-colors"
                             >
-                              +91 XXXXX XXXXX
+                              +91 9113074387
                             </a>
                           </div>
                         </div>
@@ -489,12 +486,14 @@ export default function ContactPage() {
                             <Mail className="w-5 h-5 text-blue-600" />
                           </div>
                           <div>
-                            <p className="text-sm text-slate-500 mb-1">Email</p>
+                            <p className="text-slate-800 font-bold mb-1">
+                              Email
+                            </p>
                             <a
                               href="mailto:sales@analog-chips.com"
                               className="text-slate-800 font-medium hover:text-blue-600 transition-colors break-all"
                             >
-                              sales@analogchips.com
+                              sales@analog-chips.com
                             </a>
                           </div>
                         </div>
@@ -504,7 +503,7 @@ export default function ContactPage() {
                             <Globe className="w-5 h-5 text-blue-600" />
                           </div>
                           <div>
-                            <p className="text-sm text-slate-500 mb-1">
+                            <p className="text-slate-800 font-bold mb-1">
                               Website
                             </p>
                             <a
@@ -526,8 +525,8 @@ export default function ContactPage() {
                 <div ref={mapRef}>
                   <Card className="bg-white border-slate-200 shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden">
                     <div className="p-6">
-                      <h3 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-                        <Navigation className="w-5 h-5 text-blue-600" />
+                      <h3 className="text-xl font-bold text-[#F0B100] mb-4 flex items-center gap-2">
+                        <Navigation className="w-5 h-5 text-[#F0B100]" />
                         Find Us Here
                       </h3>
                       <div className="relative w-full h-64 md:h-72 rounded-xl overflow-hidden bg-slate-100">

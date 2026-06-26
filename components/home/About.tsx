@@ -321,8 +321,9 @@ const cards = [
     id: 2,
     title: "Our Vision",
     subtitle: "Where We're Headed",
+    bold: `"Make in India by Design in India"`,
     description:
-      ' "Make in India by Design in India" — Enriching India Semiconductor Mission by successfully deploying Indian-owned Analog IPs and Products for domestic and overseas markets.',
+      "— Enriching India Semiconductor Mission by successfully deploying Indian-owned Analog IPs and Products for domestic and overseas markets.",
     color: "purple",
   },
   {
@@ -330,21 +331,21 @@ const cards = [
     title: "Our Mission",
     subtitle: "Why We Exist",
     description:
-      "Globally trusted partner for Analog & Mixed Signal IP solutions enabling seamless integration with full chip designs including SoCs and providing world class drop-in replacements for high performance Analog products.",
+      "Be a globally trusted partner for Analog & Mixed Signal IP solutions enabling seamless integration with full chip designs including SoCs and providing world class drop-in replacements for high performance Analog products.",
     color: "emerald",
   },
 ];
 
 const strengths = [
   "120+ Years of Combined Experience",
-  "Deep Analog & Mixed Signal Expertise",
+  "Analog & Mixed Signal Expertise",
   "End-to-End Product Development",
   "Indigenous Technology Development",
 ];
 
 export function AboutSection() {
   return (
-    <section className="relative font-['Instrument_Sans',sans-serif] bg-white pb-16 pt-2 overflow-hidden">
+    <section className="relative font-[font1] bg-white pb-16 pt-2 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-20 left-10 w-96 h-96 bg-blue-100/50 rounded-full blur-3xl" />
@@ -354,15 +355,15 @@ export function AboutSection() {
 
       {/* Company Overview - Full Width */}
       <div className="max-w-7xl mx-auto px-2 md:px-4 ">
-        <div className="bg-white  border-slate-100 p-8 md:p-10">
-          <h3 className="text-2xl md:text-4xl font-bold text-slate-900 mb-2">
+        <div className="bg-white  border-slate-100 p-7 md:p-10">
+          <h3 className="text-2xl md:text-4xl font-bold  text-[#F0B100] mb-5">
             Company Overview
           </h3>
           <p className="text-base md:text-lg text-slate-600 leading-relaxed mb-4">
-            AnalogChips Technology Pvt Ltd (ACT) develops Analog & Mixed-Signal
-            Products and IP solutions that combine robust design methodologies,
-            performance, and reliability to meet the evolving needs of modern
-            electronic systems.
+            <b>AnalogChips Technology Pvt Ltd (ACT)</b> develops Analog &
+            Mixed-Signal Products and IP solutions that combine robust design
+            methodologies, performance, and reliability to meet the evolving
+            needs of modern electronic systems.
           </p>
           <p className="text-base md:text-lg text-slate-600 leading-relaxed mb-4">
             Our expertise spans the complete development cycle - from
@@ -398,10 +399,11 @@ export function AboutSection() {
               className={`bg-white  ${i == 0 && "md:border-r"} px-3   `}
             >
               <div className="flex items-center gap-2.5 mb-3"></div>
-              <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
+              <h3 className="text-2xl md:text-3xl font-bold text-[#F0B100] mb-4">
                 {card.title}
               </h3>
               <p className=" md:text-lg text-slate-600 leading-relaxed">
+                <b>{card.bold && card.bold}</b>
                 {card.description}
               </p>
             </div>

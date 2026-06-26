@@ -371,14 +371,13 @@ export default function ProductsPage() {
           </div>
         </section>
 
-        {/* Product Development Notice */}
+        {/* Product Development Status */}
         <div className="mt-8 lg:w-[80vw] sm:w-[90vw] w-[95vw] mx-auto p-4 bg-amber-50 border border-amber-200 rounded-xl">
           <p className="text-sm text-amber-800">
-            <strong>Product Development Notice:</strong> The products presented
+            <strong>Product Development Status:</strong> The products presented
             on this page represent our current development roadmap. Final
             specifications, features and availability may change during the
-            product development cycle. Please contact us for the latest product
-            status.
+            product development cycle. Please contact at sales@analog-chips.com.
           </p>
         </div>
 

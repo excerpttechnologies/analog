@@ -621,7 +621,7 @@ const sliderContent = [
     ctaText: "Explore Products",
     ctaLink: "/products",
     secondaryCta: "Contact Us",
-    backgroundImage: "/images/slider-1.png",
+    backgroundImage: "/images/s1.webp",
     gradient: "from-blue-600 to-cyan-500",
     gradientLight: "from-blue-500 to-cyan-400",
     features: ["Power Management", "Analog ICs", "Domestic & Overseas"],
@@ -635,7 +635,7 @@ const sliderContent = [
     ctaText: "Markets",
     ctaLink: "/market",
     secondaryCta: "Contact Us",
-    backgroundImage: "/images/slider-2.png",
+    backgroundImage: "/images/s2.webp",
     gradient: "from-red-600 to-[#001635]",
     gradientLight: "from-orange-500 to-red-400",
     features: ["Fabless Design", "Indian Owned IPs", "Global Deployment"],
@@ -650,7 +650,7 @@ const sliderContent = [
     ctaText: "About Us",
     ctaLink: "/about",
     secondaryCta: "Contact Us",
-    backgroundImage: "/images/slider-3.png",
+    backgroundImage: "/images/s3.webp",
     gradient: "from-orange-600 to-red-500",
     gradientLight: "from-orange-500 to-red-400",
     features: ["Fabless Design", "Indian Owned IPs", "Global Deployment"],
@@ -658,13 +658,13 @@ const sliderContent = [
   {
     id: 4,
     title: "Engineering ",
-    title2: "Analog Excellence",
+    title2: "Analog Excellence.",
     subtitle:
       "Deliver high-performance Analog and Mixed-Signal Product and IPs that enable automotive, industrial and consumer applications.",
     ctaText: "Leadership",
     ctaLink: "/leadership",
     secondaryCta: "Contact Us",
-    backgroundImage: "/images/slider-4.png",
+    backgroundImage: "/images/s4.webp",
     gradient: "from-green-600 to-green-500",
     gradientLight: "from-orange-500 to-red-400",
     features: ["Fabless Design", "Indian Owned IPs", "Global Deployment"],
@@ -1031,10 +1031,10 @@ export function Hero() {
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      onMouseDown={handleMouseDown}
+      // onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
-      className="relative min-h-[50vh] md:min-h-[70vh]  flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing select-none"
+      className="relative min-h-[50vh] md:min-h-[72vh]  flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing select-none"
     >
       {/* Background Slider Image */}
       <div
@@ -1068,7 +1068,7 @@ export function Hero() {
       {/* Main Content */}
       <div
         ref={contentRef}
-        className="relative z-10 container min-h-[50vh] md:min-h-[60vh] p-6 pt-10 mx-auto max-w-7xl"
+        className="relative z-10 container min-h-[50vh] md:min-h-[60vh] p-5 pt-10  mx-auto max-w-7xl"
       >
         <div
           className={`content-wrapper h-full ${currentSlide.id == 2 ? "max-w-3xl" : "max-w-md"}  `}
@@ -1119,6 +1119,16 @@ export function Hero() {
           >
             {currentSlide.subtitle}
           </p>
+
+          <p className="lg:h-12"></p>
+          {currentSlide.id == 4 && (
+            <Link
+              href={"/products"}
+              className="text-white reletive z-30  cursor-pointer hero-subtitle border p-2.5 px-5  mt-4 flex gap-x-2 w-fit border-blue-600 rounded-full "
+            >
+              Explore Products <ArrowRight />
+            </Link>
+          )}
 
           {/* Feature Tags */}
 

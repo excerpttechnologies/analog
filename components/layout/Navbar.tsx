@@ -5639,9 +5639,7 @@ function SimpleDropdown({
     >
       <button
         className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-md font-medium transition-all duration-300 group ${
-          isActive
-            ? `text-[${THEME_COLOR}]`
-            : "text-slate-600 hover:text-slate-900"
+          isActive ? `text-[#F0B100]` : "text-slate-600 hover:text-slate-900"
         }`}
         aria-expanded={isOpen}
       >
@@ -5669,7 +5667,7 @@ function SimpleDropdown({
                   className="flex items-center border-b border-b-gray-200 gap-3 px-4 py-2.5 hover:bg-slate-50 transition-colors group"
                 >
                   <div className="flex-1">
-                    <p className="text-sm font-medium text-slate-700 group-hover:text-[#0393D3]">
+                    <p className="text-sm font-medium text-slate-700 group-hover:text-[#F0B100]">
                       {subitem.label}
                     </p>
                   </div>
@@ -5701,10 +5699,10 @@ function MobileAccordion({
       >
         <div className="flex items-center gap-3">
           <item.icon
-            className={`w-5 h-5 ${isActive ? "text-[#0393D3]" : "text-slate-500"}`}
+            className={`w-5 h-5 ${isActive ? "text-[#F0B100]" : "text-slate-500"}`}
           />
           <span
-            className={`text-sm font-medium ${isActive ? "text-[#0393D3]" : "text-slate-700"}`}
+            className={`text-sm font-medium ${isActive ? "text-[#F0B100]" : "text-slate-700"}`}
           >
             {item.label}
           </span>
@@ -5728,7 +5726,7 @@ function MobileAccordion({
                 <Link
                   key={idx}
                   href={subitem.href}
-                  className="block py-2 text-sm text-slate-600 hover:text-[#0393D3] transition-colors"
+                  className="block py-2 text-sm text-slate-600 hover:text-[#F0B100] transition-colors"
                   onClick={() => setOpenAccordion(null)}
                 >
                   <div className="flex items-center gap-2">
@@ -5802,7 +5800,7 @@ export function Navbar() {
     return false;
   };
 
-  const logoSrc = "/images/analog2.png";
+  const logoSrc = "/images/act-final2.webp";
 
   return (
     <div className="pt-20">
@@ -5819,14 +5817,14 @@ export function Navbar() {
             {/* Logo - Larger size, transparent background */}
             <Link href="/" className="group flex items-center shrink-0">
               <div className="relative">
-                <div className="relative w-52 h-52 md:h-62 md:w-62 lg:w-72 lg:h-62 flex items-center justify-center">
+                <div className="relative w-52 h-52    flex items-center justify-center">
                   {!logoError ? (
                     <Image
                       src={logoSrc}
                       alt="AnalogChips Logo"
-                      width={270}
-                      height={160}
-                      className="object-contain mt-7 -ml-7 lg:-ml-20"
+                      width={200}
+                      height={100}
+                      className="object-contain mt-1 ml-1 mb-1 -ml-7 lg:-ml-10"
                       onError={() => setLogoError(true)}
                       unoptimized
                       priority
@@ -5861,7 +5859,7 @@ export function Navbar() {
                     href={item.href!}
                     className={`nav-item-desktop flex items-center gap-1.5 px-3 py-2 rounded-lg text-md font-medium transition-all duration-300  group relative ${
                       active
-                        ? "text-[#0393D3]"
+                        ? "text-[#F0B100]"
                         : "text-slate-600 hover:text-slate-900"
                     }`}
                   >
@@ -5869,7 +5867,7 @@ export function Navbar() {
                     {active && (
                       <motion.div
                         layoutId="activeNav"
-                        className="absolute -bottom-0.5 left-0 right-0 h-0.5 bg-[#0393D3] rounded-full"
+                        className="absolute -bottom-0.5 left-0 right-0 h-0.5 bg-[#F0B100] rounded-full"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.3 }}
@@ -5969,13 +5967,13 @@ export function Navbar() {
                       href={item.href!}
                       className={`flex items-center gap-3 px-4 py-4 text-sm font-medium transition-all duration-300 ${
                         active
-                          ? "bg-gradient-to-r from-[#0393D3]/5 to-[#0393D3]/10 text-[#0393D3] border-r-4 border-[#0393D3]"
+                          ? "bg-gradient-to-r from-[#0393D3]/5 to-[#0393D3]/10 text-[#F0B100] border-r-4 border-[#0393D3]"
                           : "text-slate-700 hover:bg-slate-50"
                       }`}
                       onClick={() => setIsOpen(false)}
                     >
                       <item.icon
-                        className={`w-5 h-5 ${active ? "text-[#0393D3]" : "text-slate-400"}`}
+                        className={`w-5 h-5 ${active ? "text-[#F0B100]" : "text-slate-400"}`}
                       />
                       {item.label}
                     </Link>

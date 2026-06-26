@@ -292,7 +292,7 @@ export default function AboutPage() {
   return (
     <>
       <Navbar />
-      <main className="bg-white">
+      <main className="bg-white font-[font1]">
         {/* Section 1: Full Width Dark Navy Banner */}
         <section className="relative bg-gradient-to-br from-[#0F2747] via-[#1a3a5e] to-[#0F2747] overflow-hidden">
           {/* Geometric Abstract Background Shapes */}
@@ -373,7 +373,7 @@ export default function AboutPage() {
               }`}
             >
               <p className="text-[16px] leading-[1.8] text-[#555555]">
-                AnalogChips Technology Pvt Ltd (ACT) is a Bangalore-based
+                <b>AnalogChips Technology Pvt Ltd (ACT)</b> is a Bangalore-based
                 fabless semiconductor company specializing in Analog &
                 Mixed-Signal Products and IP solutions including Power
                 Management, Data Converters, Sensors & Interface circuits for
@@ -423,7 +423,7 @@ export default function AboutPage() {
               <div className="relative group">
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl transform transition-transform duration-700 group-hover:scale-[1.02]">
                   <Image
-                    src="/images/about-analog.png"
+                    src="/images/about-analog.webp"
                     alt="Semiconductor Technology"
                     width={600}
                     height={500}
@@ -438,7 +438,7 @@ export default function AboutPage() {
 
               {/* Right Column - Content */}
               <div className="space-y-8">
-                <h2 className="text-[36px] font-bold text-[#3B5F8A] leading-tight">
+                <h2 className="text-[36px] font-bold text-[#F0B100] leading-tight">
                   Our Focus Areas
                 </h2>
 
@@ -481,7 +481,7 @@ export default function AboutPage() {
                       <CheckCircle className="w-5 h-5 text-[#0F2747]" />
                     </div>
                     <span className="text-sm font-medium text-[#1A1A1A]">
-                      Signal Conditioning Solutions
+                      Custom Analog IPs
                     </span>
                   </div>
                 </div>

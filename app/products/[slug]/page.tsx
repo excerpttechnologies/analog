@@ -672,7 +672,7 @@ const productsData: Record<string, any> = {
       "Compact Solution Footprint",
       "Integrated Protection Features",
     ],
-    image: "/images/buck_.png",
+    image: "/images/buck_.webp",
     icon: Zap,
     gradient: "from-emerald-500 to-teal-500",
     lightGradient: "from-emerald-50 to-teal-50",
@@ -716,7 +716,7 @@ const productsData: Record<string, any> = {
       "Integrated Protection Features",
       "Compact Solution with minimal external components",
     ],
-    image: "/images/boost_.png",
+    image: "/images/boost_.webp",
     icon: Battery,
     gradient: "from-blue-500 to-cyan-500",
     lightGradient: "from-blue-50 to-cyan-50",
@@ -761,7 +761,7 @@ const productsData: Record<string, any> = {
       "Integrated Protection Features",
       "Compact Solution with Minimal External Components",
     ],
-    image: "/images/ldo_.png",
+    image: "/images/ldo_.webp",
     icon: Radio,
     gradient: "from-purple-500 to-pink-500",
     lightGradient: "from-purple-50 to-pink-50",
@@ -806,7 +806,7 @@ const productsData: Record<string, any> = {
       "PWM Dimming Support",
       "Easy Integration into Existing Lighting Platforms",
     ],
-    image: "/images/led_.png",
+    image: "/images/led_.webp",
     icon: Layers,
     gradient: "from-orange-500 to-amber-500",
     lightGradient: "from-orange-50 to-amber-50",
@@ -851,7 +851,7 @@ const productsData: Record<string, any> = {
       "Programmable discharge rate",
       "Power Good Indicator",
     ],
-    image: "/images/load_.png",
+    image: "/images/load_.webp",
     icon: Gauge,
     gradient: "from-indigo-500 to-purple-500",
     lightGradient: "from-indigo-50 to-purple-50",
@@ -897,7 +897,7 @@ const productsData: Record<string, any> = {
       "Compact Implementation",
       "Simplified Integration into Power Architectures",
     ],
-    image: "/images/ideal_.png",
+    image: "/images/ideal_.webp",
     icon: Plug,
     gradient: "from-red-500 to-rose-500",
     lightGradient: "from-red-50 to-rose-50",
@@ -1062,24 +1062,24 @@ export default function ProductDetailPage() {
                 <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
                   Need More Information?
                 </h3>
-                <p className="text-slate-300 mb-6 max-w-2xl mx-auto">
+                {/* <p className="text-slate-300 mb-6 max-w-2xl mx-auto">
                   Contact our team to learn more about our products & IP
                   solutions.
-                </p>
+                </p> */}
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Link
-                    href="/contact"
-                    className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
-                  >
-                    Contact Team
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
                   <Link
                     href="/products"
                     className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-white/10 backdrop-blur-sm text-white font-semibold border border-white/20 hover:bg-white/20 transition-all duration-300"
                   >
                     View All Products
-                    <Mail className="w-4 h-4" />
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
+                  >
+                    Contact Us
+                    <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
               </div>
