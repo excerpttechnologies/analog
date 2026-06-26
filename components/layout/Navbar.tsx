@@ -5570,19 +5570,19 @@ const navigationData: NavItem[] = [
       {
         label: "About Us",
         href: "/about",
-        description: "Our story and mission",
+        description: "",
         icon: Info,
       },
       {
         label: "Leadership",
         href: "/leadership",
-        description: "Meet our team",
+        description: "",
         icon: Crown,
       },
       {
         label: "Careers",
         href: "/careers",
-        description: "Join our team",
+        description: "",
         icon: Crown,
       },
     ],

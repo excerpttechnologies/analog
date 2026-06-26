@@ -1148,7 +1148,7 @@ export function Hero() {
       <button
         onClick={handlePrev}
         aria-label="Previous slide"
-        className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 z-20 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-300"
+        className="absolute left-3 md:left-6 bottom-5 -translate-y-1/2 z-20 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-300"
       >
         <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
       </button>
@@ -1157,7 +1157,7 @@ export function Hero() {
       <button
         onClick={handleNext}
         aria-label="Next slide"
-        className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 z-20 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-300"
+        className="absolute right-3 md:right-6 bottom-5 -translate-y-1/2 z-20 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-300"
       >
         <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
       </button>
