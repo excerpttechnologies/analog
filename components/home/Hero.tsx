@@ -744,9 +744,6 @@ export function Hero() {
   const [direction, setDirection] = useState<"next" | "prev">("next");
   const autoSlideRef = useRef<NodeJS.Timeout | null>(null);
   const isHoveringRef = useRef(false);
-  const [touchStartX, setTouchStartX] = useState(0);
-  const [touchEndX, setTouchEndX] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
 
   const currentSlide = sliderContent[activeIndex];
 
@@ -810,67 +807,6 @@ export function Hero() {
     setDirection(index > activeIndex ? "next" : "prev");
     setIsAnimating(true);
     setActiveIndex(index);
-  };
-
-  // Touch handlers for swipe
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStartX(e.touches[0].clientX);
-    setIsDragging(true);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging) return;
-    setTouchEndX(e.touches[0].clientX);
-
-    // Calculate drag distance for visual feedback
-    const dragDistance = touchStartX - e.touches[0].clientX;
-    if (Math.abs(dragDistance) > 20) {
-      // Add visual feedback here if needed
-    }
-  };
-
-  const handleTouchEnd = () => {
-    setIsDragging(false);
-    const swipeDistance = touchStartX - touchEndX;
-
-    if (Math.abs(swipeDistance) > 50) {
-      if (swipeDistance > 0) {
-        // Swipe left - next
-        handleNext();
-      } else {
-        // Swipe right - prev
-        handlePrev();
-      }
-    }
-  };
-
-  // Mouse drag handlers for desktop
-  const handleMouseDown = (e: React.MouseEvent) => {
-    setTouchStartX(e.clientX);
-    setIsDragging(true);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging) return;
-    setTouchEndX(e.clientX);
-  };
-
-  const handleMouseUp = () => {
-    if (!isDragging) return;
-    setIsDragging(false);
-    const swipeDistance = touchStartX - touchEndX;
-
-    if (Math.abs(swipeDistance) > 50) {
-      if (swipeDistance > 0) {
-        handleNext();
-      } else {
-        handlePrev();
-      }
-    }
-  };
-
-  const handleMouseLeave = () => {
-    setIsDragging(false);
   };
 
   // GSAP animations for background and content
@@ -1121,15 +1057,8 @@ export function Hero() {
       onMouseLeave={() => {
         isHoveringRef.current = false;
         startAutoSlide();
-        handleMouseLeave();
       }}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
-      // onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      className="relative lg:min-h-[74vh]  min-h-[80vh]   flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing select-none"
+      className="relative lg:min-h-[74vh]  min-h-[85vh]   flex items-center justify-center overflow-hidden select-none"
     >
       {/* Background Slider Image */}
       <div
@@ -1224,7 +1153,7 @@ export function Hero() {
           {currentSlide.id == 4 && (
             <Link
               href={"/products"}
-              className="text-white reletive z-30  cursor-pointer hero-subtitle border p-2.5 px-5  mt-4 flex gap-x-2 w-fit border-blue-600 rounded-full "
+              className="text-white relative z-[999]  cursor-pointer hero-subtitle border p-2.5 px-5  mt-4 flex gap-x-2 w-fit border-blue-600 rounded-full "
             >
               Explore Products <ArrowRight />
             </Link>
@@ -1280,15 +1209,6 @@ export function Hero() {
             />
           </button>
         ))}
-      </div>
-
-      {/* Swipe Indicator */}
-      <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex items-center gap-2 opacity-50 md:hidden">
-        <span className="text-[10px] text-white/60">Swipe</span>
-        <div className="w-5 h-5 rounded-full border border-white/30 flex items-center justify-center">
-          <ChevronLeft className="w-2.5 h-2.5 text-white/60" />
-          <ChevronRight className="w-2.5 h-2.5 text-white/60" />
-        </div>
       </div>
 
       {/* CSS Animations */}
