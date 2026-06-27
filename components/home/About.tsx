@@ -354,8 +354,8 @@ export function AboutSection() {
       </div>
 
       {/* Company Overview - Full Width */}
-      <div className="max-w-7xl mx-auto px-2 md:px-4 ">
-        <div className="bg-white  border-slate-100 p-7 md:p-10">
+      <div className="max-w-7xl mx-auto   ">
+        <div className="bg-white  border-slate-100 p-5 md:p-10 lg:p-6">
           <h3 className="text-2xl md:text-4xl font-bold  text-[#F0B100] mb-5">
             Company Overview
           </h3>
@@ -391,7 +391,7 @@ export function AboutSection() {
       </div>
 
       {/* Vision & Mission - 2 Cards in One Row */}
-      <div className="max-w-7xl sm:px-12 px-8 mx-auto ">
+      <div className="max-w-7xl  px-4 mx-auto ">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
           {cards.slice(1).map((card, i) => (
             <div

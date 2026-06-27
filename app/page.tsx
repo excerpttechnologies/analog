@@ -13,11 +13,11 @@ import { StatsSection } from "@/components/home/StatsSection";
 import { TrustedClientsSection } from "@/components/home/TrustedClientsSection";
 
 export const metadata: Metadata = {
-  title: "ACT - Analog Circuit Technologies | Power Management ICs",
+  title: "ACT - AnalogChips Technology",
   description:
     "A fabless semiconductor company designing high-performance power management solutions. Boost converters, Buck regulators, LDO, LED Drivers and more — Made in India, Designed in India.",
   openGraph: {
-    title: "ACT - Analog Circuit Technologies | Power Management ICs",
+    title: "ACT - AnalogChips Technology",
     description:
       "A fabless semiconductor company designing high-performance power management solutions. Boost converters, Buck regulators, LDO, LED Drivers and more — Made in India, Designed in India.",
     type: "website",

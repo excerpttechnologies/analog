@@ -370,7 +370,7 @@ export function Footer() {
 
   return (
     <footer ref={footerRef} className="bg-[#0B1A2E] text-white">
-      <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
+      <div className="container reletive mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:py-10">
           {/* Brand Section */}
@@ -379,7 +379,7 @@ export function Footer() {
               <img
                 src="/images/act-final2.webp"
                 alt=""
-                className="h-14 md:ml-0 m-8"
+                className="h-14 md:ml-0 m-8 lg:absolute lg:top-1 lg:left-4"
               />
             </div>
           </div>

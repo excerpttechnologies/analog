@@ -1,4 +1,3 @@
-// //////////////////////////
 
 // "use client";
 
@@ -26,11 +25,12 @@
 //     title2: "Make in India.",
 //     title3: "Deliver worldwide.",
 //     subtitle:
-//       "Deliver globally competitive Analog IPs and semiconductor solutions that serve customers across India and international markets.",
+//       "Deliver globally competitive Analog & Mixed Signal IPs and semiconductor solutions that serve customers across India and international markets.",
 //     ctaText: "Explore Products",
 //     ctaLink: "/products",
 //     secondaryCta: "Contact Us",
-//     backgroundImage: "/images/slider-1.png",
+//     backgroundImage: "/images/s1.webp",
+//     phonebg:"/images/ps1.png",
 //     gradient: "from-blue-600 to-cyan-500",
 //     gradientLight: "from-blue-500 to-cyan-400",
 //     features: ["Power Management", "Analog ICs", "Domestic & Overseas"],
@@ -44,7 +44,8 @@
 //     ctaText: "Markets",
 //     ctaLink: "/market",
 //     secondaryCta: "Contact Us",
-//     backgroundImage: "/images/slider-2.png",
+//     backgroundImage: "/images/s2.webp",
+//     phonebg:"/images/ps2.png",
 //     gradient: "from-red-600 to-[#001635]",
 //     gradientLight: "from-orange-500 to-red-400",
 //     features: ["Fabless Design", "Indian Owned IPs", "Global Deployment"],
@@ -59,7 +60,8 @@
 //     ctaText: "About Us",
 //     ctaLink: "/about",
 //     secondaryCta: "Contact Us",
-//     backgroundImage: "/images/slider-3.png",
+//     backgroundImage: "/images/s3.webp",
+//     phonebg:"/images/ps3.png",
 //     gradient: "from-orange-600 to-red-500",
 //     gradientLight: "from-orange-500 to-red-400",
 //     features: ["Fabless Design", "Indian Owned IPs", "Global Deployment"],
@@ -67,13 +69,14 @@
 //   {
 //     id: 4,
 //     title: "Engineering ",
-//     title2: "Analog Excellence",
+//     title2: "Analog Excellence.",
 //     subtitle:
 //       "Deliver high-performance Analog and Mixed-Signal Product and IPs that enable automotive, industrial and consumer applications.",
 //     ctaText: "Leadership",
 //     ctaLink: "/leadership",
 //     secondaryCta: "Contact Us",
-//     backgroundImage: "/images/slider-4.png",
+//     backgroundImage: "/images/s4.webp",
+//     phonebg:"/images/ps4.png",
 //     gradient: "from-green-600 to-green-500",
 //     gradientLight: "from-orange-500 to-red-400",
 //     features: ["Fabless Design", "Indian Owned IPs", "Global Deployment"],
@@ -87,11 +90,27 @@
 //   const [isAnimating, setIsAnimating] = useState(false);
 //   const [direction, setDirection] = useState<"next" | "prev">("next");
 //   const autoSlideRef = useRef<NodeJS.Timeout | null>(null);
+//   const isHoveringRef = useRef(false);
 //   const [touchStartX, setTouchStartX] = useState(0);
 //   const [touchEndX, setTouchEndX] = useState(0);
 //   const [isDragging, setIsDragging] = useState(false);
 
 //   const currentSlide = sliderContent[activeIndex];
+
+// const [isMobile, setIsMobile] = useState(false);
+
+// useEffect(() => {
+//   const checkScreen = () => {
+//     setIsMobile(window.innerWidth < 700); 
+//   };
+
+//   checkScreen();
+
+//   window.addEventListener("resize", checkScreen);
+//   return () => window.removeEventListener("resize", checkScreen);
+// }, []);
+
+
 
 //   // Auto-slide functionality
 //   const startAutoSlide = () => {
@@ -111,7 +130,9 @@
 //   };
 
 //   useEffect(() => {
-//     startAutoSlide();
+//     if (!isHoveringRef.current) {
+//       startAutoSlide();
+//     }
 //     return () => stopAutoSlide();
 //   }, [activeIndex, isAnimating]);
 
@@ -425,24 +446,33 @@
 //   return (
 //     <section
 //       ref={containerRef}
-//       onMouseEnter={stopAutoSlide}
+//       onMouseEnter={() => {
+//         isHoveringRef.current = true;
+//         stopAutoSlide();
+//       }}
 //       onMouseLeave={() => {
+//         isHoveringRef.current = false;
 //         startAutoSlide();
 //         handleMouseLeave();
 //       }}
 //       onTouchStart={handleTouchStart}
 //       onTouchMove={handleTouchMove}
 //       onTouchEnd={handleTouchEnd}
-//       onMouseDown={handleMouseDown}
+//       // onMouseDown={handleMouseDown}
 //       onMouseMove={handleMouseMove}
 //       onMouseUp={handleMouseUp}
-//       className="relative min-h-[50vh] md:min-h-[70vh]  flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing select-none"
+//       className="relative lg:min-h-[73vh]  min-h-[80vh]   flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing select-none"
 //     >
 //       {/* Background Slider Image */}
 //       <div
-//         className="bg-slider-image absolute inset-0 bg-cover  transition-all duration-700 "
+//         className="bg-slider-image absolute inset-0 bg-cover   transition-all duration-700 "
 //         style={{
-//           backgroundImage: `url(${currentSlide.backgroundImage})`,
+//           // backgroundImage: `url(${currentSlide.backgroundImage})`,
+//           backgroundImage: `url(${
+//     isMobile && currentSlide.phonebg
+//       ? currentSlide.phonebg
+//       : currentSlide.backgroundImage
+//   })`,
 //           backgroundSize: "cover",
 //           backgroundPosition: currentSlide.id == 2 ? "center" : "",
 //           backgroundRepeat: "no-repeat",
@@ -470,7 +500,7 @@
 //       {/* Main Content */}
 //       <div
 //         ref={contentRef}
-//         className="relative z-10 container min-h-[50vh] md:min-h-[60vh] p-6 pt-10 mx-auto max-w-7xl"
+//         className="md:relative absolute top-0 left-0  z-10 container min-h-[50vh] md:min-h-[60vh] p-5 md:pt-10  mx-auto max-w-7xl"
 //       >
 //         <div
 //           className={`content-wrapper h-full ${currentSlide.id == 2 ? "max-w-3xl" : "max-w-md"}  `}
@@ -522,6 +552,16 @@
 //             {currentSlide.subtitle}
 //           </p>
 
+//           <p className="lg:h-12"></p>
+//           {currentSlide.id == 4 && (
+//             <Link
+//               href={"/products"}
+//               className="text-white reletive z-30  cursor-pointer hero-subtitle border p-2.5 px-5  mt-4 flex gap-x-2 w-fit border-blue-600 rounded-full "
+//             >
+//               Explore Products <ArrowRight />
+//             </Link>
+//           )}
+
 //           {/* Feature Tags */}
 
 //           {/* CTA Buttons - Removed Explore Products button, only Contact Us remains */}
@@ -535,6 +575,24 @@
 //           </div> */}
 //         </div>
 //       </div>
+
+//       {/* Left Arrow */}
+//       <button
+//         onClick={handlePrev}
+//         aria-label="Previous slide"
+//         className="absolute left-3 md:left-6 bottom-5 -translate-y-1/2 z-20 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-300"
+//       >
+//         <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
+//       </button>
+
+//       {/* Right Arrow */}
+//       <button
+//         onClick={handleNext}
+//         aria-label="Next slide"
+//         className="absolute right-3 md:right-6 bottom-5 -translate-y-1/2 z-20 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-300"
+//       >
+//         <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
+//       </button>
 
 //       {/* Slide Indicators */}
 //       <div className="slider-dots absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-1.5 md:gap-2 z-20">
@@ -591,6 +649,9 @@
 //   );
 // }
 
+
+
+
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -622,6 +683,7 @@ const sliderContent = [
     ctaLink: "/products",
     secondaryCta: "Contact Us",
     backgroundImage: "/images/s1.webp",
+    phonebg:"/images/ps1.webp",
     gradient: "from-blue-600 to-cyan-500",
     gradientLight: "from-blue-500 to-cyan-400",
     features: ["Power Management", "Analog ICs", "Domestic & Overseas"],
@@ -636,6 +698,7 @@ const sliderContent = [
     ctaLink: "/market",
     secondaryCta: "Contact Us",
     backgroundImage: "/images/s2.webp",
+    phonebg:"/images/ps2.webp",
     gradient: "from-red-600 to-[#001635]",
     gradientLight: "from-orange-500 to-red-400",
     features: ["Fabless Design", "Indian Owned IPs", "Global Deployment"],
@@ -651,6 +714,7 @@ const sliderContent = [
     ctaLink: "/about",
     secondaryCta: "Contact Us",
     backgroundImage: "/images/s3.webp",
+    phonebg:"/images/ps3.webp",
     gradient: "from-orange-600 to-red-500",
     gradientLight: "from-orange-500 to-red-400",
     features: ["Fabless Design", "Indian Owned IPs", "Global Deployment"],
@@ -665,6 +729,7 @@ const sliderContent = [
     ctaLink: "/leadership",
     secondaryCta: "Contact Us",
     backgroundImage: "/images/s4.webp",
+    phonebg:"/images/ps4.webp",
     gradient: "from-green-600 to-green-500",
     gradientLight: "from-orange-500 to-red-400",
     features: ["Fabless Design", "Indian Owned IPs", "Global Deployment"],
@@ -684,6 +749,19 @@ export function Hero() {
   const [isDragging, setIsDragging] = useState(false);
 
   const currentSlide = sliderContent[activeIndex];
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkScreen = () => {
+      setIsMobile(window.innerWidth < 550);
+    };
+
+    checkScreen();
+
+    window.addEventListener("resize", checkScreen);
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
 
   // Auto-slide functionality
   const startAutoSlide = () => {
@@ -814,7 +892,22 @@ export function Hero() {
           ease: "power2.in",
         })
         .set(".bg-slider-image", {
-          backgroundImage: `url(${currentSlide.backgroundImage})`,
+          // FIX: resolve the bg image with a callback (function value) instead
+          // of a static string. GSAP runs this at the exact moment the .set()
+          // step executes in the timeline, so it always reads the *live*
+          // window width — not a stale isMobile value captured when the
+          // effect first ran. This is what fixed the "phonebg flashes first,
+          // then the desktop image takes over" glitch on desktop (and the
+          // reverse glitch on mobile).
+          backgroundImage: () => {
+            const liveIsMobile =
+              typeof window !== "undefined" && window.innerWidth < 700;
+            const bg =
+              liveIsMobile && currentSlide.phonebg
+                ? currentSlide.phonebg
+                : currentSlide.backgroundImage;
+            return `url(${bg})`;
+          },
         })
         .to(".bg-slider-image", {
           opacity: 1,
@@ -924,7 +1017,9 @@ export function Hero() {
     }, containerRef);
 
     return () => ctx.revert();
-  }, [activeIndex, direction, currentSlide]);
+    // NOTE: isMobile added so the timeline recalculates resolvedBg if the
+    // viewport crosses the mobile breakpoint between slides.
+  }, [activeIndex, direction, currentSlide, isMobile]);
 
   // Initial load animation
   useEffect(() => {
@@ -1034,13 +1129,18 @@ export function Hero() {
       // onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
-      className="relative min-h-[50vh] md:min-h-[72vh]  flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing select-none"
+      className="relative lg:min-h-[74vh]  min-h-[80vh]   flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing select-none"
     >
       {/* Background Slider Image */}
       <div
-        className="bg-slider-image absolute inset-0 bg-cover  transition-all duration-700 "
+        className="bg-slider-image absolute inset-0 bg-cover   transition-all duration-700 "
         style={{
-          backgroundImage: `url(${currentSlide.backgroundImage})`,
+          // backgroundImage: `url(${currentSlide.backgroundImage})`,
+          backgroundImage: `url(${
+    isMobile && currentSlide.phonebg
+      ? currentSlide.phonebg
+      : currentSlide.backgroundImage
+  })`,
           backgroundSize: "cover",
           backgroundPosition: currentSlide.id == 2 ? "center" : "",
           backgroundRepeat: "no-repeat",
@@ -1068,7 +1168,7 @@ export function Hero() {
       {/* Main Content */}
       <div
         ref={contentRef}
-        className="relative z-10 container min-h-[50vh] md:min-h-[60vh] p-5 pt-10  mx-auto max-w-7xl"
+        className="md:relative absolute top-0 left-0  z-10 container min-h-[50vh] md:min-h-[60vh] p-5 md:pt-10  mx-auto max-w-7xl"
       >
         <div
           className={`content-wrapper h-full ${currentSlide.id == 2 ? "max-w-3xl" : "max-w-md"}  `}
@@ -1120,7 +1220,7 @@ export function Hero() {
             {currentSlide.subtitle}
           </p>
 
-          <p className="lg:h-12"></p>
+          <p className="lg:h-12 h-6"></p>
           {currentSlide.id == 4 && (
             <Link
               href={"/products"}
