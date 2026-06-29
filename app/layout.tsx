@@ -8,7 +8,7 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "AnalogChips Technology",
-  description: "Analog",
+  // description: "Analog",
   generator: "Analog.app",
   icons: {
     icon: "/images/act-final2.webp",
