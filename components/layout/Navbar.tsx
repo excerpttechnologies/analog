@@ -5656,7 +5656,7 @@ function SimpleDropdown({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-slate-100 overflow-hidden z-50"
+            className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-slate-200 overflow-hidden z-50"
           >
             <div className="py-2">
               {item.subitems?.map((subitem, idx) => (
