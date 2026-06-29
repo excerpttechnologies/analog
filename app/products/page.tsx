@@ -483,18 +483,10 @@ export default function ProductsPage() {
                         </div> */}
 
                         {/* Learn More */}
-                        <div
-                          className={`inline-flex items-center gap-2 text-sm font-semibold transition-all duration-300 ${
-                            isHovered ? "text-blue-600" : "text-slate-700"
-                          }`}
-                        >
-                          Learn More
-                          <ArrowRight
-                            className={`w-4 h-4 transition-transform duration-300 ${
-                              isHovered ? "translate-x-1" : ""
-                            }`}
-                          />
-                        </div>
+                        <div className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600">
+  Learn More
+  <ArrowRight className="w-4 h-4" />
+</div>
                       </div>
                     </Card>
                   </Link>
