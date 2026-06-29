@@ -13,13 +13,13 @@ import { StatsSection } from "@/components/home/StatsSection";
 import { TrustedClientsSection } from "@/components/home/TrustedClientsSection";
 
 export const metadata: Metadata = {
-  title: "ACT - AnalogChips Technology",
-  description:
-    "A fabless semiconductor company designing high-performance power management solutions. Boost converters, Buck regulators, LDO, LED Drivers and more — Made in India, Designed in India.",
+  title: "ACT - AnalogChips Technology PVT LTD",
+  // description:
+  //   "AnalogChips Technology PVT LTD. semiconductor company designing high-performance power management solutions. Boost converters, Buck regulators, LDO, LED Drivers and more — Made in India, Designed in India.",
   openGraph: {
-    title: "ACT - AnalogChips Technology",
-    description:
-      "A fabless semiconductor company designing high-performance power management solutions. Boost converters, Buck regulators, LDO, LED Drivers and more — Made in India, Designed in India.",
+    title: "ACT - AnalogChips Technology PVT LTD",
+    // description:
+    //   "AnalogChips Technology PVT LTD. semiconductor company designing high-performance power management solutions. Boost converters, Buck regulators, LDO, LED Drivers and more — Made in India, Designed in India.",
     type: "website",
   },
 };
