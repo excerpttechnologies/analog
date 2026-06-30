@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -30,7 +29,7 @@ const sliderContent = [
     ctaLink: "/products",
     secondaryCta: "Contact Us",
     backgroundImage: "/images/s1.webp",
-    phonebg:"/images/ps1.webp",
+    phonebg: "/images/ps1.webp",
     gradient: "from-blue-600 to-cyan-500",
     gradientLight: "from-blue-500 to-cyan-400",
     features: ["Power Management", "Analog ICs", "Domestic & Overseas"],
@@ -45,7 +44,7 @@ const sliderContent = [
     ctaLink: "/market",
     secondaryCta: "Contact Us",
     backgroundImage: "/images/s2.webp",
-    phonebg:"/images/ps2.webp",
+    phonebg: "/images/ps2.webp",
     gradient: "from-red-600 to-[#001635]",
     gradientLight: "from-orange-500 to-red-400",
     features: ["Fabless Design", "Indian Owned IPs", "Global Deployment"],
@@ -61,7 +60,7 @@ const sliderContent = [
     ctaLink: "/about",
     secondaryCta: "Contact Us",
     backgroundImage: "/images/s3.webp",
-    phonebg:"/images/ps3.webp",
+    phonebg: "/images/ps3.webp",
     gradient: "from-orange-600 to-red-500",
     gradientLight: "from-orange-500 to-red-400",
     features: ["Fabless Design", "Indian Owned IPs", "Global Deployment"],
@@ -76,7 +75,7 @@ const sliderContent = [
     ctaLink: "/leadership",
     secondaryCta: "Contact Us",
     backgroundImage: "/images/s4.webp",
-    phonebg:"/images/ps4.webp",
+    phonebg: "/images/ps4.webp",
     gradient: "from-green-600 to-green-500",
     gradientLight: "from-orange-500 to-red-400",
     features: ["Fabless Design", "Indian Owned IPs", "Global Deployment"],
@@ -108,21 +107,18 @@ export function Hero() {
   }, []);
 
   // Auto-slide functionality
-const startAutoSlide = () => {
-  if (autoSlideRef.current) {
-    clearInterval(autoSlideRef.current);
-    autoSlideRef.current = null;
-  }
-
-  // Disable auto-slide on mobile
-  if (isMobile) return;
-
-  autoSlideRef.current = setInterval(() => {
-    if (!isAnimating) {
-      handleNext();
+  const startAutoSlide = () => {
+    if (autoSlideRef.current) {
+      clearInterval(autoSlideRef.current);
+      autoSlideRef.current = null;
     }
-  }, 6000);
-};
+
+    autoSlideRef.current = setInterval(() => {
+      if (!isAnimating) {
+        handleNext();
+      }
+    }, 20000);
+  };
 
   const stopAutoSlide = () => {
     if (autoSlideRef.current) {
@@ -136,7 +132,7 @@ const startAutoSlide = () => {
       startAutoSlide();
     }
     return () => stopAutoSlide();
-  }, [activeIndex, isAnimating,isMobile]);
+  }, [activeIndex, isAnimating, isMobile]);
 
   const handlePrev = () => {
     if (isAnimating) return;
@@ -182,7 +178,6 @@ const startAutoSlide = () => {
           ease: "power2.in",
         })
         .set(".bg-slider-image", {
-         
           backgroundImage: () => {
             const liveIsMobile =
               typeof window !== "undefined" && window.innerWidth < 700;
@@ -414,10 +409,10 @@ const startAutoSlide = () => {
         style={{
           // backgroundImage: `url(${currentSlide.backgroundImage})`,
           backgroundImage: `url(${
-    isMobile && currentSlide.phonebg
-      ? currentSlide.phonebg
-      : currentSlide.backgroundImage
-  })`,
+            isMobile && currentSlide.phonebg
+              ? currentSlide.phonebg
+              : currentSlide.backgroundImage
+          })`,
           backgroundSize: "cover",
           backgroundPosition: currentSlide.id == 2 ? "center" : "",
           backgroundRepeat: "no-repeat",
