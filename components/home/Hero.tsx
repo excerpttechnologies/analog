@@ -117,7 +117,7 @@ export function Hero() {
       if (!isAnimating) {
         handleNext();
       }
-    }, 20000);
+    }, 15000);
   };
 
   const stopAutoSlide = () => {

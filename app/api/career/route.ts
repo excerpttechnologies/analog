@@ -255,22 +255,22 @@ import nodemailer, { type SendMailOptions } from "nodemailer";
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 interface CareerFormPayload {
-    name: string;
-    email: string;
-    phone?: string;
-    position?: string;
-    linkedin?: string;
-    message?: string;
-    // resume is sent as a base64 string from the client
-    resumeBase64?: string;
-    resumeName?: string;
-    resumeType?: string;
+  name: string;
+  email: string;
+  phone?: string;
+  position?: string;
+  linkedin?: string;
+  message?: string;
+  // resume is sent as a base64 string from the client
+  resumeBase64?: string;
+  resumeName?: string;
+  resumeType?: string;
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 function buildApplicantEmail(data: CareerFormPayload): string {
-    return `
+  return `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -336,7 +336,7 @@ function buildApplicantEmail(data: CareerFormPayload): string {
 }
 
 function buildInternalEmail(data: CareerFormPayload): string {
-    return `
+  return `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -362,36 +362,36 @@ function buildInternalEmail(data: CareerFormPayload): string {
             <td style="padding:32px 40px;">
               <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
                 ${(
-            [
-                ["Full Name", data.name],
-                ["Email", `<a href="mailto:${data.email}" style="color:#1e6bb8;text-decoration:none;">${data.email}</a>`],
-                data.phone ? ["Phone", data.phone] : null,
-                data.position ? ["Position", data.position] : null,
-                data.linkedin ? ["LinkedIn", `<a href="${data.linkedin}" style="color:#1e6bb8;text-decoration:none;">${data.linkedin}</a>`] : null,
-                data.resumeName ? ["Resume", `📎 ${data.resumeName} (attached)`] : null,
-            ] as (string[] | null)[]
-        )
-            .filter((row): row is string[] => row !== null)
-            .map(
-                ([label, value]: string[]) => `
+      [
+        ["Full Name", data.name],
+        ["Email", `<a href="mailto:${data.email}" style="color:#1e6bb8;text-decoration:none;">${data.email}</a>`],
+        data.phone ? ["Phone", data.phone] : null,
+        data.position ? ["Position", data.position] : null,
+        data.linkedin ? ["LinkedIn", `<a href="${data.linkedin}" style="color:#1e6bb8;text-decoration:none;">${data.linkedin}</a>`] : null,
+        data.resumeName ? ["Resume", `📎 ${data.resumeName} (attached)`] : null,
+      ] as (string[] | null)[]
+    )
+      .filter((row): row is string[] => row !== null)
+      .map(
+        ([label, value]: string[]) => `
                     <tr>
                       <td style="padding:10px 0;border-bottom:1px solid #f1f5f9;font-size:12px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.08em;width:140px;vertical-align:top;">${label}</td>
                       <td style="padding:10px 0;border-bottom:1px solid #f1f5f9;font-size:14px;color:#1e293b;">${value}</td>
                     </tr>`
-            )
-            .join("")}
+      )
+      .join("")}
               </table>
 
               ${data.message
-            ? `
+      ? `
               <div style="margin-top:24px;">
                 <p style="margin:0 0 8px;font-size:12px;font-weight:700;color:#0d2a4a;text-transform:uppercase;letter-spacing:0.1em;">Cover Message</p>
                 <div style="background:#f8fafc;border-left:3px solid #f5c518;border-radius:4px;padding:16px 20px;color:#334155;font-size:14px;line-height:1.7;">
                   ${data.message.replace(/\n/g, "<br/>")}
                 </div>
               </div>`
-            : ""
-        }
+      : ""
+    }
 
               <div style="margin-top:28px;">
                 <a
@@ -423,78 +423,78 @@ function buildInternalEmail(data: CareerFormPayload): string {
 // ─── Route Handler ─────────────────────────────────────────────────────────────
 
 export async function POST(req: NextRequest) {
-    try {
-        // ── 1. Parse body ──────────────────────────────────────────────────────────
-        const body: CareerFormPayload = await req.json();
+  try {
+    // ── 1. Parse body ──────────────────────────────────────────────────────────
+    const body: CareerFormPayload = await req.json();
 
-        const { name, email, phone, position, linkedin, message, resumeBase64, resumeName, resumeType } = body;
+    const { name, email, phone, position, linkedin, message, resumeBase64, resumeName, resumeType } = body;
 
-        // ── 2. Basic validation ────────────────────────────────────────────────────
-        if (!name?.trim()) {
-            return NextResponse.json({ error: "Name is required." }, { status: 400 });
-        }
-        if (!email?.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            return NextResponse.json({ error: "A valid email is required." }, { status: 400 });
-        }
-
-        // ── 3. Build transporter ───────────────────────────────────────────────────
-        const transporter = nodemailer.createTransport({
-            host: process.env.SMTP_HOST || "smtp.gmail.com",
-            port: parseInt(process.env.SMTP_PORT || "587"),
-            secure: process.env.SMTP_SECURE === "true", // true for port 465
-            auth: {
-                user: process.env.SMTP_USER,
-                pass: process.env.SMTP_PASS,
-            },
-        });
-
-        // ── 4. Build attachments ───────────────────────────────────────────────────
-        type Attachment = NonNullable<SendMailOptions["attachments"]>[number];
-        const attachments: Attachment[] = [];
-        if (resumeBase64 && resumeName) {
-            attachments.push({
-                filename: resumeName,
-                content: resumeBase64,
-                encoding: "base64",
-                contentType: resumeType || "application/octet-stream",
-            });
-        }
-
-        const companyEmail = process.env.COMPANY_EMAIL || process.env.CAREERS_EMAIL || "careers@fermionic.design";
-        const senderAddress = process.env.SMTP_USER!;
-
-        // ── 5. Send internal notification email ───────────────────────────────────
-        await transporter.sendMail({
-            from: `"Fermionic Careers" <${senderAddress}>`,
-            to: companyEmail,
-            cc: senderAddress,
-            replyTo: email,
-            subject: `New Application: ${position || "General"} — ${name}`,
-            html: buildInternalEmail({ name, email, phone, position, linkedin, message, resumeName }),
-            attachments,
-        });
-
-        // ── 6. Send confirmation email to applicant ────────────────────────────────
-        await transporter.sendMail({
-            from: `"Fermionic Design Careers" <${senderAddress}>`,
-            to: email,
-            subject: "We received your application — Fermionic Design",
-            html: buildApplicantEmail({ name, email, phone, position, linkedin, message }),
-        });
-
-        return NextResponse.json(
-            { success: true, message: "Application submitted successfully." },
-            { status: 200 }
-        );
-    } catch (err: unknown) {
-        console.error("[/api/career] Error:", err);
-        const message =
-            err instanceof Error ? err.message : "Unexpected server error.";
-        return NextResponse.json({ error: message }, { status: 500 });
+    // ── 2. Basic validation ────────────────────────────────────────────────────
+    if (!name?.trim()) {
+      return NextResponse.json({ error: "Name is required." }, { status: 400 });
     }
+    if (!email?.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return NextResponse.json({ error: "A valid email is required." }, { status: 400 });
+    }
+
+    // ── 3. Build transporter ───────────────────────────────────────────────────
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST || "smtp.gmail.com",
+      port: parseInt(process.env.SMTP_PORT || "465"),
+      secure: process.env.SMTP_SECURE === "true", // true for port 465
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS || "yzgx paty iest qdia",
+      },
+    });
+
+    // ── 4. Build attachments ───────────────────────────────────────────────────
+    type Attachment = NonNullable<SendMailOptions["attachments"]>[number];
+    const attachments: Attachment[] = [];
+    if (resumeBase64 && resumeName) {
+      attachments.push({
+        filename: resumeName,
+        content: resumeBase64,
+        encoding: "base64",
+        contentType: resumeType || "application/octet-stream",
+      });
+    }
+
+    const companyEmail = process.env.COMPANY_EMAIL || process.env.CAREERS_EMAIL || "careers@fermionic.design";
+    const senderAddress = process.env.SMTP_USER!;
+
+    // ── 5. Send internal notification email ───────────────────────────────────
+    await transporter.sendMail({
+      from: `"Fermionic Careers" <${senderAddress}>`,
+      to: companyEmail,
+      cc: senderAddress,
+      replyTo: email,
+      subject: `New Application: ${position || "General"} — ${name}`,
+      html: buildInternalEmail({ name, email, phone, position, linkedin, message, resumeName }),
+      attachments,
+    });
+
+    // ── 6. Send confirmation email to applicant ────────────────────────────────
+    await transporter.sendMail({
+      from: `"Fermionic Design Careers" <${senderAddress}>`,
+      to: email,
+      subject: "We received your application — Fermionic Design",
+      html: buildApplicantEmail({ name, email, phone, position, linkedin, message }),
+    });
+
+    return NextResponse.json(
+      { success: true, message: "Application submitted successfully." },
+      { status: 200 }
+    );
+  } catch (err: unknown) {
+    console.error("[/api/career] Error:", err);
+    const message =
+      err instanceof Error ? err.message : "Unexpected server error.";
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
 }
 
 // Disallow other methods
 export async function GET() {
-    return NextResponse.json({ error: "Method not allowed." }, { status: 405 });
+  return NextResponse.json({ error: "Method not allowed." }, { status: 405 });
 }

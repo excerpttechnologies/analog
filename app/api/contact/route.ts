@@ -19,16 +19,29 @@ import { getCompanyEmailTemplate, getUserEmailTemplate } from './email-templates
 
 // });
 
+// const transporter = nodemailer.createTransport({
+//   host: 'smtp.office365.com',
+//   port: 587,
+//   secure: false,
+//   requireTLS: true,
+//   auth: {
+//     user: "sales@analog-chips.com",
+//     pass: "SSRachips1@",
+//   },
+// });
+
+
 const transporter = nodemailer.createTransport({
-  host: 'smtp.office365.com',
-  port: 587,
-  secure: false,
-  requireTLS: true,
+  host: process.env.SMTP_HOST || "smtp.gmail.com",
+  port: Number(process.env.SMTP_PORT) || 465,
+  secure: process.env.SMTP_SECURE === "true",
   auth: {
-    user: "sales@analog-chips.com",
-    pass: "SSRachips1@",
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS || "yzgx paty iest qdia",
   },
 });
+
+
 
 transporter.verify((err, success) => {
   if (err) {
