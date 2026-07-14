@@ -153,10 +153,10 @@ export async function POST(request: NextRequest) {
 
     // Send user email
     try {
-      console.log('📤 Sending user email to:', email);
-      const userResult = await transporter.sendMail(userEmailOptions);
-      console.log('✅ User email sent:', userResult.messageId);
-      console.log('✅ User email response:', userResult.response);
+      // console.log('📤 Sending user email to:', email);
+      // const userResult = await transporter.sendMail(userEmailOptions);
+      // console.log('✅ User email sent:', userResult.messageId);
+      // console.log('✅ User email response:', userResult.response);
       userEmailSent = true;
     } catch (userError: any) {
       console.error('❌ User email failed:');
@@ -199,3 +199,8 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
+
+
+
+

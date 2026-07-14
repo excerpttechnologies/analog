@@ -512,7 +512,7 @@ export const getUserEmailTemplate = (data: {
       <div class="greeting">Dear ${data.name},</div>
       
       <div class="message">
-        Thank you for reaching out to <strong>AnalogChips Technology</strong>. We appreciate your interest in our semiconductor and power management solutions.
+        Thank you for reaching out to <strong>AnalogChips Technology</strong>. We appreciate your interest in our products and IP solutions.
       </div>
       
       <div class="thank-you-box">
