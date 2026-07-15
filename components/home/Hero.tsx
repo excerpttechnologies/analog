@@ -19,27 +19,11 @@ import gsap from "gsap";
 // Slider content array with background images
 const sliderContent = [
   {
-    id: 1,
-    title: "Design in India.",
-    title2: "Make in India.",
-    title3: "Deliver worldwide.",
-    subtitle:
-      "Deliver globally competitive Analog & Mixed Signal IPs and semiconductor solutions that serve customers across India and international markets.",
-    ctaText: "Explore Products",
-    ctaLink: "/products",
-    secondaryCta: "Contact Us",
-    backgroundImage: "/images/s1.webp",
-    phonebg: "/images/ps1.webp",
-    gradient: "from-blue-600 to-cyan-500",
-    gradientLight: "from-blue-500 to-cyan-400",
-    features: ["Power Management", "Analog ICs", "Domestic & Overseas"],
-  },
-  {
     id: 2,
     title: "From Concept to Silicon.",
     title2: "From Silicon to Solutions.",
     subtitle:
-      "We partner with semiconductor and system companies to transform complex analog challenges into production-ready silicon and real-world solutions.",
+      "Partner with semiconductor and system companies to transform complex analog challenges into production-ready silicon and real-world solutions.",
     ctaText: "Markets",
     ctaLink: "/market",
     secondaryCta: "Contact Us",
@@ -50,32 +34,63 @@ const sliderContent = [
     features: ["Fabless Design", "Indian Owned IPs", "Global Deployment"],
   },
   {
-    id: 3,
-    title: "Advancing India's",
-    title2: "Semiconductor",
-    title3: "Self-Reliance.",
+    id: 1,
+    title: "Design In India. Make In India.",
+    title2: "Powering Semiconductor Self-Reliance",
+    title3: "Deliver worldwide.",
     subtitle:
-      "Building indigenous Analog IPs and products that strengthen the domestic ecosystem and contribute to India's growing semiconductor capabilities.",
-    ctaText: "About Us",
-    ctaLink: "/about",
+      "Deliver globally competitive Analog IPs and semiconductor solutions that serve customers across Domestic and Overseas markets.",
+    ctaText: "Explore Products",
+    ctaLink: "/products",
     secondaryCta: "Contact Us",
-    backgroundImage: "/images/s3.webp",
-    phonebg: "/images/ps3.webp",
-    gradient: "from-orange-600 to-red-500",
-    gradientLight: "from-orange-500 to-red-400",
-    features: ["Fabless Design", "Indian Owned IPs", "Global Deployment"],
+    backgroundImage: "/images/s1.webp",
+    phonebg: "/images/ps1.webp",
+    gradient: "from-blue-600 to-cyan-500",
+    gradientLight: "from-blue-500 to-cyan-400",
+    features: ["Power Management", "Analog ICs", "Domestic & Overseas"],
   },
+  // {
+  //   id: 2,
+  //   title: "From Concept to Silicon.",
+  //   title2: "From Silicon to Solutions.",
+  //   subtitle:
+  //     "Partner with semiconductor and system companies to transform complex analog challenges into production-ready silicon and real-world solutions.",
+  //   ctaText: "Markets",
+  //   ctaLink: "/market",
+  //   secondaryCta: "Contact Us",
+  //   backgroundImage: "/images/s2.webp",
+  //   phonebg: "/images/ps2.webp",
+  //   gradient: "from-red-600 to-[#001635]",
+  //   gradientLight: "from-orange-500 to-red-400",
+  //   features: ["Fabless Design", "Indian Owned IPs", "Global Deployment"],
+  // },
+  // {
+  //   id: 3,
+  //   title: "Advancing India's",
+  //   title2: "Semiconductor",
+  //   title3: "Self-Reliance.",
+  //   subtitle:
+  //     "Building indigenous Analog IPs and products that strengthen the domestic ecosystem and contribute to India's growing semiconductor capabilities.",
+  //   ctaText: "About Us",
+  //   ctaLink: "/about",
+  //   secondaryCta: "Contact Us",
+  //   backgroundImage: "/images/s3.webp",
+  //   phonebg: "/images/ps3.webp",
+  //   gradient: "from-orange-600 to-red-500",
+  //   gradientLight: "from-orange-500 to-red-400",
+  //   features: ["Fabless Design", "Indian Owned IPs", "Global Deployment"],
+  // },
   {
     id: 4,
     title: "Engineering ",
     title2: "Analog Excellence.",
     subtitle:
-      "Deliver high-performance Analog and Mixed-Signal Product and IPs that enable automotive, industrial and consumer applications.",
+      "Develop world-class indigenous Analog and Mixed-Signal IPs and products that strengthen India's semiconductor ecosystem while addressing the growing global demand for automotive, industrial, and consumer electronics.",
     ctaText: "Leadership",
     ctaLink: "/leadership",
     secondaryCta: "Contact Us",
-    backgroundImage: "/images/s4.webp",
-    phonebg: "/images/ps4.webp",
+    backgroundImage: "/images/s4.png",
+    phonebg: "/images/ps4.png",
     gradient: "from-green-600 to-green-500",
     gradientLight: "from-orange-500 to-red-400",
     features: ["Fabless Design", "Indian Owned IPs", "Global Deployment"],
@@ -442,52 +457,50 @@ export function Hero() {
         ref={contentRef}
         className="md:relative absolute top-0 left-0  z-10 container min-h-[50vh] md:min-h-[60vh] p-5 md:pt-10  mx-auto max-w-7xl"
       >
-        <div
-          className={`content-wrapper h-full ${currentSlide.id == 2 ? "max-w-3xl" : "max-w-md"}  `}
-        >
+        <div className={`content-wrapper h-full max-w-3xl `}>
           {/* Badge */}
 
           {/* Title */}
-          <h1 className="hero-title text-xl md:text-2xl lg:text-3xl  font-bold text-white mb-2 leading-[1.1] tracking-tight">
+          <h1 className="hero-title text-xl md:text-2xl   font-bold text-white mb-2 leading-[1.1] tracking-tight">
             {currentSlide.title}
           </h1>
           {currentSlide.id == 1 && (
-            <h1 className="hero-title text-xl md:text-2xl lg:text-3xl text-yellow-500  font-bold mb-2 leading-[1.1] tracking-tight">
+            <h1 className="hero-title text-xl md:text-2xl  text-sky-500  font-bold mb-2 leading-[1.1] tracking-tight">
               {currentSlide.title2}
             </h1>
           )}
 
           {currentSlide.id == 2 && (
-            <h1 className="hero-title text-xl md:text-2xl lg:text-3xl text-sky-500  font-bold  mb-2 leading-[1.1] tracking-tight">
+            <h1 className="hero-title text-xl md:text-2xl  text-sky-500  font-bold  mb-2 leading-[1.1] tracking-tight">
               {currentSlide.title2}
             </h1>
           )}
 
           {currentSlide.id == 3 && (
-            <h1 className="hero-title text-xl md:text-2xl lg:text-3xl text-yellow-500  font-bold  mb-2 leading-[1.1] tracking-tight">
+            <h1 className="hero-title text-xl md:text-2xl  text-yellow-500  font-bold  mb-2 leading-[1.1] tracking-tight">
               {currentSlide.title2}
             </h1>
           )}
 
           {currentSlide.id == 4 && (
-            <h1 className="hero-title text-xl md:text-2xl lg:text-3xl text-sky-500  font-bold  mb-2 leading-[1.1] tracking-tight">
+            <h1 className="hero-title text-xl md:text-2xl  text-sky-500  font-bold  mb-2 leading-[1.1] tracking-tight">
               {currentSlide.title2}
             </h1>
           )}
 
           {currentSlide.id == 3 ? (
-            <h1 className="hero-title text-xl md:text-2xl lg:text-3xl  font-bold text-yellow-500 mb-4 leading-[1.1] tracking-tight">
+            <h1 className="hero-title text-xl md:text-2xl   font-bold text-yellow-500 mb-4 leading-[1.1] tracking-tight">
               {currentSlide.title3}
             </h1>
           ) : (
-            <h1 className="hero-title text-xl md:text-2xl lg:text-3xl  font-bold text-white mb-4 leading-[1.1] tracking-tight">
+            <h1 className="hero-title text-xl md:text-2xl   font-bold text-white mb-4 leading-[1.1] tracking-tight">
               {currentSlide.title3}
             </h1>
           )}
 
           {/* Subtitle */}
           <p
-            className={`hero-subtitle text-sm md:text-base lg:text-lg text-white/80 leading-6 mb-4 ${currentSlide.id == 2 ? "max-w-fit" : "max-w-md"} `}
+            className={`hero-subtitle text-sm md:text-base lg:text-md xl:text-lg text-white/80 leading-6 mb-4 ${currentSlide.id == 2 ? "max-w-fit" : "max-w-md"} `}
           >
             {currentSlide.subtitle}
           </p>
@@ -496,7 +509,7 @@ export function Hero() {
           {currentSlide.id == 4 && (
             <Link
               href={"/products"}
-              className="text-white relative z-[999]  cursor-pointer hero-subtitle border p-2.5 px-5  mt-4 flex gap-x-2 w-fit border-blue-600 rounded-full "
+              className="text-white relative z-[999]  cursor-pointer hero-subtitle border p-2.5 px-5  mt-3 flex gap-x-2 w-fit border-blue-600 rounded-full "
             >
               Explore Products <ArrowRight />
             </Link>
