@@ -500,18 +500,18 @@ export function Hero() {
 
           {/* Subtitle */}
           <p
-            className={`hero-subtitle text-sm md:text-base lg:text-md xl:text-lg text-white/80 leading-6 mb-4 ${currentSlide.id == 2 ? "max-w-fit" : "max-w-md"} `}
+            className={`hero-subtitle text-sm md:text-base lg:text-md xl:text-lg text-white/80 sm:leading-6 leading-5 mb-4 ${currentSlide.id == 2 ? "max-w-fit" : "max-w-md"} `}
           >
             {currentSlide.subtitle}
           </p>
 
-          <p className="lg:h-12 h-6"></p>
+          <p className="lg:h-10 sm:h-5 h-2.5"></p>
           {currentSlide.id == 4 && (
             <Link
               href={"/products"}
-              className="text-white relative z-[999]  cursor-pointer hero-subtitle border p-2.5 px-5  mt-3 flex gap-x-2 w-fit border-blue-600 rounded-full "
+              className="text-white relative z-[999]  cursor-pointer hero-subtitle border p-2 px-5 lg:text-md text-sm  mt-3 flex items-center gap-x-2 w-fit border-blue-600 rounded-full "
             >
-              Explore Products <ArrowRight />
+              Explore Products <ArrowRight size={17} />
             </Link>
           )}
 
@@ -533,18 +533,18 @@ export function Hero() {
       <button
         onClick={handlePrev}
         aria-label="Previous slide"
-        className="absolute left-3 md:left-6 bottom-5 -translate-y-1/2 z-20 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-300"
+        className="absolute left-3 md:left-6 bottom-2 -translate-y-1/2 z-20 w-8 h-8  flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-300"
       >
-        <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
+        <ChevronLeft className="w-4 h-4 " />
       </button>
 
       {/* Right Arrow */}
       <button
         onClick={handleNext}
         aria-label="Next slide"
-        className="absolute right-3 md:right-6 bottom-5 -translate-y-1/2 z-20 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-300"
+        className="absolute right-3 md:right-6 bottom-2 -translate-y-1/2 z-20 w-8 h-8 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-300"
       >
-        <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
+        <ChevronRight className="w-4 h-4 " />
       </button>
 
       {/* Slide Indicators */}
