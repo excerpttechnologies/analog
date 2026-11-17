@@ -369,8 +369,8 @@ export function Footer() {
   };
 
   return (
-    <footer ref={footerRef} className="bg-[#0B1A2E] text-white reletive">
-      <div className="container reletive mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
+    <footer ref={footerRef} className="bg-[#0B1A2E] text-white relative">
+      <div className="container relative mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:py-10">
           {/* Brand Section */}
@@ -378,7 +378,7 @@ export function Footer() {
             <div className="flex items-center   gap-2">
               <img
                 src="/images/act-final2.webp"
-                alt=""
+                alt="Analog Chips"
                 className="h-14 md:ml-0 m-8 lg:absolute lg:top-1 lg:left-4"
               />
             </div>
@@ -476,7 +476,7 @@ export function Footer() {
         {/* Bottom Section - Copyright */}
         <div className="border-t border-gray-800 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-gray-400">
-            © {currentYear} AnalogChips Technologies Private Limited. All Rights
+            © {currentYear} AnalogChips Technology Private Limited. All Rights
             Reserved.
           </p>
 
